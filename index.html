@@ -42,7 +42,6 @@
     .button:hover { transform:translateY(-2px); }
     .button--primary { background:var(--blue); color:var(--white); box-shadow:0 8px 18px rgba(20,121,201,.25); }
     .button--light { border-color:rgba(255,255,255,.38); color:var(--white); }
-    .button--whatsapp { background:#24c66a; color:white; }
 
     .site-header { position:absolute; inset:0 0 auto; z-index:3; color:white; transition:background .2s ease, box-shadow .2s ease; }
     .site-header.is-scrolled { position:fixed; background:rgba(7,44,76,.96); box-shadow:0 5px 18px rgba(0,0,0,.16); }
@@ -62,23 +61,12 @@
     .hero-title-accent { color:#84d4c2; }
     .hero-copy { max-width:620px; color:#d5e7f4; font-size:1.12rem; margin-top:1.45rem; }
     .hero-actions { display:flex; flex-wrap:wrap; gap:.8rem; margin-top:2rem; }
-    .proof { display:flex; flex-wrap:wrap; gap:1.2rem 2rem; margin-top:2.4rem; color:#d5e7f4; font-size:.86rem; }
-    .proof i { color:#84d4c2; margin-right:.45rem; }
     .hero-panel { padding:2.3rem; border:1px solid rgba(255,255,255,.15); border-radius:var(--radius); background:rgba(255,255,255,.07); box-shadow:var(--shadow); backdrop-filter:blur(14px); }
     .hero-panel p { color:#d3e8f7; margin-top:.7rem; }
     .metric { border-top:1px solid rgba(255,255,255,.17); padding:1.15rem 0; display:flex; justify-content:space-between; align-items:end; }
     .metric:first-of-type { margin-top:1.4rem; }
     .metric strong { font:700 2.3rem/1 "Playfair Display",serif; color:#84d4c2; }
-    .metric span { font-size:.78rem; color:#c4d7e6; max-width:130px; }
-
-    .about { display:grid; grid-template-columns:1.1fr .9fr; gap:5rem; align-items:center; }
-    .quote-card { border-radius:var(--radius); padding:2.5rem; background:var(--sky); position:relative; }
-    .quote-card i { color:var(--blue); font-size:1.8rem; opacity:.55; }
-    .quote-card blockquote { font:600 1.55rem/1.45 "Playfair Display",serif; margin:1rem 0 1.6rem; }
-    .quote-card cite { font-style:normal; font-size:.83rem; font-weight:800; }
-    .stats { display:flex; gap:2.2rem; margin-top:2rem; }
-    .stat strong { display:block; color:var(--blue); font-size:2rem; line-height:1; }
-    .stat span { color:var(--muted); font-size:.78rem; }
+    .metric span { font-size:.78rem; color:#c4d7e6; max-width:130px; } 
 
     .service-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:1.25rem; }
     .service-card { min-height:275px; position:relative; display:flex; flex-direction:column; border:1px solid var(--line); border-radius:var(--radius); padding:2rem; overflow:hidden; background:var(--white); transition:transform .3s ease,box-shadow .3s ease,border-color .3s ease; }
@@ -116,8 +104,8 @@
     .float-whatsapp { position:fixed; z-index:5; right:1.5rem; bottom:1.5rem; width:54px; aspect-ratio:1; display:grid; place-items:center; border-radius:50%; color:white; background:#24c66a; box-shadow:0 12px 25px rgba(0,0,0,.22); font-size:1.45rem; }
     .float-whatsapp:hover { transform:translateY(-3px); }
     @media (prefers-reduced-motion:reduce) { *,*::before,*::after { scroll-behavior:auto !important; transition-duration:.01ms !important; animation-duration:.01ms !important; animation-iteration-count:1 !important; } }
-    @media (max-width:800px) { .nav-toggle { display:grid; place-items:center; } .nav-links { position:absolute; top:70px; left:1.25rem; right:1.25rem; padding:1rem; display:none; flex-direction:column; align-items:stretch; gap:.2rem; border:1px solid rgba(255,255,255,.16); border-radius:14px; background:#0b4a76; box-shadow:0 16px 30px rgba(0,0,0,.22); } .nav-links.is-open { display:flex; } .nav-links a { padding:.75rem; } .nav-links .nav-cta { text-align:center; margin-top:.3rem; } .hero { min-height:auto; } .hero-grid,.about,.contact-wrap { grid-template-columns:1fr; } .hero-panel { display:none; } .section { padding:4.5rem 0; } .deliverables { grid-template-columns:repeat(2,1fr); } }
-    @media (max-width:520px) { .container { width:min(100% - 1.5rem, 1120px); } .nav { min-height:68px; } .hero { padding:7.4rem 0 3.2rem; } h1 { font-size:clamp(2.7rem,14vw,4rem); } .hero-copy { font-size:1rem; } .hero-actions { display:grid; } .button { min-height:48px; } .proof { display:grid; gap:.65rem; } .service-grid,.form-grid { grid-template-columns:1fr; } .service-card { min-height:245px; padding:1.5rem; } .deliverables { grid-template-columns:1fr; } .stats { gap:1.2rem; } .contact-aside,.contact-form { padding:2rem 1.5rem; } .footer-inner { flex-direction:column; align-items:flex-start; } .float-whatsapp { right:1rem; bottom:1rem; } }
+    @media (max-width:800px) { .nav-toggle { display:grid; place-items:center; } .nav-links { position:absolute; top:70px; left:1.25rem; right:1.25rem; padding:1rem; display:none; flex-direction:column; align-items:stretch; gap:.2rem; border:1px solid rgba(255,255,255,.16); border-radius:14px; background:#0b4a76; box-shadow:0 16px 30px rgba(0,0,0,.22); } .nav-links.is-open { display:flex; } .nav-links a { padding:.75rem; } .nav-links .nav-cta { text-align:center; margin-top:.3rem; } .hero { min-height:auto; } .hero-grid,.contact-wrap { grid-template-columns:1fr; } .hero-panel { display:none; } .section { padding:4.5rem 0; } .deliverables { grid-template-columns:repeat(2,1fr); } }
+    @media (max-width:520px) { .container { width:min(100% - 1.5rem, 1120px); } .nav { min-height:68px; } .hero { padding:7.4rem 0 3.2rem; } h1 { font-size:clamp(2.7rem,14vw,4rem); } .hero-copy { font-size:1rem; } .hero-actions { display:grid; } .button { min-height:48px; } .service-grid,.form-grid { grid-template-columns:1fr; } .service-card { min-height:245px; padding:1.5rem; } .deliverables { grid-template-columns:1fr; } .contact-aside,.contact-form { padding:2rem 1.5rem; } .footer-inner { flex-direction:column; align-items:flex-start; } .float-whatsapp { right:1rem; bottom:1rem; } }
     /* Identidad médica: base clara (blanco/gris) con acentos azul clínico y verde médico */
     body { color:#133a52; background:#f6fafc; background-image:none; }
     h1,h2,h3,.brand,.button,.tag,.eyebrow,.metric strong { font-family:Orbitron,Manrope,sans-serif; }

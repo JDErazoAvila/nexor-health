@@ -32,7 +32,6 @@ python -m http.server 8000
 |---|---|
 | `index.html` | Catálogo, cómo comprar, carrito y contacto |
 | `productos/` | Imágenes de producto (SVG de referencia + `LEEME.txt` con los nombres esperados para fotos JPG) |
-| `servicio-*.html` / `servicios.css` | Páginas heredadas del sitio anterior (fuera del menú) |
 
 ## Personalización rápida
 
