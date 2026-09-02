@@ -1,0 +1,14 @@
+FOTOS DE PRODUCTO - NEXOR
+Coloca aqui las fotos con EXACTAMENTE estos nombres:
+  guantes-nitrilo.jpg
+  mascarillas-quirurgicas.jpg
+  jeringas-desechables.jpg
+  gasas-y-apositos.jpg
+  batas-quirurgicas.jpg
+  gorros-quirurgicos.jpg
+  cubrezapatos.jpg
+  torundas-alcohol.jpg
+  sabanas-desechables.jpg
+  termometros-desechables.jpg
+Recomendado: JPG horizontal 800x600. El sitio recorta con object-fit:cover.
+Mientras falte una foto, la tarjeta muestra el icono del producto (fallback automatico).

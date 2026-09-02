@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="NEXOR: venta de suministros médicos de un solo uso: guantes, mascarillas, jeringas, gasas, batas y más. Cotización rápida para clínicas, hospitales y consultorios.">
+  <meta name="theme-color" content="#0b4a76">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="es_CO">
+  <meta property="og:title" content="NEXOR | Suministros Médicos de Un Solo Uso">
+  <meta property="og:description" content="Guantes, mascarillas, jeringas, gasas y demás insumos desechables para clínicas, hospitales y consultorios.">
+  <meta name="twitter:card" content="summary">
+  <title>NEXOR | Suministros Médicos de Un Solo Uso</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Orbitron:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <style>
+    :root { --ink:#133a52; --navy:#0b4a76; --blue:#0e7ac4; --sky:#e3f2fb; --mint:#e2f6ef; --paper:#f6fafc; --line:#d7e5ee; --muted:#5c7b90; --white:#fff; --green:#0e9f7e; --cyan:#12b0d7; --shadow:0 18px 45px rgba(11,74,118,.12); --radius:20px; }
+    * { box-sizing:border-box; margin:0; }
+    html { scroll-behavior:smooth; scroll-padding-top:5.5rem; }
+    body { color:var(--ink); background:var(--paper); font-family:Manrope, sans-serif; line-height:1.6; }
+    a { color:inherit; text-decoration:none; }
+    a, button, input, select, textarea, summary { -webkit-tap-highlight-color:transparent; }
+    :focus-visible { outline:3px solid #7ed0ff; outline-offset:3px; }
+    .skip-link { position:fixed; z-index:20; top:1rem; left:1rem; padding:.7rem 1rem; border-radius:9px; background:var(--white); color:var(--navy); font-weight:800; transform:translateY(-160%); transition:transform .2s ease; box-shadow:var(--shadow); }
+    .skip-link:focus { transform:translateY(0); }
+    .container { width:min(1120px, calc(100% - 2.5rem)); margin:auto; }
+    .eyebrow { display:inline-flex; align-items:center; gap:.55rem; color:var(--blue); font-size:.73rem; font-weight:800; letter-spacing:.13em; text-transform:uppercase; }
+    .eyebrow::before { content:""; width:1.9rem; height:2px; background:currentColor; }
+    .section { padding:6.5rem 0; }
+    .section--paper { background:var(--white); }
+    .section-heading { max-width:650px; margin-bottom:3rem; }
+    .section-heading--center { margin-inline:auto; text-align:center; }
+    h1,h2 { font-family:"Playfair Display", serif; line-height:1.1; letter-spacing:-.035em; }
+    h1 { font-size:clamp(3rem,7vw,5.8rem); color:var(--white); }
+    h2 { font-size:clamp(2.2rem,4vw,3.4rem); margin-top:.7rem; }
+    h3 { line-height:1.25; font-size:1.2rem; }
+    .lead { color:var(--muted); font-size:1.1rem; margin-top:1rem; }
+    .button { display:inline-flex; justify-content:center; align-items:center; gap:.65rem; border:1px solid transparent; border-radius:999px; padding:.85rem 1.25rem; font-weight:800; transition:.2s ease; }
+    .button:hover { transform:translateY(-2px); }
+    .button--primary { background:var(--blue); color:var(--white); box-shadow:0 8px 18px rgba(20,121,201,.25); }
+    .button--light { border-color:rgba(255,255,255,.38); color:var(--white); }
+    .button--whatsapp { background:#24c66a; color:white; }
+
+    .site-header { position:absolute; inset:0 0 auto; z-index:3; color:white; transition:background .2s ease, box-shadow .2s ease; }
+    .site-header.is-scrolled { position:fixed; background:rgba(7,44,76,.96); box-shadow:0 5px 18px rgba(0,0,0,.16); }
+    .nav { min-height:82px; display:flex; align-items:center; justify-content:space-between; gap:1.5rem; }
+    .brand { display:flex; gap:.7rem; align-items:center; font-weight:800; letter-spacing:-.03em; }
+    .brand-mark { display:grid; place-items:center; width:38px; aspect-ratio:1; border:1px solid rgba(255,255,255,.4); border-radius:50%; font-family:"Playfair Display",serif; }
+    .nav-links { display:flex; gap:1.6rem; align-items:center; font-size:.87rem; font-weight:700; color:rgba(255,255,255,.82); }
+    .nav-links a:hover { color:white; }
+    .nav-cta { padding:.55rem .9rem; font-size:.82rem; }
+    .nav-toggle { display:none; width:42px; height:42px; border:1px solid rgba(255,255,255,.35); border-radius:10px; color:white; background:transparent; font-size:1.1rem; cursor:pointer; }
+
+    .hero { min-height:720px; padding:9.8rem 0 4rem; position:relative; overflow:hidden; background:var(--navy); color:white; }
+    .hero::before { content:""; position:absolute; width:700px; height:700px; border-radius:50%; right:-220px; top:-280px; background:radial-gradient(circle, #258bd7 0, rgba(37,139,215,0) 68%); opacity:.75; }
+    .hero::after { content:""; position:absolute; width:430px; height:430px; left:-170px; bottom:-250px; border:1px solid rgba(255,255,255,.13); border-radius:50%; }
+    .hero-grid { min-height:535px; display:grid; grid-template-columns:1.15fr .85fr; align-items:center; gap:4rem; position:relative; z-index:1; }
+    .hero .eyebrow { color:#8ed1ff; }
+    .hero-title-accent { color:#84d4c2; }
+    .hero-copy { max-width:620px; color:#d5e7f4; font-size:1.12rem; margin-top:1.45rem; }
+    .hero-actions { display:flex; flex-wrap:wrap; gap:.8rem; margin-top:2rem; }
+    .proof { display:flex; flex-wrap:wrap; gap:1.2rem 2rem; margin-top:2.4rem; color:#d5e7f4; font-size:.86rem; }
+    .proof i { color:#84d4c2; margin-right:.45rem; }
+    .hero-panel { padding:2.3rem; border:1px solid rgba(255,255,255,.15); border-radius:var(--radius); background:rgba(255,255,255,.07); box-shadow:var(--shadow); backdrop-filter:blur(14px); }
+    .hero-panel p { color:#d3e8f7; margin-top:.7rem; }
+    .metric { border-top:1px solid rgba(255,255,255,.17); padding:1.15rem 0; display:flex; justify-content:space-between; align-items:end; }
+    .metric:first-of-type { margin-top:1.4rem; }
+    .metric strong { font:700 2.3rem/1 "Playfair Display",serif; color:#84d4c2; }
+    .metric span { font-size:.78rem; color:#c4d7e6; max-width:130px; }
+
+    .about { display:grid; grid-template-columns:1.1fr .9fr; gap:5rem; align-items:center; }
+    .quote-card { border-radius:var(--radius); padding:2.5rem; background:var(--sky); position:relative; }
+    .quote-card i { color:var(--blue); font-size:1.8rem; opacity:.55; }
+    .quote-card blockquote { font:600 1.55rem/1.45 "Playfair Display",serif; margin:1rem 0 1.6rem; }
+    .quote-card cite { font-style:normal; font-size:.83rem; font-weight:800; }
+    .stats { display:flex; gap:2.2rem; margin-top:2rem; }
+    .stat strong { display:block; color:var(--blue); font-size:2rem; line-height:1; }
+    .stat span { color:var(--muted); font-size:.78rem; }
+
+    .service-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:1.25rem; }
+    .service-card { min-height:275px; position:relative; display:flex; flex-direction:column; border:1px solid var(--line); border-radius:var(--radius); padding:2rem; overflow:hidden; background:var(--white); transition:transform .3s ease,box-shadow .3s ease,border-color .3s ease; }
+    .service-card::after { content:""; position:absolute; width:170px; height:170px; border-radius:50%; right:-70px; bottom:-100px; background:radial-gradient(circle,#dff2ff,transparent 68%); transition:transform .35s ease; }
+    .service-card:hover { transform:translateY(-7px); box-shadow:var(--shadow); border-color:#8ecded; }
+    .service-card:hover::after { transform:scale(1.4); }
+    .service-card > * { position:relative; z-index:1; }
+    .icon { width:46px; aspect-ratio:1; display:grid; place-items:center; margin-bottom:1.4rem; color:var(--blue); border-radius:14px; background:var(--sky); }
+    .service-card p, .deliverable-card p { color:var(--muted); font-size:.92rem; margin-top:.7rem; }
+    .tag { display:inline-block; color:var(--blue); font-size:.72rem; font-weight:800; margin-top:1rem; }
+    .service-link { display:inline-flex; align-items:center; gap:.55rem; margin-top:auto; padding-top:1.4rem; color:var(--navy); font-size:.82rem; font-weight:800; }
+    .service-link i { width:26px; height:26px; display:grid; place-items:center; border-radius:50%; background:var(--blue); color:white; transition:transform .25s ease; }
+    .service-card:hover .service-link i { transform:translateX(4px); }
+    .deliverables { display:grid; grid-template-columns:repeat(4,1fr); gap:1rem; }
+    .deliverable-card { padding:1.5rem; border-top:3px solid #86cfeb; background:var(--paper); }
+    .deliverable-card .icon { margin-bottom:1rem; background:transparent; width:auto; display:block; font-size:1.25rem; }
+
+    .contact-wrap { display:grid; grid-template-columns:.85fr 1.15fr; overflow:hidden; background:var(--white); border-radius:var(--radius); box-shadow:var(--shadow); }
+    .contact-aside { padding:3rem; background:var(--navy); color:white; }
+    .contact-aside p { color:#c5d8e5; margin-top:1rem; }
+    .contact-list { display:grid; gap:1rem; margin-top:2.2rem; font-size:.9rem; }
+    .contact-list i { width:1.5rem; color:#84d4c2; }
+    .contact-form { padding:3rem; }
+    .form-grid { display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
+    label { display:block; font-size:.8rem; font-weight:800; margin-bottom:.35rem; }
+    input,select,textarea { width:100%; padding:.8rem; color:var(--ink); font:inherit; border:1px solid var(--line); border-radius:10px; background:var(--paper); }
+    textarea { min-height:120px; resize:vertical; }
+    input:focus,select:focus,textarea:focus { outline:3px solid #bce5fb; border-color:var(--blue); }
+    .field { margin-bottom:1rem; }
+    .contact-form .button { width:100%; }
+    .form-note { color:var(--muted); font-size:.76rem; margin-top:.85rem; text-align:center; }
+    .form-status { min-height:1.5rem; margin-top:.75rem; color:#1479c9; font-size:.85rem; font-weight:700; text-align:center; }
+    .site-footer { padding:2rem 0; background:#eef4f9; color:#5c7b90; font-size:.82rem; }
+    .footer-inner { display:flex; justify-content:space-between; gap:1rem; align-items:center; }
+    .float-whatsapp { position:fixed; z-index:5; right:1.5rem; bottom:1.5rem; width:54px; aspect-ratio:1; display:grid; place-items:center; border-radius:50%; color:white; background:#24c66a; box-shadow:0 12px 25px rgba(0,0,0,.22); font-size:1.45rem; }
+    .float-whatsapp:hover { transform:translateY(-3px); }
+    @media (prefers-reduced-motion:reduce) { *,*::before,*::after { scroll-behavior:auto !important; transition-duration:.01ms !important; animation-duration:.01ms !important; animation-iteration-count:1 !important; } }
+    @media (max-width:800px) { .nav-toggle { display:grid; place-items:center; } .nav-links { position:absolute; top:70px; left:1.25rem; right:1.25rem; padding:1rem; display:none; flex-direction:column; align-items:stretch; gap:.2rem; border:1px solid rgba(255,255,255,.16); border-radius:14px; background:#0b4a76; box-shadow:0 16px 30px rgba(0,0,0,.22); } .nav-links.is-open { display:flex; } .nav-links a { padding:.75rem; } .nav-links .nav-cta { text-align:center; margin-top:.3rem; } .hero { min-height:auto; } .hero-grid,.about,.contact-wrap { grid-template-columns:1fr; } .hero-panel { display:none; } .section { padding:4.5rem 0; } .deliverables { grid-template-columns:repeat(2,1fr); } }
+    @media (max-width:520px) { .container { width:min(100% - 1.5rem, 1120px); } .nav { min-height:68px; } .hero { padding:7.4rem 0 3.2rem; } h1 { font-size:clamp(2.7rem,14vw,4rem); } .hero-copy { font-size:1rem; } .hero-actions { display:grid; } .button { min-height:48px; } .proof { display:grid; gap:.65rem; } .service-grid,.form-grid { grid-template-columns:1fr; } .service-card { min-height:245px; padding:1.5rem; } .deliverables { grid-template-columns:1fr; } .stats { gap:1.2rem; } .contact-aside,.contact-form { padding:2rem 1.5rem; } .footer-inner { flex-direction:column; align-items:flex-start; } .float-whatsapp { right:1rem; bottom:1rem; } }
+    /* Identidad médica: base clara (blanco/gris) con acentos azul clínico y verde médico */
+    body { color:#133a52; background:#f6fafc; background-image:none; }
+    h1,h2,h3,.brand,.button,.tag,.eyebrow,.metric strong { font-family:Orbitron,Manrope,sans-serif; }
+    h1,h2 { font-weight:700; letter-spacing:-.06em; text-transform:uppercase; }
+    h3 { font-size:1.05rem; letter-spacing:-.035em; }.brand { letter-spacing:.02em; }.button { letter-spacing:-.025em; }.eyebrow,.tag { letter-spacing:.1em; }.metric strong { letter-spacing:-.08em; }
+    .hero { background:radial-gradient(circle at 80% 5%,#1279c9 0,transparent 30%),linear-gradient(135deg,#0b4a76 20%,#0d5d95 100%); border-bottom:1px solid rgba(255,255,255,.15); }
+    .hero::before { background:radial-gradient(circle,#12b0d7 0,rgba(18,176,215,0) 67%); opacity:.25; }
+    .hero::after { border-color:rgba(255,255,255,.18); }.hero-title-accent { color:#7fe0c8; text-shadow:none; }.eyebrow { color:#0e9f7e; }.hero .eyebrow { color:#8fe3cd; }.eyebrow::before { box-shadow:none; }
+    .button--primary { background:linear-gradient(135deg,#0e9f7e,#12b886); box-shadow:0 10px 25px rgba(14,159,126,.28); }.button--light { border-color:rgba(255,255,255,.45); color:#ffffff; }.button--light:hover { background:rgba(255,255,255,.12); }.site-header.is-scrolled { background:rgba(11,74,118,.97); border-bottom:1px solid rgba(255,255,255,.14); }.brand-mark { border-color:#7fe0c8; color:#7fe0c8; box-shadow:none; }
+    .section--paper { background:#ffffff; }.section-heading { border-left:2px solid #0e9f7e; padding-left:1rem; }.section-heading--center { border-left:0; padding-left:0; }.service-card,.deliverable-card { background:#ffffff; border-color:#d7e5ee; box-shadow:0 12px 32px rgba(11,74,118,.07); }.service-card::before { content:""; position:absolute; top:0; left:0; width:58px; height:2px; background:#0e9f7e; box-shadow:none; }.service-card::after { background:radial-gradient(circle,rgba(14,122,196,.10),transparent 68%); }.service-card:hover { border-color:#7cc3e8; box-shadow:0 24px 55px rgba(11,74,118,.16),0 0 0 1px rgba(14,159,126,.10); }
+    .icon { color:#0e7ac4; background:#e3f2fb; border:1px solid #cfe6f5; }.tag { color:#0e7ac4; }.service-link { color:#0b4a76; }.service-link i { background:#0e9f7e; }.deliverable-card { border-top-color:#0e9f7e; }.contact-wrap { border:1px solid #d7e5ee; box-shadow:0 22px 55px rgba(11,74,118,.12); }.contact-aside { background:linear-gradient(155deg,#0d5d95,#0b4a76); border-right:1px solid rgba(255,255,255,.14); }.contact-form { background:#ffffff; }input,select,textarea { background:#f6fafc; border-color:#d7e5ee; color:#133a52; }input::placeholder,textarea::placeholder { color:#7d93a5; }.form-status { color:#0e9f7e; }.site-footer { border-top:1px solid #d7e5ee; background:#eef4f9; color:#5c7b90; }.float-whatsapp { border:2px solid rgba(255,255,255,.35); }
+    .hero-panel { position:relative; overflow:hidden; }.hero-panel::before { content:""; display:block; height:74px; margin:1.35rem 0; border:1px solid rgba(255,255,255,.28); border-radius:6px; background:linear-gradient(transparent 49%,rgba(255,255,255,.10) 50%,transparent 51%),linear-gradient(90deg,transparent 49%,rgba(255,255,255,.07) 50%,transparent 51%); background-size:100% 24px,32px 100%; }.hero-panel::after { content:""; position:absolute; left:2.6rem; right:2.6rem; top:94px; height:55px; border-bottom:3px solid #35d0a0; filter:drop-shadow(0 0 6px #35d0a0); clip-path:polygon(0 80%,16% 55%,30% 72%,44% 25%,59% 48%,73% 14%,88% 42%,100% 5%,100% 11%,88% 49%,73% 21%,59% 55%,44% 32%,30% 79%,16% 62%,0 87%); background:#35d0a0; pointer-events:none; }
+    .thumb { position:relative; display:grid; place-items:center; height:140px; margin-bottom:1.4rem; border:1px solid var(--line); border-radius:14px; background:linear-gradient(145deg,#e3f2fb,#f6fafc); overflow:hidden; } .thumb img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; transition:transform .35s ease; } .thumb > i { font-size:2rem; color:var(--blue); } .service-card:hover .thumb img { transform:scale(1.06); } .price { display:block; margin-top:.65rem; font:800 1.05rem Orbitron,Manrope,sans-serif; color:var(--green); } .price small { font:700 .72rem Manrope,sans-serif; color:var(--muted); letter-spacing:.05em; text-transform:uppercase; }
+    .card-actions { display:flex; align-items:center; justify-content:space-between; gap:.6rem; margin-top:auto; padding-top:1.15rem; flex-wrap:wrap; } .card-actions .service-link { margin-top:0; padding-top:0; } .cart-add { display:inline-flex; align-items:center; gap:.45rem; border:0; cursor:pointer; border-radius:999px; padding:.62rem .95rem; background:linear-gradient(135deg,#0e9f7e,#12b886); color:#fff; font:800 .8rem Orbitron,Manrope,sans-serif; box-shadow:0 8px 18px rgba(14,159,126,.25); transition:.2s ease; } .cart-add:hover { transform:translateY(-2px); } .cart-add.is-added { background:#0b4a76; box-shadow:0 8px 18px rgba(11,74,118,.25); } .float-cart { position:fixed; z-index:6; right:1.5rem; bottom:5.7rem; width:54px; aspect-ratio:1; display:grid; place-items:center; border-radius:50%; border:2px solid var(--blue); color:var(--blue); background:#fff; box-shadow:0 12px 25px rgba(11,74,118,.22); font-size:1.35rem; cursor:pointer; transition:.2s ease; } .float-cart:hover { transform:translateY(-3px); } .cart-count { position:absolute; top:-6px; right:-6px; min-width:22px; height:22px; display:grid; place-items:center; border-radius:999px; background:var(--green); color:#fff; font:800 .72rem Manrope,sans-serif; padding:0 5px; } .cart-overlay { position:fixed; inset:0; z-index:29; background:rgba(8,40,66,.45); opacity:0; pointer-events:none; transition:opacity .3s ease; } .cart-overlay.is-open { opacity:1; pointer-events:auto; } .cart-panel { position:fixed; z-index:30; top:0; right:0; height:100%; width:min(410px,100%); background:#fff; box-shadow:-18px 0 50px rgba(11,74,118,.28); transform:translateX(110%); transition:transform .3s ease; display:flex; flex-direction:column; } .cart-panel.is-open { transform:none; } .cart-panel.is-shake { animation:cartShake .4s; } @keyframes cartShake { 0%,100% { transform:none; } 25% { transform:translateX(-6px); } 75% { transform:translateX(6px); } } .cart-head { display:flex; align-items:center; justify-content:space-between; padding:1.3rem 1.5rem; border-bottom:1px solid var(--line); } .cart-head h3 { margin:0; } .cart-close { border:0; background:#e3f2fb; color:var(--blue); width:36px; height:36px; border-radius:50%; cursor:pointer; font-size:1rem; } .cart-items { flex:1; overflow-y:auto; padding:1rem 1.5rem; display:grid; gap:.8rem; align-content:start; } .cart-empty { color:var(--muted); text-align:center; margin-top:2rem; } .cart-item { display:grid; grid-template-columns:1fr auto auto; gap:.8rem; align-items:center; padding:.9rem; border:1px solid var(--line); border-radius:12px; } .cart-item-info strong { display:block; font-size:.88rem; } .cart-item-info span { color:var(--muted); font-size:.78rem; } .cart-item-qty { display:flex; align-items:center; gap:.5rem; } .cart-item-qty button { width:26px; height:26px; border-radius:8px; border:1px solid var(--line); background:var(--paper); color:var(--ink); font-weight:800; cursor:pointer; } .cart-item-qty span { min-width:18px; text-align:center; font-weight:800; font-size:.9rem; } .cart-item-del { border:0; background:none; color:#d64545; cursor:pointer; font-size:.95rem; } .cart-foot { padding:1.2rem 1.5rem 1.4rem; border-top:1px solid var(--line); display:grid; gap:.7rem; } .cart-total { display:flex; justify-content:space-between; align-items:center; font-weight:800; } .cart-total strong { font:800 1.25rem Orbitron,Manrope,sans-serif; color:var(--blue); } .cart-note { color:var(--muted); font-size:.74rem; } .cart-send { display:flex; justify-content:center; align-items:center; gap:.55rem; background:linear-gradient(135deg,#0e9f7e,#12b886); color:#fff; border-radius:999px; padding:.85rem; font-weight:800; font-family:Orbitron,Manrope,sans-serif; font-size:.85rem; box-shadow:0 8px 18px rgba(14,159,126,.28); } .cart-clear { border:1px solid var(--line); background:none; color:var(--muted); border-radius:999px; padding:.55rem; cursor:pointer; font:700 .78rem Manrope,sans-serif; } @media (max-width:520px){ .float-cart { right:1rem; bottom:5.1rem; width:48px; font-size:1.2rem; } }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#contenido">Ir al contenido principal</a>
+  <header class="site-header"><nav class="nav container" aria-label="Principal"><a class="brand" href="#inicio"><span class="brand-mark">N</span><span>NEXOR</span></a><button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-links" aria-label="Abrir menú"><i class="fa-solid fa-bars"></i></button><div class="nav-links" id="nav-links"><a href="#productos">Productos</a><a href="#compras">Cómo comprar</a><a href="#contacto" class="button button--light nav-cta">Contacto</a></div></nav></header>
+  <main id="contenido">
+    <section class="hero" id="inicio"><div class="container hero-grid"><div><span class="eyebrow">NEXOR · Suministros Médicos de Un Solo Uso</span><h1>Suministros médicos <span class="hero-title-accent">de un solo uso</span> para su institución.</h1><p class="hero-copy">Distribuimos guantes, mascarillas, jeringas, gasas y demás insumos desechables para clínicas, hospitales, consultorios y laboratorios. Calidad certificada, entrega oportuna y cotización clara.</p><div class="hero-actions"><a class="button button--primary" href="#productos">Ver catálogo <i class="fa-solid fa-arrow-right"></i></a><a class="button button--light" href="#contacto">Solicite cotización</a></div></div><aside class="hero-panel" aria-label="Resultados destacados"><span class="eyebrow">Abastecimiento integral</span><p>Le ayudamos a mantener su institución abastecida: insumos desechables de calidad, disponibilidad permanente y precios claros por volumen.</p><div class="metric"><strong>10</strong><span>Referencias de un solo uso</span></div><div class="metric"><strong>1</strong><span>Objetivo: abastecer su institución</span></div></aside></div></section>
+    <section class="section" id="productos"><div class="container"><div class="section-heading"><span class="eyebrow">Catálogo · Suministros de un solo uso</span><h2>Suministros médicos listos para su institución.</h2><p class="lead">Distribuimos insumos desechables de uso clínico y hospitalario. Cotice por unidad o por caja según el volumen que su operación necesita.</p></div><div class="service-grid"><article class="service-card"><div class="thumb"><img src="productos/guantes-nitrilo.jpg" alt="Guantes de nitrilo" loading="lazy" onerror="this.onerror=null;this.src='productos/guantes-nitrilo.svg'"><i class="fa-solid fa-hand-holding-medical" aria-hidden="true"></i></div><h3>Guantes de nitrilo</h3><p>Guantes de examen ambidiestros sin polvo, con alta resistencia química y buena sensitividad. Cajas de 100 unidades en todas las tallas.</p><span class="tag">NITRILO · SIN POLVO · CAJA × 100</span><span class="price">Desde $25.900 <small>COP</small></span><div class="card-actions"><button class="cart-add" type="button" data-id="guantes-nitrilo" data-name="Guantes de nitrilo" data-price="25900" data-unit="caja × 100">Agregar al carrito <i class="fa-solid fa-cart-plus" aria-hidden="true"></i></button><a class="service-link" href="#contacto">Cotizar <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a></div></article><article class="service-card"><div class="thumb"><img src="productos/mascarillas-quirurgicas.jpg" alt="Mascarillas quirúrgicas" loading="lazy" onerror="this.onerror=null;this.src='productos/mascarillas-quirurgicas.svg'"><i class="fa-solid fa-head-side-mask" aria-hidden="true"></i></div><h3>Mascarillas quirúrgicas</h3><p>Mascarillas triples con filtro bacteriano y ajuste nasal, grado quirúrgico. Disponibles en presentación estándar e infantil.</p><span class="tag">3 CAPAS · FILTRO BACTERIANO · CAJA × 50</span><span class="price">Desde $12.900 <small>COP</small></span><div class="card-actions"><button class="cart-add" type="button" data-id="mascarillas-quirurgicas" data-name="Mascarillas quirúrgicas" data-price="12900" data-unit="caja × 50">Agregar al carrito <i class="fa-solid fa-cart-plus" aria-hidden="true"></i></button><a class="service-link" href="#contacto">Cotizar <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a></div></article><article class="service-card"><div class="thumb"><img src="productos/jeringas-desechables.jpg" alt="Jeringas y agujas desechables" loading="lazy" onerror="this.onerror=null;this.src='productos/jeringas-desechables.svg'"><i class="fa-solid fa-syringe" aria-hidden="true"></i></div><h3>Jeringas y agujas desechables</h3><p>Jeringas estériles de 3, 5, 10 y 20 ml con aguja desechable en presentación individual, para procedimientos y aplicación de medicamentos.</p><span class="tag">ESTÉRILES · 3 ML A 20 ML · UNIDAD</span><span class="price">Desde $1.150 <small>COP</small></span><div class="card-actions"><button class="cart-add" type="button" data-id="jeringas-desechables" data-name="Jeringas y agujas desechables" data-price="1150" data-unit="unidad">Agregar al carrito <i class="fa-solid fa-cart-plus" aria-hidden="true"></i></button><a class="service-link" href="#contacto">Cotizar <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a></div></article><article class="service-card"><div class="thumb"><img src="productos/gasas-y-apositos.jpg" alt="Gasas y apósitos estériles" loading="lazy" onerror="this.onerror=null;this.src='productos/gasas-y-apositos.svg'"><i class="fa-solid fa-bandage" aria-hidden="true"></i></div><h3>Gasas y apósitos estériles</h3><p>Gasas y apósitos estériles de alta absorción para curación de heridas, en paquetes individuales y presentaciones hospitalarias.</p><span class="tag">ESTÉRIL · ALTA ABSORCIÓN · PAQUETE</span><span class="price">Desde $2.900 <small>COP</small></span><div class="card-actions"><button class="cart-add" type="button" data-id="gasas-y-apositos" data-name="Gasas y apósitos estériles" data-price="2900" data-unit="paquete">Agregar al carrito <i class="fa-solid fa-cart-plus" aria-hidden="true"></i></button><a class="service-link" href="#contacto">Cotizar <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a></div></article><article class="service-card"><div class="thumb"><img src="productos/batas-quirurgicas.jpg" alt="Batas quirúrgicas desechables" loading="lazy" onerror="this.onerror=null;this.src='productos/batas-quirurgicas.svg'"><i class="fa-solid fa-user-doctor" aria-hidden="true"></i></div><h3>Batas quirúrgicas desechables</h3><p>Batas de aislamiento en tela no tejida SMS con puños elásticos, tallas M, L y XL. Paquetes de 10 unidades.</p><span class="tag">NO TEJIDA · PUÑO ELÁSTICO · PAQUETE × 10</span><span class="price">Desde $35.900 <small>COP</small></span><div class="card-actions"><button class="cart-add" type="button" data-id="batas-quirurgicas" data-name="Batas quirúrgicas desechables" data-price="35900" data-unit="paquete × 10">Agregar al carrito <i class="fa-solid fa-cart-plus" aria-hidden="true"></i></button><a class="service-link" href="#contacto">Cotizar <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a></div></article><article class="service-card"><div class="thumb"><img src="productos/gorros-quirurgicos.jpg" alt="Gorros quirúrgicos" loading="lazy" onerror="this.onerror=null;this.src='productos/gorros-quirurgicos.svg'"><i class="fa-solid fa-user-nurse" aria-hidden="true"></i></div><h3>Gorros quirúrgicos</h3><p>Gorros tipo touca en tela no tejida con elástico ajustable, libres de látex. Cajas de 100 unidades en colores azul y verde.</p><span class="tag">NO TEJIDA · LIBRES DE LÁTEX · CAJA × 100</span><span class="price">Desde $16.900 <small>COP</small></span><div class="card-actions"><button class="cart-add" type="button" data-id="gorros-quirurgicos" data-name="Gorros quirúrgicos" data-price="16900" data-unit="caja × 100">Agregar al carrito <i class="fa-solid fa-cart-plus" aria-hidden="true"></i></button><a class="service-link" href="#contacto">Cotizar <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a></div></article><article class="service-card"><div class="thumb"><img src="productos/cubrezapatos.jpg" alt="Cubrezapatos" loading="lazy" onerror="this.onerror=null;this.src='productos/cubrezapatos.svg'"><i class="fa-solid fa-shoe-prints" aria-hidden="true"></i></div><h3>Cubrezapatos</h3><p>Cubrezapatos antideslizantes en material no tejido, resistentes a líquidos. Ideales para áreas quirúrgicas y salas de aislamiento.</p><span class="tag">ANTIDESLIZANTE · CAJA × 100</span><span class="price">Desde $19.900 <small>COP</small></span><div class="card-actions"><button class="cart-add" type="button" data-id="cubrezapatos" data-name="Cubrezapatos" data-price="19900" data-unit="caja × 100">Agregar al carrito <i class="fa-solid fa-cart-plus" aria-hidden="true"></i></button><a class="service-link" href="#contacto">Cotizar <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a></div></article><article class="service-card"><div class="thumb"><img src="productos/torundas-alcohol.jpg" alt="Torundas de algodón y alcohol" loading="lazy" onerror="this.onerror=null;this.src='productos/torundas-alcohol.svg'"><i class="fa-solid fa-droplet" aria-hidden="true"></i></div><h3>Torundas de algodón y alcohol</h3><p>Torundas de algodón y paquetes de alcohol antiséptico al 70% para limpieza y desinfección de la piel, en presentaciones individuales.</p><span class="tag">ALCOHOL 70% · ALGODÓN · PAQUETE</span><span class="price">Desde $5.900 <small>COP</small></span><div class="card-actions"><button class="cart-add" type="button" data-id="torundas-alcohol" data-name="Torundas de algodón y alcohol" data-price="5900" data-unit="paquete">Agregar al carrito <i class="fa-solid fa-cart-plus" aria-hidden="true"></i></button><a class="service-link" href="#contacto">Cotizar <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a></div></article><article class="service-card"><div class="thumb"><img src="productos/sabanas-desechables.jpg" alt="Sábanas y fundas desechables" loading="lazy" onerror="this.onerror=null;this.src='productos/sabanas-desechables.svg'"><i class="fa-solid fa-bed" aria-hidden="true"></i></div><h3>Sábanas y fundas desechables</h3><p>Sábanas, fundas de camilla y rollos de papel crepé para camillas. Higiénicos, resistentes y de un solo uso.</p><span class="tag">CAMILLA · ROLLO · UN SOLO USO</span><span class="price">Desde $14.900 <small>COP</small></span><div class="card-actions"><button class="cart-add" type="button" data-id="sabanas-desechables" data-name="Sábanas y fundas desechables" data-price="14900" data-unit="rollo">Agregar al carrito <i class="fa-solid fa-cart-plus" aria-hidden="true"></i></button><a class="service-link" href="#contacto">Cotizar <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a></div></article><article class="service-card"><div class="thumb"><img src="productos/termometros-desechables.jpg" alt="Termómetros desechables" loading="lazy" onerror="this.onerror=null;this.src='productos/termometros-desechables.svg'"><i class="fa-solid fa-temperature-half" aria-hidden="true"></i></div><h3>Termómetros desechables</h3><p>Termómetros de franja de un solo uso, sin mercurio y de lectura rápida. Ideales para triage, ambulancias y dotación masiva.</p><span class="tag">SIN MERCURIO · LECTURA RÁPIDA · CAJA × 100</span><span class="price">Desde $42.900 <small>COP</small></span><div class="card-actions"><button class="cart-add" type="button" data-id="termometros-desechables" data-name="Termómetros desechables" data-price="42900" data-unit="caja × 100">Agregar al carrito <i class="fa-solid fa-cart-plus" aria-hidden="true"></i></button><a class="service-link" href="#contacto">Cotizar <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a></div></article>
+      </div></div></section>
+    <section class="section section--paper" id="compras"><div class="container"><div class="section-heading section-heading--center"><span class="eyebrow">Cómo comprar</span><h2>Pida sus suministros en cuatro pasos.</h2><p class="lead">Un proceso simple para que su institución nunca se quede sin insumos. Atendemos clínicas, hospitales, consultorios y laboratorios.</p></div><div class="deliverables"><article class="deliverable-card"><div class="icon"><i class="fa-solid fa-list-check" aria-hidden="true"></i></div><h3>1. Escoja sus productos</h3><p>Revise el catálogo y defina las referencias y cantidades que su operación necesita.</p></article><article class="deliverable-card"><div class="icon"><i class="fa-solid fa-file-invoice" aria-hidden="true"></i></div><h3>2. Solicite su cotización</h3><p>Escríbanos por WhatsApp o diligencie el formulario: le respondemos con precios y disponibilidad.</p></article><article class="deliverable-card"><div class="icon"><i class="fa-solid fa-clipboard-check" aria-hidden="true"></i></div><h3>3. Confirme su pedido</h3><p>Validamos su orden, el método de pago y la facturación de acuerdo con su régimen.</p></article><article class="deliverable-card"><div class="icon"><i class="fa-solid fa-truck-fast" aria-hidden="true"></i></div><h3>4. Reciba su entrega</h3><p>Despachos a nivel nacional y entregas locales según inventario disponible.</p></article></div></div></section>
+    <section class="section" id="contacto"><div class="container contact-wrap"><aside class="contact-aside"><span class="eyebrow">Contacto</span><h2>Cotice sus suministros sin compromiso.</h2><p>Escríbanos si necesita guantes, mascarillas, jeringas o cualquier insumo desechable. Le respondemos con precios, presentaciones y disponibilidad.</p><div class="contact-list"><a href="tel:+573053252358"><i class="fa-solid fa-phone" aria-hidden="true"></i>+57 305 325 2358</a><a href="mailto:johandavid0411@hotmail.com"><i class="fa-solid fa-envelope" aria-hidden="true"></i>johandavid0411@hotmail.com</a><a href="https://wa.me/573053252358" target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i>Escríbanos por WhatsApp</a></div></aside><div class="contact-form"><h3>Solicite su cotización</h3><p class="lead">Indique los productos y cantidades que necesita y le enviaremos la mejor propuesta.</p><form id="contact-form" style="margin-top:1.5rem"><div class="form-grid"><div class="field"><label for="name">Nombre</label><input id="name" name="name" type="text" placeholder="Su nombre" autocomplete="name" minlength="2" maxlength="80" required></div><div class="field"><label for="email">Correo</label><input id="email" name="email" type="email" placeholder="usted@empresa.com" autocomplete="email" inputmode="email" maxlength="120" required></div></div><div class="field"><label for="producto">Producto de interés</label><select id="producto" name="producto" required><option value="" selected disabled>Seleccione una opción</option><option>Guantes de nitrilo</option><option>Mascarillas quirúrgicas</option><option>Jeringas y agujas desechables</option><option>Gasas y apósitos estériles</option><option>Batas quirúrgicas desechables</option><option>Gorros quirúrgicos</option><option>Cubrezapatos</option><option>Torundas de algodón y alcohol</option><option>Sábanas y fundas desechables</option><option>Termómetros desechables</option><option>Otro producto / aún no estoy seguro</option></select></div><div class="field"><label for="message">Mensaje</label><textarea id="message" name="message" placeholder="Ej.: necesito 10 cajas de guantes de nitrilo talla M" minlength="10" maxlength="1000" required></textarea></div><button class="button button--primary" type="submit">Continuar por WhatsApp <i class="fa-brands fa-whatsapp" aria-hidden="true"></i></button><p class="form-note">Al continuar se abrirá WhatsApp con su consulta preparada. No almacenamos sus datos en este sitio.</p><p class="form-status" id="form-status" role="status" aria-live="polite"></p></form><noscript><p class="form-note">Active JavaScript o escríbanos directamente por WhatsApp para enviar su consulta.</p></noscript></div></div></section>
+  </main>
+  <footer class="site-footer"><div class="container footer-inner"><span>© 2026 NEXOR</span><span>Suministros médicos de un solo uso</span></div></footer>
+  <a class="float-whatsapp" href="https://wa.me/573053252358?text=Hola%2C%20quiero%20cotizar%20suministros%20m%C3%A9dicos%20de%20NEXOR" target="_blank" rel="noopener" aria-label="Contactar a NEXOR por WhatsApp"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i></a>
+  <button class="float-cart" id="cart-open" type="button" aria-label="Abrir carrito de compras"><i class="fa-solid fa-cart-shopping" aria-hidden="true"></i><span class="cart-count" id="cart-count" hidden>0</span></button>
+  <div class="cart-overlay" id="cart-overlay"></div>
+  <aside class="cart-panel" id="cart-panel" aria-label="Carrito de compras" aria-hidden="true">
+    <header class="cart-head"><h3>Su carrito</h3><button class="cart-close" id="cart-close" type="button" aria-label="Cerrar carrito"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button></header>
+    <div class="cart-items" id="cart-items"></div>
+    <footer class="cart-foot">
+      <div class="cart-total"><span>Total de referencia</span><strong id="cart-total">$ 0</strong></div>
+      <p class="cart-note">Los precios son de referencia. El valor final se confirma en su cotización.</p>
+      <a class="cart-send" id="cart-send" href="#" target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i>Pedir por WhatsApp</a>
+      <button class="cart-clear" id="cart-clear" type="button">Vaciar carrito</button>
+    </footer>
+  </aside>
+  <script>
+    const toggle = document.querySelector('.nav-toggle');
+    const navLinks = document.querySelector('.nav-links');
+    toggle.addEventListener('click', () => {
+      const isOpen = navLinks.classList.toggle('is-open');
+      toggle.setAttribute('aria-expanded', isOpen);
+      toggle.setAttribute('aria-label', isOpen ? 'Cerrar menú' : 'Abrir menú');
+      toggle.innerHTML = isOpen ? '<i class="fa-solid fa-xmark"></i>' : '<i class="fa-solid fa-bars"></i>';
+    });
+    navLinks.querySelectorAll('a').forEach(link => link.addEventListener('click', () => {
+      navLinks.classList.remove('is-open');
+      toggle.setAttribute('aria-expanded', 'false');
+      toggle.setAttribute('aria-label', 'Abrir menú');
+      toggle.innerHTML = '<i class="fa-solid fa-bars"></i>';
+    }));
+    window.addEventListener('scroll', () => {
+      document.querySelector('.site-header').classList.toggle('is-scrolled', window.scrollY > 24);
+    }, { passive:true });
+    document.querySelector('#contact-form').addEventListener('submit', event => {
+      event.preventDefault();
+      const form = event.currentTarget;
+      if (!form.checkValidity()) { form.reportValidity(); return; }
+      const data = new FormData(form);
+      const message = `Hola, quiero cotizar suministros médicos de NEXOR.\n\nNombre: ${data.get('name')}\nCorreo: ${data.get('email')}\nProducto de interés: ${data.get('producto')}\n\nConsulta: ${data.get('message')}`;
+      document.querySelector('#form-status').textContent = 'Abriendo WhatsApp con su consulta…';
+      window.open(`https://wa.me/573053252358?text=${encodeURIComponent(message)}`, '_blank', 'noopener');
+    });
+    // ── Carrito de compras ──
+    const CART_KEY = 'nexor-cart';
+    let cart = [];
+    try { cart = JSON.parse(localStorage.getItem(CART_KEY)) || []; } catch (e) { cart = []; }
+    const cartItems = document.querySelector('#cart-items');
+    const cartTotal = document.querySelector('#cart-total');
+    const cartCount = document.querySelector('#cart-count');
+    const cartPanel = document.querySelector('#cart-panel');
+    const cartOverlay = document.querySelector('#cart-overlay');
+    const fmtCOP = new Intl.NumberFormat('es-CO', { style:'currency', currency:'COP', maximumFractionDigits:0 });
+    const saveCart = () => { try { localStorage.setItem(CART_KEY, JSON.stringify(cart)); } catch (e) {} };
+    const renderCart = () => {
+      cartItems.innerHTML = '';
+      let total = 0, units = 0;
+      if (!cart.length) { cartItems.innerHTML = '<p class="cart-empty">Su carrito está vacío.<br>Agregue productos desde el catálogo.</p>'; }
+      cart.forEach(item => {
+        total += item.price * item.qty; units += item.qty;
+        const row = document.createElement('div');
+        row.className = 'cart-item';
+        row.innerHTML = '<div class="cart-item-info"><strong>' + item.name + '</strong><span>' + fmtCOP.format(item.price) + ' · ' + item.unit + '</span></div><div class="cart-item-qty"><button type="button" data-act="dec" data-id="' + item.id + '" aria-label="Quitar uno">−</button><span>' + item.qty + '</span><button type="button" data-act="inc" data-id="' + item.id + '" aria-label="Agregar uno">+</button></div><button class="cart-item-del" type="button" data-act="del" data-id="' + item.id + '" aria-label="Eliminar producto"><i class="fa-solid fa-trash-can" aria-hidden="true"></i></button>';
+        cartItems.appendChild(row);
+      });
+      cartTotal.textContent = fmtCOP.format(total);
+      cartCount.textContent = units;
+      cartCount.hidden = units === 0;
+      saveCart();
+    };
+    document.querySelectorAll('.cart-add').forEach(btn => btn.addEventListener('click', () => {
+      const id = btn.dataset.id;
+      const found = cart.find(item => item.id === id);
+      if (found) { found.qty += 1; } else { cart.push({ id: id, name: btn.dataset.name, price: Number(btn.dataset.price), unit: btn.dataset.unit, qty: 1 }); }
+      renderCart();
+      btn.classList.add('is-added');
+      const original = btn.innerHTML;
+      btn.innerHTML = 'Agregado <i class="fa-solid fa-check" aria-hidden="true"></i>';
+      setTimeout(() => { btn.classList.remove('is-added'); btn.innerHTML = original; }, 1200);
+    }));
+    const openCart = () => { cartPanel.classList.add('is-open'); cartOverlay.classList.add('is-open'); cartPanel.setAttribute('aria-hidden', 'false'); };
+    const closeCart = () => { cartPanel.classList.remove('is-open'); cartOverlay.classList.remove('is-open'); cartPanel.setAttribute('aria-hidden', 'true'); };
+    document.querySelector('#cart-open').addEventListener('click', openCart);
+    document.querySelector('#cart-close').addEventListener('click', closeCart);
+    cartOverlay.addEventListener('click', closeCart);
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeCart(); });
+    cartItems.addEventListener('click', e => {
+      const btn = e.target.closest('button');
+      if (!btn) return;
+      const item = cart.find(i => i.id === btn.dataset.id);
+      if (!item) return;
+      if (btn.dataset.act === 'inc') { item.qty += 1; }
+      if (btn.dataset.act === 'dec') { item.qty -= 1; }
+      if (btn.dataset.act === 'del' || item.qty === 0) { cart = cart.filter(i => i.id !== btn.dataset.id); }
+      renderCart();
+    });
+    document.querySelector('#cart-clear').addEventListener('click', () => { cart = []; renderCart(); });
+    document.querySelector('#cart-send').addEventListener('click', e => {
+      e.preventDefault();
+      if (!cart.length) { cartPanel.classList.add('is-shake'); setTimeout(() => cartPanel.classList.remove('is-shake'), 400); return; }
+      let msg = 'Hola, quiero hacer un pedido de suministros médicos NEXOR:';
+      let total = 0;
+      cart.forEach(item => { const line = item.price * item.qty; total += line; msg += '\n• ' + item.qty + ' × ' + item.name + ' (' + item.unit + ') — ' + fmtCOP.format(line); });
+      msg += '\n\nTotal de referencia: ' + fmtCOP.format(total) + '\n(Precios de referencia, sujetos a cotización final)';
+      window.open('https://wa.me/573053252358?text=' + encodeURIComponent(msg), '_blank', 'noopener');
+    });
+    renderCart();
+  </script>
+</body>
+</html>

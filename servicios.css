@@ -1,0 +1,78 @@
+/* ============================================================
+   NEXOR · servicios.css — Identidad medica (tema claro)
+   Azul clinico #0e7ac4 · Azul hospitalario #0b4a76
+   Verde medico #0e9f7e · Cian #12b0d7 · Fondos #ffffff / #f6fafc
+   NOTA: se conservan los alias --red y --gold (mapeados a verde y
+   azul medicos) por compatibilidad con los estilos inline de las
+   paginas de servicio. La tipografia (Orbitron + Manrope) no cambia.
+   ============================================================ */
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Orbitron:wght@500;600;700;800&display=swap');
+:root{
+  --blue:#0e7ac4;        /* azul clinico (primario) */
+  --blue-deep:#0b4a76;   /* azul hospitalario profundo */
+  --green:#0e9f7e;       /* verde medico (CTA y acentos) */
+  --cyan:#12b0d7;        /* cian de apoyo */
+  --ink:#133a52;         /* texto principal */
+  --muted:#5c7b90;       /* texto secundario */
+  --paper:#f6fafc;       /* fondo base claro */
+  --panel:#ffffff;       /* tarjetas */
+  --line:#d7e5ee;        /* bordes */
+  --radius:12px;
+  /* Alias de compatibilidad con estilos inline (--red / --gold) */
+  --red:var(--green);
+  --gold:var(--blue);
+  --navy:var(--blue-deep);
+}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth}
+body{font-family:Manrope,Arial,sans-serif;color:var(--ink);background:var(--paper);line-height:1.6}
+.container{width:min(1120px,calc(100% - 2.5rem));margin:auto}
+a{color:inherit;text-decoration:none}
+:focus-visible{outline:3px solid #7ec8ea;outline-offset:3px}
+.skip{position:fixed;z-index:9;left:1rem;top:1rem;padding:.7rem 1rem;color:var(--blue-deep);background:white;border-radius:8px;transform:translateY(-180%)}
+.skip:focus{transform:translateY(0)}
+.nav{height:76px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line)}
+.brand{display:flex;align-items:center;gap:.65rem;font-family:Orbitron,Manrope,sans-serif;font-weight:800;letter-spacing:.02em}
+.brand span{display:grid;place-items:center;width:36px;aspect-ratio:1;border-radius:50%;background:#e3f2fb;color:var(--blue);border:1px solid #bfe0f2}
+.back{font-size:.85rem;font-weight:800;color:var(--blue)}
+.back i{margin-right:.35rem}
+.hero{padding:4.8rem 0 5.5rem;background:radial-gradient(circle at 85% 8%,#1279c9 0,transparent 30%),linear-gradient(125deg,#0b4a76,#0d5d95);color:white;overflow:hidden;position:relative}
+.hero:before{content:"";position:absolute;right:8%;bottom:14%;width:235px;height:130px;border:1px solid rgba(255,255,255,.30);border-radius:8px;background:linear-gradient(transparent 49%,rgba(255,255,255,.10) 50%,transparent 51%),linear-gradient(90deg,transparent 49%,rgba(255,255,255,.07) 50%,transparent 51%);background-size:100% 26px,34px 100%;opacity:.85}
+.hero:after{content:"";position:absolute;width:600px;height:600px;border:1px solid rgba(255,255,255,.25);border-radius:50%;right:-220px;top:-300px}
+.hero-content{position:relative;z-index:1;max-width:780px}
+.hero-content:after{content:"";position:absolute;left:calc(100% + 34px);top:120px;width:195px;height:80px;background:#35d0a0;filter:drop-shadow(0 0 7px #35d0a0);clip-path:polygon(0 75%,14% 54%,28% 68%,43% 26%,58% 47%,72% 14%,86% 42%,100% 4%,100% 11%,86% 49%,72% 21%,58% 54%,43% 33%,28% 75%,14% 61%,0 82%)}
+.eyebrow{display:inline-flex;gap:.5rem;align-items:center;font-family:Orbitron,Manrope,sans-serif;font-size:.72rem;letter-spacing:.14em;font-weight:800;text-transform:uppercase;color:var(--blue)}
+.eyebrow:before{content:"";width:28px;height:2px;background:currentColor}
+.hero .eyebrow{color:#8fe3cd}
+h1,h2,h3{font-family:Orbitron,Manrope,sans-serif;line-height:1.12;font-weight:700;letter-spacing:-.055em;text-transform:uppercase}
+h1{font-size:clamp(2.8rem,6vw,5rem);margin-top:.75rem}
+h2{font-size:clamp(2rem,3vw,3rem)}
+.hero p{margin-top:1.3rem;max-width:690px;color:#d3e9f8;font-size:1.1rem}
+.button{display:inline-flex;align-items:center;justify-content:center;gap:.55rem;margin-top:1.8rem;min-height:48px;padding:.75rem 1.15rem;border-radius:999px;background:linear-gradient(135deg,#0e9f7e,#12b886);color:white;font-family:Orbitron,Manrope,sans-serif;font-weight:800;font-size:0;box-shadow:0 9px 20px rgba(14,159,126,.30);transition:.2s}
+.button::after{content:"Solicitar información";font-size:.78rem}
+.button i{font-size:.8rem}
+.button:hover{transform:translateY(-2px)}
+.section{padding:5.5rem 0}
+.intro{display:grid;grid-template-columns:1.15fr .85fr;gap:3rem;align-items:start}
+.lead{color:var(--muted);font-size:1.08rem;margin-top:1rem}
+.promise{padding:1.8rem;border-radius:var(--radius);background:#ffffff;border:1px solid var(--line);border-left:2px solid var(--green)}
+.promise strong{display:block;font:700 .78rem Orbitron,Manrope,sans-serif;letter-spacing:.1em;color:var(--green);text-transform:uppercase}
+.promise p{margin-top:.7rem;font:600 1.2rem/1.45 Manrope,sans-serif}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:3rem}
+.card{position:relative;overflow:hidden;padding:1.6rem;border-radius:var(--radius);border:1px solid var(--line);background:#ffffff;box-shadow:0 10px 28px rgba(11,74,118,.06)}
+.card:before{content:"";position:absolute;top:0;left:0;width:50px;height:2px;background:var(--green)}
+.num{display:grid;place-items:center;width:35px;aspect-ratio:1;border-radius:50%;background:#e3f2fb;color:var(--blue);border:1px solid rgba(14,122,196,.25);font:800 .8rem Orbitron,Manrope,sans-serif}
+.card h3{font-size:.9rem;margin-top:1rem;line-height:1.35}
+.card p{font-size:.88rem;color:var(--muted);margin-top:.65rem}
+.band{padding:5rem 0;background:#eef4f9;border-block:1px solid var(--line)}
+.deliverables{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:2rem}
+.deliverable{padding:1.25rem;display:flex;gap:.85rem;align-items:flex-start;border-left:3px solid var(--green);background:var(--panel)}
+.deliverable i{color:var(--blue);margin-top:.2rem}
+.deliverable h3{font-size:.82rem}
+.deliverable p{font-size:.84rem;color:var(--muted);margin-top:.25rem}
+.cta{padding:5rem 1.5rem;text-align:center;color:var(--ink);background:linear-gradient(180deg,#e3f2fb,#f6fafc)}
+.cta p{max-width:610px;margin:1rem auto;color:var(--muted)}
+.footer{padding:1.8rem 0;background:#ffffff;border-top:1px solid var(--line);color:var(--muted);font-size:.8rem}
+.footer .container{display:flex;justify-content:space-between;gap:1rem}
+@media(max-width:700px){.hero{padding:3.3rem 0 4rem}.hero:before,.hero-content:after{display:none}.section{padding:4rem 0}.intro,.grid,.deliverables{grid-template-columns:1fr}.grid{margin-top:2rem}.footer .container{flex-direction:column}.container{width:min(100% - 1.5rem,1120px)}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
