@@ -103,6 +103,31 @@
     .footer-inner { display:flex; justify-content:space-between; gap:1rem; align-items:center; }
     .float-whatsapp { position:fixed; z-index:5; right:1.5rem; bottom:1.5rem; width:54px; aspect-ratio:1; display:grid; place-items:center; border-radius:50%; color:white; background:#24c66a; box-shadow:0 12px 25px rgba(0,0,0,.22); font-size:1.45rem; }
     .float-whatsapp:hover { transform:translateY(-3px); }
+    /* ── Ventana flotante de detalle de producto ── */
+    body.modal-open { overflow:hidden; }
+    .service-card.is-clickable { cursor:pointer; }
+    .service-card.is-clickable:hover { box-shadow:0 22px 50px rgba(11,74,118,.18); transform:translateY(-3px); }
+    .modal-overlay { position:fixed; inset:0; z-index:8; background:rgba(11,42,64,.55); opacity:0; pointer-events:none; transition:opacity .25s ease; }
+    .modal-overlay.is-open { opacity:1; pointer-events:auto; }
+    .modal-panel { position:fixed; z-index:9; top:50%; left:50%; transform:translate(-50%,calc(-50% + 18px)); width:min(560px,calc(100% - 2rem)); max-height:min(86vh,760px); overflow:auto; background:var(--white); border-radius:var(--radius); box-shadow:0 30px 70px rgba(11,42,64,.35); opacity:0; pointer-events:none; transition:opacity .25s ease, transform .25s ease; }
+    .modal-panel.is-open { opacity:1; pointer-events:auto; transform:translate(-50%,-50%); }
+    .modal-media { position:relative; aspect-ratio:16/9; background:var(--sky); overflow:hidden; }
+    .modal-media img { width:100%; height:100%; object-fit:cover; display:block; }
+    .modal-close { position:absolute; top:.8rem; right:.8rem; z-index:2; width:38px; aspect-ratio:1; display:grid; place-items:center; border:0; border-radius:50%; background:rgba(255,255,255,.94); color:var(--navy); font-size:1.05rem; cursor:pointer; box-shadow:0 6px 16px rgba(11,42,64,.25); transition:transform .2s ease; }
+    .modal-close:hover { transform:rotate(90deg); }
+    .modal-body { padding:1.5rem 1.6rem 1.7rem; }
+    .modal-body h3 { font-size:1.45rem; color:var(--navy); letter-spacing:-.03em; }
+    .modal-tag { display:block; margin-top:.5rem; color:var(--blue); font-size:.72rem; font-weight:800; letter-spacing:.1em; }
+    .modal-price { display:block; margin-top:.45rem; font-family:Orbitron,Manrope,sans-serif; font-size:1.5rem; font-weight:800; color:var(--green); }
+    .modal-price small { font-size:.85rem; font-weight:700; color:var(--muted); }
+    .modal-desc { margin-top:.8rem; font-size:.98rem; }
+    .modal-feats { margin:.9rem 0 0; padding:0; list-style:none; display:grid; gap:.45rem; }
+    .modal-feats li { position:relative; padding-left:1.5rem; color:var(--muted); font-size:.93rem; }
+    .modal-feats li::before { content:"\f00c"; font-family:"Font Awesome 6 Free"; font-weight:900; position:absolute; left:0; top:.1rem; color:var(--green); }
+    .modal-actions { display:flex; flex-wrap:wrap; gap:.6rem; margin-top:1.25rem; align-items:center; }
+    .modal-actions .cart-add { flex:1 1 190px; }
+    .modal-note { margin-top:.8rem; color:var(--muted); font-size:.75rem; text-align:center; }
+    @media (max-width:520px) { .modal-panel { width:100%; max-height:92vh; top:auto; bottom:0; left:0; right:0; transform:translateY(24px); border-radius:var(--radius) var(--radius) 0 0; } .modal-panel.is-open { transform:translateY(0); } }
     @media (prefers-reduced-motion:reduce) { *,*::before,*::after { scroll-behavior:auto !important; transition-duration:.01ms !important; animation-duration:.01ms !important; animation-iteration-count:1 !important; } }
     @media (max-width:800px) { .nav-toggle { display:grid; place-items:center; } .nav-links { position:absolute; top:70px; left:1.25rem; right:1.25rem; padding:1rem; display:none; flex-direction:column; align-items:stretch; gap:.2rem; border:1px solid rgba(255,255,255,.16); border-radius:14px; background:#0b4a76; box-shadow:0 16px 30px rgba(0,0,0,.22); } .nav-links.is-open { display:flex; } .nav-links a { padding:.75rem; } .nav-links .nav-cta { text-align:center; margin-top:.3rem; } .hero { min-height:auto; } .hero-grid,.contact-wrap { grid-template-columns:1fr; } .hero-panel { display:none; } .section { padding:4.5rem 0; } .deliverables { grid-template-columns:repeat(2,1fr); } }
     @media (max-width:520px) { .container { width:min(100% - 1.5rem, 1120px); } .nav { min-height:68px; } .hero { padding:7.4rem 0 3.2rem; } h1 { font-size:clamp(2.7rem,14vw,4rem); } .hero-copy { font-size:1rem; } .hero-actions { display:grid; } .button { min-height:48px; } .service-grid,.form-grid { grid-template-columns:1fr; } .service-card { min-height:245px; padding:1.5rem; } .deliverables { grid-template-columns:1fr; } .contact-aside,.contact-form { padding:2rem 1.5rem; } .footer-inner { flex-direction:column; align-items:flex-start; } .float-whatsapp { right:1rem; bottom:1rem; } }
@@ -155,6 +180,25 @@
       <button class="cart-clear" id="cart-clear" type="button">Vaciar carrito</button>
     </footer>
   </aside>
+  <div class="modal-overlay" id="modal-overlay" hidden></div>
+  <div class="modal-panel" id="modal-panel" role="dialog" aria-modal="true" aria-labelledby="modal-title" hidden>
+    <div class="modal-media">
+      <button class="modal-close" id="modal-close" type="button" aria-label="Cerrar detalle"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
+      <img id="modal-img" src="productos/guantes-nitrilo.svg" alt="">
+    </div>
+    <div class="modal-body">
+      <h3 id="modal-title">Producto</h3>
+      <span class="modal-tag" id="modal-tag"></span>
+      <span class="modal-price" id="modal-price"></span>
+      <p class="modal-desc" id="modal-desc"></p>
+      <ul class="modal-feats" id="modal-feats"></ul>
+      <div class="modal-actions">
+        <button class="cart-add" type="button" id="modal-add">Agregar al carrito <i class="fa-solid fa-cart-plus" aria-hidden="true"></i></button>
+        <a class="service-link" id="modal-wa" href="#" target="_blank" rel="noopener">Pedir por WhatsApp <i class="fa-brands fa-whatsapp" aria-hidden="true"></i></a>
+      </div>
+      <p class="modal-note">Precio de referencia. El valor final se confirma en su cotización.</p>
+    </div>
+  </div>
   <script>
     const toggle = document.querySelector('.nav-toggle');
     const navLinks = document.querySelector('.nav-links');
@@ -245,6 +289,71 @@
       msg += '\n\nTotal de referencia: ' + fmtCOP.format(total) + '\n(Precios de referencia, sujetos a cotización final)';
       window.open('https://wa.me/573053252358?text=' + encodeURIComponent(msg), '_blank', 'noopener');
     });
+    // ── Detalle de producto (ventana flotante) ──
+    const FEATURES = {
+      'guantes-nitrilo': ['Nitrilo sintético 100 %, sin látex ni polvo', 'Ambidiestros con puño abocardado', 'Alta resistencia a químicos y perforaciones', 'Textura antideslizante y sensibilidad táctil', 'Tallas S, M, L y XL · caja × 100'],
+      'mascarillas-quirurgicas': ['3 capas con filtro bacteriano de alta eficiencia', 'Soporte nasal ajustable para sellado seguro', 'Elásticos suaves que reducen presión en las orejas', 'Transpirables para uso prolongado', 'Presentación estándar e infantil · caja × 50'],
+      'jeringas-desechables': ['Estériles, empaque individual', 'Graduación clara: 3, 5, 10 y 20 ml', 'Aguja desechable con protección de punta', 'Émbolo de alta precisión', 'Precio por unidad'],
+      'gasas-y-apositos': ['Algodón hidrófilo de alta absorción', 'Estériles, empaque individual', 'Tejido suave que no deja residuos', 'Medidas 10×10 y presentaciones hospitalarias', 'Caja × 50 sobres'],
+      'batas-quirurgicas': ['Tela no tejida SMS, resistente a líquidos', 'Cuello y puños elásticos', 'Cierre posterior con cintas', 'Tallas M, L y XL · color blanco', 'Paquete × 10 unidades'],
+      'gorros-quirurgicos': ['No tejida de alta densidad', 'Banda elástica ajustable', 'Libres de látex', 'Colores azul y verde', 'Caja × 100 unidades'],
+      'cubrezapatos': ['No tejido resistente a líquidos', 'Base antideslizante', 'Elástico de tobillo para ajuste firme', 'Talla estándar', 'Caja × 100 unidades'],
+      'torundas-alcohol': ['Algodón 100 % con alcohol antiséptico al 70 %', 'Presentaciones individuales de fácil apertura', 'Uso único, evita contaminación cruzada', 'Caja × 100 unidades'],
+      'sabanas-desechables': ['Superficie suave e hidrófuga', 'Presentación en rollo lista para usar', 'Protege la camilla entre pacientes', 'Uso único'],
+      'termometros-desechables': ['Lectura en segundos (35,5 – 40,5 °C)', 'Sin mercurio ni vidrio', 'Empaque individual', 'Ideal para triage y dotación masiva', 'Caja × 100 unidades']
+    };
+    const modalOverlay = document.querySelector('#modal-overlay');
+    const modalPanel = document.querySelector('#modal-panel');
+    const modalImg = document.querySelector('#modal-img');
+    const modalTitle = document.querySelector('#modal-title');
+    const modalTag = document.querySelector('#modal-tag');
+    const modalPrice = document.querySelector('#modal-price');
+    const modalDesc = document.querySelector('#modal-desc');
+    const modalFeats = document.querySelector('#modal-feats');
+    const modalAdd = document.querySelector('#modal-add');
+    const modalWa = document.querySelector('#modal-wa');
+    const openModal = () => {
+      modalOverlay.hidden = false; modalPanel.hidden = false;
+      requestAnimationFrame(() => { modalOverlay.classList.add('is-open'); modalPanel.classList.add('is-open'); });
+      document.body.classList.add('modal-open');
+      document.querySelector('#modal-close').focus();
+    };
+    const closeModal = () => {
+      modalOverlay.classList.remove('is-open'); modalPanel.classList.remove('is-open');
+      document.body.classList.remove('modal-open');
+      setTimeout(() => { modalOverlay.hidden = true; modalPanel.hidden = true; }, 250);
+    };
+    const openProduct = card => {
+      const btn = card.querySelector('.cart-add');
+      const img = card.querySelector('.thumb img');
+      const title = card.querySelector('h3');
+      const tag = card.querySelector('.tag');
+      const price = card.querySelector('.price');
+      const desc = card.querySelector('p');
+      modalImg.src = img ? (img.currentSrc || img.src) : '';
+      modalImg.alt = title ? title.textContent : '';
+      modalTitle.textContent = title ? title.textContent : '';
+      modalTag.textContent = tag ? tag.textContent : '';
+      modalPrice.innerHTML = price ? price.innerHTML : '';
+      modalDesc.textContent = desc ? desc.textContent : '';
+      modalFeats.innerHTML = '';
+      (FEATURES[btn ? btn.dataset.id : ''] || []).forEach(f => { const li = document.createElement('li'); li.textContent = f; modalFeats.appendChild(li); });
+      if (btn) { modalAdd.dataset.id = btn.dataset.id; modalAdd.dataset.name = btn.dataset.name; modalAdd.dataset.price = btn.dataset.price; modalAdd.dataset.unit = btn.dataset.unit; }
+      modalWa.href = 'https://wa.me/573053252358?text=' + encodeURIComponent('Hola, quiero cotizar: ' + (title ? title.textContent : '') + (tag ? ' (' + tag.textContent + ')' : ''));
+      openModal();
+    };
+    document.querySelectorAll('.service-card').forEach(card => {
+      card.classList.add('is-clickable');
+      card.setAttribute('tabindex', '0');
+      card.setAttribute('role', 'button');
+      card.setAttribute('aria-label', 'Ver detalle de ' + (card.querySelector('h3') ? card.querySelector('h3').textContent : 'producto'));
+      card.addEventListener('click', e => { if (e.target.closest('button, a')) return; openProduct(card); });
+      card.addEventListener('keydown', e => { if ((e.key === 'Enter' || e.key === ' ') && !e.target.closest('button, a')) { e.preventDefault(); openProduct(card); } });
+    });
+    modalOverlay.addEventListener('click', closeModal);
+    document.querySelector('#modal-close').addEventListener('click', closeModal);
+    modalAdd.addEventListener('click', () => { if (modalAdd.dataset.id) { closeModal(); openCart(); } });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
     renderCart();
   </script>
 </body>
