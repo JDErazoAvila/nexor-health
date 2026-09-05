@@ -39,5 +39,39 @@ python -m http.server 8000
 - **Fotos:** copie sus JPG en `productos/` con los nombres indicados en `productos/LEEME.txt`.
 - **WhatsApp:** el número de pedidos está en los enlaces `wa.me/573053252358` de `index.html`.
 
+## Actualizar precios desde Temu (script de web scraping)
+
+En `scraper_temu.py` hay un script que abre Temu Colombia en un navegador real
+(Playwright), busca cada uno de los 10 productos del catálogo y extrae
+título + precio en COP a un JSON/CSV.
+
+### En Windows (PowerShell)
+
+1. **Instala Python** (una sola vez) si no lo tienes:
+   `winget install --id Python.Python.3.12 -e --source winget`
+
+2. **Instalación automática** (pip, playwright y Chromium):
+   `powershell -ExecutionPolicy Bypass -File instalar-temu.ps1 -SoloInstalar`
+
+3. **Corre el scraper** (los 10 productos):
+   `powershell -ExecutionPolicy Bypass -File instalar-temu.ps1`
+
+Opciones:
+- `... -Consulta "guantes nitrilo 100"` — una sola búsqueda libre
+- `python scraper_temu.py --headless` — sin ventana (suele chocar con el captcha de Temu)
+
+Salidas: `precios_temu_AAAAMMDD_HHMMSS.json`, `.csv` y carpeta `raw/` con el HTML de cada búsqueda.
+Los precios extraídos se usan luego para recalcular `index.html` (costo Temu + 20 %).
+
+> Nota: Temu bloquea accesos automatizados con captchas; por eso el script usa un
+> navegador real y espera a que completes la verificación manualmente la primera vez.
+> Si prefieres no instalar nada, la vía manual (Temu en modo incógnito + calcular-precios.html) es la más rápida.
+
+## Herramienta local de cálculo
+
+`calcular-precios.html` (ábrela con doble clic en el navegador) permite ingresar
+el costo visto en Temu por cada producto y calcula el precio NEXOR (costo × 1,20),
+mostrando además el `data-price` listo para pegar en `index.html`.
+
 © 2026 NEXOR
 

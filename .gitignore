@@ -10,4 +10,15 @@ Thumbs.db
 *.log
 
 # Respaldos locales
-*.bak
+*.bak
+
+# Archivos generados por el scraper de Temu (no van al repositorio)
+raw/
+precios_temu_*.json
+precios_temu_*.csv
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/

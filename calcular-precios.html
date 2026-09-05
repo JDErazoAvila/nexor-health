@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NEXOR · Calcular precios desde costo Temu</title>
+<style>
+  :root { --ink:#133a52; --navy:#0b4a76; --blue:#0e7ac4; --sky:#e3f2fb; --mint:#e2f6ef; --line:#d7e5ee; --muted:#5c7b90; --green:#0e9f7e; --white:#fff; }
+  * { box-sizing:border-box; margin:0; }
+  body { font-family:Segoe UI, Arial, sans-serif; background:#f6fafc; color:var(--ink); padding:2rem 1rem; line-height:1.5; }
+  .wrap { max-width:860px; margin:auto; }
+  h1 { font-size:1.4rem; }
+  h1 span { color:var(--navy); }
+  .intro { color:var(--muted); margin:.5rem 0 1.4rem; font-size:.95rem; }
+  .note { background:var(--sky); border-left:4px solid var(--blue); padding:.8rem 1rem; border-radius:8px; margin-bottom:1.4rem; font-size:.9rem; }
+  table { width:100%; border-collapse:collapse; background:var(--white); border:1px solid var(--line); border-radius:12px; overflow:hidden; }
+  th,td { padding:.65rem .7rem; border-bottom:1px solid var(--line); text-align:left; vertical-align:middle; }
+  th { background:var(--navy); color:#fff; font-size:.8rem; text-transform:uppercase; letter-spacing:.04em; }
+  td input[type=number] { width:100%; max-width:140px; padding:.45rem .55rem; border:1px solid var(--line); border-radius:8px; font-size:.95rem; }
+  .pres { display:block; color:var(--muted); font-size:.78rem; }
+  .res { display:block; font-weight:800; color:var(--green); font-size:.95rem; white-space:nowrap; }
+  .auto { color:var(--muted); font-size:.78rem; }
+  .btn { display:inline-block; margin-top:1.1rem; padding:.7rem 1.1rem; border:0; border-radius:999px; font-weight:700; cursor:pointer; font-size:.9rem; }
+  .btn-primary { background:var(--blue); color:#fff; }
+  .btn-green { background:var(--green); color:#fff; }
+  .btn:disabled { opacity:.5; cursor:not-allowed; }
+  pre { background:#0b2c42; color:#d9f3ff; padding:1rem; border-radius:10px; overflow:auto; font-size:.82rem; margin-top:1rem; display:none; white-space:pre-wrap; word-break:break-word; }
+  .small { color:var(--muted); font-size:.8rem; margin-top:.7rem; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>NEXOR — <span>Calculadora de precios (costo Temu + 20 %)</span></h1>
+  <p class="intro">Llene el costo en pesos colombianos que ve en Temu para la presentación indicada. La herramienta calcula el precio NEXOR (costo × 1,20, redondeado) y muestra el formato listo para la página.</p>
+  <div class="note">Abra Temu en una ventana de incógnito (sin necesidad de cuenta), busque cada producto y copie el <b>precio que aparece para la cantidad/presentación indicada</b>. Si Temu vende otra presentación (ej. guantes por 50 y el sitio los vende por 100), calcule aquí el costo equivalente.</div>
+
+  <table>
+    <thead><tr><th>Producto</th><th>Presentación en el sitio</th><th>Costo Temu (COP)</th><th>Precio NEXOR +20 %</th></tr></thead>
+    <tbody id="rows"></tbody>
+  </table>
+
+  <div style="display:flex; gap:.8rem; align-items:center; flex-wrap:wrap;">
+    <button class="btn btn-primary" id="calc">Calcular precios</button>
+    <button class="btn btn-green" id="copy" disabled>Copiar listado listo para pegar</button>
+  </div>
+  <p class="small" id="status"></p>
+  <pre id="out"></pre>
+</div>
+
+<script id="app">
+var PRODUCTS = [
+  { id:"guantes-nitrilo", name:"Guantes de nitrilo", pres:"CAJA × 100 · tallas S, M, L y XL", extra:"En Temu suele costar igual en todas las tallas." },
+  { id:"mascarillas-quirurgicas", name:"Mascarillas quirúrgicas", pres:"CAJA × 50 · estándar e infantil", extra:"Varía poco entre estándar e infantil." },
+  { id:"jeringas-desechables", name:"Jeringas y agujas desechables", pres:"UNIDAD · 3, 5, 10 y 20 ml", extra:"Temu las vende por paquetes de 50/100: divida para hallar el costo por unidad del sitio." },
+  { id:"gasas-y-apositos", name:"Gasas y apósitos estériles", pres:"PAQUETE · 10×10 u otras medidas", extra:"El precio cambia según el tamaño del paquete." },
+  { id:"batas-quirurgicas", name:"Batas quirúrgicas desechables", pres:"PAQUETE × 10 · M, L y XL", extra:"El tallaje suele costar igual." },
+  { id:"gorros-quirurgicos", name:"Gorros quirúrgicos", pres:"CAJA × 100 · azul y verde", extra:"" },
+  { id:"cubrezapatos", name:"Cubrezapatos", pres:"CAJA × 100 · talla única", extra:"" },
+  { id:"torundas-alcohol", name:"Torundas de algodón y alcohol", pres:"PAQUETE · sobres individuales", extra:"" },
+  { id:"sabanas-desechables", name:"Sábanas y fundas desechables", pres:"ROLLO · para camilla", extra:"El precio cambia según largo/ancho del rollo." },
+  { id:"termometros-desechables", name:"Termómetros desechables", pres:"CAJA × 100 · de franja", extra:"" }
+];
+
+function roundCOP(v) { return Math.max(100, Math.round(v/100)*100); }
+
+var tbody = document.getElementById("rows");
+PRODUCTS.forEach(function(p) {
+  var tr = document.createElement("tr");
+  var td1 = document.createElement("td"); td1.textContent = p.name;
+  var td2 = document.createElement("td");
+  td2.innerHTML = '<span class="pres">' + p.pres + '</span><span class="pres">' + p.extra + '</span>';
+  var td3 = document.createElement("td");
+  td3.innerHTML = '<input type="number" min="0" step="50" placeholder="$" data-id="' + p.id + '">';
+  var td4 = document.createElement("td"); td4.id = "res-" + p.id;
+  tr.appendChild(td1); tr.appendChild(td2); tr.appendChild(td3); tr.appendChild(td4);
+  tbody.appendChild(tr);
+});
+
+var statusEl = document.getElementById("status");
+var outEl = document.getElementById("out");
+var copyBtn = document.getElementById("copy");
+var results = {};
+
+function fmtCop(n) { return "$" + n.toLocaleString("es-CO"); }
+
+document.getElementById("calc").addEventListener("click", function() {
+  results = {};
+  var missing = [];
+  PRODUCTS.forEach(function(p) {
+    var input = document.querySelector('input[data-id="' + p.id + '"]');
+    var val = parseFloat(input.value);
+    var cell = document.getElementById("res-" + p.id);
+    if (!isFinite(val) || val <= 0) { missing.push(p.name); cell.innerHTML = '<span class="pres">—</span>'; return; }
+    var nexor = roundCOP(val * 1.2);
+    results[p.id] = { costo: val, nexor: nexor };
+    cell.innerHTML = '<span class="res">' + fmtCop(nexor) + '</span><span class="pres">costo ' + fmtCop(val) + ' × 1.2</span>';
+  });
+  if (missing.length) { statusEl.textContent = "Faltan costos para: " + missing.join(", "); }
+  else { statusEl.textContent = "Listo. Presione el botón verde para copiar el listado."; }
+  copyBtn.disabled = Object.keys(results).length !== PRODUCTS.length;
+});
+
+copyBtn.addEventListener("click", function() {
+  if (Object.keys(results).length !== PRODUCTS.length) return;
+  var lines = [];
+  lines.push("PRECIOS NEXOR — costo Temu + 20 %");
+  lines.push("===================================");
+  PRODUCTS.forEach(function(p) {
+    var r = results[p.id];
+    lines.push(p.name + " (" + p.pres + "): " + fmtCop(r.nexor) + "  —  data-price=" + r.nexor + "  [costo Temu " + fmtCop(r.costo) + "]");
+  });
+  outEl.textContent = lines.join("\n");
+  outEl.style.display = "block";
+  var range = document.createRange();
+  range.selectNodeContents(outEl);
+  var sel = window.getSelection(); sel.removeAllRanges(); sel.addRange(range);
+  try { document.execCommand("copy"); sel.removeAllRanges(); statusEl.textContent = "Copiado: péguelo en el chat y con eso actualizo la página final."; }
+  catch (e) { statusEl.textContent = "Seleccione el recuadro azul y cópielo (Ctrl+C)."; }
+});
+</script>
+</body>
+</html>
