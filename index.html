@@ -111,8 +111,15 @@
     .modal-overlay.is-open { opacity:1; pointer-events:auto; }
     .modal-panel { position:fixed; z-index:9; top:50%; left:50%; transform:translate(-50%,calc(-50% + 18px)); width:min(560px,calc(100% - 2rem)); max-height:min(86vh,760px); overflow:auto; background:var(--white); border-radius:var(--radius); box-shadow:0 30px 70px rgba(11,42,64,.35); opacity:0; pointer-events:none; transition:opacity .25s ease, transform .25s ease; }
     .modal-panel.is-open { opacity:1; pointer-events:auto; transform:translate(-50%,-50%); }
-    .modal-media { position:relative; aspect-ratio:16/9; background:var(--sky); overflow:hidden; }
-    .modal-media img { width:100%; height:100%; object-fit:cover; display:block; }
+    .modal-media { position:relative; aspect-ratio:16/9; background:#fff; overflow:hidden; border-bottom:1px solid var(--line); }
+    .modal-media img { width:100%; height:100%; object-fit:contain; display:block; }
+    .modal-nav { position:absolute; top:50%; transform:translateY(-50%); z-index:2; width:40px; aspect-ratio:1; display:grid; place-items:center; border:0; border-radius:50%; background:rgba(255,255,255,.94); color:var(--navy); font-size:1rem; cursor:pointer; box-shadow:0 6px 16px rgba(11,42,64,.25); transition:.2s ease; }
+    .modal-nav:hover { background:var(--navy); color:#fff; }
+    .modal-nav.prev { left:.7rem; }
+    .modal-nav.next { right:.7rem; }
+    .modal-dots { position:absolute; left:0; right:0; bottom:.7rem; z-index:2; display:flex; justify-content:center; gap:.4rem; }
+    .modal-dots button { width:9px; height:9px; padding:0; border:0; border-radius:999px; background:rgba(11,42,64,.28); cursor:pointer; transition:.2s ease; }
+    .modal-dots button.is-active { width:22px; background:var(--green); }
     .modal-close { position:absolute; top:.8rem; right:.8rem; z-index:2; width:38px; aspect-ratio:1; display:grid; place-items:center; border:0; border-radius:50%; background:rgba(255,255,255,.94); color:var(--navy); font-size:1.05rem; cursor:pointer; box-shadow:0 6px 16px rgba(11,42,64,.25); transition:transform .2s ease; }
     .modal-close:hover { transform:rotate(90deg); }
     .modal-body { padding:1.5rem 1.6rem 1.7rem; }
@@ -184,7 +191,10 @@
   <div class="modal-panel" id="modal-panel" role="dialog" aria-modal="true" aria-labelledby="modal-title" hidden>
     <div class="modal-media">
       <button class="modal-close" id="modal-close" type="button" aria-label="Cerrar detalle"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
+      <button class="modal-nav prev" id="modal-prev" type="button" aria-label="Imagen anterior" hidden><i class="fa-solid fa-chevron-left" aria-hidden="true"></i></button>
       <img id="modal-img" src="productos/guantes-nitrilo.svg" alt="">
+      <button class="modal-nav next" id="modal-next" type="button" aria-label="Imagen siguiente" hidden><i class="fa-solid fa-chevron-right" aria-hidden="true"></i></button>
+      <div class="modal-dots" id="modal-dots" hidden></div>
     </div>
     <div class="modal-body">
       <h3 id="modal-title">Producto</h3>
@@ -330,8 +340,6 @@
       const tag = card.querySelector('.tag');
       const price = card.querySelector('.price');
       const desc = card.querySelector('p');
-      modalImg.src = img ? (img.currentSrc || img.src) : '';
-      modalImg.alt = title ? title.textContent : '';
       modalTitle.textContent = title ? title.textContent : '';
       modalTag.textContent = tag ? tag.textContent : '';
       modalPrice.innerHTML = price ? price.innerHTML : '';
@@ -340,8 +348,69 @@
       (FEATURES[btn ? btn.dataset.id : ''] || []).forEach(f => { const li = document.createElement('li'); li.textContent = f; modalFeats.appendChild(li); });
       if (btn) { modalAdd.dataset.id = btn.dataset.id; modalAdd.dataset.name = btn.dataset.name; modalAdd.dataset.price = btn.dataset.price; modalAdd.dataset.unit = btn.dataset.unit; }
       modalWa.href = 'https://wa.me/573053252358?text=' + encodeURIComponent('Hola, quiero cotizar: ' + (title ? title.textContent : '') + (tag ? ' (' + tag.textContent + ')' : ''));
+      openGallery(btn ? btn.dataset.id : 'producto', img ? (img.currentSrc || img.src) : '');
       openModal();
     };
+    // ── Galería de imágenes del producto ──
+    const modalMedia = document.querySelector('.modal-media');
+    const modalPrev = document.querySelector('#modal-prev');
+    const modalNext = document.querySelector('#modal-next');
+    const modalDots = document.querySelector('#modal-dots');
+    const galleryCache = {};
+    let gallery = [];
+    let galleryIndex = 0;
+    let galleryId = '';
+    const rebuildGallery = () => {
+      const c = galleryCache[galleryId];
+      if (!c) return;
+      gallery = [c.main];
+      ['-2','-3','-4'].forEach(s => { const u = c.extras[s]; if (u && gallery.indexOf(u) === -1) gallery.push(u); });
+      if (galleryIndex >= gallery.length) galleryIndex = 0;
+      renderGallery();
+    };
+    const renderGallery = () => {
+      if (!gallery.length) return;
+      modalImg.src = gallery[galleryIndex];
+      modalImg.alt = (modalTitle.textContent || 'Producto') + ' · imagen ' + (galleryIndex + 1) + ' de ' + gallery.length;
+      modalPrev.hidden = modalNext.hidden = modalDots.hidden = gallery.length < 2;
+      modalDots.innerHTML = '';
+      gallery.forEach((_, i) => {
+        const d = document.createElement('button');
+        d.type = 'button';
+        d.setAttribute('aria-label', 'Ir a la imagen ' + (i + 1));
+        if (i === galleryIndex) d.classList.add('is-active');
+        d.addEventListener('click', () => showSlide(i));
+        modalDots.appendChild(d);
+      });
+    };
+    const showSlide = i => { galleryIndex = (i + gallery.length) % gallery.length; renderGallery(); };
+    const openGallery = (id, mainSrc) => {
+      galleryId = id;
+      galleryIndex = 0;
+      galleryCache[id] = galleryCache[id] || { main: mainSrc, extras: {}, probed: false };
+      galleryCache[id].main = mainSrc;
+      if (!galleryCache[id].probed) {
+        galleryCache[id].probed = true;
+        ['-2','-3','-4'].forEach(s => {
+          const found = url => { galleryCache[id].extras[s] = url; if (galleryId === id) rebuildGallery(); };
+          const tryJpg = new Image();
+          tryJpg.onload = () => found(tryJpg.src);
+          tryJpg.onerror = () => { const tryPng = new Image(); tryPng.onload = () => found(tryPng.src); tryPng.src = 'productos/' + id + s + '.png'; };
+          tryJpg.src = 'productos/' + id + s + '.jpg';
+        });
+      }
+      rebuildGallery();
+    };
+    modalPrev.addEventListener('click', () => showSlide(galleryIndex - 1));
+    modalNext.addEventListener('click', () => showSlide(galleryIndex + 1));
+    let modalTouchX = null;
+    modalMedia.addEventListener('touchstart', e => { modalTouchX = e.changedTouches[0].clientX; }, { passive:true });
+    modalMedia.addEventListener('touchend', e => { if (modalTouchX === null) return; const dx = e.changedTouches[0].clientX - modalTouchX; if (Math.abs(dx) > 40) showSlide(galleryIndex + (dx < 0 ? 1 : -1)); modalTouchX = null; }, { passive:true });
+    document.addEventListener('keydown', e => {
+      if (modalPanel.hidden) return;
+      if (e.key === 'ArrowRight') showSlide(galleryIndex + 1);
+      if (e.key === 'ArrowLeft') showSlide(galleryIndex - 1);
+    });
     document.querySelectorAll('.service-card').forEach(card => {
       card.classList.add('is-clickable');
       card.setAttribute('tabindex', '0');

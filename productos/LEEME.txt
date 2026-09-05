@@ -12,3 +12,12 @@ Coloca aqui las fotos con EXACTAMENTE estos nombres:
   termometros-desechables.jpg
 Recomendado: JPG horizontal 800x600. El sitio recorta con object-fit:cover.
 Mientras falte una foto, la tarjeta muestra el icono del producto (fallback automatico).
+
+FOTOS ADICIONALES (galeria en la ventana de detalle del producto):
+Puedes agregar hasta 3 fotos extra por producto. Nombra asi:
+  <producto>-2.jpg   (ej: guantes-nitrilo-2.jpg)
+  <producto>-3.jpg
+  <producto>-4.jpg
+Aparecen automaticamente en la ventana de detalle con flechas, puntos y
+deslizamiento (swipe) en celular, sin tocar el codigo.
+La imagen grande de la ventana se muestra completa, sin recortes.
