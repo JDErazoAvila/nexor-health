@@ -1,6 +1,6 @@
 FOTOS DE PRODUCTO - NEXOR
 Coloca aqui las fotos con EXACTAMENTE estos nombres:
-  guantes-nitrilo.jpg
+  guantes-nitrilo.png   (actual: foto de referencia descargada)
   mascarillas-quirurgicas.jpg
   jeringas-desechables.jpg
   gasas-y-apositos.jpg
