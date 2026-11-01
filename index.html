@@ -3,14 +3,14 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="NEXOR: venta de suministros médicos de un solo uso: guantes, mascarillas, jeringas, gasas, batas y más. Cotización rápida para clínicas, hospitales y consultorios.">
-  <meta name="theme-color" content="#0b4a76">
+  <meta name="description" content="NEXOR - MEDICAL SYSTEMS: equipamiento, instrumental e insumos médicos. Explore el catálogo médico 2026 y solicite una cotización institucional.">
+  <meta name="theme-color" content="#071827">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="es_CO">
-  <meta property="og:title" content="NEXOR | Suministros Médicos de Un Solo Uso">
-  <meta property="og:description" content="Guantes, mascarillas, jeringas, gasas y demás insumos desechables para clínicas, hospitales y consultorios.">
+  <meta property="og:title" content="NEXOR - MEDICAL SYSTEMS">
+  <meta property="og:description" content="Equipamiento, instrumental e insumos médicos. Explore el catálogo médico 2026 y solicite una cotización institucional.">
   <meta name="twitter:card" content="summary">
-  <title>NEXOR | Suministros Médicos de Un Solo Uso</title>
+  <title>NEXOR - MEDICAL SYSTEMS | Equipamiento médico</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Orbitron:wght@500;600;700;800&display=swap" rel="stylesheet">
@@ -33,7 +33,7 @@
     .section--paper { background:var(--white); }
     .section-heading { max-width:650px; margin-bottom:3rem; }
     .section-heading--center { margin-inline:auto; text-align:center; }
-    h1,h2 { font-family:"Playfair Display", serif; line-height:1.1; letter-spacing:-.035em; }
+    h1,h2 { font-family:Orbitron,Manrope,sans-serif; line-height:1.1; letter-spacing:-.035em; }
     h1 { font-size:clamp(3rem,7vw,5.8rem); color:var(--white); }
     h2 { font-size:clamp(2.2rem,4vw,3.4rem); margin-top:.7rem; }
     h3 { line-height:1.25; font-size:1.2rem; }
@@ -47,7 +47,7 @@
     .site-header.is-scrolled { position:fixed; background:rgba(7,44,76,.96); box-shadow:0 5px 18px rgba(0,0,0,.16); }
     .nav { min-height:82px; display:flex; align-items:center; justify-content:space-between; gap:1.5rem; }
     .brand { display:flex; gap:.7rem; align-items:center; font-weight:800; letter-spacing:-.03em; }
-    .brand-mark { display:grid; place-items:center; width:38px; aspect-ratio:1; border:1px solid rgba(255,255,255,.4); border-radius:50%; font-family:"Playfair Display",serif; }
+    .brand-mark { display:grid; place-items:center; width:38px; aspect-ratio:1; border:1px solid rgba(255,255,255,.4); border-radius:50%; font-family:Orbitron,Manrope,sans-serif; }
     .nav-links { display:flex; gap:1.6rem; align-items:center; font-size:.87rem; font-weight:700; color:rgba(255,255,255,.82); }
     .nav-links a:hover { color:white; }
     .nav-cta { padding:.55rem .9rem; font-size:.82rem; }
@@ -65,7 +65,7 @@
     .hero-panel p { color:#d3e8f7; margin-top:.7rem; }
     .metric { border-top:1px solid rgba(255,255,255,.17); padding:1.15rem 0; display:flex; justify-content:space-between; align-items:end; }
     .metric:first-of-type { margin-top:1.4rem; }
-    .metric strong { font:700 2.3rem/1 "Playfair Display",serif; color:#84d4c2; }
+    .metric strong { font:700 2.3rem/1 Orbitron,Manrope,sans-serif; color:#84d4c2; }
     .metric span { font-size:.78rem; color:#c4d7e6; max-width:130px; } 
 
     .service-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:1.25rem; }
@@ -113,6 +113,7 @@
     .modal-panel.is-open { opacity:1; pointer-events:auto; transform:translate(-50%,-50%); }
     .modal-media { position:relative; aspect-ratio:16/9; background:#fff; overflow:hidden; border-bottom:1px solid var(--line); }
     .modal-media img { width:100%; height:100%; object-fit:contain; display:block; }
+    .modal-media img[hidden], .modal-nav[hidden], .modal-dots[hidden] { display:none; }
     .modal-nav { position:absolute; top:50%; transform:translateY(-50%); z-index:2; width:40px; aspect-ratio:1; display:grid; place-items:center; border:0; border-radius:50%; background:rgba(255,255,255,.94); color:var(--navy); font-size:1rem; cursor:pointer; box-shadow:0 6px 16px rgba(11,42,64,.25); transition:.2s ease; }
     .modal-nav:hover { background:var(--navy); color:#fff; }
     .modal-nav.prev { left:.7rem; }
@@ -132,7 +133,7 @@
     .modal-feats li { position:relative; padding-left:1.5rem; color:var(--muted); font-size:.93rem; }
     .modal-feats li::before { content:"\f00c"; font-family:"Font Awesome 6 Free"; font-weight:900; position:absolute; left:0; top:.1rem; color:var(--green); }
     .modal-actions { display:flex; flex-wrap:wrap; gap:.6rem; margin-top:1.25rem; align-items:center; }
-    .modal-actions .cart-add { flex:1 1 190px; }
+    
     .modal-note { margin-top:.8rem; color:var(--muted); font-size:.75rem; text-align:center; }
     @media (max-width:520px) { .modal-panel { width:100%; max-height:92vh; top:auto; bottom:0; left:0; right:0; transform:translateY(24px); border-radius:var(--radius) var(--radius) 0 0; } .modal-panel.is-open { transform:translateY(0); } }
     @media (prefers-reduced-motion:reduce) { *,*::before,*::after { scroll-behavior:auto !important; transition-duration:.01ms !important; animation-duration:.01ms !important; animation-iteration-count:1 !important; } }
@@ -151,65 +152,342 @@
     .icon { color:#0e7ac4; background:#e3f2fb; border:1px solid #cfe6f5; }.tag { color:#0e7ac4; }.service-link { color:#0b4a76; }.service-link i { background:#0e9f7e; }.deliverable-card { border-top-color:#0e9f7e; }.contact-wrap { border:1px solid #d7e5ee; box-shadow:0 22px 55px rgba(11,74,118,.12); }.contact-aside { background:linear-gradient(155deg,#0d5d95,#0b4a76); border-right:1px solid rgba(255,255,255,.14); }.contact-form { background:#ffffff; }input,select,textarea { background:#f6fafc; border-color:#d7e5ee; color:#133a52; }input::placeholder,textarea::placeholder { color:#7d93a5; }.form-status { color:#0e9f7e; }.site-footer { border-top:1px solid #d7e5ee; background:#eef4f9; color:#5c7b90; }.float-whatsapp { border:2px solid rgba(255,255,255,.35); }
     .hero-panel { position:relative; overflow:hidden; }.hero-panel::before { content:""; display:block; height:74px; margin:1.35rem 0; border:1px solid rgba(255,255,255,.28); border-radius:6px; background:linear-gradient(transparent 49%,rgba(255,255,255,.10) 50%,transparent 51%),linear-gradient(90deg,transparent 49%,rgba(255,255,255,.07) 50%,transparent 51%); background-size:100% 24px,32px 100%; }.hero-panel::after { content:""; position:absolute; left:2.6rem; right:2.6rem; top:94px; height:55px; border-bottom:3px solid #35d0a0; filter:drop-shadow(0 0 6px #35d0a0); clip-path:polygon(0 80%,16% 55%,30% 72%,44% 25%,59% 48%,73% 14%,88% 42%,100% 5%,100% 11%,88% 49%,73% 21%,59% 55%,44% 32%,30% 79%,16% 62%,0 87%); background:#35d0a0; pointer-events:none; }
     .thumb { position:relative; display:grid; place-items:center; height:140px; margin-bottom:1.4rem; border:1px solid var(--line); border-radius:14px; background:linear-gradient(145deg,#e3f2fb,#f6fafc); overflow:hidden; } .thumb img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; transition:transform .35s ease; } .thumb > i { font-size:2rem; color:var(--blue); } .service-card:hover .thumb img { transform:scale(1.06); } .price { display:block; margin-top:.65rem; font:800 1.05rem Orbitron,Manrope,sans-serif; color:var(--green); } .price small { font:700 .72rem Manrope,sans-serif; color:var(--muted); letter-spacing:.05em; text-transform:uppercase; }
-    .card-actions { display:flex; align-items:center; justify-content:space-between; gap:.6rem; margin-top:auto; padding-top:1.15rem; flex-wrap:wrap; } .card-actions .service-link { margin-top:0; padding-top:0; } .cart-add { display:inline-flex; align-items:center; gap:.45rem; border:0; cursor:pointer; border-radius:999px; padding:.62rem .95rem; background:linear-gradient(135deg,#0e9f7e,#12b886); color:#fff; font:800 .8rem Orbitron,Manrope,sans-serif; box-shadow:0 8px 18px rgba(14,159,126,.25); transition:.2s ease; } .cart-add:hover { transform:translateY(-2px); } .cart-add.is-added { background:#0b4a76; box-shadow:0 8px 18px rgba(11,74,118,.25); } .float-cart { position:fixed; z-index:6; right:1.5rem; bottom:5.7rem; width:54px; aspect-ratio:1; display:grid; place-items:center; border-radius:50%; border:2px solid var(--blue); color:var(--blue); background:#fff; box-shadow:0 12px 25px rgba(11,74,118,.22); font-size:1.35rem; cursor:pointer; transition:.2s ease; } .float-cart:hover { transform:translateY(-3px); } .cart-count { position:absolute; top:-6px; right:-6px; min-width:22px; height:22px; display:grid; place-items:center; border-radius:999px; background:var(--green); color:#fff; font:800 .72rem Manrope,sans-serif; padding:0 5px; } .cart-overlay { position:fixed; inset:0; z-index:29; background:rgba(8,40,66,.45); opacity:0; pointer-events:none; transition:opacity .3s ease; } .cart-overlay.is-open { opacity:1; pointer-events:auto; } .cart-panel { position:fixed; z-index:30; top:0; right:0; height:100%; width:min(410px,100%); background:#fff; box-shadow:-18px 0 50px rgba(11,74,118,.28); transform:translateX(110%); transition:transform .3s ease; display:flex; flex-direction:column; } .cart-panel.is-open { transform:none; } .cart-panel.is-shake { animation:cartShake .4s; } @keyframes cartShake { 0%,100% { transform:none; } 25% { transform:translateX(-6px); } 75% { transform:translateX(6px); } } .cart-head { display:flex; align-items:center; justify-content:space-between; padding:1.3rem 1.5rem; border-bottom:1px solid var(--line); } .cart-head h3 { margin:0; } .cart-close { border:0; background:#e3f2fb; color:var(--blue); width:36px; height:36px; border-radius:50%; cursor:pointer; font-size:1rem; } .cart-items { flex:1; overflow-y:auto; padding:1rem 1.5rem; display:grid; gap:.8rem; align-content:start; } .cart-empty { color:var(--muted); text-align:center; margin-top:2rem; } .cart-item { display:grid; grid-template-columns:1fr auto auto; gap:.8rem; align-items:center; padding:.9rem; border:1px solid var(--line); border-radius:12px; } .cart-item-info strong { display:block; font-size:.88rem; } .cart-item-info span { color:var(--muted); font-size:.78rem; } .cart-item-qty { display:flex; align-items:center; gap:.5rem; } .cart-item-qty button { width:26px; height:26px; border-radius:8px; border:1px solid var(--line); background:var(--paper); color:var(--ink); font-weight:800; cursor:pointer; } .cart-item-qty span { min-width:18px; text-align:center; font-weight:800; font-size:.9rem; } .cart-item-del { border:0; background:none; color:#d64545; cursor:pointer; font-size:.95rem; } .cart-foot { padding:1.2rem 1.5rem 1.4rem; border-top:1px solid var(--line); display:grid; gap:.7rem; } .cart-total { display:flex; justify-content:space-between; align-items:center; font-weight:800; } .cart-total strong { font:800 1.25rem Orbitron,Manrope,sans-serif; color:var(--blue); } .cart-note { color:var(--muted); font-size:.74rem; } .cart-send { display:flex; justify-content:center; align-items:center; gap:.55rem; background:linear-gradient(135deg,#0e9f7e,#12b886); color:#fff; border-radius:999px; padding:.85rem; font-weight:800; font-family:Orbitron,Manrope,sans-serif; font-size:.85rem; box-shadow:0 8px 18px rgba(14,159,126,.28); } .cart-clear { border:1px solid var(--line); background:none; color:var(--muted); border-radius:999px; padding:.55rem; cursor:pointer; font:700 .78rem Manrope,sans-serif; } @media (max-width:520px){ .float-cart { right:1rem; bottom:5.1rem; width:48px; font-size:1.2rem; } }
+    .card-actions { display:flex; align-items:center; justify-content:space-between; gap:.6rem; margin-top:auto; padding-top:1.15rem; flex-wrap:wrap; } .card-actions .service-link { margin-top:0; padding-top:0; }                               
+    .gmd-grid { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:1rem; }
+    .gmd-card { min-height:340px; padding:1.25rem; cursor:pointer; }
+    .gmd-card h3 { font-size:1rem; }
+    .gmd-card .thumb { height:130px; }
+    .gmd-card .gmd-reference { min-height:1.3rem; }
+    .gmd-card .gmd-availability { display:block; margin-top:.65rem; color:#a15c00; font-size:.75rem; font-weight:800; }
+    .modal-price[hidden] { display:none; }
+    .gmd-card .card-actions { display:flex; justify-content:flex-start; }
+    .gmd-card .card-actions .service-link { padding-top:0; margin-top:0; }
+    .gmd-filters { display:grid; grid-template-columns:minmax(0,2fr) minmax(220px,1fr); gap:1rem; max-width:760px; margin:0 auto 1rem; }
+    .gmd-search { min-width:0; }
+    .gmd-category-filter { min-width:0; }
+    .gmd-search label { margin-bottom:.45rem; }
+    .gmd-results { min-height:1.5rem; margin-bottom:1.25rem; color:var(--muted); text-align:center; font-size:.9rem; }
+    .gmd-pagination { display:flex; justify-content:center; align-items:center; gap:1rem; margin-top:2rem; }
+    .gmd-pagination button { border:1px solid var(--line); border-radius:999px; padding:.65rem 1rem; background:var(--white); color:var(--navy); font:700 .85rem Manrope,sans-serif; cursor:pointer; }
+    .gmd-pagination button:disabled { opacity:.5; cursor:not-allowed; }
+    .gmd-page { color:var(--muted); font-size:.85rem; }
+    @media (max-width:900px) { .gmd-grid { grid-template-columns:repeat(3,minmax(0,1fr)); } }
+    @media (max-width:650px) { .gmd-grid { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+    @media (max-width:520px) { .gmd-filters { grid-template-columns:1fr; } }
+    @media (max-width:420px) { .gmd-grid { grid-template-columns:1fr; } }
   </style>
+  <link rel="stylesheet" href="nexor-premium.css?v=20261031">
 </head>
 <body>
   <a class="skip-link" href="#contenido">Ir al contenido principal</a>
-  <header class="site-header"><nav class="nav container" aria-label="Principal"><a class="brand" href="#inicio"><span class="brand-mark">N</span><span>NEXOR</span></a><button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-links" aria-label="Abrir menú"><i class="fa-solid fa-bars"></i></button><div class="nav-links" id="nav-links"><a href="#productos">Productos</a><a href="#compras">Cómo comprar</a><a href="#contacto" class="button button--light nav-cta">Contacto</a></div></nav></header>
+  <header class="site-header">
+    <nav class="nav container" aria-label="Principal">
+      <a class="brand" href="#inicio" aria-label="NEXOR Medical Systems, inicio">
+        <span class="brand-mark" aria-hidden="true">N</span>
+        <span class="brand-name"><strong>NEXOR</strong><small>MEDICAL SYSTEMS</small></span>
+      </a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-links" aria-label="Abrir menú">
+        <i class="fa-solid fa-bars" aria-hidden="true"></i>
+      </button>
+      <div class="nav-links" id="nav-links">
+        <a href="#productos">Cat&aacute;logo</a>
+        <a href="#proceso">C&oacute;mo cotizar</a>
+        <a href="#contacto" class="button button--light nav-cta">Hablar con NEXOR <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></a>
+      </div>
+    </nav>
+  </header>
   <main id="contenido">
-    <section class="hero" id="inicio"><div class="container hero-grid"><div><span class="eyebrow">NEXOR · Suministros Médicos de Un Solo Uso</span><h1>Suministros médicos <span class="hero-title-accent">de un solo uso</span> para su institución.</h1><p class="hero-copy">Distribuimos guantes, mascarillas, jeringas, gasas y demás insumos desechables para clínicas, hospitales, consultorios y laboratorios. Calidad certificada, entrega oportuna y cotización clara.</p><div class="hero-actions"><a class="button button--primary" href="#productos">Ver catálogo <i class="fa-solid fa-arrow-right"></i></a><a class="button button--light" href="#contacto">Solicite cotización</a></div></div><aside class="hero-panel" aria-label="Resultados destacados"><span class="eyebrow">Abastecimiento integral</span><p>Le ayudamos a mantener su institución abastecida: insumos desechables de calidad, disponibilidad permanente y precios claros por volumen.</p><div class="metric"><strong>10</strong><span>Referencias de un solo uso</span></div><div class="metric"><strong>1</strong><span>Objetivo: abastecer su institución</span></div></aside></div></section>
-    <section class="section" id="productos"><div class="container"><div class="section-heading"><span class="eyebrow">Catálogo · Suministros de un solo uso</span><h2>Suministros médicos listos para su institución.</h2><p class="lead">Distribuimos insumos desechables de uso clínico y hospitalario. Cotice por unidad o por caja según el volumen que su operación necesita.</p><p style="margin-top:.5rem;font-size:.9rem;color:#5c7b90">Precios de referencia sobre costo de adquisición a proveedor certificado (Colombia) más 20 % de margen. El valor final se confirma en la cotización.</p><!-- Costo COP (proveedor certificado, sep/2026) → precio NEXOR (+20 %): Guantes examen nitrilo caja x100: 21.755 → 26.100 · Mascarillas quirúrgicas x50: 10.472 → 12.600 · Jeringa 3 ml c/u: 339 → 410 · Gasas 10×10 caja x50: 14.000 → 16.800 · Batas SMS paquete x10: 39.990 → 48.000 · Gorros quirúrgicos x100: 40.800 → 49.000 · Cubrezapatos x100: 37.500 → 45.000 · Toallitas alcohol 70% caja x100: 13.990 → 16.800 · Papel camilla rollo: 50.000 → 60.000 · Termómetros de franja x100: 214.479 → 257.400. --></div><div class="service-grid"><article class="service-card"><div class="thumb"><img src="productos/guantes-nitrilo.png" alt="Guantes de nitrilo" loading="lazy" onerror="this.onerror=null;this.src='productos/guantes-nitrilo.svg'"><i class="fa-solid fa-hand-holding-medical" aria-hidden="true"></i></div><h3>Guantes de nitrilo</h3><p>Guantes de examen de nitrilo 100 % sintético, libres de látex y sin polvo, ideales para pacientes y personal con alergia al látex. Alta resistencia a químicos y perforaciones, textura antideslizante y gran sensibilidad táctil para procedimientos de precisión. Ambidiestros, con puño abocardado. Cajas de 100 unidades en tallas S, M, L y XL.</p><span class="tag">NITRILO · SIN LÁTEX · CAJA × 100</span><span class="price">Desde $26.100 <small>COP</small></span><div class="card-actions"><button class="cart-add" type="button" data-id="guantes-nitrilo" data-name="Guantes de nitrilo" data-price="26100" data-unit="caja × 100">Agregar al carrito <i class="fa-solid fa-cart-plus" aria-hidden="true"></i></button><a class="service-link" href="#contacto">Cotizar <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a></div></article>
-<article class="service-card"><div class="thumb"><img src="productos/mascarillas-quirurgicas.jpg" alt="Mascarillas quirúrgicas" loading="lazy" onerror="this.onerror=null;this.src='productos/mascarillas-quirurgicas.svg'"><i class="fa-solid fa-head-side-mask" aria-hidden="true"></i></div><h3>Mascarillas quirúrgicas</h3><p>Mascarillas quirúrgicas desechables de 3 capas con filtro bacteriano de alta eficiencia y soporte nasal ajustable para un sellado cómodo y seguro. Material no tejido de gramaje firme y elásticos suaves que reducen la presión en las orejas. Transpirables para uso prolongado en consultorios, hospitales y laboratorios. Presentación estándar e infantil, cajas de 50 unidades.</p><span class="tag">3 CAPAS · FILTRO BACTERIANO · CAJA × 50</span><span class="price">Desde $12.600 <small>COP</small></span><div class="card-actions"><button class="cart-add" type="button" data-id="mascarillas-quirurgicas" data-name="Mascarillas quirúrgicas" data-price="12600" data-unit="caja × 50">Agregar al carrito <i class="fa-solid fa-cart-plus" aria-hidden="true"></i></button><a class="service-link" href="#contacto">Cotizar <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a></div></article>
-<article class="service-card"><div class="thumb"><img src="productos/jeringas-desechables.jpg" alt="Jeringas y agujas desechables" loading="lazy" onerror="this.onerror=null;this.src='productos/jeringas-desechables.svg'"><i class="fa-solid fa-syringe" aria-hidden="true"></i></div><h3>Jeringas y agujas desechables</h3><p>Jeringas estériles de polipropileno con graduaciones claras en 3, 5, 10 y 20 ml y émbolo de alta precisión. Incluyen aguja desechable con protección de punta y empaque individual estéril de un solo uso. Indicadas para procedimientos, aplicación de medicamentos y toma de muestras.</p><span class="tag">ESTÉRILES · 3 ML A 20 ML · UNIDAD</span><span class="price">Desde $410 <small>COP</small></span><div class="card-actions"><button class="cart-add" type="button" data-id="jeringas-desechables" data-name="Jeringas y agujas desechables" data-price="410" data-unit="unidad">Agregar al carrito <i class="fa-solid fa-cart-plus" aria-hidden="true"></i></button><a class="service-link" href="#contacto">Cotizar <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a></div></article>
-<article class="service-card"><div class="thumb"><img src="productos/gasas-y-apositos.jpg" alt="Gasas y apósitos estériles" loading="lazy" onerror="this.onerror=null;this.src='productos/gasas-y-apositos.svg'"><i class="fa-solid fa-bandage" aria-hidden="true"></i></div><h3>Gasas y apósitos estériles</h3><p>Gasas de algodón hidrófilo y apósitos estériles de alta absorción para limpieza y curación de heridas. Tejido suave y flexible que se adapta a la zona tratada sin dejar residuos, con empaque estéril individual, cajas de 50 sobres y presentaciones hospitalarias. Ideales para curaciones, drenajes y protección de sitios de punción.</p><span class="tag">ESTÉRIL · 10×10 · CAJA × 50</span><span class="price">Desde $16.800 <small>COP</small></span><div class="card-actions"><button class="cart-add" type="button" data-id="gasas-y-apositos" data-name="Gasas y apósitos estériles" data-price="16800" data-unit="caja × 50">Agregar al carrito <i class="fa-solid fa-cart-plus" aria-hidden="true"></i></button><a class="service-link" href="#contacto">Cotizar <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a></div></article>
-<article class="service-card"><div class="thumb"><img src="productos/batas-quirurgicas.jpg" alt="Batas quirúrgicas desechables" loading="lazy" onerror="this.onerror=null;this.src='productos/batas-quirurgicas.svg'"><i class="fa-solid fa-user-doctor" aria-hidden="true"></i></div><h3>Batas quirúrgicas desechables</h3><p>Batas de aislamiento desechables en tela no tejida SMS resistente a la penetración de líquidos y con buena ventilación. Cuello y puños elásticos, cierre posterior con cintas para fácil colocación. Tallaje M, L y XL en color blanco. Paquetes de 10 unidades.</p><span class="tag">NO TEJIDA SMS · PUÑO ELÁSTICO · PAQUETE × 10</span><span class="price">Desde $48.000 <small>COP</small></span><div class="card-actions"><button class="cart-add" type="button" data-id="batas-quirurgicas" data-name="Batas quirúrgicas desechables" data-price="48000" data-unit="paquete × 10">Agregar al carrito <i class="fa-solid fa-cart-plus" aria-hidden="true"></i></button><a class="service-link" href="#contacto">Cotizar <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a></div></article>
-<article class="service-card"><div class="thumb"><img src="productos/gorros-quirurgicos.jpg" alt="Gorros quirúrgicos" loading="lazy" onerror="this.onerror=null;this.src='productos/gorros-quirurgicos.svg'"><i class="fa-solid fa-user-nurse" aria-hidden="true"></i></div><h3>Gorros quirúrgicos</h3><p>Gorros tipo touca desechables en tela no tejida de alta densidad con banda elástica ajustable y libres de látex. Contienen el cabello por completo y reducen el riesgo de contaminación en áreas estériles. Disponibles en azul y verde, en cajas de 100 unidades.</p><span class="tag">NO TEJIDA · LIBRES DE LÁTEX · CAJA × 100</span><span class="price">Desde $49.000 <small>COP</small></span><div class="card-actions"><button class="cart-add" type="button" data-id="gorros-quirurgicos" data-name="Gorros quirúrgicos" data-price="49000" data-unit="caja × 100">Agregar al carrito <i class="fa-solid fa-cart-plus" aria-hidden="true"></i></button><a class="service-link" href="#contacto">Cotizar <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a></div></article>
-<article class="service-card"><div class="thumb"><img src="productos/cubrezapatos.jpg" alt="Cubrezapatos" loading="lazy" onerror="this.onerror=null;this.src='productos/cubrezapatos.svg'"><i class="fa-solid fa-shoe-prints" aria-hidden="true"></i></div><h3>Cubrezapatos</h3><p>Cubrezapatos desechables en material no tejido resistente a líquidos, con base antideslizante y elástico de tobillo para un ajuste firme. Protegen el calzado y evitan la propagación de contaminantes en quirófanos, salas de aislamiento y laboratorios. Talla estándar, cajas de 100 unidades.</p><span class="tag">ANTIDESLIZANTE · CAJA × 100</span><span class="price">Desde $45.000 <small>COP</small></span><div class="card-actions"><button class="cart-add" type="button" data-id="cubrezapatos" data-name="Cubrezapatos" data-price="45000" data-unit="caja × 100">Agregar al carrito <i class="fa-solid fa-cart-plus" aria-hidden="true"></i></button><a class="service-link" href="#contacto">Cotizar <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a></div></article>
-<article class="service-card"><div class="thumb"><img src="productos/torundas-alcohol.jpg" alt="Torundas de algodón y alcohol" loading="lazy" onerror="this.onerror=null;this.src='productos/torundas-alcohol.svg'"><i class="fa-solid fa-droplet" aria-hidden="true"></i></div><h3>Torundas de algodón y alcohol</h3><p>Torundas de algodón 100 % y toallitas impregnadas de alcohol antiséptico al 70 % en presentaciones individuales. Limpian y desinfectan la piel antes de inyecciones, curaciones y procedimientos menores. Empaque fácil de abrir, de un solo uso para evitar contaminación cruzada.</p><span class="tag">ALCOHOL 70% · ANTISÉPTICO · CAJA × 100</span><span class="price">Desde $16.800 <small>COP</small></span><div class="card-actions"><button class="cart-add" type="button" data-id="torundas-alcohol" data-name="Torundas de algodón y alcohol" data-price="16800" data-unit="caja × 100">Agregar al carrito <i class="fa-solid fa-cart-plus" aria-hidden="true"></i></button><a class="service-link" href="#contacto">Cotizar <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a></div></article>
-<article class="service-card"><div class="thumb"><img src="productos/sabanas-desechables.jpg" alt="Sábanas y fundas desechables" loading="lazy" onerror="this.onerror=null;this.src='productos/sabanas-desechables.svg'"><i class="fa-solid fa-bed" aria-hidden="true"></i></div><h3>Sábanas y fundas desechables</h3><p>Sábanas, fundas de camilla y papel de examen desechables y resistentes, en presentación rollo lista para usar. La superficie suave e hidrófuga protege la camilla y evita la contaminación cruzada entre pacientes. Ideales para consultorios, urgencias y procedimientos; uso único.</p><span class="tag">CAMILLA · ROLLO · UN SOLO USO</span><span class="price">Desde $60.000 <small>COP</small></span><div class="card-actions"><button class="cart-add" type="button" data-id="sabanas-desechables" data-name="Sábanas y fundas desechables" data-price="60000" data-unit="rollo">Agregar al carrito <i class="fa-solid fa-cart-plus" aria-hidden="true"></i></button><a class="service-link" href="#contacto">Cotizar <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a></div></article>
-<article class="service-card"><div class="thumb"><img src="productos/termometros-desechables.jpg" alt="Termómetros desechables" loading="lazy" onerror="this.onerror=null;this.src='productos/termometros-desechables.svg'"><i class="fa-solid fa-temperature-half" aria-hidden="true"></i></div><h3>Termómetros desechables</h3><p>Termómetros de franja clínica de un solo uso, sin mercurio, sin vidrio y con lectura en segundos (rango aproximado 35,5 °C - 40,5 °C). Livianos y seguros para triage, ambulancias y dotación masiva de pacientes. Empaque individual, en cajas de 100 unidades.</p><span class="tag">SIN MERCURIO · LECTURA RÁPIDA · CAJA × 100</span><span class="price">Desde $257.400 <small>COP</small></span><div class="card-actions"><button class="cart-add" type="button" data-id="termometros-desechables" data-name="Termómetros desechables" data-price="257400" data-unit="caja × 100">Agregar al carrito <i class="fa-solid fa-cart-plus" aria-hidden="true"></i></button><a class="service-link" href="#contacto">Cotizar <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a></div></article>
-      </div></div></section>
-    <section class="section section--paper" id="compras"><div class="container"><div class="section-heading section-heading--center"><span class="eyebrow">Cómo comprar</span><h2>Pida sus suministros en cuatro pasos.</h2><p class="lead">Un proceso simple para que su institución nunca se quede sin insumos. Atendemos clínicas, hospitales, consultorios y laboratorios.</p></div><div class="deliverables"><article class="deliverable-card"><div class="icon"><i class="fa-solid fa-list-check" aria-hidden="true"></i></div><h3>1. Escoja sus productos</h3><p>Revise el catálogo y defina las referencias y cantidades que su operación necesita.</p></article><article class="deliverable-card"><div class="icon"><i class="fa-solid fa-file-invoice" aria-hidden="true"></i></div><h3>2. Solicite su cotización</h3><p>Escríbanos por WhatsApp o diligencie el formulario: le respondemos con precios y disponibilidad.</p></article><article class="deliverable-card"><div class="icon"><i class="fa-solid fa-clipboard-check" aria-hidden="true"></i></div><h3>3. Confirme su pedido</h3><p>Validamos su orden, el método de pago y la facturación de acuerdo con su régimen.</p></article><article class="deliverable-card"><div class="icon"><i class="fa-solid fa-truck-fast" aria-hidden="true"></i></div><h3>4. Reciba su entrega</h3><p>Despachos a nivel nacional y entregas locales según inventario disponible.</p></article></div></div></section>
-    <section class="section" id="contacto"><div class="container contact-wrap"><aside class="contact-aside"><span class="eyebrow">Contacto</span><h2>Cotice sus suministros sin compromiso.</h2><p>Escríbanos si necesita guantes, mascarillas, jeringas o cualquier insumo desechable. Le respondemos con precios, presentaciones y disponibilidad.</p><div class="contact-list"><a href="tel:+573053252358"><i class="fa-solid fa-phone" aria-hidden="true"></i>+57 305 325 2358</a><a href="mailto:johandavid0411@hotmail.com"><i class="fa-solid fa-envelope" aria-hidden="true"></i>johandavid0411@hotmail.com</a><a href="https://wa.me/573053252358" target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i>Escríbanos por WhatsApp</a></div></aside><div class="contact-form"><h3>Solicite su cotización</h3><p class="lead">Indique los productos y cantidades que necesita y le enviaremos la mejor propuesta.</p><form id="contact-form" style="margin-top:1.5rem"><div class="form-grid"><div class="field"><label for="name">Nombre</label><input id="name" name="name" type="text" placeholder="Su nombre" autocomplete="name" minlength="2" maxlength="80" required></div><div class="field"><label for="email">Correo</label><input id="email" name="email" type="email" placeholder="usted@empresa.com" autocomplete="email" inputmode="email" maxlength="120" required></div></div><div class="field"><label for="producto">Producto de interés</label><select id="producto" name="producto" required><option value="" selected disabled>Seleccione una opción</option><option>Guantes de nitrilo</option><option>Mascarillas quirúrgicas</option><option>Jeringas y agujas desechables</option><option>Gasas y apósitos estériles</option><option>Batas quirúrgicas desechables</option><option>Gorros quirúrgicos</option><option>Cubrezapatos</option><option>Torundas de algodón y alcohol</option><option>Sábanas y fundas desechables</option><option>Termómetros desechables</option><option>Otro producto / aún no estoy seguro</option></select></div><div class="field"><label for="message">Mensaje</label><textarea id="message" name="message" placeholder="Ej.: necesito 10 cajas de guantes de nitrilo talla M" minlength="10" maxlength="1000" required></textarea></div><button class="button button--primary" type="submit">Continuar por WhatsApp <i class="fa-brands fa-whatsapp" aria-hidden="true"></i></button><p class="form-note">Al continuar se abrirá WhatsApp con su consulta preparada. No almacenamos sus datos en este sitio.</p><p class="form-status" id="form-status" role="status" aria-live="polite"></p></form><noscript><p class="form-note">Active JavaScript o escríbanos directamente por WhatsApp para enviar su consulta.</p></noscript></div></div></section>
+    <section class="hero" id="inicio">
+      <div class="hero-grid container">
+        <div class="hero-content">
+          <span class="eyebrow hero-eyebrow"><span class="status-pulse" aria-hidden="true"></span> INGENIER&Iacute;A PARA EL CUIDADO DE LA SALUD</span>
+          <h1>TECNOLOG&Iacute;A M&Eacute;DICA.<br><span class="hero-title-accent">CONFIANZA CL&Iacute;NICA.</span></h1>
+          <p class="hero-copy">Equipamiento, instrumental e insumos seleccionados para acompa&ntilde;ar el trabajo de profesionales e instituciones de salud.</p>
+          <div class="hero-actions">
+            <a class="button button--primary" href="#productos">Explorar cat&aacute;logo <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
+            <a class="hero-text-link" href="#contacto">Solicitar una cotizaci&oacute;n <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></a>
+          </div>
+          <div class="hero-metrics" aria-label="Datos del catálogo">
+            <div class="hero-metric"><strong id="product-count">243</strong><span>productos en cat&aacute;logo</span></div>
+            <div class="hero-metric"><strong id="category-count">24</strong><span>categor&iacute;as m&eacute;dicas</span></div>
+            <div class="hero-metric"><strong>2026</strong><span>precios publicados</span></div>
+          </div>
+        </div>
+        <aside class="hero-visual" aria-label="Producto destacado del catálogo">
+          <div class="hero-orbit hero-orbit--outer" aria-hidden="true"></div>
+          <div class="hero-orbit hero-orbit--inner" aria-hidden="true"></div>
+          <div class="hero-crosshair" aria-hidden="true"></div>
+          <div class="hero-visual-label"><span class="status-pulse" aria-hidden="true"></span> EQUIPAMIENTO M&Eacute;DICO</div>
+          <article class="hero-spotlight" id="hero-spotlight">
+            <div class="hero-product-image"><img id="hero-product-img" alt="" loading="eager"><span class="hero-image-index">N&deg; 01 <i class="fa-solid fa-plus" aria-hidden="true"></i></span></div>
+            <div class="hero-product-details">
+              <span class="hero-product-kicker">EN EL CAT&Aacute;LOGO 2026</span>
+              <h2 id="hero-product-name">Soluciones para el cuidado de la salud</h2>
+              <div class="hero-product-footer"><span id="hero-product-ref">EQUIPAMIENTO &middot; INSTRUMENTAL &middot; INSUMOS</span><strong id="hero-product-price"></strong></div>
+            </div>
+          </article>
+          <span class="hero-coordinates" aria-hidden="true">NEXOR / MEDICAL SYSTEMS</span>
+        </aside>
+      </div>
+      <div class="hero-bottom-line" aria-hidden="true"><span>PRECISI&Oacute;N</span><span class="hero-bottom-rule"></span><span>PROP&Oacute;SITO</span></div>
+    </section>
+
+    <section class="catalog-section section section--paper" id="productos">
+      <div class="container">
+        <div class="catalog-heading">
+          <div class="section-heading">
+            <span class="eyebrow">PORTAFOLIO &nbsp;/&nbsp; 2026</span>
+            <h2>Equipamiento para cada entorno cl&iacute;nico.</h2>
+            <p class="lead">Explore precios publicados, especificaciones y referencias. Seleccione un producto para consultar sus detalles o iniciar una solicitud.</p>
+          </div>
+          <div class="catalog-index"><span>REF.</span><strong>01—24</strong><span>CAT&Aacute;LOGO M&Eacute;DICO</span></div>
+        </div>
+        <div class="catalog-toolbar">
+          <div class="gmd-search">
+            <label for="gmd-search-input">Buscar en el cat&aacute;logo</label>
+            <div class="search-control"><i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i><input id="gmd-search-input" type="search" placeholder="Producto, referencia o especificaci&oacute;n" autocomplete="off"><button class="search-clear" id="gmd-search-clear" type="button" aria-label="Limpiar b&uacute;squeda" hidden><i class="fa-solid fa-xmark" aria-hidden="true"></i></button></div>
+          </div>
+          <div class="gmd-category-filter">
+            <label for="gmd-category">Categor&iacute;a m&eacute;dica</label>
+            <div class="select-control"><i class="fa-solid fa-layer-group" aria-hidden="true"></i><select id="gmd-category"><option value="">Todas las categor&iacute;as</option></select><i class="fa-solid fa-chevron-down select-chevron" aria-hidden="true"></i></div>
+          </div>
+          <div class="gmd-sort-control">
+            <label for="gmd-sort">Ordenar por</label>
+            <div class="select-control"><i class="fa-solid fa-arrow-down-wide-short" aria-hidden="true"></i><select id="gmd-sort"><option value="relevance">Relevancia</option><option value="name">Nombre A–Z</option><option value="price-asc">Precio: menor a mayor</option><option value="price-desc">Precio: mayor a menor</option></select><i class="fa-solid fa-chevron-down select-chevron" aria-hidden="true"></i></div>
+          </div>
+        </div>
+        <div class="catalog-results-row">
+          <p class="gmd-results" id="gmd-results" role="status" aria-live="polite"></p>
+          <button class="reset-filters" id="gmd-reset" type="button"><i class="fa-solid fa-arrow-rotate-left" aria-hidden="true"></i> Limpiar filtros</button>
+        </div>
+        <div class="gmd-grid" id="gmd-grid"></div>
+        <div class="gmd-empty" id="gmd-empty" hidden><i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i><h3>No encontramos coincidencias.</h3><p>Pruebe otra palabra, referencia o categor&iacute;a.</p><button class="button button--secondary" id="gmd-empty-reset" type="button">Ver todo el cat&aacute;logo</button></div>
+        <div class="gmd-pagination" aria-label="P&aacute;ginas del cat&aacute;logo"><button id="gmd-prev" type="button"><i class="fa-solid fa-arrow-left" aria-hidden="true"></i> Anterior</button><span class="gmd-page" id="gmd-page"></span><button id="gmd-next" type="button">Siguiente <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></button></div>
+      </div>
+    </section>
+
+    <section class="process-section section" id="proceso">
+      <div class="container process-layout">
+        <div class="process-intro"><span class="eyebrow">UNA EXPERIENCIA DIRECTA</span><h2>De la b&uacute;squeda a su cotizaci&oacute;n.</h2><p>Comparta lo que necesita. Preparamos su consulta para continuar de forma sencilla por WhatsApp.</p></div>
+        <div class="process-steps">
+          <article class="process-step"><span class="process-number">01</span><div><h3>Explore</h3><p>Busque productos y compare referencias del cat&aacute;logo.</p></div><i class="fa-solid fa-arrow-right" aria-hidden="true"></i></article>
+          <article class="process-step"><span class="process-number">02</span><div><h3>Comparta su requerimiento</h3><p>Indique los productos, las cantidades y sus datos de contacto.</p></div><i class="fa-solid fa-arrow-right" aria-hidden="true"></i></article>
+          <article class="process-step"><span class="process-number">03</span><div><h3>Contin&uacute;e por WhatsApp</h3><p>Revise su solicitud y env&iacute;ela directamente desde su dispositivo.</p></div><i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="contact-section section" id="contacto">
+      <div class="container contact-wrap">
+        <aside class="contact-aside">
+          <span class="eyebrow">NEXOR &nbsp;/&nbsp; MEDICAL SYSTEMS</span>
+          <h2>Una conversaci&oacute;n puede ser el inicio.</h2>
+          <p>Cu&eacute;ntenos qu&eacute; necesita su instituci&oacute;n. Nuestro equipo est&aacute; disponible para atender sus consultas sobre referencias, presentaciones y precios.</p>
+          <div class="contact-list">
+            <a href="tel:+573053252358"><span class="contact-icon"><i class="fa-solid fa-phone" aria-hidden="true"></i></span><span><small>L&Iacute;NEA DE ATENCI&Oacute;N</small>+57 305 325 2358</span></a>
+            <a href="mailto:johandavid0411@hotmail.com"><span class="contact-icon"><i class="fa-solid fa-envelope" aria-hidden="true"></i></span><span><small>CORREO ELECTR&Oacute;NICO</small>johandavid0411@hotmail.com</span></a>
+            <a href="https://wa.me/573053252358" target="_blank" rel="noopener"><span class="contact-icon"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i></span><span><small>RESPUESTA DIRECTA</small>Escr&iacute;banos por WhatsApp</span></a>
+          </div>
+          <div class="contact-aside-footer"><span class="status-pulse" aria-hidden="true"></span> COTIZACIONES INSTITUCIONALES</div>
+        </aside>
+        <div class="contact-form">
+          <div class="form-heading"><span class="eyebrow">SOLICITUD &nbsp;/&nbsp; 01</span><h3>Prepare su cotizaci&oacute;n.</h3><p>Complete los datos y continuaremos la conversaci&oacute;n por WhatsApp.</p></div>
+          <form id="contact-form">
+            <div class="form-grid">
+              <div class="field"><label for="name">Nombre completo</label><input id="name" name="name" type="text" placeholder="Su nombre" autocomplete="name" minlength="2" maxlength="80" required></div>
+              <div class="field"><label for="email">Correo electr&oacute;nico</label><input id="email" name="email" type="email" placeholder="usted@empresa.com" autocomplete="email" inputmode="email" maxlength="120" required></div>
+            </div>
+            <div class="form-grid">
+              <div class="field"><label for="organization">Instituci&oacute;n u organizaci&oacute;n <span>OPCIONAL</span></label><input id="organization" name="organization" type="text" placeholder="Nombre de la organizaci&oacute;n" autocomplete="organization" maxlength="120"></div>
+              <div class="field"><label for="quantity">Cantidad requerida</label><input id="quantity" name="quantity" type="number" placeholder="Ej.: 10" min="1" max="10000" step="1" inputmode="numeric" required></div>
+            </div>
+            <div class="field"><label for="producto">Producto de inter&eacute;s</label><input id="producto" name="producto" type="text" list="producto-opciones" placeholder="Escriba o seleccione un producto" maxlength="180" required><datalist id="producto-opciones"></datalist></div>
+            <div class="field"><label for="message">Cu&eacute;ntenos un poco m&aacute;s <span>OPCIONAL</span></label><textarea id="message" name="message" placeholder="Detalles adicionales sobre su requerimiento, presentaci&oacute;n o consulta." maxlength="1000"></textarea></div>
+            <button class="button button--primary form-submit" type="submit">Continuar por WhatsApp <i class="fa-brands fa-whatsapp" aria-hidden="true"></i></button>
+            <p class="form-note">Sus datos se incluir&aacute;n en un mensaje de WhatsApp para que usted lo revise antes de enviarlo. No almacenamos sus datos en este sitio.</p>
+            <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
+          </form>
+          <noscript><p class="form-note">Active JavaScript o escr&iacute;banos directamente por WhatsApp para enviar su consulta.</p></noscript>
+        </div>
+      </div>
+    </section>
   </main>
-  <footer class="site-footer"><div class="container footer-inner"><span>© 2026 NEXOR</span><span>Suministros médicos de un solo uso</span></div></footer>
-  <a class="float-whatsapp" href="https://wa.me/573053252358?text=Hola%2C%20quiero%20cotizar%20suministros%20m%C3%A9dicos%20de%20NEXOR" target="_blank" rel="noopener" aria-label="Contactar a NEXOR por WhatsApp"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i></a>
-  <button class="float-cart" id="cart-open" type="button" aria-label="Abrir carrito de compras"><i class="fa-solid fa-cart-shopping" aria-hidden="true"></i><span class="cart-count" id="cart-count" hidden>0</span></button>
-  <div class="cart-overlay" id="cart-overlay"></div>
-  <aside class="cart-panel" id="cart-panel" aria-label="Carrito de compras" aria-hidden="true">
-    <header class="cart-head"><h3>Su carrito</h3><button class="cart-close" id="cart-close" type="button" aria-label="Cerrar carrito"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button></header>
-    <div class="cart-items" id="cart-items"></div>
-    <footer class="cart-foot">
-      <div class="cart-total"><span>Total de referencia</span><strong id="cart-total">$ 0</strong></div>
-      <p class="cart-note">Los precios son de referencia. El valor final se confirma en su cotización.</p>
-      <a class="cart-send" id="cart-send" href="#" target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i>Pedir por WhatsApp</a>
-      <button class="cart-clear" id="cart-clear" type="button">Vaciar carrito</button>
-    </footer>
-  </aside>
+  <footer class="site-footer">
+    <div class="container footer-main">
+      <a class="brand footer-brand" href="#inicio" aria-label="NEXOR Medical Systems, inicio"><span class="brand-mark" aria-hidden="true">N</span><span class="brand-name"><strong>NEXOR</strong><small>MEDICAL SYSTEMS</small></span></a>
+      <p>Tecnolog&iacute;a m&eacute;dica.<br>Confianza cl&iacute;nica.</p>
+      <a class="footer-top" href="#inicio">VOLVER AL INICIO <i class="fa-solid fa-arrow-up" aria-hidden="true"></i></a>
+    </div>
+    <div class="container footer-bottom"><span>&copy; 2026 NEXOR - MEDICAL SYSTEMS</span><span>Equipamiento, instrumental e insumos m&eacute;dicos</span><a href="mailto:johandavid0411@hotmail.com">CONT&Aacute;CTENOS <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></a></div>
+  </footer>
+  <a class="float-whatsapp" href="https://wa.me/573053252358?text=Hola%2C%20quiero%20cotizar%20suministros%20m%C3%A9dicos%20de%20NEXOR%20Medical%20Systems" target="_blank" rel="noopener" aria-label="Contactar a NEXOR Medical Systems por WhatsApp"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i></a>
   <div class="modal-overlay" id="modal-overlay" hidden></div>
   <div class="modal-panel" id="modal-panel" role="dialog" aria-modal="true" aria-labelledby="modal-title" hidden>
     <div class="modal-media">
       <button class="modal-close" id="modal-close" type="button" aria-label="Cerrar detalle"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
       <button class="modal-nav prev" id="modal-prev" type="button" aria-label="Imagen anterior" hidden><i class="fa-solid fa-chevron-left" aria-hidden="true"></i></button>
-      <img id="modal-img" src="productos/guantes-nitrilo.svg" alt="">
+      <img id="modal-img" alt="">
       <button class="modal-nav next" id="modal-next" type="button" aria-label="Imagen siguiente" hidden><i class="fa-solid fa-chevron-right" aria-hidden="true"></i></button>
       <div class="modal-dots" id="modal-dots" hidden></div>
     </div>
     <div class="modal-body">
       <h3 id="modal-title">Producto</h3>
       <span class="modal-tag" id="modal-tag"></span>
-      <span class="modal-price" id="modal-price"></span>
+      <p class="modal-price" id="modal-price"></p>
       <p class="modal-desc" id="modal-desc"></p>
       <ul class="modal-feats" id="modal-feats"></ul>
       <div class="modal-actions">
-        <button class="cart-add" type="button" id="modal-add">Agregar al carrito <i class="fa-solid fa-cart-plus" aria-hidden="true"></i></button>
         <a class="service-link" id="modal-wa" href="#" target="_blank" rel="noopener">Pedir por WhatsApp <i class="fa-brands fa-whatsapp" aria-hidden="true"></i></a>
       </div>
-      <p class="modal-note">Precio de referencia. El valor final se confirma en su cotización.</p>
+      <p class="modal-note">Precios publicados en el cat&aacute;logo 2026. Confirme disponibilidad y precio final al cotizar.</p>
     </div>
   </div>
+  <script src="productos_gmd_catalogo.js"></script>
   <script>
+    if (!Array.isArray(window.GMD_PRODUCTS)) throw new Error('No se pudo cargar el catálogo de productos.');
+    const gmdProducts = window.GMD_PRODUCTS;
+    document.querySelector('#product-count').textContent = gmdProducts.length;
+    const productOptions = document.querySelector('#producto-opciones');
+    gmdProducts.forEach(product => {
+      const option = document.createElement('option');
+      option.value = product.name + (product.reference ? ' — ' + product.reference : '');
+      productOptions.appendChild(option);
+    });
+    const gmdSearch = document.querySelector('#gmd-search-input');
+    const gmdCategory = document.querySelector('#gmd-category');
+    const gmdSort = document.querySelector('#gmd-sort');
+    const gmdSearchClear = document.querySelector('#gmd-search-clear');
+    const gmdEmpty = document.querySelector('#gmd-empty');
+    const gmdGrid = document.querySelector('#gmd-grid');
+    const gmdResults = document.querySelector('#gmd-results');
+    const gmdPageLabel = document.querySelector('#gmd-page');
+    const gmdPrev = document.querySelector('#gmd-prev');
+    const gmdNext = document.querySelector('#gmd-next');
+    const gmdPageSize = 24;
+    const gmdPriceFormatter = new Intl.NumberFormat('es-CO', { style:'currency', currency:'COP', maximumFractionDigits:0 });
+    let gmdPage = 0;
+    const gmdCategories = [...new Set(gmdProducts.map(product => product.category))].sort((a, b) => a.localeCompare(b, 'es'));
+    document.querySelector('#category-count').textContent = gmdCategories.length;
+    gmdCategories.forEach(category => {
+      const option = document.createElement('option');
+      option.value = category;
+      option.textContent = category;
+      gmdCategory.appendChild(option);
+    });
+    const heroProduct = gmdProducts.find(product => product.image && Number.isFinite(product.price));
+    if (heroProduct) {
+      const heroImage = document.querySelector('#hero-product-img');
+      heroImage.src = heroProduct.image;
+      heroImage.alt = heroProduct.name;
+      document.querySelector('#hero-product-name').textContent = heroProduct.name;
+      document.querySelector('#hero-product-ref').textContent = 'REF. ' + (heroProduct.reference || '—');
+      document.querySelector('#hero-product-price').textContent = gmdPriceFormatter.format(heroProduct.price);
+    }
+    const renderGmdCatalog = () => {
+      const query = gmdSearch.value.trim().toLocaleLowerCase('es');
+      const selectedCategory = gmdCategory.value;
+      const filtered = gmdProducts.filter(product =>
+        (!selectedCategory || product.category === selectedCategory) &&
+        (product.name + ' ' + product.reference + ' ' + product.specifications + ' ' + product.category).toLocaleLowerCase('es').includes(query)
+      );
+      if (gmdSort.value === 'name') {
+        filtered.sort((a, b) => a.name.localeCompare(b.name, 'es'));
+      } else if (gmdSort.value === 'price-asc') {
+        filtered.sort((a, b) => (a.price ?? Infinity) - (b.price ?? Infinity));
+      } else if (gmdSort.value === 'price-desc') {
+        filtered.sort((a, b) => (b.price ?? -Infinity) - (a.price ?? -Infinity));
+      }
+      const pageCount = Math.max(1, Math.ceil(filtered.length / gmdPageSize));
+      gmdPage = Math.min(gmdPage, pageCount - 1);
+      const start = gmdPage * gmdPageSize;
+      gmdGrid.replaceChildren();
+      gmdEmpty.hidden = filtered.length !== 0;
+      gmdGrid.hidden = filtered.length === 0;
+      document.querySelector('.gmd-pagination').hidden = filtered.length === 0;
+      filtered.slice(start, start + gmdPageSize).forEach(product => {
+        const card = document.createElement('article');
+        card.className = 'service-card gmd-card';
+        card.dataset.productId = product.reference || product.name;
+        card.dataset.productIndex = String(gmdProducts.indexOf(product));
+        card.dataset.category = product.category;
+        card.dataset.reference = product.reference;
+        card.tabIndex = 0;
+        card.setAttribute('role', 'button');
+        card.setAttribute('aria-label', 'Ver foto y detalles de ' + product.name);
+        const thumb = document.createElement('div');
+        thumb.className = 'thumb';
+        const icon = document.createElement('i');
+        icon.className = 'fa-solid fa-box-open';
+        icon.setAttribute('aria-hidden', 'true');
+        const image = document.createElement('img');
+        image.alt = product.name;
+        image.loading = 'lazy';
+        image.hidden = !product.image;
+        image.addEventListener('error', () => { image.hidden = true; }, { once:true });
+        if (product.image) image.src = product.image;
+        thumb.append(image, icon);
+        const title = document.createElement('h3');
+        title.textContent = product.name;
+        const category = document.createElement('span');
+        category.className = 'tag';
+        category.textContent = product.category;
+        const reference = document.createElement('p');
+        reference.className = 'tag gmd-reference';
+        reference.textContent = product.reference ? 'Referencia: ' + product.reference : '';
+        reference.hidden = !product.reference;
+        const description = document.createElement('p');
+        description.className = 'gmd-description';
+        description.textContent = product.specifications || '';
+        description.hidden = !product.specifications;
+        const price = document.createElement('span');
+        if (Number.isFinite(product.price)) {
+          price.className = 'price';
+          price.append(document.createTextNode(gmdPriceFormatter.format(product.price)));
+          const priceNote = document.createElement('small');
+          priceNote.textContent = ' · COP · IVA incluido';
+          price.appendChild(priceNote);
+        } else {
+          price.className = 'gmd-availability';
+          price.textContent = product.availability || 'Precio no publicado';
+        }
+        const actions = document.createElement('div');
+        actions.className = 'card-actions';
+        const viewDetails = document.createElement('span');
+        viewDetails.className = 'service-link';
+        viewDetails.innerHTML = 'Ver detalles <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>';
+        actions.appendChild(viewDetails);
+        card.append(thumb, title, category, reference, description, price, actions);
+        gmdGrid.appendChild(card);
+      });
+      gmdResults.textContent = filtered.length
+        ? 'Mostrando ' + (start + 1) + '–' + Math.min(start + gmdPageSize, filtered.length) + ' de ' + filtered.length + ' productos.'
+        : 'No se encontraron productos con esa búsqueda.';
+      gmdPageLabel.textContent = 'Página ' + (gmdPage + 1) + ' de ' + pageCount;
+      gmdPrev.disabled = gmdPage === 0;
+      gmdNext.disabled = gmdPage >= pageCount - 1;
+      gmdSearchClear.hidden = !gmdSearch.value;
+    };
+    const resetGmdFilters = () => {
+      gmdSearch.value = '';
+      gmdCategory.value = '';
+      gmdSort.value = 'relevance';
+      gmdPage = 0;
+      renderGmdCatalog();
+    };
+    gmdSearch.addEventListener('input', () => { gmdPage = 0; renderGmdCatalog(); });
+    gmdCategory.addEventListener('change', () => { gmdPage = 0; renderGmdCatalog(); });
+    gmdSort.addEventListener('change', () => { gmdPage = 0; renderGmdCatalog(); });
+    gmdSearchClear.addEventListener('click', () => {
+      gmdSearch.value = '';
+      gmdSearch.focus();
+      gmdPage = 0;
+      renderGmdCatalog();
+    });
+    document.querySelector('#gmd-reset').addEventListener('click', resetGmdFilters);
+    document.querySelector('#gmd-empty-reset').addEventListener('click', resetGmdFilters);
+    gmdPrev.addEventListener('click', () => { gmdPage -= 1; renderGmdCatalog(); });
+    gmdNext.addEventListener('click', () => { gmdPage += 1; renderGmdCatalog(); });
+    renderGmdCatalog();
     const toggle = document.querySelector('.nav-toggle');
     const navLinks = document.querySelector('.nav-links');
     toggle.addEventListener('click', () => {
@@ -232,86 +510,21 @@
       const form = event.currentTarget;
       if (!form.checkValidity()) { form.reportValidity(); return; }
       const data = new FormData(form);
-      const message = `Hola, quiero cotizar suministros médicos de NEXOR.\n\nNombre: ${data.get('name')}\nCorreo: ${data.get('email')}\nProducto de interés: ${data.get('producto')}\n\nConsulta: ${data.get('message')}`;
+      const organization = data.get('organization');
+      const details = data.get('message');
+      const message = [
+        'Hola, quiero solicitar una cotización a NEXOR - MEDICAL SYSTEMS.',
+        '',
+        `Nombre: ${data.get('name')}`,
+        organization ? `Institución u organización: ${organization}` : '',
+        `Correo: ${data.get('email')}`,
+        `Producto de interés: ${data.get('producto')}`,
+        `Cantidad requerida: ${data.get('quantity')}`,
+        details ? `\nConsulta adicional: ${details}` : ''
+      ].filter(Boolean).join('\n');
       document.querySelector('#form-status').textContent = 'Abriendo WhatsApp con su consulta…';
       window.open(`https://wa.me/573053252358?text=${encodeURIComponent(message)}`, '_blank', 'noopener');
     });
-    // ── Carrito de compras ──
-    const CART_KEY = 'nexor-cart';
-    let cart = [];
-    try { cart = JSON.parse(localStorage.getItem(CART_KEY)) || []; } catch (e) { cart = []; }
-    const cartItems = document.querySelector('#cart-items');
-    const cartTotal = document.querySelector('#cart-total');
-    const cartCount = document.querySelector('#cart-count');
-    const cartPanel = document.querySelector('#cart-panel');
-    const cartOverlay = document.querySelector('#cart-overlay');
-    const fmtCOP = new Intl.NumberFormat('es-CO', { style:'currency', currency:'COP', maximumFractionDigits:0 });
-    const saveCart = () => { try { localStorage.setItem(CART_KEY, JSON.stringify(cart)); } catch (e) {} };
-    const renderCart = () => {
-      cartItems.innerHTML = '';
-      let total = 0, units = 0;
-      if (!cart.length) { cartItems.innerHTML = '<p class="cart-empty">Su carrito está vacío.<br>Agregue productos desde el catálogo.</p>'; }
-      cart.forEach(item => {
-        total += item.price * item.qty; units += item.qty;
-        const row = document.createElement('div');
-        row.className = 'cart-item';
-        row.innerHTML = '<div class="cart-item-info"><strong>' + item.name + '</strong><span>' + fmtCOP.format(item.price) + ' · ' + item.unit + '</span></div><div class="cart-item-qty"><button type="button" data-act="dec" data-id="' + item.id + '" aria-label="Quitar uno">−</button><span>' + item.qty + '</span><button type="button" data-act="inc" data-id="' + item.id + '" aria-label="Agregar uno">+</button></div><button class="cart-item-del" type="button" data-act="del" data-id="' + item.id + '" aria-label="Eliminar producto"><i class="fa-solid fa-trash-can" aria-hidden="true"></i></button>';
-        cartItems.appendChild(row);
-      });
-      cartTotal.textContent = fmtCOP.format(total);
-      cartCount.textContent = units;
-      cartCount.hidden = units === 0;
-      saveCart();
-    };
-    document.querySelectorAll('.cart-add').forEach(btn => btn.addEventListener('click', () => {
-      const id = btn.dataset.id;
-      const found = cart.find(item => item.id === id);
-      if (found) { found.qty += 1; } else { cart.push({ id: id, name: btn.dataset.name, price: Number(btn.dataset.price), unit: btn.dataset.unit, qty: 1 }); }
-      renderCart();
-      btn.classList.add('is-added');
-      const original = btn.innerHTML;
-      btn.innerHTML = 'Agregado <i class="fa-solid fa-check" aria-hidden="true"></i>';
-      setTimeout(() => { btn.classList.remove('is-added'); btn.innerHTML = original; }, 1200);
-    }));
-    const openCart = () => { cartPanel.classList.add('is-open'); cartOverlay.classList.add('is-open'); cartPanel.setAttribute('aria-hidden', 'false'); };
-    const closeCart = () => { cartPanel.classList.remove('is-open'); cartOverlay.classList.remove('is-open'); cartPanel.setAttribute('aria-hidden', 'true'); };
-    document.querySelector('#cart-open').addEventListener('click', openCart);
-    document.querySelector('#cart-close').addEventListener('click', closeCart);
-    cartOverlay.addEventListener('click', closeCart);
-    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeCart(); });
-    cartItems.addEventListener('click', e => {
-      const btn = e.target.closest('button');
-      if (!btn) return;
-      const item = cart.find(i => i.id === btn.dataset.id);
-      if (!item) return;
-      if (btn.dataset.act === 'inc') { item.qty += 1; }
-      if (btn.dataset.act === 'dec') { item.qty -= 1; }
-      if (btn.dataset.act === 'del' || item.qty === 0) { cart = cart.filter(i => i.id !== btn.dataset.id); }
-      renderCart();
-    });
-    document.querySelector('#cart-clear').addEventListener('click', () => { cart = []; renderCart(); });
-    document.querySelector('#cart-send').addEventListener('click', e => {
-      e.preventDefault();
-      if (!cart.length) { cartPanel.classList.add('is-shake'); setTimeout(() => cartPanel.classList.remove('is-shake'), 400); return; }
-      let msg = 'Hola, quiero hacer un pedido de suministros médicos NEXOR:';
-      let total = 0;
-      cart.forEach(item => { const line = item.price * item.qty; total += line; msg += '\n• ' + item.qty + ' × ' + item.name + ' (' + item.unit + ') — ' + fmtCOP.format(line); });
-      msg += '\n\nTotal de referencia: ' + fmtCOP.format(total) + '\n(Precios de referencia, sujetos a cotización final)';
-      window.open('https://wa.me/573053252358?text=' + encodeURIComponent(msg), '_blank', 'noopener');
-    });
-    // ── Detalle de producto (ventana flotante) ──
-    const FEATURES = {
-      'guantes-nitrilo': ['Nitrilo sintético 100 %, sin látex ni polvo', 'Ambidiestros con puño abocardado', 'Alta resistencia a químicos y perforaciones', 'Textura antideslizante y sensibilidad táctil', 'Tallas S, M, L y XL · caja × 100'],
-      'mascarillas-quirurgicas': ['3 capas con filtro bacteriano de alta eficiencia', 'Soporte nasal ajustable para sellado seguro', 'Elásticos suaves que reducen presión en las orejas', 'Transpirables para uso prolongado', 'Presentación estándar e infantil · caja × 50'],
-      'jeringas-desechables': ['Estériles, empaque individual', 'Graduación clara: 3, 5, 10 y 20 ml', 'Aguja desechable con protección de punta', 'Émbolo de alta precisión', 'Precio por unidad'],
-      'gasas-y-apositos': ['Algodón hidrófilo de alta absorción', 'Estériles, empaque individual', 'Tejido suave que no deja residuos', 'Medidas 10×10 y presentaciones hospitalarias', 'Caja × 50 sobres'],
-      'batas-quirurgicas': ['Tela no tejida SMS, resistente a líquidos', 'Cuello y puños elásticos', 'Cierre posterior con cintas', 'Tallas M, L y XL · color blanco', 'Paquete × 10 unidades'],
-      'gorros-quirurgicos': ['No tejida de alta densidad', 'Banda elástica ajustable', 'Libres de látex', 'Colores azul y verde', 'Caja × 100 unidades'],
-      'cubrezapatos': ['No tejido resistente a líquidos', 'Base antideslizante', 'Elástico de tobillo para ajuste firme', 'Talla estándar', 'Caja × 100 unidades'],
-      'torundas-alcohol': ['Algodón 100 % con alcohol antiséptico al 70 %', 'Presentaciones individuales de fácil apertura', 'Uso único, evita contaminación cruzada', 'Caja × 100 unidades'],
-      'sabanas-desechables': ['Superficie suave e hidrófuga', 'Presentación en rollo lista para usar', 'Protege la camilla entre pacientes', 'Uso único'],
-      'termometros-desechables': ['Lectura en segundos (35,5 – 40,5 °C)', 'Sin mercurio ni vidrio', 'Empaque individual', 'Ideal para triage y dotación masiva', 'Caja × 100 unidades']
-    };
     const modalOverlay = document.querySelector('#modal-overlay');
     const modalPanel = document.querySelector('#modal-panel');
     const modalImg = document.querySelector('#modal-img');
@@ -320,8 +533,8 @@
     const modalPrice = document.querySelector('#modal-price');
     const modalDesc = document.querySelector('#modal-desc');
     const modalFeats = document.querySelector('#modal-feats');
-    const modalAdd = document.querySelector('#modal-add');
     const modalWa = document.querySelector('#modal-wa');
+    modalImg.addEventListener('error', () => { modalImg.hidden = true; });
     const openModal = () => {
       modalOverlay.hidden = false; modalPanel.hidden = false;
       requestAnimationFrame(() => { modalOverlay.classList.add('is-open'); modalPanel.classList.add('is-open'); });
@@ -334,21 +547,28 @@
       setTimeout(() => { modalOverlay.hidden = true; modalPanel.hidden = true; }, 250);
     };
     const openProduct = card => {
-      const btn = card.querySelector('.cart-add');
-      const img = card.querySelector('.thumb img');
-      const title = card.querySelector('h3');
-      const tag = card.querySelector('.tag');
-      const price = card.querySelector('.price');
-      const desc = card.querySelector('p');
-      modalTitle.textContent = title ? title.textContent : '';
-      modalTag.textContent = tag ? tag.textContent : '';
-      modalPrice.innerHTML = price ? price.innerHTML : '';
-      modalDesc.textContent = desc ? desc.textContent : '';
-      modalFeats.innerHTML = '';
-      (FEATURES[btn ? btn.dataset.id : ''] || []).forEach(f => { const li = document.createElement('li'); li.textContent = f; modalFeats.appendChild(li); });
-      if (btn) { modalAdd.dataset.id = btn.dataset.id; modalAdd.dataset.name = btn.dataset.name; modalAdd.dataset.price = btn.dataset.price; modalAdd.dataset.unit = btn.dataset.unit; }
-      modalWa.href = 'https://wa.me/573053252358?text=' + encodeURIComponent('Hola, quiero cotizar: ' + (title ? title.textContent : '') + (tag ? ' (' + tag.textContent + ')' : ''));
-      openGallery(btn ? btn.dataset.id : 'producto', img ? (img.currentSrc || img.src) : '');
+      const product = gmdProducts[Number(card.dataset.productIndex)];
+      modalTitle.textContent = product.name;
+      modalTag.textContent = product.category || '';
+      modalDesc.textContent = product.reference ? 'Referencia: ' + product.reference : '';
+      modalPrice.replaceChildren();
+      modalPrice.hidden = !Number.isFinite(product.price);
+      if (Number.isFinite(product.price)) {
+        modalPrice.append(document.createTextNode(gmdPriceFormatter.format(product.price)));
+        const priceNote = document.createElement('small');
+        priceNote.textContent = ' · COP · IVA incluido';
+        modalPrice.appendChild(priceNote);
+      }
+      modalFeats.replaceChildren();
+      [product.specifications, product.availability].filter(Boolean).forEach(detail => {
+        const item = document.createElement('li');
+        item.textContent = detail;
+        modalFeats.appendChild(item);
+      });
+      modalFeats.hidden = modalFeats.childElementCount === 0;
+      const productReference = product.reference ? ' (' + product.reference + ')' : '';
+      modalWa.href = 'https://wa.me/573053252358?text=' + encodeURIComponent('Hola, quiero cotizar con NEXOR - MEDICAL SYSTEMS: ' + product.name + productReference);
+      openGallery(card.dataset.productId || product.name, product.image || '', false);
       openModal();
     };
     // ── Galería de imágenes del producto ──
@@ -371,6 +591,7 @@
     const renderGallery = () => {
       if (!gallery.length) return;
       modalImg.src = gallery[galleryIndex];
+      modalImg.hidden = false;
       modalImg.alt = (modalTitle.textContent || 'Producto') + ' · imagen ' + (galleryIndex + 1) + ' de ' + gallery.length;
       modalPrev.hidden = modalNext.hidden = modalDots.hidden = gallery.length < 2;
       modalDots.innerHTML = '';
@@ -384,12 +605,20 @@
       });
     };
     const showSlide = i => { galleryIndex = (i + gallery.length) % gallery.length; renderGallery(); };
-    const openGallery = (id, mainSrc) => {
+    const openGallery = (id, mainSrc, probeExtras = true) => {
       galleryId = id;
       galleryIndex = 0;
-      galleryCache[id] = galleryCache[id] || { main: mainSrc, extras: {}, probed: false };
+      if (!mainSrc) {
+        gallery = [];
+        modalImg.removeAttribute('src');
+        modalImg.hidden = true;
+        modalPrev.hidden = modalNext.hidden = modalDots.hidden = true;
+        modalDots.replaceChildren();
+        return;
+      }
+      galleryCache[id] = galleryCache[id] || { main: mainSrc, extras: {}, probed:false };
       galleryCache[id].main = mainSrc;
-      if (!galleryCache[id].probed) {
+      if (probeExtras && !galleryCache[id].probed) {
         galleryCache[id].probed = true;
         ['-2','-3','-4'].forEach(s => {
           const found = url => { galleryCache[id].extras[s] = url; if (galleryId === id) rebuildGallery(); };
@@ -411,19 +640,20 @@
       if (e.key === 'ArrowRight') showSlide(galleryIndex + 1);
       if (e.key === 'ArrowLeft') showSlide(galleryIndex - 1);
     });
-    document.querySelectorAll('.service-card').forEach(card => {
-      card.classList.add('is-clickable');
-      card.setAttribute('tabindex', '0');
-      card.setAttribute('role', 'button');
-      card.setAttribute('aria-label', 'Ver detalle de ' + (card.querySelector('h3') ? card.querySelector('h3').textContent : 'producto'));
-      card.addEventListener('click', e => { if (e.target.closest('button, a')) return; openProduct(card); });
-      card.addEventListener('keydown', e => { if ((e.key === 'Enter' || e.key === ' ') && !e.target.closest('button, a')) { e.preventDefault(); openProduct(card); } });
+    gmdGrid.addEventListener('click', event => {
+      const card = event.target.closest('.gmd-card');
+      if (card && !event.target.closest('a, button')) openProduct(card);
+    });
+    gmdGrid.addEventListener('keydown', event => {
+      const card = event.target.closest('.gmd-card');
+      if (card && (event.key === 'Enter' || event.key === ' ')) {
+        event.preventDefault();
+        openProduct(card);
+      }
     });
     modalOverlay.addEventListener('click', closeModal);
     document.querySelector('#modal-close').addEventListener('click', closeModal);
-    modalAdd.addEventListener('click', () => { if (modalAdd.dataset.id) { closeModal(); openCart(); } });
     document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
-    renderCart();
   </script>
 </body>
 </html>
