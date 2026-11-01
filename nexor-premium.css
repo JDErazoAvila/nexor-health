@@ -566,6 +566,39 @@ body {
   letter-spacing: .1em;
 }
 
+.hero-product-controls {
+  position: absolute;
+  bottom: .7rem;
+  left: .7rem;
+  z-index: 1;
+  display: flex;
+  gap: .35rem;
+}
+
+.hero-product-controls button {
+  display: grid;
+  width: 32px;
+  height: 32px;
+  place-items: center;
+  border: 1px solid rgba(11, 74, 118, .16);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, .92);
+  color: var(--navy);
+  cursor: pointer;
+  transition: background .2s ease, color .2s ease, transform .2s ease;
+}
+
+.hero-product-controls button:hover {
+  transform: translateY(-2px);
+  background: var(--navy);
+  color: white;
+}
+
+.hero-product-controls button:focus-visible {
+  outline: 3px solid #12b0d7;
+  outline-offset: 3px;
+}
+
 .hero-image-index i {
   color: var(--green);
 }

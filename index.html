@@ -219,7 +219,14 @@
           <div class="hero-crosshair" aria-hidden="true"></div>
           <div class="hero-visual-label"><span class="status-pulse" aria-hidden="true"></span> EQUIPAMIENTO M&Eacute;DICO</div>
           <article class="hero-spotlight" id="hero-spotlight">
-            <div class="hero-product-image"><img id="hero-product-img" alt="" loading="eager"><span class="hero-image-index">N&deg; 01 <i class="fa-solid fa-plus" aria-hidden="true"></i></span></div>
+            <div class="hero-product-image">
+              <img id="hero-product-img" alt="" loading="eager">
+              <span class="hero-image-index" id="hero-image-index">01 / 01</span>
+              <div class="hero-product-controls" aria-label="Cambiar producto destacado">
+                <button id="hero-product-prev" type="button" aria-label="Producto destacado anterior"><i class="fa-solid fa-arrow-left" aria-hidden="true"></i></button>
+                <button id="hero-product-next" type="button" aria-label="Siguiente producto destacado"><i class="fa-solid fa-arrow-right" aria-hidden="true"></i></button>
+              </div>
+            </div>
             <div class="hero-product-details">
               <span class="hero-product-kicker">PRECIO NEXOR &middot; 2026</span>
               <h2 id="hero-product-name">Soluciones para el cuidado de la salud</h2>
@@ -402,14 +409,62 @@
       option.textContent = category;
       gmdCategory.appendChild(option);
     });
-    const heroProduct = gmdProducts.find(product => product.image && Number.isFinite(product.price));
-    if (heroProduct) {
-      const heroImage = document.querySelector('#hero-product-img');
-      heroImage.src = heroProduct.image;
-      heroImage.alt = heroProduct.name;
-      document.querySelector('#hero-product-name').textContent = heroProduct.name;
-      document.querySelector('#hero-product-ref').textContent = 'REF. ' + (heroProduct.reference || '—');
-      document.querySelector('#hero-product-price').textContent = gmdPriceFormatter.format(heroProduct.price);
+    const heroProducts = gmdProducts.filter(product =>
+      product.image &&
+      Number.isFinite(product.price) &&
+      !product.publicAlert &&
+      !product.availability?.startsWith('Variantes de referencia')
+    );
+    const heroImage = document.querySelector('#hero-product-img');
+    const heroName = document.querySelector('#hero-product-name');
+    const heroReference = document.querySelector('#hero-product-ref');
+    const heroPrice = document.querySelector('#hero-product-price');
+    const heroIndex = document.querySelector('#hero-image-index');
+    const heroPrevious = document.querySelector('#hero-product-prev');
+    const heroNext = document.querySelector('#hero-product-next');
+    const heroVisual = document.querySelector('.hero-visual');
+    let heroProductIndex = 0;
+    let heroRotationTimer;
+    const showHeroProduct = index => {
+      if (!heroProducts.length) return;
+      heroProductIndex = (index + heroProducts.length) % heroProducts.length;
+      const product = heroProducts[heroProductIndex];
+      heroImage.src = product.image;
+      heroImage.alt = product.name;
+      heroName.textContent = product.name;
+      heroReference.textContent = 'REF. ' + (product.reference || '—');
+      heroPrice.textContent = gmdPriceFormatter.format(product.price);
+      heroIndex.textContent = String(heroProductIndex + 1).padStart(2, '0') + ' / ' + String(heroProducts.length).padStart(2, '0');
+    };
+    const stopHeroRotation = () => window.clearTimeout(heroRotationTimer);
+    const scheduleHeroRotation = () => {
+      stopHeroRotation();
+      if (
+        heroProducts.length < 2 ||
+        window.matchMedia('(prefers-reduced-motion: reduce)').matches ||
+        document.hidden
+      ) return;
+      heroRotationTimer = window.setTimeout(() => {
+        showHeroProduct(heroProductIndex + 1);
+        scheduleHeroRotation();
+      }, 6000);
+    };
+    if (heroProducts.length) {
+      showHeroProduct(0);
+      heroPrevious.addEventListener('click', () => {
+        showHeroProduct(heroProductIndex - 1);
+        scheduleHeroRotation();
+      });
+      heroNext.addEventListener('click', () => {
+        showHeroProduct(heroProductIndex + 1);
+        scheduleHeroRotation();
+      });
+      document.addEventListener('visibilitychange', scheduleHeroRotation);
+      window.matchMedia('(prefers-reduced-motion: reduce)').addEventListener('change', scheduleHeroRotation);
+      scheduleHeroRotation();
+    } else {
+      heroPrevious.hidden = true;
+      heroNext.hidden = true;
     }
     const renderGmdCatalog = () => {
       const query = gmdSearch.value.trim().toLocaleLowerCase('es');

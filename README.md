@@ -10,6 +10,7 @@ Plataforma web de productos y equipos médicos para instituciones de salud, con 
 - Se conservan por separado los precios de referencia, códigos tributarios y datos de origen para control interno; no se muestran en las fichas públicas.
 - Las cantidades mínimas y los múltiplos comerciales identificados en el catálogo se muestran y validan al preparar una cotización.
 - Cada ficha abre una ventana de detalle con la imagen disponible y la opción de solicitar una cotización.
+- El producto destacado de la portada cambia automáticamente y permite avanzar o retroceder manualmente; la rotación se pausa al interactuar o al reducir movimiento.
 - Las fichas incluyen especificaciones y disponibilidad cuando están indicadas en el catálogo fuente.
 - Búsqueda por nombre, referencia, categoría o especificaciones, filtros y orden de productos.
 - El formulario prepara una solicitud con organización, producto y cantidad para continuar por WhatsApp.
