@@ -2168,3 +2168,48 @@ body.modal-open {
     transition-duration: .01ms !important;
   }
 }
+
+.hero-price-note {
+  display: block;
+  margin-top: .5rem;
+  color: #647980;
+  font-size: .56rem;
+  line-height: 1.5;
+}
+
+.gmd-price-terms {
+  display: flex;
+  flex-direction: column;
+  gap: .22rem;
+  margin-top: .32rem;
+  color: #71818a;
+  font-size: .61rem;
+  line-height: 1.45;
+}
+
+.gmd-price-terms small {
+  font-size: inherit;
+}
+
+.gmd-price-terms .gmd-product-alert {
+  color: #8a5313;
+  font-weight: 800;
+}
+
+.gmd-card .gmd-availability {
+  min-height: 46px;
+  align-items: end;
+}
+
+.field-hint {
+  display: block;
+  margin-top: .35rem;
+  color: #71818a;
+  font-size: .62rem;
+  line-height: 1.5;
+}
+
+.modal-price small {
+  display: inline-block;
+  line-height: 1.5;
+}

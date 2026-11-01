@@ -4,7 +4,11 @@ Plataforma web de productos y equipos médicos para instituciones de salud, con 
 
 ## Características
 
-- Catálogo consolidado 2026 de 243 productos, con precios publicados en COP (IVA incluido), categorías, búsqueda y paginación.
+- Catálogo consolidado 2026 de 243 productos, con precios NEXOR en COP antes de impuestos, categorías, búsqueda y paginación.
+- Los precios comerciales se calculan sobre el precio de lista del proveedor con la fórmula de margen bruto autorizada; el valor publicado se redondea al peso colombiano más cercano.
+- El tratamiento tributario del proveedor está pendiente de validación. El sitio no presenta impuestos como incluidos ni calcula una tarifa no confirmada.
+- Se conservan por separado los precios de referencia, códigos tributarios y datos de origen para control interno; no se muestran en las fichas públicas.
+- Las cantidades mínimas y los múltiplos comerciales identificados en el catálogo se muestran y validan al preparar una cotización.
 - Cada ficha abre una ventana de detalle con la imagen disponible y la opción de solicitar una cotización.
 - Las fichas incluyen especificaciones y disponibilidad cuando están indicadas en el catálogo fuente.
 - Búsqueda por nombre, referencia, categoría o especificaciones, filtros y orden de productos.
@@ -32,7 +36,7 @@ python -m http.server 8000
 |---|---|
 | `index.html` | Catálogo, proceso de cotización, formulario de contacto y detalles de productos |
 | `nexor-premium.css` | Identidad visual, diseño responsive, tarjetas y componentes de la interfaz |
-| `productos_gmd_catalogo.js` | Productos, precios 2026, referencias, categorías, especificaciones e imágenes |
+| `productos_gmd_catalogo.js` | Productos, precios NEXOR 2026, datos de control, referencias, categorías, especificaciones e imágenes |
 | `Catalogo_consolidado_precios_2026.xlsx` | Fuente del catálogo consolidado y los precios publicados |
 | `productos_gmd_catalogo_completo.csv` | Catálogo CSV complementario |
 
