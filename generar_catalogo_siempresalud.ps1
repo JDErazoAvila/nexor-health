@@ -1,6 +1,7 @@
 $ErrorActionPreference = 'Stop'
 Add-Type -AssemblyName System.IO.Compression.FileSystem
 
+$saleDiscount = 0.20
 $workbookPath = Join-Path $PSScriptRoot 'siempresalud_catalogo_completo.xlsx'
 $outputPath = Join-Path $PSScriptRoot 'productos_siempresalud_catalogo.js'
 if (-not (Test-Path $workbookPath)) {
@@ -66,10 +67,23 @@ try {
     return $null
   }
 
+  function Convert-SalePrice($Value, [bool]$ApplyDiscount = $true) {
+    $number = Convert-Price $Value
+    if ($null -eq $number) { return $null }
+    if (-not $ApplyDiscount) { return $number }
+    return [math]::Round($number * (1 - $saleDiscount), 0, [System.MidpointRounding]::AwayFromZero)
+  }
+
   $productRows = Read-Worksheet 'xl/worksheets/sheet1.xml'
   $variantRows = Read-Worksheet 'xl/worksheets/sheet2.xml'
   if ($productRows.Count -lt 2 -or $variantRows.Count -lt 2) {
     throw "Las hojas Productos o Variantes no contienen datos (Productos: $($productRows.Count), Variantes: $($variantRows.Count))."
+  }
+
+  $brandByProductUrl = @{}
+  foreach ($row in ($productRows | Select-Object -Skip 1)) {
+    $categoryPath = @(([string]$row['R'] -split '\s*\|\s*') | Where-Object { $_ })
+    $brandByProductUrl[[string]$row['P']] = if ($categoryPath.Count -gt 1) { $categoryPath[-1] } else { '' }
   }
 
   $variantsByProduct = @{}
@@ -79,10 +93,11 @@ try {
       $variantsByProduct[$productUrl] = [System.Collections.Generic.List[object]]::new()
     }
     $variantName = [string]$row['E']
+    $isLittmann = $brandByProductUrl[$productUrl] -ieq 'Littmann'
     $variantsByProduct[$productUrl].Add([ordered]@{
       name = $variantName
       sku = [string]$row['C']
-      price = Convert-Price $row['F']
+      price = Convert-SalePrice $row['F'] (-not $isLittmann)
       available = ([string]$row['H'] -eq '1')
     })
   }
@@ -90,13 +105,13 @@ try {
   $catalog = [System.Collections.Generic.List[object]]::new()
   foreach ($row in ($productRows | Select-Object -Skip 1)) {
     $productId = [string]$row['A']
-    $productUrl = [string]$row['O']
-    $categoryPath = @(([string]$row['Q'] -split '\s*\|\s*') | Where-Object { $_ })
+    $productUrl = [string]$row['P']
+    $categoryPath = @(([string]$row['R'] -split '\s*\|\s*') | Where-Object { $_ })
     $productType = [string]$row['D']
     $category = if ($categoryPath.Count) { $categoryPath[0] } else { $productType }
     $brand = if ($categoryPath.Count -gt 1) { $categoryPath[-1] } else { '' }
     $images = @(
-      ([string]$row['H'] -split '\s*\|\s*') |
+      ([string]$row['I'] -split '\s*\|\s*') |
         ForEach-Object {
           $imageUrl = $_.Trim()
           if ($imageUrl.StartsWith('//')) { $imageUrl = 'https:' + $imageUrl }
@@ -117,18 +132,18 @@ try {
       $currentPrice = ($availablePrices | Measure-Object -Minimum).Minimum
       $priceLabel = if ($availablePrices.Count -gt 1) { 'Desde' } else { '' }
     } else {
-      $currentPrice = Convert-Price $row['E']
+      $currentPrice = Convert-SalePrice $row['F'] ($brand -ine 'Littmann')
       $priceLabel = ''
     }
     $catalog.Add([ordered]@{
-      id = if ($row['P']) { [string]$row['P'] } else { $productId }
+      id = if ($row['Q']) { [string]$row['Q'] } else { $productId }
       name = [string]$row['B']
       reference = $reference
       category = $category
       categories = $categoryPath
       brand = $brand
       productType = $productType
-      description = [string]$row['G']
+      description = [string]$row['H']
       price = $currentPrice
       priceLabel = $priceLabel
       priceUnitLabel = 'producto'
@@ -136,9 +151,9 @@ try {
       specifications = $productType
       image = if ($images.Count) { $images[0] } else { '' }
       images = $images
-      available = ([string]$row['L'] -eq '1')
-      rating = Convert-Price $row['M']
-      reviewCount = Convert-Price $row['N']
+      available = ([string]$row['M'] -eq '1')
+      rating = Convert-Price $row['N']
+      reviewCount = Convert-Price $row['O']
       variants = $variants
     })
   }
@@ -146,7 +161,7 @@ try {
   $json = ConvertTo-Json -InputObject $catalog.ToArray() -Depth 8 -Compress
   $javascript = "window.NEXOR_PRODUCTS = $json;`n"
   [System.IO.File]::WriteAllText($outputPath, $javascript, [System.Text.UTF8Encoding]::new($false))
-  Write-Output "Catálogo generado: $($catalog.Count) productos, $($variantRows.Count - 1) variantes."
+  Write-Output "Catálogo generado: $($catalog.Count) productos, $($variantRows.Count - 1) variantes; 20 % de descuento aplicado excepto a Littmann."
 } finally {
   $archive.Dispose()
 }
