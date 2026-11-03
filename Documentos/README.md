@@ -1,23 +1,26 @@
 # NEXOR - MEDICAL SYSTEMS
 
-Plataforma web de productos y equipos médicos para instituciones de salud, con búsqueda, fichas de producto, precios en COP y solicitud de cotización por WhatsApp.
+Plataforma web de NEXOR - MEDICAL SYSTEMS, comercializadora colombiana de productos médicos, con catálogo consultable para personas e instituciones y solicitudes de cotización por WhatsApp.
 
 ## Características
 
 - Catálogo de 253 productos con precios publicados en COP, categorías, marcas, referencias y variantes.
 - Búsqueda por nombre, referencia, marca, categoría, tipo de producto o variante, con filtros y paginación.
 - Las fichas muestran las descripciones del catálogo, variantes y precios por variante, disponibilidad e imágenes de producto; las fichas permiten recorrer la galería disponible.
-- El carrito conserva productos, variantes y cantidades en el navegador; permite editar y consultar el pedido por WhatsApp.
+- La lista de cotización conserva productos, variantes y cantidades en el navegador; permite editarlos y preparar un mensaje con nombre, correo, organización y observaciones.
+- El mensaje se muestra para revisión antes de abrir WhatsApp. Los datos del formulario no se guardan en el navegador ni se envían automáticamente.
 - El pago en línea permanece deshabilitado hasta conectar una pasarela comercial.
 - Cada ficha abre una ventana de detalle con la opción de solicitar una cotización.
 - Chat guiado para resolver preguntas frecuentes, buscar productos en el catálogo y continuar la consulta por WhatsApp; no requiere servicios externos.
 - El producto destacado de la portada cambia automáticamente y permite avanzar o retroceder manualmente; la rotación se pausa al interactuar o al reducir movimiento.
 - El formulario prepara una solicitud con organización, producto y cantidad para continuar por WhatsApp.
+- La sección institucional explica el proceso de cotización y aclara que disponibilidad, impuestos aplicables, precio final y condiciones de entrega deben confirmarse en cada solicitud.
+- Los apartados de privacidad, términos comerciales, entrega, garantías y devoluciones son marcadores pendientes de aprobación; no son políticas publicadas.
 - La sección de redes muestra banners para Instagram, Facebook y TikTok; sus enlaces oficiales se configuran en `socialProfileUrls` dentro de `index.html`.
 - Diseño responsive: catálogo de cinco columnas en pantallas amplias, cuatro en escritorio, dos en móvil y una en teléfonos estrechos.
 - Diseño responsive con identidad tecnológica en azul profundo y turquesa, usando las tipografías Orbitron y Manrope.
 
-La lista toma los precios actuales mínimos de `siempresalud_catalogo_completo.xlsx` como precios publicados de NEXOR; si ese mínimo corresponde a una variante agotada, muestra el menor precio entre las variantes disponibles. Confirme precios y disponibilidad antes de procesar cada cotización. El sitio usa las descripciones e imágenes autorizadas incluidas en el Excel.
+La lista toma los precios actuales mínimos de `siempresalud_catalogo_completo.xlsx` como precios publicados de NEXOR; si ese mínimo corresponde a una variante agotada, muestra el menor precio entre las variantes disponibles. `generar_catalogo_siempresalud.ps1` aplica actualmente un descuento del 30 % salvo a Littmann. Confirme que esta regla siga aprobada antes de regenerar o publicar los precios. El sitio no declara si los precios incluyen impuestos ni infiere presentaciones no registradas; impuestos aplicables, disponibilidad, presentación, precio final y entrega se confirman al cotizar. El sitio usa las descripciones e imágenes incluidas en el Excel.
 
 ## Vista previa local
 
@@ -38,7 +41,7 @@ python -m http.server 8000
 
 | Ruta | Contenido |
 |---|---|
-| `index.html` | Catálogo, carrito, chat guiado, banners de redes, proceso de cotización, formulario de contacto y detalles de productos |
+| `index.html` | Catálogo, lista de cotización, chat guiado, información institucional, marcadores legales, formulario de contacto y detalles de productos |
 | `nexor-premium.css` | Identidad visual, diseño responsive, tarjetas y componentes de la interfaz |
 | `productos_siempresalud_catalogo.js` | Catálogo web generado: productos, descripciones, precios, imágenes, categorías, marcas y variantes |
 | `siempresalud_catalogo_completo.xlsx` | Fuente de los productos, descripciones, precios, imágenes, categorías y variantes |

@@ -3,12 +3,12 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="NEXOR - MEDICAL SYSTEMS: equipamiento, instrumental e insumos médicos. Explore el catálogo médico 2026 y solicite una cotización institucional.">
+  <meta name="description" content="Explore el catálogo NEXOR de equipamiento, instrumental e insumos médicos. Consulte productos y prepare cotizaciones para profesionales e instituciones de salud.">
   <meta name="theme-color" content="#071827">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="es_CO">
   <meta property="og:title" content="NEXOR - MEDICAL SYSTEMS">
-  <meta property="og:description" content="Equipamiento, instrumental e insumos médicos. Explore el catálogo médico 2026 y solicite una cotización institucional.">
+  <meta property="og:description" content="Explore el catálogo NEXOR de equipamiento, instrumental e insumos médicos. Consulte productos y prepare cotizaciones para profesionales e instituciones de salud.">
   <meta name="twitter:card" content="summary">
   <title>NEXOR - MEDICAL SYSTEMS | Equipamiento médico</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -134,7 +134,7 @@
     .modal-feats li::before { content:"\f00c"; font-family:"Font Awesome 6 Free"; font-weight:900; position:absolute; left:0; top:.1rem; color:var(--green); }
     .modal-actions { display:flex; flex-wrap:wrap; gap:.6rem; margin-top:1.25rem; align-items:center; }
     
-    .modal-note { margin-top:.8rem; color:var(--muted); font-size:.75rem; text-align:center; }
+    . { margin-top:.8rem; color:var(--muted); font-size:.75rem; text-align:center; }
     @media (max-width:520px) { .modal-panel { width:100%; max-height:92vh; top:auto; bottom:0; left:0; right:0; transform:translateY(24px); border-radius:var(--radius) var(--radius) 0 0; } .modal-panel.is-open { transform:translateY(0); } }
     @media (prefers-reduced-motion:reduce) { *,*::before,*::after { scroll-behavior:auto !important; transition-duration:.01ms !important; animation-duration:.01ms !important; animation-iteration-count:1 !important; } }
     @media (max-width:800px) { .nav-toggle { display:grid; place-items:center; } .nav-links { position:absolute; top:70px; left:1.25rem; right:1.25rem; padding:1rem; display:none; flex-direction:column; align-items:stretch; gap:.2rem; border:1px solid rgba(255,255,255,.16); border-radius:14px; background:#0b4a76; box-shadow:0 16px 30px rgba(0,0,0,.22); } .nav-links.is-open { display:flex; } .nav-links a { padding:.75rem; } .nav-links .nav-cta { text-align:center; margin-top:.3rem; } .hero { min-height:auto; } .hero-grid,.contact-wrap { grid-template-columns:1fr; } .hero-panel { display:none; } .section { padding:4.5rem 0; } .deliverables { grid-template-columns:repeat(2,1fr); } }
@@ -190,13 +190,14 @@
         <span class="brand-name"><strong>NEXOR</strong><small>MEDICAL SYSTEMS</small></span>
       </a>
       <div class="nav-links" id="nav-links">
+        <a href="#sobre">Sobre NEXOR</a>
         <a href="#productos">Cat&aacute;logo</a>
         <a href="#proceso">C&oacute;mo cotizar</a>
         <a href="#contacto" class="button button--light nav-cta">Hablar con NEXOR <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></a>
       </div>
-      <button class="nav-cart" id="cart-open" type="button" aria-label="Abrir carrito, 0 productos">
+      <button class="nav-cart" id="cart-open" type="button" aria-label="Abrir lista de cotización, 0 productos">
         <i class="fa-solid fa-cart-shopping" aria-hidden="true"></i>
-        <span class="nav-cart-label">Carrito</span>
+        <span class="nav-cart-label">Cotización</span>
         <span class="nav-cart-count" id="cart-count" aria-live="polite">0</span>
       </button>
       <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-links" aria-label="Abrir menú">
@@ -208,16 +209,16 @@
     <section class="hero" id="inicio">
       <div class="hero-grid container">
         <div class="hero-content">
-          <span class="eyebrow hero-eyebrow"><span class="status-pulse" aria-hidden="true"></span> INGENIER&Iacute;A PARA EL CUIDADO DE LA SALUD</span>
-          <h1>TECNOLOG&Iacute;A M&Eacute;DICA.<br><span class="hero-title-accent">CONFIANZA CL&Iacute;NICA.</span></h1>
-          <p class="hero-copy">Equipamiento, instrumental e insumos seleccionados para acompa&ntilde;ar el trabajo de profesionales e instituciones de salud.</p>
+          <span class="eyebrow hero-eyebrow"><span class="status-pulse" aria-hidden="true"></span> NEXOR &nbsp;/&nbsp; MEDICAL SYSTEMS</span>
+          <h1>TECNOLOG&Iacute;A M&Eacute;DICA.<br><span class="hero-title-accent">PARA PROFESIONALES.</span></h1>
+          <p class="hero-copy">Equipamiento, instrumental e insumos m&eacute;dicos para profesionales e instituciones de salud.</p>
           <div class="hero-actions">
             <a class="button button--primary" href="#productos">Explorar cat&aacute;logo <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
-            <a class="hero-text-link" href="#contacto">Solicitar una cotizaci&oacute;n <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></a>
+            <a class="button button--light" href="#contacto">Solicitar cotizaci&oacute;n <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></a>
           </div>
           <div class="hero-metrics" aria-label="Datos del catálogo">
-            <div class="hero-metric"><strong id="product-count">253</strong><span>productos en cat&aacute;logo</span></div>
-            <div class="hero-metric"><strong id="category-count">5</strong><span>categor&iacute;as m&eacute;dicas</span></div>
+            <div class="hero-metric"><strong id="product-count">—</strong><span>productos en cat&aacute;logo</span></div>
+            <div class="hero-metric"><strong id="category-count">—</strong><span>categor&iacute;as y l&iacute;neas</span></div>
             <div class="hero-metric"><strong>2026</strong><span>precios publicados</span></div>
           </div>
         </div>
@@ -240,7 +241,7 @@
               <span class="hero-product-kicker">PRECIO NEXOR &middot; 2026</span>
               <h2 id="hero-product-name">Soluciones para el cuidado de la salud</h2>
               <div class="hero-product-footer"><span id="hero-product-ref">EQUIPAMIENTO &middot; INSTRUMENTAL &middot; INSUMOS</span><strong id="hero-product-price"></strong></div>
-              <small class="hero-price-note">Precio publicado en el cat&aacute;logo. Confirme disponibilidad al cotizar.</small>
+              <small class="hero-price-note">Precio publicado. Impuestos aplicables, disponibilidad y precio final se confirman al cotizar.</small>
             </div>
           </article>
           <span class="hero-coordinates" aria-hidden="true">NEXOR / MEDICAL SYSTEMS</span>
@@ -249,13 +250,49 @@
       <div class="hero-bottom-line" aria-hidden="true"><span>PRECISI&Oacute;N</span><span class="hero-bottom-rule"></span><span>PROP&Oacute;SITO</span></div>
     </section>
 
+    <section class="about-section section section--paper" id="sobre" aria-labelledby="about-title">
+      <div class="container">
+        <div class="about-intro">
+          <span class="eyebrow">SOBRE NEXOR &nbsp;/&nbsp; MEDICAL SYSTEMS</span>
+          <h2 id="about-title">Acceso claro a productos para la salud.</h2>
+          <p>NEXOR es una comercializadora colombiana de productos m&eacute;dicos. Facilitamos el acceso a equipamiento, instrumental e insumos mediante un cat&aacute;logo consultable y solicitudes de cotizaci&oacute;n transparentes.</p>
+        </div>
+        <div class="about-grid">
+          <article class="about-card">
+            <span class="about-card-index">01 &nbsp;/&nbsp; QU&Eacute; HACEMOS</span>
+            <h3>Comercializaci&oacute;n y orientaci&oacute;n</h3>
+            <p>Presentamos productos y referencias disponibles en el cat&aacute;logo para que pueda revisar alternativas y preparar una consulta.</p>
+          </article>
+          <article class="about-card">
+            <span class="about-card-index">02 &nbsp;/&nbsp; A QUI&Eacute;N ATENDEMOS</span>
+            <h3>Personas e instituciones</h3>
+            <p>Puede hacer una consulta particular o preparar una solicitud institucional con varias referencias y cantidades.</p>
+          </article>
+          <article class="about-card">
+            <span class="about-card-index">03 &nbsp;/&nbsp; COTIZACI&Oacute;N</span>
+            <h3>Revise antes de confirmar</h3>
+            <p>Elija los productos, indique cantidades y observaciones, y revise el mensaje preparado antes de continuar por WhatsApp.</p>
+          </article>
+          <article class="about-card">
+            <span class="about-card-index">04 &nbsp;/&nbsp; ABASTECIMIENTO Y DESPACHO</span>
+            <h3>Condiciones verificadas en cada solicitud</h3>
+            <p>La disponibilidad, el precio final, los impuestos aplicables, el destino y el plazo de entrega se confirman al atender cada cotizaci&oacute;n.</p>
+          </article>
+        </div>
+        <div class="about-actions" aria-label="Accesos para compradores">
+          <a class="button button--secondary" href="#productos">Consulta particular <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
+          <a class="button button--primary" href="#contacto">Cotizaci&oacute;n institucional <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
+        </div>
+      </div>
+    </section>
+
     <section class="catalog-section section section--paper" id="productos">
       <div class="container">
         <div class="catalog-heading">
           <div class="section-heading">
             <span class="eyebrow">PORTAFOLIO &nbsp;/&nbsp; 2026</span>
             <h2>Equipamiento para cada entorno cl&iacute;nico.</h2>
-            <p class="lead">Explore productos, marcas, variantes y precios en pesos colombianos. Confirme disponibilidad y precio al preparar su cotizaci&oacute;n.</p>
+            <p class="lead">Explore productos, marcas, variantes y precios publicados en pesos colombianos. Impuestos aplicables, disponibilidad y precio final se confirman al cotizar.</p>
           </div>
           <div class="catalog-index"><span>REF.</span><strong>01—05</strong><span>CAT&Aacute;LOGO M&Eacute;DICO</span></div>
         </div>
@@ -265,8 +302,8 @@
             <div class="search-control"><i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i><input id="gmd-search-input" type="search" placeholder="Producto, marca, referencia o variante" autocomplete="off"><button class="search-clear" id="gmd-search-clear" type="button" aria-label="Limpiar b&uacute;squeda" hidden><i class="fa-solid fa-xmark" aria-hidden="true"></i></button></div>
           </div>
           <div class="gmd-category-filter">
-            <label for="gmd-category">Categor&iacute;a m&eacute;dica</label>
-            <div class="select-control"><i class="fa-solid fa-layer-group" aria-hidden="true"></i><select id="gmd-category"><option value="">Todas las categor&iacute;as</option></select><i class="fa-solid fa-chevron-down select-chevron" aria-hidden="true"></i></div>
+            <label for="gmd-category">Categor&iacute;a o l&iacute;nea</label>
+            <div class="select-control"><i class="fa-solid fa-layer-group" aria-hidden="true"></i><select id="gmd-category"><option value="">Todas las categor&iacute;as y l&iacute;neas</option></select><i class="fa-solid fa-chevron-down select-chevron" aria-hidden="true"></i></div>
           </div>
           <div class="gmd-sort-control">
             <label for="gmd-sort">Ordenar por</label>
@@ -277,9 +314,12 @@
           <p class="gmd-results" id="gmd-results" role="status" aria-live="polite"></p>
           <button class="reset-filters" id="gmd-reset" type="button"><i class="fa-solid fa-arrow-rotate-left" aria-hidden="true"></i> Limpiar filtros</button>
         </div>
+        <p class="catalog-loading" id="gmd-loading" role="status" aria-live="polite">Cargando cat&aacute;logo...</p>
+        <p class="catalog-error" id="gmd-error" role="alert" hidden>No pudimos cargar el cat&aacute;logo. Actualice la p&aacute;gina o cont&aacute;ctenos para consultar productos.</p>
         <div class="gmd-grid" id="gmd-grid"></div>
-        <div class="gmd-empty" id="gmd-empty" hidden><i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i><h3>No encontramos coincidencias.</h3><p>Pruebe otra palabra, referencia o categor&iacute;a.</p><button class="button button--secondary" id="gmd-empty-reset" type="button">Ver todo el cat&aacute;logo</button></div>
+        <div class="gmd-empty" id="gmd-empty" hidden><i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i><h3 id="gmd-empty-title">No encontramos coincidencias.</h3><p id="gmd-empty-description">Pruebe otra palabra, referencia o categor&iacute;a.</p><button class="button button--secondary" id="gmd-empty-reset" type="button">Ver todo el cat&aacute;logo</button></div>
         <div class="gmd-pagination" aria-label="P&aacute;ginas del cat&aacute;logo"><button id="gmd-prev" type="button"><i class="fa-solid fa-arrow-left" aria-hidden="true"></i> Anterior</button><span class="gmd-page" id="gmd-page"></span><button id="gmd-next" type="button">Siguiente <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></button></div>
+        <noscript><p class="catalog-error">Active JavaScript para consultar y filtrar el cat&aacute;logo.</p></noscript>
       </div>
     </section>
 
@@ -314,9 +354,10 @@
               <div class="field"><label for="name">Nombre completo</label><input id="name" name="name" type="text" placeholder="Su nombre" autocomplete="name" minlength="2" maxlength="80" required></div>
               <div class="field"><label for="email">Correo electr&oacute;nico</label><input id="email" name="email" type="email" placeholder="usted@empresa.com" autocomplete="email" inputmode="email" maxlength="120" required></div>
             </div>
+            <div class="field"><label for="contact-request-type">Tipo de solicitud</label><select id="contact-request-type" name="requestType"><option value="particular">Consulta particular</option><option value="institucional">Cotizaci&oacute;n institucional</option></select></div>
             <div class="form-grid">
-              <div class="field"><label for="organization">Instituci&oacute;n u organizaci&oacute;n <span>OPCIONAL</span></label><input id="organization" name="organization" type="text" placeholder="Nombre de la organizaci&oacute;n" autocomplete="organization" maxlength="120"></div>
-              <div class="field"><label for="quantity">Cantidad requerida</label><input id="quantity" name="quantity" type="number" placeholder="Ej.: 10" min="1" max="10000" step="1" inputmode="numeric" required><small class="field-hint" id="quantity-guidance" aria-live="polite">Las condiciones comerciales se verifican seg&uacute;n el producto.</small></div>
+              <div class="field"><label for="organization">Instituci&oacute;n u organizaci&oacute;n <span id="organization-hint">OPCIONAL</span></label><input id="organization" name="organization" type="text" placeholder="Nombre de la organizaci&oacute;n" autocomplete="organization" maxlength="120"></div>
+              <div class="field"><label for="quantity">Cantidad solicitada</label><input id="quantity" name="quantity" type="number" placeholder="Ej.: 10" min="1" max="10000" step="1" inputmode="numeric" required><small class="field-hint" id="quantity-guidance" aria-live="polite">La presentaci&oacute;n y unidad de venta se confirman al cotizar.</small></div>
             </div>
             <div class="field"><label for="producto">Producto de inter&eacute;s</label><input id="producto" name="producto" type="text" list="producto-opciones" placeholder="Escriba o seleccione un producto" maxlength="180" required><datalist id="producto-opciones"></datalist></div>
             <div class="field"><label for="message">Cu&eacute;ntenos un poco m&aacute;s <span>OPCIONAL</span></label><textarea id="message" name="message" placeholder="Indique la variante o comparta detalles adicionales de su solicitud." maxlength="1000"></textarea></div>
@@ -328,6 +369,21 @@
         </div>
       </div>
     </section>
+  <section class="legal-section section" id="informacion-comercial" aria-labelledby="legal-title">
+    <div class="container">
+      <div class="legal-intro">
+        <span class="eyebrow">INFORMACI&Oacute;N PARA COMPRAR</span>
+        <h2 id="legal-title">Condiciones y documentos.</h2>
+        <p>Estos apartados est&aacute;n pendientes de los textos revisados y aprobados por NEXOR. No constituyen pol&iacute;ticas ni condiciones jur&iacute;dicas vigentes.</p>
+      </div>
+      <div class="legal-grid">
+        <article><h3>Tratamiento de datos personales</h3><p>Texto oficial pendiente de aprobaci&oacute;n y publicaci&oacute;n.</p></article>
+        <article><h3>T&eacute;rminos comerciales</h3><p>Condiciones de cotizaci&oacute;n y aceptaci&oacute;n pendientes de validaci&oacute;n.</p></article>
+        <article><h3>Entrega y despacho</h3><p>Alcance, destinos, tiempos y costos pendientes de definici&oacute;n comercial.</p></article>
+        <article><h3>Garant&iacute;as y devoluciones</h3><p>Procedimientos y condiciones pendientes de validaci&oacute;n y publicaci&oacute;n.</p></article>
+      </div>
+    </div>
+  </section>
   </main>
   <section class="social-section" id="redes" aria-labelledby="social-title">
     <div class="container social-layout">
@@ -358,10 +414,10 @@
   <footer class="site-footer">
     <div class="container footer-main">
       <a class="brand footer-brand" href="#inicio" aria-label="NEXOR Medical Systems, inicio"><span class="brand-mark" aria-hidden="true">N</span><span class="brand-name"><strong>NEXOR</strong><small>MEDICAL SYSTEMS</small></span></a>
-      <p>Tecnolog&iacute;a m&eacute;dica.<br>Confianza cl&iacute;nica.</p>
+      <p>Comercializaci&oacute;n de equipamiento, instrumental e insumos m&eacute;dicos.</p>
       <a class="footer-top" href="#inicio">VOLVER AL INICIO <i class="fa-solid fa-arrow-up" aria-hidden="true"></i></a>
     </div>
-    <div class="container footer-bottom"><span>&copy; 2026 NEXOR - MEDICAL SYSTEMS</span><span>Equipamiento, instrumental e insumos m&eacute;dicos</span><a href="https://wa.me/573053252358" target="_blank" rel="noopener">ESCR&Iacute;BANOS POR WHATSAPP <i class="fa-brands fa-whatsapp" aria-hidden="true"></i></a></div>
+    <div class="container footer-bottom"><span>&copy; 2026 NEXOR - MEDICAL SYSTEMS</span><a href="#informacion-comercial">Informaci&oacute;n comercial y legal</a><a href="https://wa.me/573053252358" target="_blank" rel="noopener">ESCR&Iacute;BANOS POR WHATSAPP <i class="fa-brands fa-whatsapp" aria-hidden="true"></i></a></div>
   </footer>
   <a class="float-whatsapp" href="https://wa.me/573053252358?text=Hola%2C%20quiero%20cotizar%20suministros%20m%C3%A9dicos%20de%20NEXOR%20Medical%20Systems" target="_blank" rel="noopener" aria-label="Contactar a NEXOR Medical Systems por WhatsApp"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i></a>
   <aside class="chat-widget" aria-label="Asistente virtual de NEXOR">
@@ -416,21 +472,21 @@
         </div>
         <p class="cart-inline-status" id="modal-cart-status" role="status" aria-live="polite"></p>
         <button class="button button--primary cart-add-button" id="modal-add-cart" type="button">
-          <i class="fa-solid fa-cart-plus" aria-hidden="true"></i> Agregar al carrito
+          <i class="fa-solid fa-cart-plus" aria-hidden="true"></i> Agregar a cotización
         </button>
       </div>
       <div class="modal-actions">
         <a class="service-link" id="modal-wa" href="#" target="_blank" rel="noopener">Pedir por WhatsApp <i class="fa-brands fa-whatsapp" aria-hidden="true"></i></a>
       </div>
-      <p class="modal-note">Precio publicado en el cat&aacute;logo. Confirme precio y disponibilidad al solicitar su cotizaci&oacute;n.</p>
+      <p class="modal-note">Precio publicado en el cat&aacute;logo. Impuestos aplicables, disponibilidad y precio final se confirman al cotizar.</p>
     </div>
   </div>
   <div class="cart-overlay" id="cart-overlay" hidden></div>
   <aside class="cart-panel" id="cart-panel" role="dialog" aria-modal="true" aria-labelledby="cart-title" tabindex="-1" hidden>
     <header class="cart-header">
       <div>
-        <span class="eyebrow">SU PEDIDO</span>
-        <h2 id="cart-title">Carrito</h2>
+        <span class="eyebrow">SOLICITUD DE COTIZACI&Oacute;N</span>
+        <h2 id="cart-title">Lista de cotizaci&oacute;n</h2>
       </div>
       <button class="cart-close" id="cart-close" type="button" aria-label="Cerrar carrito"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
     </header>
@@ -439,15 +495,33 @@
     <ul class="cart-items" id="cart-items"></ul>
     <footer class="cart-footer">
       <div class="cart-subtotal"><span>Subtotal de referencia</span><strong id="cart-subtotal">$ 0</strong></div>
-      <p class="cart-payment-note">El pago en l&iacute;nea estar&aacute; disponible pr&oacute;ximamente. Confirma precio y disponibilidad antes de realizar tu pedido.</p>
-      <button class="button button--primary cart-checkout" id="cart-checkout" type="button" disabled>Pago en l&iacute;nea pr&oacute;ximamente</button>
-      <a class="button button--light cart-whatsapp" id="cart-whatsapp" href="#" target="_blank" rel="noopener" hidden>Consultar pedido por WhatsApp <i class="fa-brands fa-whatsapp" aria-hidden="true"></i></a>
+      <p class="cart-payment-note">El subtotal usa precios publicados de referencia; no es una cotizaci&oacute;n final. Impuestos aplicables, disponibilidad, precio final y entrega se confirman con NEXOR. Este sitio no procesa pagos.</p>
+      <form class="cart-request-form" id="cart-request-form">
+        <h3>Datos de contacto</h3>
+        <div class="cart-form-grid">
+          <div class="cart-request-field"><label for="cart-request-type">Tipo de solicitud</label><select id="cart-request-type" name="requestType"><option value="particular">Consulta particular</option><option value="institucional">Cotizaci&oacute;n institucional</option></select></div>
+          <div class="cart-request-field"><label for="cart-customer-name">Nombre</label><input id="cart-customer-name" name="name" type="text" autocomplete="name" minlength="2" maxlength="80" required></div>
+          <div class="cart-request-field"><label for="cart-customer-email">Correo electr&oacute;nico</label><input id="cart-customer-email" name="email" type="email" autocomplete="email" maxlength="120" required></div>
+          <div class="cart-request-field"><label for="cart-organization">Organizaci&oacute;n <span id="cart-organization-hint">opcional</span></label><input id="cart-organization" name="organization" type="text" autocomplete="organization" maxlength="120"></div>
+          <div class="cart-request-field"><label for="cart-observations">Observaciones <span>opcional</span></label><textarea id="cart-observations" name="observations" rows="3" maxlength="1000"></textarea></div>
+        </div>
+        <button class="button button--primary cart-prepare" id="cart-prepare" type="submit" disabled>Preparar mensaje para revisar</button>
+      </form>
+      <div class="cart-message-preview" id="cart-message-preview-wrap" hidden>
+        <label for="cart-message-preview">Mensaje preparado para WhatsApp</label>
+        <textarea id="cart-message-preview" rows="8" readonly></textarea>
+        <p>Revise el contenido. WhatsApp se abrir&aacute; solo cuando seleccione el bot&oacute;n de abajo; usted decide si lo env&iacute;a.</p>
+      </div>
+      <p class="cart-message-status" id="cart-message-status" role="status" aria-live="polite">Agregue productos para preparar una solicitud.</p>
+      <a class="button button--light cart-whatsapp" id="cart-whatsapp" href="#" target="_blank" rel="noopener" hidden>Abrir WhatsApp para revisar y enviar <i class="fa-brands fa-whatsapp" aria-hidden="true"></i></a>
     </footer>
   </aside>
   <p class="cart-toast" id="cart-toast" role="status" aria-live="polite"></p>
   <script src="productos_siempresalud_catalogo.js?v=siempresalud-2026-11-descuento-30"></script>
   <script>
-    if (!Array.isArray(window.NEXOR_PRODUCTS)) throw new Error('No se pudo cargar el catálogo de productos.');
+    const gmdCatalogFailed = !Array.isArray(window.NEXOR_PRODUCTS);
+    if (gmdCatalogFailed) console.error('No se pudo cargar el catálogo de productos.');
+    document.querySelector('#gmd-loading').hidden = true;
     const socialProfileUrls = {
       instagram: '',
       facebook: '',
@@ -491,8 +565,9 @@
       link.setAttribute('aria-label', 'Visitar el perfil oficial de NEXOR en ' + network);
       status.textContent = 'Visitar perfil oficial';
     });
-    const gmdProducts = window.NEXOR_PRODUCTS;
+    const gmdProducts = gmdCatalogFailed ? [] : window.NEXOR_PRODUCTS;
     document.querySelector('#product-count').textContent = gmdProducts.length;
+    document.querySelector('#gmd-error').hidden = !gmdCatalogFailed;
     const productOptions = document.querySelector('#producto-opciones');
     gmdProducts.forEach(product => {
       const option = document.createElement('option');
@@ -509,6 +584,8 @@
     const gmdPageLabel = document.querySelector('#gmd-page');
     const gmdPrev = document.querySelector('#gmd-prev');
     const gmdNext = document.querySelector('#gmd-next');
+    const gmdEmptyTitle = document.querySelector('#gmd-empty-title');
+    const gmdEmptyDescription = document.querySelector('#gmd-empty-description');
     const gmdPageSize = 24;
     const gmdPriceFormatter = new Intl.NumberFormat('es-CO', { style:'currency', currency:'COP', maximumFractionDigits:0 });
     const cartStorageKey = 'nexor-cart-v1';
@@ -521,6 +598,14 @@
     const cartStatus = document.querySelector('#cart-status');
     const cartSubtotal = document.querySelector('#cart-subtotal');
     const cartWhatsApp = document.querySelector('#cart-whatsapp');
+    const cartPrepareButton = document.querySelector('#cart-prepare');
+    const cartRequestForm = document.querySelector('#cart-request-form');
+    const cartMessagePreviewWrap = document.querySelector('#cart-message-preview-wrap');
+    const cartMessagePreview = document.querySelector('#cart-message-preview');
+    const cartMessageStatus = document.querySelector('#cart-message-status');
+    const cartRequestType = document.querySelector('#cart-request-type');
+    const cartOrganizationInput = document.querySelector('#cart-organization');
+    const cartOrganizationHint = document.querySelector('#cart-organization-hint');
     const cartToast = document.querySelector('#cart-toast');
     const modalVariantSelect = document.querySelector('#modal-variant');
     const modalQuantityInput = document.querySelector('#modal-quantity');
@@ -532,6 +617,7 @@
     let cartStatusNotice = '';
     let activeCartProduct = null;
     let cartOpener = null;
+    let modalOpener = null;
     let cartToastTimer;
     const createCartKey = (product, variant) => product.id + '::' + (variant.sku || '') + '::' + variant.name;
     try {
@@ -578,13 +664,13 @@
         };
       });
       if (hasUnavailableItems) {
-        cartStatusNotice = 'Hay productos o variantes sin disponibilidad confirmada. Revísalos antes de enviar el pedido.';
+        cartStatusNotice = 'Hay productos o variantes sin disponibilidad confirmada. Revísalos antes de enviar la solicitud.';
       }
     }
     const updateCartAvailabilityNotice = () => {
       if (!cartStorageAvailable) return;
       cartStatusNotice = cart.some(line => line.available === false)
-        ? 'Hay productos o variantes sin disponibilidad confirmada. Revísalos antes de enviar el pedido.'
+        ? 'Hay productos o variantes sin disponibilidad confirmada. Revísalos antes de enviar la solicitud.'
         : '';
     };
     const saveCart = () => {
@@ -597,11 +683,20 @@
         cartStatus.textContent = cartStatusNotice;
       }
     };
+    const clearCartQuoteDraft = () => {
+      cartMessagePreview.value = '';
+      cartMessagePreviewWrap.hidden = true;
+      cartWhatsApp.hidden = true;
+      cartWhatsApp.href = '#';
+      cartMessageStatus.textContent = cart.length
+        ? 'Complete los datos de contacto y prepare el mensaje para revisarlo.'
+        : 'Agregue productos para preparar una solicitud.';
+    };
     const renderCart = () => {
       cartStatus.textContent = cartStatusNotice;
       const unitCount = cart.reduce((total, line) => total + line.quantity, 0);
       cartCount.textContent = String(unitCount);
-      cartOpenButton.setAttribute('aria-label', 'Abrir carrito, ' + unitCount + (unitCount === 1 ? ' producto' : ' productos'));
+      cartOpenButton.setAttribute('aria-label', 'Abrir lista de cotización, ' + unitCount + (unitCount === 1 ? ' producto' : ' productos'));
       cartEmpty.hidden = cart.length > 0;
       cartList.replaceChildren();
       cart.forEach(line => {
@@ -650,15 +745,8 @@
       });
       const total = cart.reduce((sum, line) => sum + line.unitPrice * line.quantity, 0);
       cartSubtotal.textContent = gmdPriceFormatter.format(total);
-      cartWhatsApp.hidden = cart.length === 0;
-      cartWhatsApp.href = 'https://wa.me/573053252358?text=' + encodeURIComponent([
-        'Hola, quiero consultar este pedido con NEXOR - MEDICAL SYSTEMS:',
-        '',
-        ...cart.map(line => `${line.quantity} × ${line.productName} · ${line.variantName}${line.sku ? ' · Ref. ' + line.sku : ''}${line.available === false ? ' · disponibilidad por confirmar' : ''} · ${gmdPriceFormatter.format(line.unitPrice)} c/u`),
-        '',
-        `Subtotal de referencia: ${gmdPriceFormatter.format(total)}`,
-        'Entiendo que el precio y la disponibilidad deben confirmarse antes de completar el pedido.'
-      ].join('\n'));
+      cartPrepareButton.disabled = cart.length === 0;
+      clearCartQuoteDraft();
     };
     const announceCartChange = message => {
       cartToast.textContent = message;
@@ -698,7 +786,7 @@
       }
       saveCart();
       renderCart();
-      announceCartChange('Agregamos ' + quantity + ' × ' + product.name + ' al carrito.');
+      announceCartChange('Agregamos ' + quantity + ' × ' + product.name + ' a la lista de cotización.');
       return true;
     };
     const openCart = opener => {
@@ -719,6 +807,53 @@
       }, 250);
     };
     renderCart();
+    const updateCartOrganizationRequirement = () => {
+      const required = cartRequestType.value === 'institucional';
+      cartOrganizationInput.required = required;
+      cartOrganizationHint.textContent = required ? 'requerida' : 'opcional';
+      clearCartQuoteDraft();
+    };
+    cartRequestType.addEventListener('change', updateCartOrganizationRequirement);
+    cartRequestForm.addEventListener('input', clearCartQuoteDraft);
+    cartRequestForm.addEventListener('change', clearCartQuoteDraft);
+    cartRequestForm.addEventListener('submit', event => {
+      event.preventDefault();
+      if (!cart.length) {
+        cartMessageStatus.textContent = 'Agregue al menos un producto antes de preparar la solicitud.';
+        return;
+      }
+      if (!cartRequestForm.reportValidity()) return;
+      const data = new FormData(cartRequestForm);
+      const organization = data.get('organization');
+      const observations = data.get('observations');
+      const total = cart.reduce((sum, line) => sum + line.unitPrice * line.quantity, 0);
+      const message = [
+        'Hola, quiero solicitar una cotización a NEXOR - MEDICAL SYSTEMS.',
+        '',
+        `Tipo de solicitud: ${data.get('requestType') === 'institucional' ? 'Institucional' : 'Particular'}`,
+        `Nombre: ${data.get('name')}`,
+        `Correo: ${data.get('email')}`,
+        organization ? `Organización: ${organization}` : '',
+        '',
+        'Productos solicitados:',
+        ...cart.map(line => {
+          const product = gmdProducts.find(item => item.id === line.productId);
+          const productReference = line.sku || product?.reference;
+          const reference = productReference ? ` · Ref. ${productReference}` : '';
+          const availability = line.available === false ? ' · disponibilidad por confirmar' : '';
+          return `${line.quantity} (cantidad solicitada) · ${line.productName} · ${line.variantName}${reference}${availability} · Precio publicado de referencia: ${gmdPriceFormatter.format(line.unitPrice)} c/u`;
+        }),
+        '',
+        `Subtotal de referencia: ${gmdPriceFormatter.format(total)}`,
+        observations ? `Observaciones: ${observations}` : '',
+        'El precio final, los impuestos aplicables, la disponibilidad y la entrega deben confirmarse en la cotización. Esta solicitud no genera un pedido ni un pago.'
+      ].filter(Boolean).join('\n');
+      cartMessagePreview.value = message;
+      cartMessagePreviewWrap.hidden = false;
+      cartWhatsApp.href = 'https://wa.me/573053252358?text=' + encodeURIComponent(message);
+      cartWhatsApp.hidden = false;
+      cartMessageStatus.textContent = 'Mensaje preparado. Revíselo arriba; WhatsApp solo se abrirá si selecciona el botón.';
+    });
     const quoteProductInput = document.querySelector('#producto');
     const quoteQuantityInput = document.querySelector('#quantity');
     const quoteQuantityGuidance = document.querySelector('#quantity-guidance');
@@ -731,7 +866,7 @@
       quoteQuantityInput.min = String(product?.minimumOrderQuantity || 1);
       if (!product?.minimumOrderDescription) {
         quoteQuantityGuidance.textContent = product
-          ? 'Indique la cantidad en ' + (product.quantityUnit || 'unidades') + '.'
+          ? 'Indique la cantidad solicitada. La presentación o unidad de venta se confirma al cotizar.'
           : 'Las condiciones comerciales se verifican según el producto.';
         return;
       }
@@ -816,6 +951,14 @@
       heroNext.hidden = true;
     }
     const renderGmdCatalog = () => {
+      if (gmdCatalogFailed) {
+        gmdGrid.replaceChildren();
+        gmdGrid.hidden = true;
+        gmdEmpty.hidden = true;
+        document.querySelector('.gmd-pagination').hidden = true;
+        gmdResults.textContent = 'Catálogo no disponible.';
+        return;
+      }
       const query = gmdSearch.value.trim().toLocaleLowerCase('es');
       const selectedCategory = gmdCategory.value;
       const filtered = gmdProducts.filter(product =>
@@ -846,6 +989,13 @@
       gmdEmpty.hidden = filtered.length !== 0;
       gmdGrid.hidden = filtered.length === 0;
       document.querySelector('.gmd-pagination').hidden = filtered.length === 0;
+      if (gmdProducts.length === 0) {
+        gmdEmptyTitle.textContent = 'El catálogo está vacío.';
+        gmdEmptyDescription.textContent = 'No hay productos publicados para consultar en este momento.';
+      } else {
+        gmdEmptyTitle.textContent = 'No encontramos coincidencias.';
+        gmdEmptyDescription.textContent = 'Pruebe otra palabra, referencia o categoría.';
+      }
       filtered.slice(start, start + gmdPageSize).forEach(product => {
         const card = document.createElement('article');
         card.className = 'service-card gmd-card';
@@ -863,6 +1013,7 @@
         const image = document.createElement('img');
         image.alt = product.name;
         image.loading = 'lazy';
+        image.decoding = 'async';
         image.hidden = !product.image;
         image.addEventListener('error', () => { image.hidden = true; icon.hidden = false; }, { once:true });
         if (product.image) image.src = product.image;
@@ -880,6 +1031,10 @@
         description.className = 'gmd-description';
         description.textContent = product.description || product.specifications || '';
         description.hidden = !description.textContent;
+        const specification = document.createElement('p');
+        specification.className = 'gmd-specifications';
+        specification.textContent = product.productType ? 'Tipo de producto: ' + product.productType : '';
+        specification.hidden = !specification.textContent;
         const price = document.createElement('span');
         const priceTerms = document.createElement('div');
         priceTerms.className = 'gmd-price-terms';
@@ -890,7 +1045,7 @@
           priceNote.textContent = ' · COP';
           price.appendChild(priceNote);
           const unitNote = document.createElement('small');
-          unitNote.textContent = 'Precio del producto';
+          unitNote.textContent = 'Precio publicado; impuestos y valor final por confirmar';
           priceTerms.appendChild(unitNote);
         } else {
           price.className = 'gmd-availability';
@@ -918,14 +1073,16 @@
         addButton.className = 'cart-card-add';
         addButton.type = 'button';
         const availableVariants = product.variants.filter(variant => variant.available && Number.isFinite(variant.price));
-        addButton.textContent = availableVariants.length > 1 ? 'Elegir variante' : 'Agregar';
-        addButton.setAttribute('aria-label', (availableVariants.length ? 'Agregar ' : 'Sin disponibilidad: ') + product.name);
+        addButton.textContent = availableVariants.length > 1 ? 'Elegir variante' : 'Agregar a cotización';
+        addButton.setAttribute('aria-label', availableVariants.length
+          ? 'Agregar ' + product.name + ' a la cotización'
+          : 'Sin disponibilidad: ' + product.name);
         if (!availableVariants.length) {
           addButton.disabled = true;
           addButton.textContent = 'No disponible';
         }
         actions.append(viewDetails, addButton);
-        card.append(thumb, title, category, reference, description, price, priceTerms, actions);
+        card.append(thumb, title, category, reference, description, specification, price, priceTerms, actions);
         gmdGrid.appendChild(card);
       });
       gmdResults.textContent = filtered.length
@@ -974,13 +1131,24 @@
     window.addEventListener('scroll', () => {
       document.querySelector('.site-header').classList.toggle('is-scrolled', window.scrollY > 24);
     }, { passive:true });
-    document.querySelector('#contact-form').addEventListener('submit', event => {
+    const contactForm = document.querySelector('#contact-form');
+    const contactRequestType = document.querySelector('#contact-request-type');
+    const contactOrganization = document.querySelector('#organization');
+    const contactOrganizationHint = document.querySelector('#organization-hint');
+    const updateContactOrganizationRequirement = () => {
+      const required = contactRequestType.value === 'institucional';
+      contactOrganization.required = required;
+      contactOrganizationHint.textContent = required ? 'REQUERIDA' : 'OPCIONAL';
+    };
+    contactRequestType.addEventListener('change', updateContactOrganizationRequirement);
+    contactForm.addEventListener('submit', event => {
       event.preventDefault();
       const form = event.currentTarget;
       if (!form.checkValidity()) { form.reportValidity(); return; }
       const data = new FormData(form);
       const organization = data.get('organization');
       const details = data.get('message');
+      const requestType = data.get('requestType');
       const product = getQuoteProduct();
       const quantity = Number(data.get('quantity'));
       if (product?.minimumOrderDescription && (
@@ -994,11 +1162,12 @@
       const message = [
         'Hola, quiero solicitar una cotización a NEXOR - MEDICAL SYSTEMS.',
         '',
+        `Tipo de solicitud: ${requestType === 'institucional' ? 'Institucional' : 'Particular'}`,
         `Nombre: ${data.get('name')}`,
         organization ? `Institución u organización: ${organization}` : '',
         `Correo: ${data.get('email')}`,
         `Producto de interés: ${data.get('producto')}`,
-        `Cantidad requerida: ${data.get('quantity')} ${product?.quantityUnit || 'unidades'}`,
+        `Cantidad solicitada: ${data.get('quantity')}`,
         product && Number.isFinite(product.price)
           ? `Precio NEXOR publicado: ${product.priceLabel ? product.priceLabel + ' ' : ''}${gmdPriceFormatter.format(product.price)} por ${product.priceUnitLabel || 'producto'}.`
           : product && !product.available
@@ -1006,6 +1175,7 @@
             : product
               ? 'Precio: consultar en la cotización.'
               : '',
+        'Impuestos aplicables, disponibilidad, presentación y precio final se confirman en la cotización.',
         details ? `\nConsulta adicional: ${details}` : ''
       ].filter(Boolean).join('\n');
       document.querySelector('#form-status').textContent = 'Abriendo WhatsApp con su consulta…';
@@ -1020,6 +1190,15 @@
     const modalDesc = document.querySelector('#modal-desc');
     const modalFeats = document.querySelector('#modal-feats');
     const modalWa = document.querySelector('#modal-wa');
+    const pageTitle = document.querySelector('title');
+    const descriptionMeta = document.querySelector('meta[name="description"]');
+    const openGraphTitleMeta = document.querySelector('meta[property="og:title"]');
+    const openGraphDescriptionMeta = document.querySelector('meta[property="og:description"]');
+    const originalPageTitle = pageTitle.textContent;
+    const originalDescription = descriptionMeta.content;
+    const originalOpenGraphTitle = openGraphTitleMeta.content;
+    const originalOpenGraphDescription = openGraphDescriptionMeta.content;
+    let productUrlActive = false;
     modalImg.addEventListener('error', () => { modalImg.hidden = true; });
     const updateModalVariant = () => {
       if (!activeCartProduct) return null;
@@ -1054,14 +1233,44 @@
       document.body.classList.add('modal-open');
       document.querySelector('#modal-close').focus();
     };
-    const closeModal = () => {
+    const closeModal = (fromHistory = false) => {
+      if (productUrlActive && !fromHistory) {
+        const url = new URL(window.location.href);
+        url.searchParams.delete('producto');
+        window.history.replaceState(window.history.state, '', url);
+      }
+      productUrlActive = false;
       modalOverlay.classList.remove('is-open'); modalPanel.classList.remove('is-open');
       document.body.classList.remove('modal-open');
-      setTimeout(() => { modalOverlay.hidden = true; modalPanel.hidden = true; }, 250);
+      pageTitle.textContent = originalPageTitle;
+      descriptionMeta.content = originalDescription;
+      openGraphTitleMeta.content = originalOpenGraphTitle;
+      openGraphDescriptionMeta.content = originalOpenGraphDescription;
+      setTimeout(() => {
+        modalOverlay.hidden = true;
+        modalPanel.hidden = true;
+        if (modalOpener?.isConnected) modalOpener.focus();
+      }, 250);
     };
-    const openProduct = card => {
-      const product = gmdProducts[Number(card.dataset.productIndex)];
+    const openProduct = (product, updateUrl = true) => {
+      if (!product) return;
+      if (document.activeElement !== document.body && !modalPanel.contains(document.activeElement)) {
+        modalOpener = document.activeElement;
+      }
+      const url = new URL(window.location.href);
+      const currentProductId = url.searchParams.get('producto');
+      url.searchParams.set('producto', product.id);
+      if (updateUrl && currentProductId !== product.id) {
+        window.history.pushState({ ...window.history.state, nexorProductId: product.id }, '', url);
+      } else if (currentProductId === product.id) {
+        window.history.replaceState({ ...window.history.state, nexorProductId: product.id }, '', url);
+      }
+      productUrlActive = true;
       activeCartProduct = product;
+      pageTitle.textContent = product.name + ' | NEXOR - MEDICAL SYSTEMS';
+      descriptionMeta.content = (product.description || originalDescription).replace(/\s+/g, ' ').slice(0, 155);
+      openGraphTitleMeta.content = pageTitle.textContent;
+      openGraphDescriptionMeta.content = descriptionMeta.content;
       modalTitle.textContent = product.name;
       modalTag.textContent = [product.category, product.brand].filter(Boolean).join(' · ');
       modalDesc.textContent = product.description || '';
@@ -1084,7 +1293,7 @@
       });
       modalFeats.replaceChildren();
       [
-        product.specifications,
+        product.productType ? 'Tipo de producto: ' + product.productType : '',
         product.reference ? 'Referencia: ' + product.reference : '',
         product.available ? 'Disponible según el catálogo' : 'Disponibilidad por confirmar',
         product.rating ? 'Calificación: ' + product.rating + (product.reviewCount ? ' · ' + product.reviewCount + ' reseñas' : '') : '',
@@ -1133,7 +1342,7 @@
         return;
       }
       if (addCartLine(activeCartProduct, variant, quantity)) {
-        modalCartStatus.textContent = 'Producto agregado al carrito.';
+        modalCartStatus.textContent = 'Producto agregado a la lista de cotización.';
       }
     });
     // ── Galería de imágenes del producto ──
@@ -1203,7 +1412,7 @@
     });
     cartPanel.addEventListener('keydown', event => {
       if (event.key !== 'Tab') return;
-      const focusable = [...cartPanel.querySelectorAll('button:not(:disabled), input:not(:disabled), a[href]:not([hidden])')]
+      const focusable = [...cartPanel.querySelectorAll('button:not(:disabled), input:not(:disabled), select:not(:disabled), textarea:not(:disabled), a[href]:not([hidden])')]
         .filter(element => !element.hidden);
       if (!focusable.length) return;
       const first = focusable[0];
@@ -1223,6 +1432,19 @@
       if (modalPanel.hidden) return;
       if (e.key === 'ArrowRight') showSlide(galleryIndex + 1);
       if (e.key === 'ArrowLeft') showSlide(galleryIndex - 1);
+      if (e.key !== 'Tab') return;
+      const focusable = [...modalPanel.querySelectorAll('button:not(:disabled), input:not(:disabled), select:not(:disabled), a[href]:not([hidden])')]
+        .filter(element => !element.hidden);
+      if (!focusable.length) return;
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
     });
     gmdGrid.addEventListener('click', event => {
       const card = event.target.closest('.gmd-card');
@@ -1233,19 +1455,33 @@
         if (availableVariants.length === 1) {
           addCartLine(product, availableVariants[0], 1);
         } else if (availableVariants.length > 1) {
-          openProduct(card);
+          openProduct(product);
           requestAnimationFrame(() => modalVariantSelect.focus());
         }
         return;
       }
       if (event.target.closest('.card-details-button')) {
-        openProduct(card);
+        openProduct(gmdProducts[Number(card.dataset.productIndex)]);
         return;
       }
-      if (!event.target.closest('a, button')) openProduct(card);
+      if (!event.target.closest('a, button')) openProduct(gmdProducts[Number(card.dataset.productIndex)]);
     });
-    modalOverlay.addEventListener('click', closeModal);
-    document.querySelector('#modal-close').addEventListener('click', closeModal);
+    modalOverlay.addEventListener('click', () => closeModal());
+    document.querySelector('#modal-close').addEventListener('click', () => closeModal());
+    window.addEventListener('popstate', () => {
+      const productId = new URL(window.location.href).searchParams.get('producto');
+      if (productId) {
+        const product = gmdProducts.find(item => item.id === productId);
+        if (product && (modalPanel.hidden || activeCartProduct?.id !== product.id)) {
+          openProduct(product, false);
+        }
+      } else if (!modalPanel.hidden) {
+        closeModal(true);
+      }
+    });
+    const initialProductId = new URL(window.location.href).searchParams.get('producto');
+    const initialProduct = gmdProducts.find(product => product.id === initialProductId);
+    if (initialProduct) openProduct(initialProduct, false);
     document.addEventListener('keydown', e => {
       if (e.key !== 'Escape') return;
       if (!cartPanel.hidden) closeCart();
@@ -1329,7 +1565,7 @@
     const respondToChat = question => {
       const normalized = normalizeChatText(question);
       if (/\b(cotiz|cotizar|cotizacion|asesor|comprar|pedido)\b/.test(normalized)) {
-        const reply = addChatMessage('Puedes agregar productos al carrito y consultar tu pedido por WhatsApp, o completar el formulario de cotización. El pago en línea todavía no está habilitado.');
+        const reply = addChatMessage('Puedes agregar productos a tu lista de cotización y preparar un mensaje para WhatsApp, o completar el formulario de consulta. El pago en línea todavía no está habilitado.');
         addChatLink(reply, 'Ir al formulario de cotización', '#contacto');
         addChatLink(reply, 'Ver el catálogo', '#productos');
         return;
