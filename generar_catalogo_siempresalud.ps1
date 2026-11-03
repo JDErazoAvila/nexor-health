@@ -1,14 +1,16 @@
 $ErrorActionPreference = 'Stop'
+Add-Type -AssemblyName System.IO.Compression
 Add-Type -AssemblyName System.IO.Compression.FileSystem
 
-$saleDiscount = 0.20
+$saleDiscount = 0.30
 $workbookPath = Join-Path $PSScriptRoot 'siempresalud_catalogo_completo.xlsx'
 $outputPath = Join-Path $PSScriptRoot 'productos_siempresalud_catalogo.js'
 if (-not (Test-Path $workbookPath)) {
   throw "No se encontró el archivo fuente: $workbookPath"
 }
 
-$archive = [System.IO.Compression.ZipFile]::OpenRead($workbookPath)
+$workbookStream = [System.IO.File]::Open($workbookPath, [System.IO.FileMode]::Open, [System.IO.FileAccess]::Read, [System.IO.FileShare]::ReadWrite)
+$archive = [System.IO.Compression.ZipArchive]::new($workbookStream, [System.IO.Compression.ZipArchiveMode]::Read)
 try {
   function Read-WorkbookEntry([string]$Name) {
     $entry = $archive.GetEntry($Name)
@@ -74,44 +76,79 @@ try {
     return [math]::Round($number * (1 - $saleDiscount), 0, [System.MidpointRounding]::AwayFromZero)
   }
 
+  function Find-Column([hashtable]$HeaderRow, [string[]]$Names, [string]$FieldName) {
+    foreach ($name in $Names) {
+      foreach ($column in $HeaderRow.Keys) {
+        $headerKey = ([string]$HeaderRow[$column] -replace '[^A-Za-z0-9]', '')
+        $nameKey = ($name -replace '[^A-Za-z0-9]', '')
+        if ($headerKey -ieq $nameKey) { return $column }
+      }
+    }
+    throw "No se encontró la columna '$FieldName' en el archivo Excel."
+  }
+
   $productRows = Read-Worksheet 'xl/worksheets/sheet1.xml'
   $variantRows = Read-Worksheet 'xl/worksheets/sheet2.xml'
   if ($productRows.Count -lt 2 -or $variantRows.Count -lt 2) {
     throw "Las hojas Productos o Variantes no contienen datos (Productos: $($productRows.Count), Variantes: $($variantRows.Count))."
   }
 
+  $productHeaders = $productRows[0]
+  $productColumns = @{
+    id = Find-Column $productHeaders @('Handle') 'Handle'
+    fallbackId = Find-Column $productHeaders @('ID Shopify') 'ID Shopify'
+    name = Find-Column $productHeaders @('Nombre') 'Nombre'
+    type = Find-Column $productHeaders @('Tipo de producto') 'Tipo de producto'
+    basePrice = Find-Column $productHeaders @('Precio actual mínimo', 'precio_NEXOR') 'Precio actual mínimo'
+    description = Find-Column $productHeaders @('Descripción') 'Descripción'
+    images = Find-Column $productHeaders @('Imágenes') 'Imágenes'
+    url = Find-Column $productHeaders @('URL') 'URL'
+    categories = Find-Column $productHeaders @('Categorías') 'Categorías'
+    available = Find-Column $productHeaders @('Disponibilidad general') 'Disponibilidad general'
+    rating = Find-Column $productHeaders @('Calificación') 'Calificación'
+    reviewCount = Find-Column $productHeaders @('Número de reseñas') 'Número de reseñas'
+  }
+  $variantHeaders = $variantRows[0]
+  $variantColumns = @{
+    sku = Find-Column $variantHeaders @('SKU') 'SKU'
+    name = Find-Column $variantHeaders @('Variante') 'Variante'
+    price = Find-Column $variantHeaders @('Precio') 'Precio'
+    available = Find-Column $variantHeaders @('Disponibilidad') 'Disponibilidad'
+    url = Find-Column $variantHeaders @('URL') 'URL'
+  }
+
   $brandByProductUrl = @{}
   foreach ($row in ($productRows | Select-Object -Skip 1)) {
-    $categoryPath = @(([string]$row['R'] -split '\s*\|\s*') | Where-Object { $_ })
-    $brandByProductUrl[[string]$row['P']] = if ($categoryPath.Count -gt 1) { $categoryPath[-1] } else { '' }
+    $categoryPath = @(([string]$row[$productColumns.categories] -split '\s*\|\s*') | Where-Object { $_ })
+    $brandByProductUrl[[string]$row[$productColumns.url]] = if ($categoryPath.Count -gt 1) { $categoryPath[-1] } else { '' }
   }
 
   $variantsByProduct = @{}
   foreach ($row in ($variantRows | Select-Object -Skip 1)) {
-    $productUrl = [string]$row['K']
+    $productUrl = [string]$row[$variantColumns.url]
     if (-not $variantsByProduct.ContainsKey($productUrl)) {
       $variantsByProduct[$productUrl] = [System.Collections.Generic.List[object]]::new()
     }
-    $variantName = [string]$row['E']
+    $variantName = [string]$row[$variantColumns.name]
     $isLittmann = $brandByProductUrl[$productUrl] -ieq 'Littmann'
     $variantsByProduct[$productUrl].Add([ordered]@{
       name = $variantName
-      sku = [string]$row['C']
-      price = Convert-SalePrice $row['F'] (-not $isLittmann)
-      available = ([string]$row['H'] -eq '1')
+      sku = [string]$row[$variantColumns.sku]
+      price = Convert-SalePrice $row[$variantColumns.price] (-not $isLittmann)
+      available = ([string]$row[$variantColumns.available] -eq '1')
     })
   }
 
   $catalog = [System.Collections.Generic.List[object]]::new()
   foreach ($row in ($productRows | Select-Object -Skip 1)) {
-    $productId = [string]$row['A']
-    $productUrl = [string]$row['P']
-    $categoryPath = @(([string]$row['R'] -split '\s*\|\s*') | Where-Object { $_ })
-    $productType = [string]$row['D']
+    $productId = [string]$row[$productColumns.fallbackId]
+    $productUrl = [string]$row[$productColumns.url]
+    $categoryPath = @(([string]$row[$productColumns.categories] -split '\s*\|\s*') | Where-Object { $_ })
+    $productType = [string]$row[$productColumns.type]
     $category = if ($categoryPath.Count) { $categoryPath[0] } else { $productType }
     $brand = if ($categoryPath.Count -gt 1) { $categoryPath[-1] } else { '' }
     $images = @(
-      ([string]$row['I'] -split '\s*\|\s*') |
+      ([string]$row[$productColumns.images] -split '\s*\|\s*') |
         ForEach-Object {
           $imageUrl = $_.Trim()
           if ($imageUrl.StartsWith('//')) { $imageUrl = 'https:' + $imageUrl }
@@ -132,18 +169,18 @@ try {
       $currentPrice = ($availablePrices | Measure-Object -Minimum).Minimum
       $priceLabel = if ($availablePrices.Count -gt 1) { 'Desde' } else { '' }
     } else {
-      $currentPrice = Convert-SalePrice $row['F'] ($brand -ine 'Littmann')
+      $currentPrice = Convert-SalePrice $row[$productColumns.basePrice] ($brand -ine 'Littmann')
       $priceLabel = ''
     }
     $catalog.Add([ordered]@{
-      id = if ($row['Q']) { [string]$row['Q'] } else { $productId }
-      name = [string]$row['B']
+      id = if ($row[$productColumns.id]) { [string]$row[$productColumns.id] } else { $productId }
+      name = [string]$row[$productColumns.name]
       reference = $reference
       category = $category
       categories = $categoryPath
       brand = $brand
       productType = $productType
-      description = [string]$row['H']
+      description = [string]$row[$productColumns.description]
       price = $currentPrice
       priceLabel = $priceLabel
       priceUnitLabel = 'producto'
@@ -151,9 +188,9 @@ try {
       specifications = $productType
       image = if ($images.Count) { $images[0] } else { '' }
       images = $images
-      available = ([string]$row['M'] -eq '1')
-      rating = Convert-Price $row['N']
-      reviewCount = Convert-Price $row['O']
+      available = ([string]$row[$productColumns.available] -eq '1')
+      rating = Convert-Price $row[$productColumns.rating]
+      reviewCount = Convert-Price $row[$productColumns.reviewCount]
       variants = $variants
     })
   }
@@ -161,7 +198,7 @@ try {
   $json = ConvertTo-Json -InputObject $catalog.ToArray() -Depth 8 -Compress
   $javascript = "window.NEXOR_PRODUCTS = $json;`n"
   [System.IO.File]::WriteAllText($outputPath, $javascript, [System.Text.UTF8Encoding]::new($false))
-  Write-Output "Catálogo generado: $($catalog.Count) productos, $($variantRows.Count - 1) variantes; 20 % de descuento aplicado excepto a Littmann."
+  Write-Output "Catálogo generado: $($catalog.Count) productos, $($variantRows.Count - 1) variantes; 30 % de descuento aplicado excepto a Littmann."
 } finally {
   $archive.Dispose()
 }
