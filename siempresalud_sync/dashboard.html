@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sincronización de proveedor | NEXOR</title>
+  <style>
+    :root{font-family:system-ui,-apple-system,"Segoe UI",sans-serif;color:#133a52;background:#f6fafc;line-height:1.5}
+    *{box-sizing:border-box}body{margin:0}.wrap{max-width:1180px;margin:auto;padding:2rem 1rem}
+    h1,h2{color:#0b4a76}h1{font-size:clamp(1.7rem,4vw,2.4rem)}h2{font-size:1.15rem}
+    .card{background:#fff;border:1px solid #d7e5ee;border-radius:14px;padding:1rem 1.2rem;margin:1rem 0;box-shadow:0 6px 20px #0b4a760d}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:.8rem}.metric strong{display:block;font-size:1.5rem;color:#0e7ac4}
+    input,button{font:inherit;padding:.7rem;border:1px solid #bdd0dd;border-radius:8px}input{min-width:min(100%,360px)}
+    button{background:#0e9f7e;color:#fff;border:0;font-weight:700;cursor:pointer}button:disabled{opacity:.55;cursor:wait}
+    .row{display:flex;flex-wrap:wrap;gap:.6rem;align-items:center}.muted{color:#5c7b90}.error{color:#a22626}.status{min-height:1.5rem}
+    .table-wrap{overflow:auto}table{width:100%;border-collapse:collapse;font-size:.88rem}th,td{text-align:left;padding:.6rem;border-bottom:1px solid #e4edf2;vertical-align:top}
+    th{color:#5c7b90;white-space:nowrap}td a{color:#0e7ac4}.badge{display:inline-block;background:#fff2cf;color:#725400;border-radius:20px;padding:.1rem .5rem}
+    .section-note{font-size:.82rem;color:#5c7b90}.hidden{display:none}
+  </style>
+</head>
+<body>
+<main class="wrap">
+  <h1>NEXOR · Sincronización de Siempre Salud</h1>
+  <p class="muted">Datos del proveedor aislados del precio de venta y del inventario propio.</p>
+  <section class="card">
+    <h2>Acceso al panel</h2>
+    <div class="row"><label for="token">Token de administración</label><input id="token" type="password" autocomplete="current-password"><button id="connect">Conectar</button></div>
+    <p id="message" class="status" role="status"></p>
+  </section>
+  <div id="panel" class="hidden">
+    <section class="card">
+      <div class="row" style="justify-content:space-between"><div><h2>Estado</h2><p>Última sincronización exitosa: <strong id="last-success">—</strong></p></div><button id="sync">Ejecutar sincronización manual</button></div>
+      <div class="grid">
+        <div class="metric">Productos consultados (última ejecución)<strong id="count-products">0</strong></div>
+        <div class="metric">Productos actualizados<strong id="count-updated">0</strong></div>
+        <div class="metric">Cambios de disponibilidad<strong id="count-inventory">0</strong></div>
+        <div class="metric">Cambios de precio<strong id="count-price">0</strong></div>
+        <div class="metric">Productos nuevos<strong id="count-new">0</strong></div>
+        <div class="metric">Productos pendientes<strong id="count-pending">0</strong></div>
+        <div class="metric">No vistos en barrido completo<strong id="count-missing">0</strong></div>
+        <div class="metric">Ejecuciones con error<strong id="count-errors">0</strong></div>
+      </div>
+      <p class="section-note">La fuente no publica cantidad exacta en UCP; no se muestra ni se infiere.</p>
+    </section>
+    <section class="card"><h2>Programación persistente</h2><div class="table-wrap"><table><thead><tr><th>Tarea</th><th>Intervalo</th><th>Último éxito</th><th>Próxima ejecución</th></tr></thead><tbody id="schedule"></tbody></table></div></section>
+    <section class="card"><h2>Productos del proveedor</h2><div class="table-wrap"><table><thead><tr><th>Producto / presentación</th><th>SKU</th><th>Precio de referencia</th><th>Disponibilidad proveedor</th><th>Revisión</th><th>Consulta</th></tr></thead><tbody id="products"></tbody></table></div></section>
+    <section class="card"><h2>Cambios detectados</h2><div class="table-wrap"><table><thead><tr><th>Fecha</th><th>Producto / SKU</th><th>Campo</th><th>Anterior</th><th>Nuevo</th></tr></thead><tbody id="changes"></tbody></table></div></section>
+    <section class="card"><h2>Ejecuciones y errores</h2><div class="table-wrap"><table><thead><tr><th>Inicio</th><th>Estado</th><th>Barrido completo</th><th>Ámbitos</th><th>Consultados</th><th>Actualizados</th><th>Cambios precio / disponibilidad</th><th>Error</th></tr></thead><tbody id="runs"></tbody></table></div></section>
+  </div>
+</main>
+<script>
+(() => {
+  const tokenInput = document.querySelector('#token');
+  const message = document.querySelector('#message');
+  const panel = document.querySelector('#panel');
+  const safe = value => value == null ? '—' : String(value);
+  const date = value => value ? new Date(value).toLocaleString('es-CO') : '—';
+  const cell = (row, value) => { const td = document.createElement('td'); td.textContent = safe(value); row.append(td); return td; };
+  let token = sessionStorage.getItem('nexorSyncToken') || '';
+  tokenInput.value = token;
+  async function request(path, options = {}) {
+    const response = await fetch(path, { ...options, headers: { Authorization: `Bearer ${token}`, ...(options.headers || {}) } });
+    const body = await response.json();
+    if (!response.ok) throw new Error(body.error || `HTTP ${response.status}`);
+    return body;
+  }
+  function render(data) {
+    document.querySelector('#last-success').textContent = date(data.latest_success);
+    const latest = data.latest_run || {};
+    document.querySelector('#count-products').textContent = latest.products_consulted || 0;
+    document.querySelector('#count-updated').textContent = latest.products_updated || 0;
+    document.querySelector('#count-inventory').textContent = latest.inventory_changes || 0;
+    document.querySelector('#count-price').textContent = latest.price_changes || 0;
+    document.querySelector('#count-new').textContent = latest.new_products || 0;
+    document.querySelector('#count-pending').textContent = data.counts.pending;
+    document.querySelector('#count-missing').textContent = data.counts.missing;
+    document.querySelector('#count-errors').textContent = data.counts.errors;
+    const schedule = document.querySelector('#schedule'); schedule.replaceChildren();
+    for (const item of data.schedule) {
+      const tr = document.createElement('tr'); cell(tr, item.name); cell(tr, `${item.interval_seconds / 3600} h`); cell(tr, date(item.last_success_at));
+      cell(tr, item.next_due_at > 0 ? new Date(item.next_due_at * 1000).toLocaleString('es-CO') : 'Inmediata'); schedule.append(tr);
+    }
+    const products = document.querySelector('#products'); products.replaceChildren();
+    for (const item of data.products) {
+      const tr = document.createElement('tr');
+      const name = cell(tr, item.title + (item.presentation ? ` · ${item.presentation}` : ''));
+      if (item.source_url) {
+        try {
+          const source = new URL(item.source_url);
+          if (source.protocol === 'https:' && source.hostname === 'siempresalud.co') {
+            const link = document.createElement('a'); link.href = source.href; link.target = '_blank'; link.rel = 'noopener'; link.textContent = ' Fuente'; name.append(link);
+          }
+        } catch { /* Invalid source URLs are displayed as text only. */ }
+      }
+      cell(tr, item.sku);
+      const noMinorUnit = new Set(['BIF','CLP','COP','DJF','GNF','ISK','JPY','KMF','KRW','PYG','RWF','UGX','VND','VUV','XAF','XOF','XPF']);
+      const threeMinorUnits = new Set(['BHD','IQD','JOD','KWD','LYD','OMR','TND']);
+      const exponent = noMinorUnit.has(item.provider_price_currency) ? 0 : threeMinorUnits.has(item.provider_price_currency) ? 3 : 2;
+      const amount = item.provider_price_amount == null ? null : `${(item.provider_price_amount / (10 ** exponent)).toLocaleString('es-CO')} ${item.provider_price_currency}`;
+      cell(tr, amount);
+      cell(tr, item.supplier_available == null ? 'No informado' : item.supplier_available ? 'Disponible' : 'No disponible');
+      const review = cell(tr, item.approval_status === 'pending_review' ? 'Pendiente de aprobación' : item.approval_status);
+      if (item.absent_from_complete_scan) review.append(' · No apareció en el último barrido completo; no eliminado.');
+      if (item.variant_absent_from_complete_scan) review.append(' · Variante no vista; no eliminada.');
+      cell(tr, date(item.last_checked_at)); products.append(tr);
+    }
+    const changes = document.querySelector('#changes'); changes.replaceChildren();
+    for (const item of data.changes) {
+      const tr = document.createElement('tr'); cell(tr, date(item.observed_at)); cell(tr, item.title || item.sku || item.entity_id); cell(tr, item.field);
+      cell(tr, JSON.stringify(item.old_value)); cell(tr, JSON.stringify(item.new_value)); changes.append(tr);
+    }
+    const runs = document.querySelector('#runs'); runs.replaceChildren();
+    for (const item of data.runs) {
+      const tr = document.createElement('tr'); cell(tr, date(item.started_at)); cell(tr, item.status); cell(tr, item.catalog_complete == null ? '—' : item.catalog_complete ? 'Sí' : 'No');
+      cell(tr, (item.scopes || []).join(', '));
+      cell(tr, item.products_consulted); cell(tr, item.products_updated); cell(tr, `${item.price_changes} / ${item.inventory_changes}`); cell(tr, item.error); runs.append(tr);
+    }
+  }
+  async function refresh() {
+    try {
+      const data = await request('/api/dashboard'); render(data); panel.classList.remove('hidden'); message.textContent = '';
+    } catch (error) { panel.classList.add('hidden'); message.textContent = error.message; message.className = 'status error'; }
+  }
+  document.querySelector('#connect').addEventListener('click', () => {
+    token = tokenInput.value; sessionStorage.setItem('nexorSyncToken', token); refresh();
+  });
+  document.querySelector('#sync').addEventListener('click', async event => {
+    const button = event.currentTarget; button.disabled = true;
+    try { const result = await request('/api/sync', { method: 'POST' }); message.textContent = `Sincronización iniciada (${result.run_id}). Actualizando panel…`; setTimeout(refresh, 1500); }
+    catch (error) { message.textContent = error.message; message.className = 'status error'; }
+    finally { button.disabled = false; }
+  });
+  if (token) refresh();
+  setInterval(() => { if (token) refresh(); }, 30000);
+})();
+</script>
+</body>
+</html>

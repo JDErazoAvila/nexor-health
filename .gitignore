@@ -21,4 +21,11 @@ precios_temu_*.csv
 __pycache__/
 *.pyc
 .venv/
-venv/
+venv/
+
+# Siempre Salud sync secrets and persistent provider data
+.env
+.env.*
+*.pem
+data/*.sqlite3
+data/*.sqlite3-*
