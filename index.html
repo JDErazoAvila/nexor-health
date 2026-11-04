@@ -17,7 +17,7 @@
   <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
   <style>
-    :root { --ink:#133a52; --navy:#0b4a76; --blue:#0e7ac4; --sky:#e3f2fb; --mint:#e2f6ef; --paper:#f6fafc; --line:#d7e5ee; --muted:#5c7b90; --white:#fff; --green:#0e9f7e; --cyan:#12b0d7; --shadow:0 18px 45px rgba(11,74,118,.12); --radius:20px; }
+    :root { --ink:#133a52; --navy:#080e14; --blue:#137f9b; --sky:#e3f2fb; --mint:#e2f6ef; --paper:#f6fafc; --line:#d7e5ee; --muted:#5c7b90; --white:#fff; --green:#087f8b; --cyan:#28cfe0; --shadow:0 18px 45px rgba(11,74,118,.12); --radius:20px; }
     * { box-sizing:border-box; margin:0; }
     html { scroll-behavior:smooth; scroll-padding-top:5.5rem; }
     body { color:var(--ink); background:var(--paper); font-family:Manrope, sans-serif; line-height:1.6; }
@@ -137,19 +137,19 @@
     . { margin-top:.8rem; color:var(--muted); font-size:.75rem; text-align:center; }
     @media (max-width:520px) { .modal-panel { width:100%; max-height:92vh; top:auto; bottom:0; left:0; right:0; transform:translateY(24px); border-radius:var(--radius) var(--radius) 0 0; } .modal-panel.is-open { transform:translateY(0); } }
     @media (prefers-reduced-motion:reduce) { *,*::before,*::after { scroll-behavior:auto !important; transition-duration:.01ms !important; animation-duration:.01ms !important; animation-iteration-count:1 !important; } }
-    @media (max-width:800px) { .nav-toggle { display:grid; place-items:center; } .nav-links { position:absolute; top:70px; left:1.25rem; right:1.25rem; padding:1rem; display:none; flex-direction:column; align-items:stretch; gap:.2rem; border:1px solid rgba(255,255,255,.16); border-radius:14px; background:#0b4a76; box-shadow:0 16px 30px rgba(0,0,0,.22); } .nav-links.is-open { display:flex; } .nav-links a { padding:.75rem; } .nav-links .nav-cta { text-align:center; margin-top:.3rem; } .hero { min-height:auto; } .hero-grid,.contact-wrap { grid-template-columns:1fr; } .hero-panel { display:none; } .section { padding:4.5rem 0; } .deliverables { grid-template-columns:repeat(2,1fr); } }
+    @media (max-width:800px) { .nav-toggle { display:grid; place-items:center; } .nav-links { position:absolute; top:70px; left:1.25rem; right:1.25rem; padding:1rem; display:none; flex-direction:column; align-items:stretch; gap:.2rem; border:1px solid rgba(255,255,255,.16); border-radius:14px; background:#080e14; box-shadow:0 16px 30px rgba(0,0,0,.22); } .nav-links.is-open { display:flex; } .nav-links a { padding:.75rem; } .nav-links .nav-cta { text-align:center; margin-top:.3rem; } .hero { min-height:auto; } .hero-grid,.contact-wrap { grid-template-columns:1fr; } .hero-panel { display:none; } .section { padding:4.5rem 0; } .deliverables { grid-template-columns:repeat(2,1fr); } }
     @media (max-width:520px) { .container { width:min(100% - 1.5rem, 1120px); } .nav { min-height:68px; } .hero { padding:7.4rem 0 3.2rem; } h1 { font-size:clamp(2.7rem,14vw,4rem); } .hero-copy { font-size:1rem; } .hero-actions { display:grid; } .button { min-height:48px; } .service-grid,.form-grid { grid-template-columns:1fr; } .service-card { min-height:245px; padding:1.5rem; } .deliverables { grid-template-columns:1fr; } .contact-aside,.contact-form { padding:2rem 1.5rem; } .footer-inner { flex-direction:column; align-items:flex-start; } .float-whatsapp { right:1rem; bottom:1rem; } }
     /* Identidad médica: base clara (blanco/gris) con acentos azul clínico y verde médico */
     body { color:#133a52; background:#f6fafc; background-image:none; }
     h1,h2,h3,.brand,.button,.tag,.eyebrow,.metric strong { font-family:Orbitron,Manrope,sans-serif; }
     h1,h2 { font-weight:700; letter-spacing:-.06em; text-transform:uppercase; }
     h3 { font-size:1.05rem; letter-spacing:-.035em; }.brand { letter-spacing:.02em; }.button { letter-spacing:-.025em; }.eyebrow,.tag { letter-spacing:.1em; }.metric strong { letter-spacing:-.08em; }
-    .hero { background:radial-gradient(circle at 80% 5%,#1279c9 0,transparent 30%),linear-gradient(135deg,#0b4a76 20%,#0d5d95 100%); border-bottom:1px solid rgba(255,255,255,.15); }
+    .hero { background:radial-gradient(circle at 80% 5%,rgba(40,207,224,.34) 0,transparent 30%),linear-gradient(135deg,#080e14 20%,#0e2029 100%); border-bottom:1px solid rgba(40,207,224,.24); }
     .hero::before { background:radial-gradient(circle,#12b0d7 0,rgba(18,176,215,0) 67%); opacity:.25; }
-    .hero::after { border-color:rgba(255,255,255,.18); }.hero-title-accent { color:#7fe0c8; text-shadow:none; }.eyebrow { color:#0e9f7e; }.hero .eyebrow { color:#8fe3cd; }.eyebrow::before { box-shadow:none; }
-    .button--primary { background:linear-gradient(135deg,#0e9f7e,#12b886); box-shadow:0 10px 25px rgba(14,159,126,.28); }.button--light { border-color:rgba(255,255,255,.45); color:#ffffff; }.button--light:hover { background:rgba(255,255,255,.12); }.site-header.is-scrolled { background:rgba(11,74,118,.97); border-bottom:1px solid rgba(255,255,255,.14); }.brand-mark { border-color:#7fe0c8; color:#7fe0c8; box-shadow:none; }
-    .section--paper { background:#ffffff; }.section-heading { border-left:2px solid #0e9f7e; padding-left:1rem; }.section-heading--center { border-left:0; padding-left:0; }.service-card,.deliverable-card { background:#ffffff; border-color:#d7e5ee; box-shadow:0 12px 32px rgba(11,74,118,.07); }.service-card::before { content:""; position:absolute; top:0; left:0; width:58px; height:2px; background:#0e9f7e; box-shadow:none; }.service-card::after { background:radial-gradient(circle,rgba(14,122,196,.10),transparent 68%); }.service-card:hover { border-color:#7cc3e8; box-shadow:0 24px 55px rgba(11,74,118,.16),0 0 0 1px rgba(14,159,126,.10); }
-    .icon { color:#0e7ac4; background:#e3f2fb; border:1px solid #cfe6f5; }.tag { color:#0e7ac4; }.service-link { color:#0b4a76; }.service-link i { background:#0e9f7e; }.deliverable-card { border-top-color:#0e9f7e; }.contact-wrap { border:1px solid #d7e5ee; box-shadow:0 22px 55px rgba(11,74,118,.12); }.contact-aside { background:linear-gradient(155deg,#0d5d95,#0b4a76); border-right:1px solid rgba(255,255,255,.14); }.contact-form { background:#ffffff; }input,select,textarea { background:#f6fafc; border-color:#d7e5ee; color:#133a52; }input::placeholder,textarea::placeholder { color:#7d93a5; }.form-status { color:#0e9f7e; }.site-footer { border-top:1px solid #d7e5ee; background:#eef4f9; color:#5c7b90; }.float-whatsapp { border:2px solid rgba(255,255,255,.35); }
+    .hero::after { border-color:rgba(40,207,224,.18); }.hero-title-accent { color:#8ceaf1; text-shadow:none; }.eyebrow { color:#087f8b; }.hero .eyebrow { color:#8ceaf1; }.eyebrow::before { box-shadow:none; }
+    .button--primary { background:linear-gradient(135deg,#28cfe0,#8ceaf1); box-shadow:0 10px 25px rgba(40,207,224,.22); }.button--light { border-color:rgba(255,255,255,.45); color:#ffffff; }.button--light:hover { background:rgba(255,255,255,.12); }.site-header.is-scrolled { background:rgba(8,14,20,.97); border-bottom:1px solid rgba(40,207,224,.18); }.brand-mark { border-color:#8ceaf1; color:#8ceaf1; box-shadow:none; }
+    .section--paper { background:#ffffff; }.section-heading { border-left:2px solid #28cfe0; padding-left:1rem; }.section-heading--center { border-left:0; padding-left:0; }.service-card,.deliverable-card { background:#ffffff; border-color:#d7e5ee; box-shadow:0 12px 32px rgba(8,14,20,.07); }    .service-card::before { content:""; position:absolute; top:0; left:0; width:58px; height:2px; background:#28cfe0; box-shadow:none; }.service-card::after { background:radial-gradient(circle,rgba(19,127,155,.10),transparent 68%); }.service-card:hover { border-color:#63cbd7; box-shadow:0 24px 55px rgba(8,14,20,.16),0 0 0 1px rgba(40,207,224,.14); }
+    .icon { color:#137f9b; background:#e3f7fa; border:1px solid #c6edf1; }.tag { color:#137f9b; }.service-link { color:#101b23; }.service-link i { background:#087f8b; }.deliverable-card { border-top-color:#28cfe0; }.contact-wrap { border:1px solid #d7e5ee; box-shadow:0 22px 55px rgba(8,14,20,.12); }.contact-aside { background:linear-gradient(155deg,#102b36,#080e14); border-right:1px solid rgba(40,207,224,.18); }.contact-form { background:#ffffff; }input,select,textarea { background:#f6fafc; border-color:#d7e5ee; color:#133a52; }input::placeholder,textarea::placeholder { color:#7d93a5; }.form-status { color:#087f8b; }.site-footer { border-top:1px solid #d7e5ee; background:#eef4f9; color:#5c7b90; }.float-whatsapp { border:2px solid rgba(255,255,255,.35); }
     .hero-panel { position:relative; overflow:hidden; }.hero-panel::before { content:""; display:block; height:74px; margin:1.35rem 0; border:1px solid rgba(255,255,255,.28); border-radius:6px; background:linear-gradient(transparent 49%,rgba(255,255,255,.10) 50%,transparent 51%),linear-gradient(90deg,transparent 49%,rgba(255,255,255,.07) 50%,transparent 51%); background-size:100% 24px,32px 100%; }.hero-panel::after { content:""; position:absolute; left:2.6rem; right:2.6rem; top:94px; height:55px; border-bottom:3px solid #35d0a0; filter:drop-shadow(0 0 6px #35d0a0); clip-path:polygon(0 80%,16% 55%,30% 72%,44% 25%,59% 48%,73% 14%,88% 42%,100% 5%,100% 11%,88% 49%,73% 21%,59% 55%,44% 32%,30% 79%,16% 62%,0 87%); background:#35d0a0; pointer-events:none; }
     .thumb { position:relative; display:grid; place-items:center; height:140px; margin-bottom:1.4rem; border:1px solid var(--line); border-radius:14px; background:linear-gradient(145deg,#e3f2fb,#f6fafc); overflow:hidden; } .thumb img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; transition:transform .35s ease; } .thumb > i { font-size:2rem; color:var(--blue); } .service-card:hover .thumb img { transform:scale(1.06); } .price { display:block; margin-top:.65rem; font:800 1.05rem Orbitron,Manrope,sans-serif; color:var(--green); } .price small { font:700 .72rem Manrope,sans-serif; color:var(--muted); letter-spacing:.05em; text-transform:uppercase; }
     .hero-product-placeholder { position:relative; color:var(--blue); font-size:5rem; opacity:.72; }
@@ -179,7 +179,7 @@
     @media (max-width:520px) { .gmd-filters { grid-template-columns:1fr; } }
     @media (max-width:420px) { .gmd-grid { grid-template-columns:1fr; } }
   </style>
-  <link rel="stylesheet" href="nexor-premium.css?v=nexor-pricing-2">
+  <link rel="stylesheet" href="nexor-premium.css?v=nexor-general-circuit-1">
 </head>
 <body>
   <a class="skip-link" href="#contenido">Ir al contenido principal</a>
@@ -207,6 +207,35 @@
   </header>
   <main id="contenido">
     <section class="hero" id="inicio">
+      <svg class="hero-circuit-lines" viewBox="0 0 1440 760" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+        <defs>
+          <filter id="circuit-glow" x="-30%" y="-30%" width="160%" height="160%">
+            <feGaussianBlur stdDeviation="5" />
+          </filter>
+        </defs>
+        <g class="circuit-glow" filter="url(#circuit-glow)">
+          <path d="M1440 40h-145l-76 76v72h-126l-78 78v104h-78l-80 80v114" />
+          <path d="M1440 610h-150l-72-72h-115l-92 92h-106v130" />
+          <path d="M0 585h168l78-78h106l86-86h91" />
+          <path d="M0 138h142l66 66h96l80 80" />
+        </g>
+        <g class="circuit-traces">
+          <path d="M1440 40h-145l-76 76v72h-126l-78 78v104h-78l-80 80v114" />
+          <path d="M1440 610h-150l-72-72h-115l-92 92h-106v130" />
+          <path d="M0 585h168l78-78h106l86-86h91" />
+          <path d="M0 138h142l66 66h96l80 80" />
+          <path class="circuit-detail" d="M1440 58h-134l-60 60v80h-128l-62 62v115h-84l-62 62v90" />
+          <path class="circuit-detail" d="M1440 628h-136l-68-68h-126l-82 82h-108v88" />
+          <path class="circuit-detail" d="M0 603h160l70-70h112l78-78h78" />
+          <path class="circuit-detail" d="M0 120h134l72 72h104l62 62" />
+        </g>
+        <g class="circuit-nodes">
+          <circle cx="1219" cy="188" r="4" />
+          <circle cx="905" cy="564" r="4" />
+          <circle cx="438" cy="421" r="4" />
+          <circle cx="292" cy="204" r="4" />
+        </g>
+      </svg>
       <div class="hero-grid container">
         <div class="hero-content">
           <span class="eyebrow hero-eyebrow"><span class="status-pulse" aria-hidden="true"></span> NEXOR &nbsp;/&nbsp; MEDICAL SYSTEMS</span>
