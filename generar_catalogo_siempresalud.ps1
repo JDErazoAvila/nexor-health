@@ -2,7 +2,7 @@ $ErrorActionPreference = 'Stop'
 Add-Type -AssemblyName System.IO.Compression
 Add-Type -AssemblyName System.IO.Compression.FileSystem
 
-$saleDiscount = 0.30
+$saleDiscount = [decimal]0.30
 $workbookPath = Join-Path $PSScriptRoot 'siempresalud_catalogo_completo.xlsx'
 $outputPath = Join-Path $PSScriptRoot 'productos_siempresalud_catalogo.js'
 if (-not (Test-Path $workbookPath)) {
@@ -56,10 +56,56 @@ try {
     return ,$rows.ToArray()
   }
 
+  function Read-XlsxRows([string]$Path, [string]$EntryName) {
+    $stream = [System.IO.File]::Open($Path, [System.IO.FileMode]::Open, [System.IO.FileAccess]::Read, [System.IO.FileShare]::ReadWrite)
+    $xlsx = [System.IO.Compression.ZipArchive]::new($stream, [System.IO.Compression.ZipArchiveMode]::Read)
+    try {
+      $sharedStrings = [System.Collections.Generic.List[string]]::new()
+      $sharedEntry = $xlsx.GetEntry('xl/sharedStrings.xml')
+      if ($sharedEntry) {
+        $sharedReader = [System.IO.StreamReader]::new($sharedEntry.Open())
+        try { $sharedDocument = [xml]$sharedReader.ReadToEnd() }
+        finally { $sharedReader.Dispose() }
+        $sharedNamespaces = [System.Xml.XmlNamespaceManager]::new($sharedDocument.NameTable)
+        $sharedNamespaces.AddNamespace('m', 'http://schemas.openxmlformats.org/spreadsheetml/2006/main')
+        foreach ($item in $sharedDocument.SelectNodes('//m:si', $sharedNamespaces)) {
+          $sharedStrings.Add((($item.SelectNodes('.//m:t', $sharedNamespaces) | ForEach-Object { $_.InnerText }) -join ''))
+        }
+      }
+
+      $sheetEntry = $xlsx.GetEntry($EntryName)
+      if (-not $sheetEntry) { throw "No se encontró la sección $EntryName en $Path." }
+      $sheetReader = [System.IO.StreamReader]::new($sheetEntry.Open())
+      try { $sheetDocument = [xml]$sheetReader.ReadToEnd() }
+      finally { $sheetReader.Dispose() }
+      $namespaces = [System.Xml.XmlNamespaceManager]::new($sheetDocument.NameTable)
+      $namespaces.AddNamespace('m', 'http://schemas.openxmlformats.org/spreadsheetml/2006/main')
+      $rows = [System.Collections.Generic.List[hashtable]]::new()
+      foreach ($row in $sheetDocument.SelectNodes('//m:sheetData/m:row', $namespaces)) {
+        $values = @{}
+        foreach ($cell in $row.SelectNodes('m:c', $namespaces)) {
+          $column = [regex]::Match($cell.r, '^[A-Z]+').Value
+          $value = $cell.SelectSingleNode('m:v', $namespaces)
+          if ($cell.t -eq 's' -and $value) {
+            $values[$column] = $sharedStrings[[int]$value.InnerText]
+          } elseif ($cell.t -eq 'inlineStr') {
+            $values[$column] = ($cell.SelectNodes('.//m:t', $namespaces) | ForEach-Object { $_.InnerText }) -join ''
+          } elseif ($value) {
+            $values[$column] = $value.InnerText
+          }
+        }
+        $rows.Add($values)
+      }
+      return ,$rows.ToArray()
+    } finally {
+      $xlsx.Dispose()
+    }
+  }
+
   function Convert-Price($Value) {
     if ([string]::IsNullOrWhiteSpace([string]$Value)) { return $null }
-    $number = 0.0
-    $parsed = [double]::TryParse(
+    $number = [decimal]0
+    $parsed = [decimal]::TryParse(
       [string]$Value,
       [System.Globalization.NumberStyles]::Float,
       [System.Globalization.CultureInfo]::InvariantCulture,
@@ -114,13 +160,78 @@ try {
     name = Find-Column $variantHeaders @('Variante') 'Variante'
     price = Find-Column $variantHeaders @('Precio') 'Precio'
     available = Find-Column $variantHeaders @('Disponibilidad') 'Disponibilidad'
+    options = Find-Column $variantHeaders @('Opciones') 'Opciones'
     url = Find-Column $variantHeaders @('URL') 'URL'
   }
 
-  $brandByProductUrl = @{}
+  $taxReviewPath = Join-Path $PSScriptRoot 'reporte_clasificacion_iva_productos_nexor_2026-11-06.xlsx'
+  if (-not (Test-Path $taxReviewPath)) {
+    throw "No se encontró el reporte de clasificación tributaria editable: $taxReviewPath"
+  }
+  $taxReviewRows = Read-XlsxRows $taxReviewPath 'xl/worksheets/sheet2.xml'
+  if ($taxReviewRows.Count -lt 5) { throw 'La hoja Revisión por producto del reporte tributario no contiene productos.' }
+  $taxHeaderIndex = -1
+  for ($index = 0; $index -lt $taxReviewRows.Count; $index++) {
+    if ($taxReviewRows[$index].Values -contains 'Identificador (handle)') {
+      $taxHeaderIndex = $index
+      break
+    }
+  }
+  if ($taxHeaderIndex -lt 0) { throw 'No se encontró el encabezado Identificador (handle) en el reporte tributario.' }
+  $taxReviewHeaders = $taxReviewRows[$taxHeaderIndex]
+  $taxColumns = @{
+    handle = Find-Column $taxReviewHeaders @('Identificador (handle)') 'Identificador (handle)'
+    treatment = Find-Column $taxReviewHeaders @('Tratamiento aprobado por contabilidad') 'Tratamiento aprobado por contabilidad'
+    rate = Find-Column $taxReviewHeaders @('Tarifa IVA aprobada') 'Tarifa IVA aprobada'
+  }
+  $taxByHandle = @{}
+  foreach ($row in ($taxReviewRows | Select-Object -Skip ($taxHeaderIndex + 1))) {
+    $handle = [string]$row[$taxColumns.handle]
+    if (-not $handle) { continue }
+    if ($taxByHandle.ContainsKey($handle)) { throw "El reporte tributario tiene el producto '$handle' más de una vez." }
+    $treatment = [string]$row[$taxColumns.treatment]
+    $rateText = [string]$row[$taxColumns.rate]
+    $rate = $null
+    if ($rateText) {
+      $parsedRate = 0.0
+      if (-not [double]::TryParse($rateText, [System.Globalization.NumberStyles]::Float, [System.Globalization.CultureInfo]::InvariantCulture, [ref]$parsedRate)) {
+        throw "La tarifa IVA aprobada del producto '$handle' no es numérica."
+      }
+      $rate = $parsedRate
+    }
+    switch ($treatment) {
+      'GRAVADO 19%' {
+        if ($null -eq $rate -or [math]::Abs($rate - 0.19) -gt 0.000001) { throw "El producto '$handle' está marcado gravado, pero su tarifa aprobada no es 19 %." }
+        $taxByHandle[$handle] = @{ treatment = 'taxable'; rate = $rate }
+      }
+      'EXCLUIDO 0%' {
+        if ($null -eq $rate -or [math]::Abs($rate) -gt 0.000001) { throw "El producto '$handle' está marcado excluido, pero su tarifa aprobada no es 0 %." }
+        $taxByHandle[$handle] = @{ treatment = 'excluded'; rate = 0 }
+      }
+      'EXENTO 0%' {
+        if ($null -eq $rate -or [math]::Abs($rate) -gt 0.000001) { throw "El producto '$handle' está marcado exento, pero su tarifa aprobada no es 0 %." }
+        $taxByHandle[$handle] = @{ treatment = 'exempt'; rate = 0 }
+      }
+      { $_ -eq 'PENDIENTE DE VALIDACIÓN' -or $_ -eq 'PENDIENTE DE VALIDACIÓN CONTABLE' -or -not $_ } {
+        if ($null -ne $rate) { throw "El producto '$handle' tiene tarifa aprobada, pero sigue pendiente de clasificación." }
+        $taxByHandle[$handle] = @{ treatment = 'pending'; rate = $null }
+      }
+      default { throw "El tratamiento tributario aprobado '$treatment' del producto '$handle' no es válido." }
+    }
+  }
+
   foreach ($row in ($productRows | Select-Object -Skip 1)) {
-    $categoryPath = @(([string]$row[$productColumns.categories] -split '\s*\|\s*') | Where-Object { $_ })
-    $brandByProductUrl[[string]$row[$productColumns.url]] = if ($categoryPath.Count -gt 1) { $categoryPath[-1] } else { '' }
+    $handle = [string]$row[$productColumns.id]
+    if (-not $taxByHandle.ContainsKey($handle)) { throw "El producto '$handle' no aparece en el reporte de clasificación tributaria." }
+  }
+  if ($taxByHandle.Count -ne ($productRows.Count - 1)) {
+    throw "El reporte tributario contiene $($taxByHandle.Count) productos y el catálogo fuente contiene $($productRows.Count - 1)."
+  }
+
+  $isLittmannByProductUrl = @{}
+  foreach ($row in ($productRows | Select-Object -Skip 1)) {
+    $isLittmannByProductUrl[[string]$row[$productColumns.url]] =
+      [regex]::IsMatch([string]$row[$productColumns.name], '(?i)\bLittmann\b')
   }
 
   $variantsByProduct = @{}
@@ -130,9 +241,23 @@ try {
       $variantsByProduct[$productUrl] = [System.Collections.Generic.List[object]]::new()
     }
     $variantName = [string]$row[$variantColumns.name]
-    $isLittmann = $brandByProductUrl[$productUrl] -ieq 'Littmann'
+    $optionData = [string]$row[$variantColumns.options]
+    $optionNames = @()
+    if ($optionData) {
+      try {
+        $optionNames = @(
+          (ConvertFrom-Json $optionData).PSObject.Properties |
+            ForEach-Object { $_.Name } |
+            Where-Object { $_ -and $_ -ine 'Title' }
+        )
+      } catch {
+        throw "No se pudieron leer las opciones de la variante '$variantName' para $productUrl."
+      }
+    }
+    $isLittmann = $isLittmannByProductUrl[$productUrl]
     $variantsByProduct[$productUrl].Add([ordered]@{
       name = $variantName
+      optionName = $optionNames -join ' y '
       sku = [string]$row[$variantColumns.sku]
       price = Convert-SalePrice $row[$variantColumns.price] (-not $isLittmann)
       available = ([string]$row[$variantColumns.available] -eq '1')
@@ -143,8 +268,10 @@ try {
   foreach ($row in ($productRows | Select-Object -Skip 1)) {
     $productId = [string]$row[$productColumns.fallbackId]
     $productUrl = [string]$row[$productColumns.url]
+    $isLittmann = $isLittmannByProductUrl[$productUrl]
     $categoryPath = @(([string]$row[$productColumns.categories] -split '\s*\|\s*') | Where-Object { $_ })
     $productType = [string]$row[$productColumns.type]
+    $tax = $taxByHandle[[string]$row[$productColumns.id]]
     $category = if ($categoryPath.Count) { $categoryPath[0] } else { $productType }
     $brand = if ($categoryPath.Count -gt 1) { $categoryPath[-1] } else { '' }
     $images = @(
@@ -169,7 +296,7 @@ try {
       $currentPrice = ($availablePrices | Measure-Object -Minimum).Minimum
       $priceLabel = if ($availablePrices.Count -gt 1) { 'Desde' } else { '' }
     } else {
-      $currentPrice = Convert-SalePrice $row[$productColumns.basePrice] ($brand -ine 'Littmann')
+      $currentPrice = Convert-SalePrice $row[$productColumns.basePrice] (-not $isLittmann)
       $priceLabel = ''
     }
     $catalog.Add([ordered]@{
@@ -183,6 +310,8 @@ try {
       description = [string]$row[$productColumns.description]
       price = $currentPrice
       priceLabel = $priceLabel
+      taxTreatment = $tax.treatment
+      taxRate = $tax.rate
       priceUnitLabel = 'producto'
       quantityUnit = 'unidades'
       specifications = $productType
@@ -198,7 +327,8 @@ try {
   $json = ConvertTo-Json -InputObject $catalog.ToArray() -Depth 8 -Compress
   $javascript = "window.NEXOR_PRODUCTS = $json;`n"
   [System.IO.File]::WriteAllText($outputPath, $javascript, [System.Text.UTF8Encoding]::new($false))
-  Write-Output "Catálogo generado: $($catalog.Count) productos, $($variantRows.Count - 1) variantes; 30 % de descuento aplicado excepto a Littmann."
+  $taxCounts = $catalog | Group-Object -Property { $_.taxTreatment } | ForEach-Object { "$($_.Name): $($_.Count)" }
+  Write-Output "Catálogo generado: $($catalog.Count) productos, $($variantRows.Count - 1) variantes; clasificación IVA: $($taxCounts -join ', '); el precio no aumenta y el IVA solo se desglosa en productos gravados aprobados."
 } finally {
   $archive.Dispose()
 }
