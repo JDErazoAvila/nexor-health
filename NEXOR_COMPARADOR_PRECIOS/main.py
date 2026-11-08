@@ -28,9 +28,9 @@ from bs4 import BeautifulSoup
 ROOT = Path(__file__).resolve().parent
 SKU_FILE = ROOT / "sku_gmd.txt"
 SITES_FILE = ROOT / "competidores.txt"
-REPORT_DIR = ROOT / "reports"
-LOG_DIR = ROOT / "logs"
-CHECKPOINT_DIR = ROOT / "checkpoints"
+REPORT_DIR = ROOT / "Reports"
+LOG_DIR = ROOT / "Logs"
+CHECKPOINT_DIR = ROOT / "Checkpoints"
 
 SITES_DEFAULT = [
     "https://tiendamedicalospinos.com", "https://tmvco.com.co",

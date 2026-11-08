@@ -13,14 +13,14 @@ from .config import Config, ROOT
 from .store import SyncStore
 
 
-logger = logging.getLogger("nexor.siempresalud_sync")
+logger = logging.getLogger("nexor.Siempresalud_sync")
 
 
 def load_nexor_references() -> set[str]:
     catalog_path = Path(
         os.environ.get(
             "NEXOR_CATALOG_JS",
-            str(ROOT / "productos_siempresalud_catalogo.js"),
+            str(ROOT / "Assets" / "Js" / "catalogo-productos.js"),
         )
     )
     if not catalog_path.exists():

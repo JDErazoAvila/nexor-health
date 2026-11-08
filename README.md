@@ -21,7 +21,7 @@ Plataforma web de NEXOR - MEDICAL SYSTEMS, comercializadora colombiana de produc
 - Diseño responsive: catálogo de cinco columnas en pantallas amplias, cuatro en escritorio, dos en móvil y una en teléfonos estrechos.
 - Diseño responsive con identidad tecnológica en azul profundo y turquesa, usando las tipografías Orbitron y Manrope.
 
-La lista toma los precios actuales mínimos de `siempresalud_catalogo_completo.xlsx` como precios publicados de NEXOR; si ese mínimo corresponde a una variante agotada, muestra el menor precio entre las variantes disponibles. `generar_catalogo_siempresalud.ps1` aplica actualmente un descuento del 30 % salvo a Littmann. Confirme que esta regla siga aprobada antes de regenerar o publicar los precios. El sitio no declara si los precios incluyen impuestos ni infiere presentaciones no registradas; impuestos aplicables, disponibilidad, presentación, precio final y entrega se confirman al cotizar. El sitio usa las descripciones e imágenes incluidas en el Excel.
+La lista toma los precios actuales mínimos de `Datos/Catálogos/catalogo-siempre-salud-fuente.xlsx` como precios publicados de NEXOR; si ese mínimo corresponde a una variante agotada, muestra el menor precio entre las variantes disponibles. `Herramientas/Catálogos/generar-catalogo-siempre-salud.ps1` aplica actualmente un descuento del 30 % salvo a Littmann. Confirme que esta regla siga aprobada antes de regenerar o publicar los precios. El sitio no declara si los precios incluyen impuestos ni infiere presentaciones no registradas; impuestos aplicables, disponibilidad, presentación, precio final y entrega se confirman al cotizar. El sitio usa las descripciones e imágenes incluidas en el Excel.
 
 ## Vista previa local
 
@@ -42,17 +42,27 @@ python -m http.server 8000
 
 | Ruta | Contenido |
 |---|---|
-| `Ruta_formalizacion_NEXOR_interactiva.html` | Guía desplegable de formalización empresarial, tributaria, comercial y sanitaria; el estado del centro documental se guarda solo en el navegador local |
-| `Ruta_formalizacion_NEXOR.svg` | Infografía resumen enlazada con la guía interactiva |
+| `Guías/ruta-formalizacion.html` | Guía desplegable de formalización empresarial, tributaria, comercial y sanitaria; el estado del centro documental se guarda solo en el navegador local |
+| `Guías/ruta-formalizacion-resumen.svg` | Infografía resumen enlazada con la guía interactiva |
 | `index.html` | Catálogo, lista de cotización, chat guiado, información institucional, marcadores legales, formulario de contacto y detalles de productos |
-| `nexor-premium.css` | Identidad visual, diseño responsive, tarjetas y componentes de la interfaz |
-| `productos_siempresalud_catalogo.js` | Catálogo web generado: productos, descripciones, precios, imágenes, categorías, marcas y variantes |
-| `siempresalud_catalogo_completo.xlsx` | Fuente de los productos, descripciones, precios, imágenes, categorías y variantes |
-| `generar_catalogo_siempresalud.ps1` | Genera el archivo JavaScript del catálogo desde el Excel |
+| `Assets/Css/site.css` | Identidad visual, diseño responsive, tarjetas y componentes de la interfaz |
+| `Assets/Images/fondo-circuitos.svg` | Fondo gráfico del sitio |
+| `Assets/Js/catalogo-productos.js` | Catálogo web generado: productos, descripciones, precios, imágenes, categorías, marcas y variantes |
+| `Datos/Catálogos/catalogo-siempre-salud-fuente.xlsx` | Fuente de los productos, descripciones, precios, imágenes, categorías y variantes |
+| `Herramientas/Catálogos/generar-catalogo-siempre-salud.ps1` | Genera el archivo JavaScript del catálogo desde el Excel |
+| `Análisis/Catálogos/` y `Análisis/Precios/` | Cuadernos y resultados de análisis; el cuaderno de comparación es una referencia histórica |
+| `Documentos/` | Documentos empresariales clasificados por empresa, planeación, legal, catálogo, finanzas y mercado |
+| `Herramientas/Catálogos/` y `Herramientas/Precios/` | Scrapers y calculadora de precios |
+| `Herramientas/Scraping-Temu/` | Instalador del scraper Temu; falta el archivo `scraper_temu.py` requerido para ejecutarlo |
+| `Logs/Catálogo-GMD/` | Registro conservado del scraper GMD |
+| `Respaldos/` | Respaldos locales conservados |
+| `Nexor_comparador_precios/` | Comparador de precios independiente, con su propio entorno, informes y configuración |
+| `Siempresalud_sync/` | Sincronizador independiente del proveedor Siempre Salud |
 
 ## Personalización rápida
 
-- **Productos, descripciones, imágenes, categorías, precios y variantes:** actualice el Excel fuente y ejecute `.\generar_catalogo_siempresalud.ps1` en PowerShell.
+- **Productos, descripciones, imágenes, categorías, precios y variantes:** actualice el Excel fuente y ejecute `.\Herramientas\Catálogos\generar-catalogo-siempre-salud.ps1` desde la raíz en PowerShell.
+- **Guía de formalización:** abra `Guías/ruta-formalizacion.html`; la versión previa se conserva en `Guías/ruta-formalizacion-anterior.html`.
 - **Redes sociales:** agregue la URL oficial de cada perfil en `socialProfileUrls` de `index.html`; el enlace se activará solo si corresponde al dominio de esa red.
 - **WhatsApp:** el número de pedidos está en los enlaces `wa.me/573053252358` de `index.html`.
 - **Teléfono y correo:** la línea de atención y el correo electrónico se mostrarán como disponibles próximamente; mientras tanto, el canal de contacto activo es WhatsApp.

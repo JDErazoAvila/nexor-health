@@ -13,7 +13,7 @@ from .store import SyncStore
 from .worker import SyncService
 
 
-logger = logging.getLogger("nexor.siempresalud_sync")
+logger = logging.getLogger("nexor.Siempresalud_sync")
 DASHBOARD_PATH = Path(__file__).with_name("dashboard.html")
 
 

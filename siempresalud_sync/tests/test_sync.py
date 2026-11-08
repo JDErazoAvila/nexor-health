@@ -5,7 +5,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from siempresalud_sync.store import SyncStore
+from Siempresalud_sync.store import SyncStore
 
 
 def product(price: int = 109900, available: bool = True) -> dict:

@@ -13,7 +13,7 @@ from cryptography.hazmat.primitives import hashes
 from cryptography.hazmat.primitives.asymmetric import ec
 from cryptography.hazmat.primitives.asymmetric.utils import encode_dss_signature
 
-from siempresalud_sync.client import UcpCatalogClient
+from Siempresalud_sync.client import UcpCatalogClient
 
 
 class UcpSignatureTests(unittest.TestCase):

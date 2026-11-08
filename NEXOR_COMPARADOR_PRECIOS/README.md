@@ -21,7 +21,7 @@ py -m pip install -r requirements.txt
 py main.py
 ```
 
-Los informes se guardan en `reports/` y los registros en `logs/`.
+Los informes se guardan en `Reports/`, los registros en `Logs/` y los puntos de control en `Checkpoints/`.
 
 ## Alcance y limitaciones
 

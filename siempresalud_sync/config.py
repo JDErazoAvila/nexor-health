@@ -41,7 +41,7 @@ class Config:
         database_path = Path(
             os.environ.get(
                 "NEXOR_SYNC_DATABASE",
-                str(ROOT / "data" / "siempresalud_sync.sqlite3"),
+                str(ROOT / "Datos" / "siempresalud_sync.sqlite3"),
             )
         ).expanduser()
         signature_agent_url = os.environ.get(

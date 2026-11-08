@@ -2,13 +2,17 @@
 """Extractor de listados públicos de GMD Colombia. Exporta CSV UTF-8 con BOM."""
 import csv, logging, re, sys, time
 from collections import deque
+from pathlib import Path
 from urllib.parse import urljoin, urlparse, parse_qs, urlencode, urlunparse
 from playwright.sync_api import sync_playwright, TimeoutError as PlaywrightTimeoutError
 
 BASE = 'https://www.gmd.com.co/'
 SEED = 'https://www.gmd.com.co/category/todos-los-productos/0ZGVT000000004r4AA?page=1&category=0ZGVT000000004r4AA'
-OUT = 'productos_gmd_catalogo_completo.csv'
-LOG = 'errores_gmd.log'
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
+OUT = PROJECT_ROOT / 'Datos' / 'Catálogos' / 'productos-gmd-catalogo-completo.csv'
+LOG = PROJECT_ROOT / 'Logs' / 'Catálogo-GMD' / 'errores.log'
+OUT.parent.mkdir(parents=True, exist_ok=True)
+LOG.parent.mkdir(parents=True, exist_ok=True)
 PAUSE = 1.2
 TIMEOUT = 45000
 MAX_PAGES = 500

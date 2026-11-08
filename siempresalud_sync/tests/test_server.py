@@ -8,9 +8,9 @@ import urllib.request
 from http.server import ThreadingHTTPServer
 from pathlib import Path
 
-from siempresalud_sync.config import Config
-from siempresalud_sync.server import make_handler
-from siempresalud_sync.store import SyncStore
+from Siempresalud_sync.config import Config
+from Siempresalud_sync.server import make_handler
+from Siempresalud_sync.store import SyncStore
 
 
 class FakeService:

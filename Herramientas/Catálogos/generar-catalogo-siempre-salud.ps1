@@ -2,9 +2,10 @@ $ErrorActionPreference = 'Stop'
 Add-Type -AssemblyName System.IO.Compression
 Add-Type -AssemblyName System.IO.Compression.FileSystem
 
+$repoRoot = (Resolve-Path (Join-Path $PSScriptRoot '..\..')).Path
 $saleDiscount = [decimal]0.30
-$workbookPath = Join-Path $PSScriptRoot 'siempresalud_catalogo_completo.xlsx'
-$outputPath = Join-Path $PSScriptRoot 'productos_siempresalud_catalogo.js'
+$workbookPath = Join-Path $repoRoot 'Datos\Catálogos\catalogo-siempre-salud-fuente.xlsx'
+$outputPath = Join-Path $repoRoot 'Assets\Js\catalogo-productos.js'
 if (-not (Test-Path $workbookPath)) {
   throw "No se encontró el archivo fuente: $workbookPath"
 }
@@ -164,7 +165,7 @@ try {
     url = Find-Column $variantHeaders @('URL') 'URL'
   }
 
-  $taxReviewPath = Join-Path $PSScriptRoot 'reporte_clasificacion_iva_productos_nexor_2026-11-06.xlsx'
+  $taxReviewPath = Join-Path $repoRoot 'Documentos\Catálogo\reporte-iva-productos-2026-11-06.xlsx'
   if (-not (Test-Path $taxReviewPath)) {
     throw "No se encontró el reporte de clasificación tributaria editable: $taxReviewPath"
   }

@@ -48,7 +48,7 @@
   <text class="eyebrow" x="60" y="52">NEXOR  /  MEDICAL SYSTEMS</text>
   <text class="title" x="60" y="99">RUTA PARA FORMALIZAR NEXOR</text>
   <text class="subtitle" x="62" y="130">Decisiones, trámites y verificaciones antes de iniciar operaciones en Colombia</text>
-  <a href="Ruta_formalizacion_NEXOR_interactiva.html"><text class="guide-link" x="860" y="130">ABRIR GUÍA INTERACTIVA →</text></a>
+  <a href="ruta-formalizacion.html"><text class="guide-link" x="860" y="130">ABRIR GUÍA INTERACTIVA →</text></a>
   <path d="M60 153H1140" stroke="#8ceaf1" stroke-opacity=".18"/>
 
   <path class="route" d="M600 330V351" marker-end="url(#arrow)"/>

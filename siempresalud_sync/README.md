@@ -1,6 +1,6 @@
 # Sincronización persistente de Siempre Salud para NEXOR
 
-Este servicio es independiente del navegador. Mantiene una base SQLite para el catálogo **del proveedor**, consulta el catálogo oficial UCP anunciado por `https://siempresalud.co/.well-known/ucp`, guarda el historial y ofrece un panel HTTP protegido. No modifica `productos_siempresalud_catalogo.js`, precios de venta, márgenes ni inventario propio.
+Este servicio es independiente del navegador. Mantiene una base SQLite para el catálogo **del proveedor**, consulta el catálogo oficial UCP anunciado por `https://siempresalud.co/.well-known/ucp`, guarda el historial y ofrece un panel HTTP protegido. No modifica `Assets/Js/catalogo-productos.js`, precios de venta, márgenes ni inventario propio.
 
 ## Fuente y límites verificados
 
@@ -14,7 +14,7 @@ Este servicio es independiente del navegador. Mantiene una base SQLite para el c
 
 ### Evidencia pública inicial
 
-En la colección pública `/collections/littmann` se observó “Kit de repuesto Gris para fonendoscopio Littmann” con precio actual de **$109.900 COP**. El catálogo estático de NEXOR contiene ese producto con referencia `40017` y precio `109900` en [productos_siempresalud_catalogo.js](../productos_siempresalud_catalogo.js). La observación confirma un producto y valor reales, pero representa **paridad**, no un cambio de precio detectado. No se hizo una llamada autenticada UCP ni se creó un run de producción: el perfil/clave privada autorizados no están configurados en este checkout. La primera sincronización real y su historial aparecerán al desplegar el servicio con esa identidad.
+En la colección pública `/collections/littmann` se observó “Kit de repuesto Gris para fonendoscopio Littmann” con precio actual de **$109.900 COP**. El catálogo estático de NEXOR contiene ese producto con referencia `40017` y precio `109900` en [catalogo-productos.js](../Assets/Js/catalogo-productos.js). La observación confirma un producto y valor reales, pero representa **paridad**, no un cambio de precio detectado. No se hizo una llamada autenticada UCP ni se creó un run de producción: el perfil/clave privada autorizados no están configurados en este checkout. La primera sincronización real y su historial aparecerán al desplegar el servicio con esa identidad.
 
 ## Configuración
 
@@ -27,7 +27,7 @@ Use Python 3.11+ y `pip install -r requirements.txt`. Defina estos valores en el
 | `NEXOR_UCP_PRIVATE_KEY_PASSWORD` | No | Contraseña de una clave PEM cifrada. |
 | `NEXOR_UCP_SIGNATURE_AGENT_URL` | No | Por defecto usa el perfil UCP y `type=jwks_uri`. |
 | `NEXOR_SYNC_ADMIN_TOKEN` | Sí | Token aleatorio de al menos 32 caracteres para el panel/API. |
-| `NEXOR_SYNC_DATABASE` | No | SQLite persistente; por defecto `data/siempresalud_sync.sqlite3`. |
+| `NEXOR_SYNC_DATABASE` | No | SQLite persistente; por defecto `Datos/siempresalud_sync.sqlite3`. |
 | `NEXOR_SYNC_HOST` | No | Por defecto `127.0.0.1`; exponga solo detrás de proxy TLS y control de acceso. |
 | `NEXOR_SYNC_PORT` | No | Por defecto `8765`. |
 
@@ -42,7 +42,7 @@ python -m pip install -r requirements.txt
 $env:NEXOR_UCP_PROFILE_URL = "https://<dominio-publico-de-nexor>/.well-known/ucp"
 $env:NEXOR_UCP_PRIVATE_KEY_PATH = "C:\ruta-segura\nexor-ucp-key.pem"
 $env:NEXOR_SYNC_ADMIN_TOKEN = "<token-aleatorio-de-32-o-mas-caracteres>"
-python -m siempresalud_sync
+python -m Siempresalud_sync
 ```
 
 Abra `http://127.0.0.1:8765/` e ingrese el token. El scheduler corre dentro del proceso incluso cuando no hay clientes HTTP conectados. Los intervalos son 6 h (disponibilidad), 12 h (precio de referencia) y 24 h (altas, referencias, descripción e imágenes). Una lectura manual ejecuta los tres ámbitos. Se permiten hasta tres intentos por ventana, se respeta `Retry-After` y solo se reintentan fallos temporales. Si la fuente falla, se conservan los últimos valores guardados.
@@ -65,7 +65,7 @@ Wants=network-online.target
 Type=simple
 WorkingDirectory=/opt/nexor-health
 EnvironmentFile=/etc/nexor/siempresalud-sync.env
-ExecStart=/opt/nexor-venv/bin/python -m siempresalud_sync
+ExecStart=/opt/nexor-venv/bin/python -m Siempresalud_sync
 Restart=always
 RestartSec=10
 User=nexor-sync
@@ -79,7 +79,7 @@ Luego `systemctl enable --now nexor-siempresalud-sync`. Compruebe `systemctl sta
 
 ### Windows Server
 
-Configure las variables como secretos del servicio y cree en Task Scheduler una tarea al iniciar el equipo que ejecute `python.exe -m siempresalud_sync`, con “Restart on failure”, historial habilitado y una cuenta de servicio de privilegios mínimos. Mantenga el proceso activo (no programe una tarea que termine al finalizar una sesión de usuario). Verifique el estado de la tarea, los registros del servicio y `data\siempresalud_sync.sqlite3` tras reiniciar.
+Configure las variables como secretos del servicio y cree en Task Scheduler una tarea al iniciar el equipo que ejecute `python.exe -m Siempresalud_sync`, con “Restart on failure”, historial habilitado y una cuenta de servicio de privilegios mínimos. Mantenga el proceso activo (no programe una tarea que termine al finalizar una sesión de usuario). Verifique el estado de la tarea, los registros del servicio y `Datos\siempresalud_sync.sqlite3` tras reiniciar.
 
 No se puede certificar un reinicio de producción desde este repositorio: debe probarse en el host elegido después de configurar el perfil y la clave autorizados.
 
@@ -91,4 +91,4 @@ No se puede certificar un reinicio de producción desde este repositorio: debe p
 
 ## Validación
 
-`python -m unittest discover -s siempresalud_sync\tests` ejecuta pruebas locales del comparador y las reglas de aislamiento. No realiza llamadas al proveedor. Una prueba end-to-end requiere las credenciales autorizadas y un servidor público de perfil UCP; no se debe reportar una sincronización real hasta completar ese paso y conservar la respuesta/run ID en SQLite.
+`python -m unittest discover -s Siempresalud_sync\Tests` ejecuta pruebas locales del comparador y las reglas de aislamiento. No realiza llamadas al proveedor. Una prueba end-to-end requiere las credenciales autorizadas y un servidor público de perfil UCP; no se debe reportar una sincronización real hasta completar ese paso y conservar la respuesta/run ID en SQLite.

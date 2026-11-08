@@ -3020,7 +3020,7 @@ body.modal-open {
 
 .social-section {
   background-image:
-    url("circuit-background.svg"),
+    url("../Images/fondo-circuitos.svg"),
     radial-gradient(ellipse at 82% 45%, rgba(23, 121, 145, .28), transparent 38%),
     linear-gradient(117deg, #080e14 0%, #0b1720 58%, #0e2029 100%);
   background-position: center;
@@ -3315,7 +3315,7 @@ body.modal-open {
 .process-section,
 .contact-section,
 .legal-section {
-  background-image: url("circuit-background.svg");
+  background-image: url("../Images/fondo-circuitos.svg");
   background-position: center;
   background-size: cover;
 }
@@ -3325,7 +3325,7 @@ body.modal-open {
 .service-card,
 .deliverable-card {
   background-color: #fff;
-  background-image: url("circuit-background.svg");
+  background-image: url("../Images/fondo-circuitos.svg");
   background-position: right center;
   background-repeat: no-repeat;
   background-size: auto 100%;
