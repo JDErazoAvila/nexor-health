@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="es"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Ruta para formalizar NEXOR</title>
+<style>
+:root{--bg:#081428;--card:#0e2246;--card2:#122b58;--tx:#fff;--mu:#a9bbd8;--tq:#19d3c5;--bl:#3b82f6;--ln:#1f3d73;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*{box-sizing:border-box}html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--tx);font:15px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.w{max-width:900px;margin:0 auto;padding:28px 16px 60px}
+h1{font-size:clamp(26px,5vw,38px);margin:0 0 6px}h1 span{color:var(--tq)}
+.sub{color:var(--mu);margin:0 0 18px}
+.bar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:22px}
+.prog{flex:1;min-width:180px;height:8px;background:var(--ln);border-radius:9px;overflow:hidden}.prog i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--bl),var(--tq));transition:.3s}
+button{font:inherit;cursor:pointer;border:1px solid var(--tq);background:transparent;color:var(--tq);padding:8px 14px;border-radius:9px}
+button:hover{background:var(--tq);color:var(--bg)}button.pr{background:linear-gradient(90deg,var(--bl),var(--tq));color:#04122a;border:0;font-weight:700}
+.note{background:var(--card);border-left:4px solid var(--tq);padding:10px 14px;border-radius:8px;color:var(--mu);font-size:13px;margin-bottom:22px}
+.st{position:relative;background:var(--card);border:1px solid var(--ln);border-radius:16px;padding:18px 18px 16px 74px}
+.st+.st{margin-top:46px}
+.st+.st::before{content:"";position:absolute;left:38px;top:-46px;height:46px;border-left:2px dashed var(--tq)}
+.st+.st::after{content:"";position:absolute;left:31px;top:-12px;border:7px solid transparent;border-top:10px solid var(--tq);border-bottom:0}
+.num{position:absolute;left:14px;top:16px;width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,var(--bl),var(--tq));color:#04122a;font-weight:800;display:grid;place-items:center;font-size:18px}
+.st h2{margin:0 0 4px;font-size:18px;letter-spacing:.2px}
+.st p{margin:4px 0;color:var(--mu)}.st p b{color:var(--tx)}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:10px}
+.row label{color:var(--mu);font-size:13px}
+.det{display:none;margin-top:14px;border-top:1px solid var(--ln);padding-top:12px}.st.open .det{display:block}
+.blk{background:var(--card2);border-radius:12px;padding:12px 14px;margin-bottom:10px}
+.blk h3{margin:0 0 6px;font-size:12px;text-transform:uppercase;letter-spacing:1px;color:var(--tq)}
+.blk h4{margin:8px 0 2px;font-size:14px;color:var(--bl);filter:brightness(1.5)}
+.blk ul{margin:2px 0 4px;padding-left:20px}.blk li{margin:1px 0}
+a{color:var(--tq)}
+h2.sec{font-size:24px;margin:50px 0 6px}
+.dc{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:12px}
+.fo{background:var(--card);border:1px solid var(--ln);border-radius:14px;padding:14px;break-inside:avoid}
+.fo h3{margin:0 0 8px;font-size:14px;color:var(--tq)}
+.dr{display:flex;justify-content:space-between;gap:8px;align-items:center;padding:5px 0;border-top:1px solid var(--ln);font-size:13px}
+select{font:inherit;font-size:12px;background:#081428;color:#fff;border:1px solid var(--ln);border-radius:7px;padding:3px 4px}
+select.s1{border-color:#f59e0b;color:#fbbf24}select.s2{border-color:var(--bl);color:#93c5fd}select.s3{border-color:#22c55e;color:#4ade80}select.s4{border-color:#64748b;color:#94a3b8}
+.fu{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}.fu a{border:1px solid var(--ln);background:var(--card);padding:8px 12px;border-radius:9px;text-decoration:none}
+.exp{margin-top:36px;text-align:center;background:var(--card);border:1px solid var(--tq);border-radius:16px;padding:22px}
+.ft{color:var(--mu);font-size:12px;margin-top:24px}
+.ans{margin-top:12px}.ans label{display:block;font-size:12px;color:var(--tq);text-transform:uppercase;letter-spacing:1px;margin-bottom:4px}textarea,.di{width:100%;font:inherit;background:#081428;color:#fff;border:1px solid var(--ln);border-radius:9px;padding:8px 10px}textarea{min-height:72px;resize:vertical;overflow:hidden}.di{font-size:12px;padding:5px 8px}textarea:focus,.di:focus{outline:2px solid var(--tq)}.dr{flex-wrap:wrap}
+@media print{textarea,.di{background:#fff;color:#000;border:1px solid #999;resize:none}}
+@media(max-width:560px){.st{padding:16px 14px}.num{position:static;margin-bottom:8px}.st+.st::before,.st+.st::after{left:50%}.st+.st::after{left:calc(50% - 7px)}}
+@media print{
+:root{--bg:#fff;--card:#f3f7fc;--card2:#e8f0fa;--tx:#0b1b36;--mu:#44556f;--ln:#c7d3e4;--tq:#0b8f87;--bl:#1d4ed8}
+body{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.bar,.row,.exp button,.nop{display:none!important}.det{display:block!important}.st{break-inside:avoid-page}
+select{background:#fff;color:#000!important;appearance:none;border-color:#999!important}
+.num{color:#fff}.fu a{color:#0b1b36}}
+</style></head><body><div class="w">
+<h1>Ruta para formalizar <span>NEXOR</span></h1>
+<p class="sub">NEXOR – MEDICAL SYSTEMS · Comercializadora de equipos, dispositivos e insumos médicos en Colombia (no fabricante)</p>
+<div class="bar"><div class="prog"><i id="pg"></i></div><span id="pt" style="color:var(--mu);font-size:13px"></span>
+<button onclick="tg(1)">Expandir todo</button><button onclick="tg(0)">Contraer todo</button><button class="pr" onclick="window.print()">Exportar a PDF</button></div>
+<div class="note">Guía orientativa, no constituye asesoría legal ni contable. Verifique siempre la vigencia de cada norma y trámite en las fuentes oficiales; los costos, formularios y códigos cambian. Marque cada etapa como revisada a medida que avance.</div>
+<div id="stages"></div>
+<h2 class="sec">CENTRO DOCUMENTAL DE FORMALIZACIÓN NEXOR</h2>
+<p class="sub">Carpetas y documentos que deben conservarse. Asigne un estado a cada uno.</p>
+<div class="dc" id="dc"></div>
+<h2 class="sec">Fuentes oficiales</h2>
+<div class="fu" id="fu"></div>
+<div class="exp"><b>¿Terminó de responder?</b><p style="color:var(--mu)">Genera un PDF con todas las etapas desplegadas y el estado actual de los documentos. En el diálogo de impresión elija «Guardar como PDF».</p><button class="pr" onclick="window.print()">Exportar a PDF</button></div>
+<p class="ft">Elaborado el 8 de noviembre de 2026. Las referencias normativas deben contrastarse con su texto vigente antes de aplicarlas.</p>
+</div>
+<script>
+const L={vue:['Ventanilla Única Empresarial','https://www.vue.gov.co/'],dian:['DIAN','https://www.dian.gov.co/'],invima:['INVIMA','https://www.invima.gov.co/'],sic:['Superintendencia de Industria y Comercio','https://www.sic.gov.co/'],rues:['RUES','https://www.rues.org.co/'],ley:['Ley 1258 de 2008','https://www.secretariasenado.gov.co/senado/basedoc/ley_1258_2008.html']};
+const S=[
+{t:'Acuerdos entre socios y estructura del negocio',o:'Establecer las condiciones bajo las cuales funcionará NEXOR y evitar conflictos entre sus integrantes.',
+a:[['1.1 Participantes','Identificar socios o accionistas y su porcentaje|Definir aportes iniciales (dinero o bienes) y si habrá aportes posteriores|Determinar quién ejercerá la representación legal'],
+['1.2 Organización económica','Cómo se distribuyen utilidades y se asumen pérdidas|Condiciones para reinvertir y reglas de retiro de dinero|Separar recursos personales de empresariales'],
+['1.3 Toma de decisiones','Quién autoriza compras y compromete económicamente a la empresa|Procedimiento para aprobar inversiones|Resolución de desacuerdos e ingreso o retiro de accionistas']],
+d:['Acuerdo entre socios','Documento de distribución de participaciones','Acta de decisiones iniciales','Acuerdo de confidencialidad (si es pertinente)','Estatutos sociales (si se constituye sociedad)'],
+e:'Los propios socios, con apoyo de un abogado si lo consideran necesario.',r:'Condiciones económicas, administrativas y jurídicas claramente definidas.',
+v:['Que los porcentajes y aportes sumen y coincidan con lo que se registrará','Que el acuerdo sea coherente con los estatutos','Que existan reglas para salida de socios y desempate'],
+f:[['Código de Comercio (contrato de sociedad)'],['ley']]},
+{t:'Elección de la figura jurídica',o:'Seleccionar la estructura legal más conveniente para las operaciones comerciales de NEXOR.',
+a:[['A. Persona natural comerciante','No crea una persona jurídica independiente; actúa en nombre propio|Las obligaciones pueden comprometer su patrimonio personal|Constitución y administración más sencillas|Debe cumplir obligaciones tributarias y mercantiles aplicables'],
+['B. Sociedad por Acciones Simplificada (S.A.S.)','Uno o varios accionistas; personalidad jurídica independiente|Responsabilidad limitada, por regla general, a los aportes, con excepciones legales|Admite diversas modalidades de administración|Requiere documento de constitución y estatutos, y cumplir obligaciones societarias'],
+['2.1 Criterios para decidir','Protección patrimonial|Número de participantes y facilidad de administración|Financiación y relación con proveedores|Contratación con clínicas, hospitales e instituciones|Crecimiento, costos de constitución y mantenimiento']],
+d:['Análisis comparativo de las figuras','Acta o documento de decisión'],e:'Socios; consulta opcional a contador o abogado.',
+r:'Decisión documentada sobre la figura jurídica. Ninguna figura es superior en abstracto: depende de las circunstancias reales del negocio.',
+v:['Que la figura elegida sea compatible con los requisitos de clientes institucionales','Que se hayan comparado costos de ambas figuras'],f:[['ley'],['Código de Comercio']]},
+{t:'Nombre, actividades económicas y domicilio',o:'Establecer la identidad comercial y las actividades que desarrollará la empresa.',
+a:[['3.1 Nombre empresarial','Consultar disponibilidad en el RUES y verificar homonimia|Diferenciar razón social de nombre comercial|Consultar la marca ante la SIC|Revisar dominio web y canales digitales|Ojo: la matrícula mercantil NO equivale al registro de marca'],
+['3.2 Actividades CIIU','Evaluar, sin asignar automáticamente: comercio al por mayor de productos farmacéuticos y medicinales (p. ej. 4645), de otra maquinaria y equipo (p. ej. 4659), al por menor de productos médicos y ortopédicos en establecimientos especializados (p. ej. 4773) y comercio electrónico (p. ej. 4791)|Verificar cada código en el catálogo oficial de la DIAN frente a la actividad realmente desarrollada'],
+['3.3 Domicilio','Municipio y departamento del domicilio principal|Dónde funcionará el establecimiento y condiciones de uso del inmueble|Requisitos municipales (uso del suelo, etc.) y establecimientos adicionales']],
+d:['Consulta de homonimia (RUES)','Consulta de marcas (SIC)','Listado de códigos CIIU justificados','Soporte del domicilio (contrato o título)'],
+e:'Cámara de Comercio (RUES), SIC, DIAN y autoridad municipal.',r:'Nombre definido, actividades económicas justificadas y domicilio establecido.',
+v:['Que el código CIIU refleje lo que NEXOR realmente hará (nacional, importación, almacenamiento)','Que el uso del suelo permita la actividad'],f:[['rues'],['sic'],['dian']]},
+{t:'Constitución y registro mercantil',o:'Formalizar jurídicamente la empresa ante las entidades correspondientes.',
+a:[['4.1 Si se elige S.A.S.','Documento privado de constitución (salvo casos que exijan escritura pública, p. ej. aportes de inmuebles)|Estatutos: capital autorizado, suscrito y pagado, domicilio, objeto social, administración y facultades de representación|Identificación de accionistas y representante legal'],
+['4.2 Registro ante Cámara de Comercio','Diligenciar el formulario RUES y presentar los documentos|Inscribir la sociedad y matricular el establecimiento, cuando corresponda|Pagar derechos e impuestos aplicables|Obtener el certificado de existencia y representación legal'],
+['4.3 Documentación posterior','Copia de estatutos y organización de documentos societarios|Identificar libros de comercio que deben llevarse e inscribirse|Revisar obligaciones del Registro Único de Beneficiarios Finales (RUB), cuando aplique']],
+d:['Documento de constitución y estatutos','Documentos de identidad de accionistas y representante','Formulario RUES','Certificado de existencia y representación legal','Libros de comercio'],
+e:'Cámara de Comercio (también vía VUE); DIAN para el RUB.',r:'Empresa constituida y registrada, con documentación legal organizada.',
+v:['Que objeto social y CIIU sean coherentes','Que la matrícula se renueve cada año dentro de los primeros tres meses','Que el certificado indique las facultades del representante'],f:[['ley'],['vue'],['rues'],['dian']]},
+{t:'RUT, NIT y obligaciones tributarias',o:'Configurar la situación tributaria antes de facturar y vender.',
+a:[['5.1 Registro ante la DIAN','Obtener el RUT y verificar el NIT|Revisar actividad económica principal y secundarias|Identificar responsabilidades tributarias y datos del representante; mantener actualizado'],
+['5.2 Tratamiento tributario','Régimen ordinario o Régimen Simple de Tributación, si cumple requisitos y conviene|Responsabilidad frente al IVA y tratamiento por categoría de producto|Retenciones en la fuente, de IVA e ICA cuando correspondan|Renta, información exógena (si hay obligación) e ICA según el municipio'],
+['5.3 Facturación electrónica','Elegir sistema de facturación y habilitarse ante la DIAN|Configurar datos, solicitar numeración e impuestos|Pruebas de emisión; procedimiento de facturas y notas crédito'],
+['5.4 Organización contable','Sistema contable, catálogo de cuentas, terceros y auxiliares de clientes y proveedores|Control de cuentas por cobrar y pagar, inventarios y conciliación bancaria|Definir el marco técnico contable aplicable (Decreto 2420 de 2015 y modificaciones)']],
+d:['RUT','Certificado del NIT','Resolución de numeración de facturación','Soportes de habilitación','Catálogo de cuentas y políticas contables'],
+e:'DIAN; secretaría de hacienda municipal (ICA); contador público.',r:'Empresa identificada tributariamente, con responsabilidades verificadas y sistemas contable y de facturación listos.',
+v:['No asumir que todos los insumos médicos tienen el mismo IVA: clasificar por producto con la norma vigente','Que el Régimen Simple se evalúe frente a los requisitos del Estatuto Tributario','Calendario tributario nacional y municipal'],f:[['dian'],['Estatuto Tributario']]},
+{t:'Organización administrativa, bancaria y comercial',o:'Preparar la infraestructura administrativa para operar formalmente.',
+a:[['6.1 Banca','Evaluar cuenta empresarial; preparar documentos de constitución y representación|Definir responsables, controles de pagos y separar movimientos personales de empresariales'],
+['6.2 Proveedores','Solicitar RUT, certificado de existencia (si es persona jurídica) e identificación|Cotizaciones, listas de precios, facturas de compra y fichas técnicas|Registros o autorizaciones sanitarias, documentos de importación si aplican|Garantías, entregas y devoluciones'],
+['6.3 Clientes','Base de datos comercial y proceso de cotización|Condiciones de pago, entrega y garantía|Atención de solicitudes y reclamaciones'],
+['6.4 Protección de información','Política de tratamiento de datos y aviso de privacidad; autorizaciones cuando correspondan|Protección de bases de datos de clientes y proveedores|Términos y condiciones web; política de cambios, devoluciones y garantías']],
+d:['Certificación o apertura bancaria','Carpeta de proveedores','Formato de cotización','Política de datos personales','Términos y condiciones'],
+e:'Entidad bancaria; socios; SIC (autoridad de datos personales y consumidor).',r:'Infraestructura administrativa y comercial organizada.',
+v:['Que se cumpla la Ley 1581 de 2012 sobre datos personales y, en ventas al consumidor, la Ley 1480 de 2011','Que la información del proveedor esté vigente'],f:[['sic']]},
+{t:'Revisión sanitaria y documental de los productos',o:'Garantizar que cada producto cuente con la documentación y autorizaciones exigibles según su naturaleza. Etapa crítica para NEXOR.',
+a:[['7.1 Matriz por SKU','Código interno, nombre, descripción, fabricante, país de origen, proveedor|Clasificación del producto y de riesgo (dispositivos médicos)|Registro sanitario o permiso de comercialización, titular y vigencia|Ficha técnica, almacenamiento, garantía y vida útil'],
+['7.2 Verificación ante INVIMA (por referencia)','Identificar si es dispositivo médico, su clasificación y si requiere registro o permiso|Comprobar vigencia y que fabricante, titular, importador y producto coincidan|Revisar etiquetado e instrucciones; conservar evidencia de cada consulta'],
+['7.3 Modelo de operación','A. Compra nacional para reventa: verificar al proveedor y cada referencia; NEXOR no necesita las autorizaciones del importador|B. Importación directa: requisitos adicionales de importación, registros o permisos y, según corresponda, capacidad de almacenamiento y acondicionamiento (CCAA)|C. Almacenamiento y distribución: condiciones sanitarias del establecimiento y exigencias de la autoridad territorial de salud|INVIMA señala que quien solo comercializa dispositivos médicos, sin importarlos, no requiere certificación CCAA de esa entidad, sin perjuicio de la vigilancia de las autoridades territoriales. No extender la excepción a importadores'],
+['7.4 Inventarios','Lotes, vencimientos, entradas y salidas, FIFO o FEFO|Almacenamiento, devoluciones, productos no conformes y trazabilidad'],
+['7.5 Posventa y vigilancia','Reclamaciones, garantías, novedades de calidad y devoluciones|Revisar obligaciones de tecnovigilancia cuando apliquen']],
+d:['Matriz de cumplimiento por producto','Registros sanitarios y permisos','Fichas técnicas','Evidencia de consultas INVIMA','Procedimientos de inventario y posventa'],
+e:'INVIMA; secretarías de salud territoriales; proveedor o titular del registro.',r:'Matriz de cumplimiento sanitario por producto, con evidencia documental de las verificaciones.',
+v:['No todos los dispositivos requieren los mismos trámites: depende de clase, riesgo y naturaleza','Marco de referencia: Decreto 4725 de 2005 y normas que lo desarrollan; confirmar vigencia','No tratar equipos, insumos y medicamentos como equivalentes'],f:[['invima'],['Decreto 4725 de 2005']]},
+{t:'Catálogo, precios y canales de venta',o:'Preparar la oferta comercial para su publicación y comercialización.',
+a:[['8.1 Catálogo','Código, nombre, descripción técnica, marca y fabricante|Imagen autorizada, ficha técnica y especificaciones|Precio, disponibilidad, entrega y garantía'],
+['8.2 Precios','Precio de compra, transporte, almacenamiento y costos operativos atribuibles|Impuestos aplicables, margen comercial y precio final|Diferenciar margen sobre ventas de incremento sobre costo: no son equivalentes'],
+['8.3 Canales','Página web, catálogo digital, correo empresarial y canales de atención|Cotización, condiciones de pago, despacho y entrega|Garantía y posventa']],
+d:['Catálogo aprobado','Metodología y lista de precios','Autorización de uso de imágenes','Políticas comerciales publicadas'],
+e:'Socios y área comercial; SIC como autoridad de protección al consumidor.',r:'Catálogo revisado, precios aprobados y canales de venta preparados.',
+v:['Que la información publicitaria sea veraz y verificable','Que no se promocionen productos sin la autorización exigible'],f:[['sic']]},
+{t:'Verificación final y autorización de apertura',o:'Comprobar que NEXOR reúne las condiciones para comenzar a operar.',
+a:[['Legal','Figura definida; empresa registrada; certificado de existencia; estatutos organizados; establecimiento matriculado si aplica'],
+['Tributario','RUT y NIT verificados; responsabilidades identificadas; facturación electrónica habilitada; ICA revisado'],
+['Contable y financiero','Cuenta bancaria; sistema contable y catálogo de cuentas; inventario inicial; control de compras y ventas; conciliación'],
+['Comercial','Proveedores verificados; precios y catálogo aprobados; políticas y canales de atención'],
+['Sanitario','Matriz de productos y clasificación; verificación por referencia; almacenamiento y trazabilidad; requisitos de INVIMA y autoridades territoriales revisados']],
+d:['Lista de verificación firmada','Acta de autorización de apertura'],e:'Representante legal y socios.',
+r:'Decisión documentada de apertura, condicionada al cumplimiento de los requisitos de la empresa y de cada producto.',
+v:['Que los pendientes se registren con responsable y fecha','Que ningún producto sin verificación sanitaria se publique o venda'],f:[['vue'],['dian'],['invima'],['rues']]}];
+const D=[['1. Constitución y documentos societarios','Acuerdo entre socios|Estatutos|Actas|Libro de accionistas'],['2. Cámara de Comercio','Certificado de existencia|Matrícula mercantil|Formulario RUES|Renovación anual'],['3. RUT y documentación DIAN','RUT|Certificado NIT|Firma electrónica|RUB (si aplica)'],['4. Obligaciones tributarias municipales','Registro ICA|Declaraciones ICA|Soportes de uso del suelo'],['5. Documentación bancaria','Certificación bancaria|Firmas autorizadas|Políticas de pago'],['6. Contabilidad y estados financieros','Catálogo de cuentas|Libros contables|Estados financieros|Conciliaciones'],['7. Proveedores y contratos','RUT y certificados del proveedor|Cotizaciones|Contratos y condiciones'],['8. Clientes y contratos comerciales','Base de clientes|Cotizaciones|Contratos y órdenes de compra'],['9. Inventario y fichas técnicas','Inventario inicial|Kardex|Fichas técnicas'],['10. Registros y documentación sanitaria','Matriz de productos|Registros sanitarios|Evidencia de consultas INVIMA'],['11. Facturación electrónica','Habilitación|Resolución de numeración|Facturas y notas crédito'],['12. Protección de datos personales','Política de tratamiento|Aviso de privacidad|Autorizaciones'],['13. Página web y políticas comerciales','Términos y condiciones|Política de devoluciones|Catálogo publicado'],['14. Garantías, devoluciones y posventa','Procedimiento de garantías|Registro de reclamaciones|Registro de devoluciones']];
+const ST=['Pendiente','En proceso','Verificado','No aplica'];
+const ul=s=>'<ul>'+s.split('|').map(x=>`<li>${x}</li>`).join('')+'</ul>';
+const lk=f=>f.map(x=>x.length==1&&L[x[0]]?`<a href="${L[x[0]][1]}" target="_blank" rel="noopener">${L[x[0]][0]}</a>`:`${x[0]}`).join(' · ');
+document.getElementById('stages').innerHTML=S.map((s,i)=>`<section class="st" id="e${i}"><div class="num">${String(i+1).padStart(2,'0')}</div><h2>Etapa ${String(i+1).padStart(2,'0')}. ${s.t}</h2><p><b>Objetivo:</b> ${s.o}</p><p><b>Resultado esperado:</b> ${s.r}</p>
+<div class="row nop"><button onclick="ex(${i})" id="b${i}">Ver información detallada</button><label><input type="checkbox" onchange="pg()" class="ck"> Etapa revisada</label></div>
+<div class="ans"><label for="t${i}">Mis respuestas y notas de esta etapa</label><textarea id="t${i}" placeholder="Escriba aquí sus decisiones, responsables, fechas o pendientes..."></textarea></div>
+<div class="det"><div class="blk"><h3>1. Objetivo de la etapa</h3>${s.o}</div>
+<div class="blk"><h3>2. Actividades</h3>${s.a.map(g=>`<h4>${g[0]}</h4>${ul(g[1])}`).join('')}</div>
+<div class="blk"><h3>3. Documentos necesarios</h3><ul>${s.d.map(x=>`<li>${x}</li>`).join('')}</ul></div>
+<div class="blk"><h3>4. Entidad responsable</h3>${s.e}</div><div class="blk"><h3>5. Resultado esperado</h3>${s.r}</div>
+<div class="blk"><h3>6. Aspectos que deben verificarse</h3><ul>${s.v.map(x=>`<li>${x}</li>`).join('')}</ul></div>
+<div class="blk"><h3>7. Fuente normativa u oficial</h3>${lk(s.f)}</div></div></section>`).join('');
+document.getElementById('dc').innerHTML=D.map(f=>`<div class="fo"><h3>${f[0]}</h3>${f[1].split('|').map(d=>`<div class="dr"><span>${d}</span><select class="s1" onchange="this.className='s'+(this.selectedIndex+1)">${ST.map(x=>`<option>${x}</option>`).join('')}</select><input class="di" placeholder="Nota, responsable o enlace"></div>`).join('')}</div>`).join('');
+document.getElementById('fu').innerHTML=Object.values(L).map(x=>`<a href="${x[1]}" target="_blank" rel="noopener">${x[0]}</a>`).join('');
+function ex(i){const e=document.getElementById('e'+i);e.classList.toggle('open');document.getElementById('b'+i).textContent=e.classList.contains('open')?'Ocultar información detallada':'Ver información detallada'}
+function tg(o){S.forEach((_,i)=>{const e=document.getElementById('e'+i);if(e.classList.contains('open')!=!!o)ex(i)})}
+function pg(){const c=document.querySelectorAll('.ck'),n=[...c].filter(x=>x.checked).length;document.getElementById('pg').style.width=n/c.length*100+'%';document.getElementById('pt').textContent=n+' de '+c.length+' etapas revisadas'}
+const K='nexor-guia-v1',FL=()=>[...document.querySelectorAll('textarea,input.di,select,input.ck')];
+function gr(e){if(e.tagName=='TEXTAREA'){e.style.height='auto';e.style.height=Math.max(72,e.scrollHeight)+'px'}}
+function sv(){try{localStorage.setItem(K,JSON.stringify(FL().map(e=>e.type=='checkbox'?e.checked:e.value)))}catch(x){}}
+try{const v=JSON.parse(localStorage.getItem(K)||'null');if(v)FL().forEach((e,i)=>{if(i in v){if(e.type=='checkbox')e.checked=v[i];else e.value=v[i];if(e.tagName=='SELECT')e.className='s'+(e.selectedIndex+1);gr(e)}})}catch(x){}
+document.addEventListener('input',e=>{gr(e.target);sv()});document.addEventListener('change',sv);
+addEventListener('beforeprint',()=>{document.querySelectorAll('textarea').forEach(gr);document.querySelectorAll('.ans').forEach(a=>a.style.display=a.querySelector('textarea').value.trim()?'':'none');document.querySelectorAll('.di').forEach(a=>a.style.display=a.value.trim()?'':'none')});
+addEventListener('afterprint',()=>document.querySelectorAll('.ans,.di').forEach(a=>a.style.display=''));
+pg();
+</script></body></html>

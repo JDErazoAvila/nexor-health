@@ -1,0 +1,183 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="1960" viewBox="0 0 1200 1960" role="img" aria-labelledby="title description" style="width:100%;height:auto;max-width:1200px;display:block;margin:auto">
+  <title id="title">Ruta ampliada para formalizar NEXOR en Colombia</title>
+  <desc id="description">Guía visual de seis pasos para formalizar NEXOR, comparar persona natural comerciante y sociedad S.A.S., y validar requisitos antes de operar.</desc>
+  <defs>
+    <linearGradient id="background" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#07141d"/>
+      <stop offset="1" stop-color="#102936"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#28cfe0"/>
+      <stop offset="1" stop-color="#83ead8"/>
+    </linearGradient>
+    <pattern id="grid" width="48" height="48" patternUnits="userSpaceOnUse">
+      <path d="M48 0H0V48" fill="none" stroke="#8ceaf1" stroke-opacity=".055" stroke-width="1"/>
+      <circle cx="0" cy="0" r="1.5" fill="#8ceaf1" fill-opacity=".12"/>
+    </pattern>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="130%">
+      <feDropShadow dx="0" dy="8" stdDeviation="9" flood-color="#02080d" flood-opacity=".25"/>
+    </filter>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="9" refY="6" orient="auto">
+      <path d="M1 1 10 6 1 11" fill="none" stroke="#42d8d8" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+    </marker>
+    <style>
+      text { font-family: Manrope, "Segoe UI", Arial, sans-serif; }
+      .eyebrow { fill: #83ead8; font-size: 13px; font-weight: 800; letter-spacing: 3px; }
+      .title { fill: #f5fbfc; font-size: 34px; font-weight: 800; letter-spacing: .5px; }
+      .subtitle { fill: #b4cbd1; font-size: 16px; font-weight: 500; }
+      .card { fill: #10232e; stroke: #8ceaf1; stroke-opacity: .22; stroke-width: 1.5; }
+      .step { fill: url(#accent); }
+      .step-number { fill: #07141d; font-size: 16px; font-weight: 900; text-anchor: middle; }
+      .card-title { fill: #f5fbfc; font-size: 19px; font-weight: 800; letter-spacing: .3px; }
+      .body { fill: #c4d5d9; font-size: 15px; font-weight: 500; }
+      .comparison { fill: #c4d5d9; font-size: 13px; font-weight: 500; }
+      .small { fill: #9fb6bc; font-size: 13px; font-weight: 500; }
+      .compare-head { fill: #83ead8; font-size: 14px; font-weight: 900; letter-spacing: .6px; }
+      .route { fill: none; stroke: #42d8d8; stroke-opacity: .75; stroke-width: 2.5; stroke-dasharray: 5 8; }
+      .panel-title { fill: #f5fbfc; font-size: 21px; font-weight: 900; letter-spacing: .4px; }
+      .gate-title { fill: #f5fbfc; font-size: 20px; font-weight: 900; }
+      .gate-body { fill: #c6d9dc; font-size: 14px; font-weight: 600; }
+      .source { fill: #83ead8; font-size: 13px; font-weight: 700; text-decoration: underline; }
+      .guide-link { fill: #83ead8; font-size: 14px; font-weight: 800; text-decoration: underline; }
+      .footnote { fill: #91aab1; font-size: 12px; font-weight: 500; }
+    </style>
+  </defs>
+
+  <rect width="1200" height="1960" fill="url(#background)"/>
+  <rect width="1200" height="1960" fill="url(#grid)"/>
+  <text class="eyebrow" x="60" y="52">NEXOR  /  MEDICAL SYSTEMS</text>
+  <text class="title" x="60" y="99">RUTA PARA FORMALIZAR NEXOR</text>
+  <text class="subtitle" x="62" y="130">Decisiones, trámites y verificaciones antes de iniciar operaciones en Colombia</text>
+  <a href="Ruta_formalizacion_NEXOR_interactiva.html"><text class="guide-link" x="860" y="130">ABRIR GUÍA INTERACTIVA →</text></a>
+  <path d="M60 153H1140" stroke="#8ceaf1" stroke-opacity=".18"/>
+
+  <path class="route" d="M600 330V351" marker-end="url(#arrow)"/>
+  <path class="route" d="M600 600V616" marker-end="url(#arrow)"/>
+  <path class="route" d="M600 770V791" marker-end="url(#arrow)"/>
+  <path class="route" d="M600 955V976" marker-end="url(#arrow)"/>
+  <path class="route" d="M600 1140V1161" marker-end="url(#arrow)"/>
+
+  <g filter="url(#shadow)">
+    <rect class="card" x="60" y="175" width="1080" height="155" rx="13"/>
+    <rect class="card" x="60" y="355" width="1080" height="245" rx="13"/>
+    <rect class="card" x="60" y="620" width="1080" height="150" rx="13"/>
+    <rect class="card" x="60" y="795" width="1080" height="160" rx="13"/>
+    <rect class="card" x="60" y="980" width="1080" height="160" rx="13"/>
+    <rect class="card" x="60" y="1165" width="1080" height="175" rx="13"/>
+  </g>
+
+  <g>
+    <circle class="step" cx="101" cy="215" r="21"/><text class="step-number" x="101" y="221">01</text>
+    <text class="card-title" x="137" y="222">ACUERDOS ENTRE SOCIOS</text>
+    <text class="body" x="92" y="260">
+      <tspan x="92">Definan porcentaje de participación, aportes y quién será representante legal.</tspan>
+      <tspan x="92" dy="23">Acuerden quién decide y cómo resolver empates, salida de un socio y desacuerdos.</tspan>
+      <tspan x="92" dy="23">Pongan las reglas por escrito; consideren revisión jurídica de estatutos y acuerdo de accionistas.</tspan>
+    </text>
+  </g>
+
+  <g>
+    <circle class="step" cx="101" cy="395" r="21"/><text class="step-number" x="101" y="401">02</text>
+    <text class="card-title" x="137" y="402">ELIJAN LA FIGURA: PERSONA NATURAL O S.A.S.</text>
+    <path d="M600 426V510" stroke="#8ceaf1" stroke-opacity=".2"/>
+    <text class="compare-head" x="92" y="441">PERSONA NATURAL COMERCIANTE</text>
+    <text class="comparison" x="92" y="467">
+      <tspan x="92">• Un titular; no crea persona</tspan>
+      <tspan x="92" dy="16">jurídica aparte.</tspan>
+      <tspan x="92" dy="16">• El inicio puede ser más sencillo.</tspan>
+      <tspan x="92" dy="16">• Responde personalmente por</tspan>
+      <tspan x="92" dy="16">deudas del negocio: puede exponer</tspan>
+      <tspan x="92" dy="16">su patrimonio personal.</tspan>
+      <tspan x="92" dy="16">• Puede convenir para actividad</tspan>
+      <tspan x="92" dy="16">individual de menor complejidad.</tspan>
+    </text>
+    <text class="compare-head" x="625" y="441">SOCIEDAD POR ACCIONES SIMPLIFICADA (S.A.S.)</text>
+    <text class="comparison" x="625" y="467">
+      <tspan x="625">• Admite uno o más accionistas;</tspan>
+      <tspan x="625" dy="16">es persona jurídica al inscribirse.</tspan>
+      <tspan x="625" dy="16">• Permite ordenar acciones, aportes,</tspan>
+      <tspan x="625" dy="16">roles y gobierno entre los socios.</tspan>
+      <tspan x="625" dy="16">• Responsabilidad generalmente</tspan>
+      <tspan x="625" dy="16">hasta los aportes, con excepciones.*</tspan>
+      <tspan x="625" dy="16">• Requiere constitución, registros</tspan>
+      <tspan x="625" dy="16">y administración societaria.</tspan>
+    </text>
+  </g>
+
+  <g>
+    <circle class="step" cx="101" cy="660" r="21"/><text class="step-number" x="101" y="666">03</text>
+    <text class="card-title" x="137" y="667">DEFINAN NOMBRE, ACTIVIDAD Y DOMICILIO</text>
+    <text class="body" x="92" y="705">
+      <tspan x="92">Consulten homonimia en el registro mercantil; el nombre legal no reemplaza el registro de marca.</tspan>
+      <tspan x="92" dy="23">Definan actividad económica (CIIU), domicilio principal, objeto, representante y estructura de administración.</tspan>
+      <tspan x="92" dy="23">La Cámara competente y ciertos trámites locales dependen del municipio elegido.</tspan>
+    </text>
+  </g>
+
+  <g>
+    <circle class="step" cx="101" cy="840" r="21"/><text class="step-number" x="101" y="846">04</text>
+    <text class="card-title" x="137" y="847">CONSTITUYAN Y REGISTREN LA EMPRESA</text>
+    <text class="body" x="92" y="885">
+      <tspan x="92">Si eligen S.A.S., preparen documento de constitución y estatutos con accionistas, capital, domicilio,</tspan>
+      <tspan x="92" dy="23">objeto y administración; radiquen la inscripción ante la Cámara de Comercio del domicilio principal.</tspan>
+      <tspan x="92" dy="23">Consulten costos y documentos vigentes. Inscriban matrícula mercantil y establecimiento cuando corresponda.</tspan>
+    </text>
+  </g>
+
+  <g>
+    <circle class="step" cx="101" cy="1025" r="21"/><text class="step-number" x="101" y="1031">05</text>
+    <text class="card-title" x="137" y="1032">ORDENEN RUT, NIT Y OBLIGACIONES</text>
+    <text class="body" x="92" y="1070">
+      <tspan x="92">Verifiquen inscripción y responsabilidades tributarias ante DIAN; configuren facturación electrónica si aplica.</tspan>
+      <tspan x="92" dy="23">Revisen ICA y otros deberes locales según municipio, actividad y situación real del negocio.</tspan>
+      <tspan x="92" dy="23">Un contador puede validar régimen, IVA por producto, retenciones, calendario y obligaciones concretas.</tspan>
+    </text>
+  </g>
+
+  <g>
+    <circle class="step" cx="101" cy="1210" r="21"/><text class="step-number" x="101" y="1216">06</text>
+    <text class="card-title" x="137" y="1217">HABILITEN OPERACIÓN Y REVISEN CADA PRODUCTO</text>
+    <text class="body" x="92" y="1255">
+      <tspan x="92">Verifiquen proveedor, facturas, origen y soportes; documenten precios, inventario, entrega y servicio al cliente.</tspan>
+      <tspan x="92" dy="23">Por referencia/SKU, confirmen naturaleza, clasificación sanitaria, registro o permiso requerido cuando aplique.</tspan>
+      <tspan x="92" dy="23">Revisen etiquetado, almacenamiento y trazabilidad según producto. No asuman que todo producto requiere lo mismo.</tspan>
+      <tspan x="92" dy="23">Confirmen con INVIMA y asesores antes de ofrecer productos cuya autorización no esté clara.</tspan>
+    </text>
+  </g>
+
+  <g filter="url(#shadow)">
+    <rect x="60" y="1375" width="1080" height="255" rx="14" fill="#0d202a" stroke="#8ceaf1" stroke-opacity=".3"/>
+  </g>
+  <text class="panel-title" x="88" y="1416">ANTES DE ABRIR: LISTA DE CONTROL</text>
+  <path d="M600 1435V1606" stroke="#8ceaf1" stroke-opacity=".18"/>
+  <g class="body">
+    <text x="90" y="1459"><tspan fill="#83ead8">✓</tspan><tspan dx="9">Socios, porcentajes y decisiones acordados.</tspan></text>
+    <text x="90" y="1496"><tspan fill="#83ead8">✓</tspan><tspan dx="9">Figura y documentos constitutivos revisados.</tspan></text>
+    <text x="90" y="1533"><tspan fill="#83ead8">✓</tspan><tspan dx="9">Matrícula y situación tributaria verificadas.</tspan></text>
+    <text x="90" y="1570"><tspan fill="#83ead8">✓</tspan><tspan dx="9">Proveedor y soportes comerciales confirmados.</tspan></text>
+    <text x="625" y="1459"><tspan fill="#83ead8">✓</tspan><tspan dx="9">Revisión sanitaria documentada por referencia.</tspan></text>
+    <text x="625" y="1496"><tspan fill="#83ead8">✓</tspan><tspan dx="9">Precios, IVA, disponibilidad y entrega validados.</tspan></text>
+    <text x="625" y="1533"><tspan fill="#83ead8">✓</tspan><tspan dx="9">Privacidad y condiciones comerciales aprobadas.</tspan></text>
+    <text x="625" y="1570"><tspan fill="#83ead8">✓</tspan><tspan dx="9">Canales de atención y proceso de cotización probados.</tspan></text>
+  </g>
+  <text class="small" x="88" y="1605">No inicien ventas hasta confirmar los requisitos aplicables a la empresa y a cada referencia.</text>
+
+  <g filter="url(#shadow)">
+    <rect x="60" y="1655" width="1080" height="125" rx="14" fill="#10332f" stroke="#54dfbf" stroke-opacity=".65" stroke-width="2"/>
+  </g>
+  <circle cx="112" cy="1717" r="27" fill="#54dfbf" fill-opacity=".16" stroke="#75ebcb" stroke-width="2"/>
+  <path d="m99 1717 9 9 18-21" fill="none" stroke="#83ead8" stroke-linecap="round" stroke-linejoin="round" stroke-width="4"/>
+  <text class="eyebrow" x="157" y="1702">PUERTA DE APERTURA</text>
+  <text class="gate-title" x="157" y="1732">OPERAR CUANDO TODO ESTÉ VALIDADO</text>
+  <text class="gate-body" x="157" y="1758">Empresa y productos habilitados  ·  precios y condiciones confirmados  ·  web y atención listas</text>
+
+  <text class="eyebrow" x="60" y="1818">FUENTES OFICIALES PARA EMPEZAR</text>
+  <a href="https://www.vue.gov.co/" target="_blank" rel="noopener noreferrer"><text class="source" x="60" y="1847">Ventanilla Única Empresarial</text></a>
+  <a href="https://www.funcionpublica.gov.co/eva/gestornormativo/norma.php?i=34130" target="_blank" rel="noopener noreferrer"><text class="source" x="350" y="1847">Ley 1258 de 2008 (S.A.S.)</text></a>
+  <a href="https://www.dian.gov.co/impuestos/RUT/Paginas/Inscripcion-y-actualizacion-RUT.aspx" target="_blank" rel="noopener noreferrer"><text class="source" x="640" y="1847">DIAN: RUT</text></a>
+  <a href="https://www.invima.gov.co/productos-vigilados/dispositivos-medicos" target="_blank" rel="noopener noreferrer"><text class="source" x="790" y="1847">INVIMA: dispositivos médicos</text></a>
+
+  <text class="footnote" x="60" y="1880">Orientación general, no asesoría legal o tributaria. Requisitos, costos y trámites varían según ciudad, figura y producto.</text>
+  <text class="footnote" x="60" y="1902">La responsabilidad limitada de una S.A.S. no es absoluta; revisen excepciones, garantías y obligaciones con profesionales.</text>
+  <text class="footnote" x="1140" y="1930" text-anchor="end">NEXOR  ·  2026</text>
+</svg>

@@ -134,7 +134,7 @@
     .modal-feats li::before { content:"\f00c"; font-family:"Font Awesome 6 Free"; font-weight:900; position:absolute; left:0; top:.1rem; color:var(--green); }
     .modal-actions { display:flex; flex-wrap:wrap; gap:.6rem; margin-top:1.25rem; align-items:center; }
     
-    . { margin-top:.8rem; color:var(--muted); font-size:.75rem; text-align:center; }
+    .modal-note { margin-top:.8rem; color:var(--muted); font-size:.75rem; text-align:center; }
     @media (max-width:520px) { .modal-panel { width:100%; max-height:92vh; top:auto; bottom:0; left:0; right:0; transform:translateY(24px); border-radius:var(--radius) var(--radius) 0 0; } .modal-panel.is-open { transform:translateY(0); } }
     @media (prefers-reduced-motion:reduce) { *,*::before,*::after { scroll-behavior:auto !important; transition-duration:.01ms !important; animation-duration:.01ms !important; animation-iteration-count:1 !important; } }
     @media (max-width:800px) { .nav-toggle { display:grid; place-items:center; } .nav-links { position:absolute; top:70px; left:1.25rem; right:1.25rem; padding:1rem; display:none; flex-direction:column; align-items:stretch; gap:.2rem; border:1px solid rgba(255,255,255,.16); border-radius:14px; background:#080e14; box-shadow:0 16px 30px rgba(0,0,0,.22); } .nav-links.is-open { display:flex; } .nav-links a { padding:.75rem; } .nav-links .nav-cta { text-align:center; margin-top:.3rem; } .hero { min-height:auto; } .hero-grid,.contact-wrap { grid-template-columns:1fr; } .hero-panel { display:none; } .section { padding:4.5rem 0; } .deliverables { grid-template-columns:repeat(2,1fr); } }
@@ -544,21 +544,18 @@
       facebook: 'facebook.com',
       tiktok: 'tiktok.com'
     };
-    let activeSocialProfiles = 0;
     document.querySelectorAll('[data-social-profile]').forEach(link => {
       const network = link.dataset.socialProfile;
       const profileUrl = socialProfileUrls[network];
       const domain = socialDomains[network];
       const status = link.querySelector('[data-social-status]');
-      if (!profileUrl || !domain) {
-        link.hidden = true;
-        return;
-      }
+      if (!profileUrl || !domain) return;
       let parsedUrl;
       try {
         parsedUrl = new URL(profileUrl);
       } catch {
-        link.hidden = true;
+        status.textContent = 'Enlace oficial no válido';
+        console.error('La URL oficial de ' + network + ' no es válida.');
         return;
       }
       if (
@@ -566,7 +563,8 @@
         !(parsedUrl.hostname === domain || parsedUrl.hostname.endsWith('.' + domain)) ||
         parsedUrl.pathname === '/'
       ) {
-        link.hidden = true;
+        status.textContent = 'Enlace oficial no válido';
+        console.error('La URL oficial de ' + network + ' no corresponde a su perfil.');
         return;
       }
       link.href = parsedUrl.href;
@@ -577,9 +575,7 @@
       link.classList.add('is-ready');
       link.setAttribute('aria-label', 'Visitar el perfil oficial de NEXOR en ' + network);
       status.textContent = 'Visitar perfil oficial';
-      activeSocialProfiles += 1;
     });
-    document.querySelector('#redes').hidden = activeSocialProfiles === 0;
     const gmdProducts = gmdCatalogFailed ? [] : window.NEXOR_PRODUCTS;
     document.querySelector('#product-count').textContent = gmdProducts.length;
     document.querySelector('#gmd-error').hidden = !gmdCatalogFailed;

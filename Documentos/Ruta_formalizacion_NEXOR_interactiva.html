@@ -1,0 +1,375 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Guía interactiva de formalización empresarial, tributaria, comercial y sanitaria para NEXOR en Colombia.">
+  <meta name="theme-color" content="#07141d">
+  <title>Ruta interactiva de formalización | NEXOR</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #07141d;
+      --surface: #10232e;
+      --surface-soft: #0c1c25;
+      --ink: #f5fbfc;
+      --body: #c4d5d9;
+      --muted: #91aab1;
+      --line: rgba(140, 234, 241, .2);
+      --cyan: #28cfe0;
+      --mint: #83ead8;
+      --green-bg: #10332f;
+      --radius: 12px;
+      font-family: Manrope, "Segoe UI", Arial, sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      min-width: 320px;
+      margin: 0;
+      background:
+        radial-gradient(ellipse at 82% 0, rgba(20, 128, 150, .2), transparent 34rem),
+        linear-gradient(140deg, #07141d, #10232e);
+      color: var(--ink);
+      line-height: 1.65;
+    }
+
+    a { color: var(--mint); }
+    a:hover { color: #fff; }
+    button, select { font: inherit; }
+    :focus-visible { outline: 3px solid var(--cyan); outline-offset: 3px; }
+
+    .container { width: min(1120px, calc(100% - 40px)); margin-inline: auto; }
+    .topbar { display: flex; justify-content: space-between; align-items: center; gap: 1rem; padding-block: 1.1rem; border-bottom: 1px solid var(--line); }
+    .brand { color: var(--ink); font-size: .78rem; font-weight: 900; letter-spacing: .2em; text-decoration: none; }
+    .topbar a:last-child { font-size: .78rem; font-weight: 800; }
+    .hero { padding: clamp(2.5rem, 7vw, 5rem) 0 2rem; }
+    .eyebrow { color: var(--mint); font-size: .72rem; font-weight: 900; letter-spacing: .19em; text-transform: uppercase; }
+    h1, h2, h3 { line-height: 1.2; }
+    h1 { max-width: 850px; margin: .75rem 0 1rem; font-size: clamp(2rem, 5vw, 3.8rem); letter-spacing: -.045em; }
+    .hero p { max-width: 800px; color: var(--body); font-size: 1.05rem; }
+    .notice { margin-top: 1.25rem; padding: 1rem 1.1rem; border: 1px solid rgba(40, 207, 224, .35); border-left: 4px solid var(--cyan); border-radius: 8px; background: rgba(16, 35, 46, .74); color: var(--body); font-size: .9rem; }
+    .notice strong { color: var(--ink); }
+    .summary-wrap { margin: 1rem auto 3rem; overflow: hidden; border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface-soft); }
+    .summary-wrap img { display: block; width: 100%; height: auto; }
+    .summary-caption { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: .7rem; padding: .8rem 1rem; color: var(--muted); font-size: .78rem; }
+    .summary-caption a { font-weight: 800; }
+
+    .section-heading { display: flex; justify-content: space-between; align-items: end; gap: 1rem; margin: 2rem 0 1rem; }
+    .section-heading h2 { margin: .35rem 0 0; font-size: clamp(1.5rem, 3vw, 2.2rem); }
+    .section-heading p { max-width: 590px; margin: .4rem 0 0; color: var(--muted); font-size: .9rem; }
+    .tool-button, .expand-button {
+      min-height: 42px;
+      padding: .6rem .9rem;
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      background: #102a36;
+      color: var(--ink);
+      cursor: pointer;
+      font-size: .78rem;
+      font-weight: 800;
+    }
+    .tool-button:hover, .expand-button:hover { border-color: var(--cyan); background: #143543; }
+    .expand-controls { display: flex; gap: .5rem; flex-wrap: wrap; }
+
+    .stages { display: grid; gap: .8rem; }
+    .stage {
+      overflow: clip;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: linear-gradient(115deg, rgba(16, 35, 46, .98), rgba(11, 28, 37, .98));
+      box-shadow: 0 12px 30px rgba(0, 0, 0, .13);
+    }
+    .stage summary { display: grid; grid-template-columns: 48px minmax(0, 1fr) auto; align-items: center; gap: 1rem; padding: 1.1rem 1.25rem; cursor: pointer; list-style: none; }
+    .stage summary::-webkit-details-marker { display: none; }
+    .stage summary:hover { background: rgba(40, 207, 224, .045); }
+    .stage-number { display: grid; width: 42px; height: 42px; place-items: center; border-radius: 50%; background: linear-gradient(135deg, var(--cyan), var(--mint)); color: var(--bg); font-size: .82rem; font-weight: 950; }
+    .stage-title { display: block; font-size: 1rem; font-weight: 900; }
+    .stage-objective { display: block; margin-top: .2rem; color: var(--muted); font-size: .8rem; font-weight: 500; }
+    .summary-action { color: var(--mint); font-size: .76rem; font-weight: 900; white-space: nowrap; }
+    .summary-action::after { content: "＋"; margin-left: .5rem; font-size: 1rem; }
+    details[open] .summary-action::after { content: "−"; }
+    details[open] .summary-action .close-label { display: inline; }
+    details[open] .summary-action .open-label { display: none; }
+    details:not([open]) .summary-action .close-label { display: none; }
+    .stage-content { padding: .2rem 1.25rem 1.4rem 5.25rem; border-top: 1px solid rgba(140, 234, 241, .1); }
+    .detail-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .8rem; margin-top: .8rem; }
+    .detail { padding: .85rem .95rem; border: 1px solid rgba(140, 234, 241, .12); border-radius: 8px; background: rgba(3, 15, 22, .3); }
+    .detail h3 { margin: 0 0 .45rem; color: var(--mint); font-size: .76rem; letter-spacing: .075em; text-transform: uppercase; }
+    .detail p, .detail ul, .detail ol { margin: 0; color: var(--body); font-size: .84rem; }
+    .detail ul, .detail ol { padding-left: 1.15rem; }
+    .detail li + li { margin-top: .26rem; }
+    .detail--wide { grid-column: 1 / -1; }
+    .detail .sources { display: flex; flex-wrap: wrap; gap: .5rem 1rem; margin: 0; padding: 0; list-style: none; }
+    .detail .sources li { margin: 0; }
+    .callout { margin-top: .7rem; padding: .65rem .75rem; border-left: 3px solid var(--cyan); background: rgba(40, 207, 224, .07); color: var(--body); font-size: .8rem; }
+    .compare { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .8rem; }
+    .compare article { padding: .85rem; border: 1px solid rgba(140, 234, 241, .14); border-radius: 8px; }
+    .compare h4 { margin: 0 0 .4rem; color: var(--ink); font-size: .86rem; }
+    .compare p { color: var(--body); font-size: .82rem; }
+
+    .document-center { margin: 3.5rem 0 2rem; padding: clamp(1.1rem, 3vw, 2rem); border: 1px solid rgba(83, 223, 191, .45); border-radius: var(--radius); background: linear-gradient(135deg, rgba(16, 51, 47, .62), rgba(16, 35, 46, .96)); }
+    .document-center h2 { margin: .3rem 0; font-size: clamp(1.5rem, 3vw, 2.1rem); }
+    .document-center > p { max-width: 760px; margin: .4rem 0 1rem; color: var(--body); font-size: .88rem; }
+    .progress-row { display: flex; justify-content: space-between; align-items: center; gap: 1rem; margin: 1rem 0; }
+    .progress-copy { color: var(--ink); font-size: .82rem; font-weight: 800; }
+    .progress-track { height: 8px; flex: 1; overflow: hidden; border-radius: 99px; background: rgba(255,255,255,.12); }
+    .progress-value { width: 0; height: 100%; border-radius: inherit; background: linear-gradient(90deg, var(--cyan), var(--mint)); transition: width .25s ease; }
+    .storage-status { min-height: 1.3rem; margin: .35rem 0; color: var(--muted); font-size: .75rem; }
+    .document-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .55rem; margin: 1rem 0 0; padding: 0; list-style: none; }
+    .document-item { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: .75rem; padding: .7rem .8rem; border: 1px solid rgba(140, 234, 241, .14); border-radius: 7px; background: rgba(3, 15, 22, .28); }
+    .document-item label { color: var(--body); font-size: .82rem; font-weight: 700; }
+    .document-item select { max-width: 150px; min-height: 38px; padding: .35rem .5rem; border: 1px solid var(--line); border-radius: 6px; background: #0b1c25; color: var(--ink); font-size: .75rem; }
+    .sources-section { padding: 1.5rem 0 3rem; }
+    .sources-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .7rem; margin-top: .8rem; }
+    .source-card { display: block; padding: .8rem .9rem; border: 1px solid var(--line); border-radius: 8px; background: rgba(16, 35, 46, .7); color: var(--ink); text-decoration: none; }
+    .source-card strong { display: block; color: var(--mint); font-size: .8rem; }
+    .source-card span { display: block; margin-top: .2rem; color: var(--muted); font-size: .72rem; }
+    footer { padding: 1rem 0 2rem; border-top: 1px solid var(--line); color: var(--muted); font-size: .75rem; }
+    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+
+    @media (max-width: 720px) {
+      .stage summary { grid-template-columns: 42px minmax(0, 1fr); gap: .75rem; padding: 1rem; }
+      .summary-action { grid-column: 2; }
+      .stage-content { padding: .2rem 1rem 1rem; }
+      .detail-grid, .compare, .document-list, .sources-grid { grid-template-columns: 1fr; }
+      .section-heading { align-items: flex-start; flex-direction: column; }
+      .document-item { grid-template-columns: minmax(0, 1fr) auto; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <header class="container topbar">
+    <a class="brand" href="#inicio">NEXOR / MEDICAL SYSTEMS</a>
+    <a href="Ruta_formalizacion_NEXOR.svg">Ver infografía resumen</a>
+  </header>
+
+  <main class="container" id="inicio">
+    <section class="hero" aria-labelledby="page-title">
+      <span class="eyebrow">Guía de trabajo · Colombia</span>
+      <h1 id="page-title">Ruta interactiva de formalización</h1>
+      <p>Una guía de decisiones, documentos y verificaciones para constituir y preparar NEXOR como comercializadora de productos médicos adquiridos inicialmente a proveedores nacionales.</p>
+      <div class="notice"><strong>Cómo usarla:</strong> revisen el resumen, desplieguen cada etapa y asignen responsables. Los requisitos dependen de la figura jurídica, el municipio y la naturaleza de cada producto; validen los casos concretos con las entidades y asesores correspondientes.</div>
+    </section>
+
+    <figure class="summary-wrap">
+      <img src="Ruta_formalizacion_NEXOR.svg" alt="Infografía resumen de la ruta para formalizar NEXOR en Colombia">
+      <figcaption class="summary-caption"><span>Resumen ejecutivo de la ruta.</span><a href="Ruta_formalizacion_NEXOR.svg">Abrir infografía completa</a></figcaption>
+    </figure>
+
+    <section aria-labelledby="stages-title">
+      <div class="section-heading">
+        <div>
+          <span class="eyebrow">Del acuerdo a la apertura</span>
+          <h2 id="stages-title">Etapas de formalización</h2>
+          <p>Abra una etapa para consultar su objetivo, tareas, documentos, responsables, resultado, verificaciones y referencias.</p>
+        </div>
+        <div class="expand-controls">
+          <button class="tool-button" id="expand-all" type="button">Desplegar todas</button>
+          <button class="tool-button" id="collapse-all" type="button">Cerrar todas</button>
+        </div>
+      </div>
+
+      <div class="stages">
+        <details class="stage">
+          <summary><span class="stage-number">01</span><span><span class="stage-title">Acuerdos entre socios y estructura del negocio</span><span class="stage-objective">Acordar cómo se participa, se aporta, se decide y se administra.</span></span><span class="summary-action"><span class="open-label">Ver información detallada</span><span class="close-label">Cerrar detalle</span></span></summary>
+          <div class="stage-content"><div class="detail-grid">
+            <section class="detail"><h3>Objetivo</h3><p>Definir las reglas económicas, administrativas y de gobierno de NEXOR antes de constituirla, para reducir ambigüedades y prevenir conflictos entre socios.</p></section>
+            <section class="detail"><h3>Actividades</h3><ul><li>Identificar a los socios y fijar porcentajes de participación y aportes iniciales, en dinero o bienes.</li><li>Acordar si habrá aportes futuros, cómo se autorizan y cómo se documentan.</li><li>Definir distribución de utilidades, tratamiento de pérdidas, reinversión y retiros.</li><li>Separar el dinero de la empresa de los recursos personales.</li><li>Establecer quién puede aprobar compras, inversiones, pagos, contratos y obligaciones.</li><li>Definir representante legal, facultades, mecanismos de votación, desempate, ingreso y salida de socios.</li></ul></section>
+            <section class="detail"><h3>Documentos a preparar</h3><ul><li>Acuerdo entre socios o de accionistas y cuadro de participaciones.</li><li>Acta o registro de decisiones iniciales y aportes acordados.</li><li>Estatutos, si se constituye una sociedad.</li><li>Acuerdo de confidencialidad, si el intercambio de información lo justifica.</li></ul><div class="callout">Un acuerdo de socios no sustituye los estatutos ni los registros que exige la ley. Definan con asesoría qué debe constar en cada documento.</div></section>
+            <section class="detail"><h3>Responsables y resultado</h3><p><strong>Responsables:</strong> socios fundadores; abogado o asesor societario para revisar documentos, si lo requieren. <strong>Resultado:</strong> reglas de participación y gobierno acordadas por escrito, con responsables y límites de autorización claros.</p></section>
+            <section class="detail detail--wide"><h3>Verificaciones y fuentes</h3><p>Confirmen identidad, capacidad para contratar, origen y valoración de aportes, tratamiento de empates, salida y solución de controversias. No firmen reglas que no reflejen el acuerdo real.</p><ul class="sources"><li><a href="https://www.funcionpublica.gov.co/eva/gestornormativo/norma.php?i=34130" target="_blank" rel="noopener noreferrer">Ley 1258 de 2008 (S.A.S.)</a></li><li><a href="https://www.vue.gov.co/" target="_blank" rel="noopener noreferrer">Ventanilla Única Empresarial</a></li></ul></section>
+          </div></div>
+        </details>
+
+        <details class="stage">
+          <summary><span class="stage-number">02</span><span><span class="stage-title">Elección de la figura jurídica</span><span class="stage-objective">Comparar persona natural comerciante y sociedad S.A.S. según la realidad del negocio.</span></span><span class="summary-action"><span class="open-label">Ver información detallada</span><span class="close-label">Cerrar detalle</span></span></summary>
+          <div class="stage-content"><div class="detail-grid">
+            <section class="detail detail--wide"><h3>Objetivo y comparación</h3><div class="compare">
+              <article><h4>Persona natural comerciante</h4><p>Una persona ejerce el comercio en nombre propio; no nace una persona jurídica separada. El registro y administración pueden ser más simples, pero las obligaciones del negocio pueden comprometer directamente su patrimonio personal. No crea una estructura accionaria para varios socios.</p></article>
+              <article><h4>Sociedad por acciones simplificada (S.A.S.)</h4><p>Puede constituirse por una o varias personas y, una vez inscrita, es persona jurídica distinta. Permite organizar acciones, aportes, administración y reglas entre accionistas. La responsabilidad se limita, como regla general, a los aportes, con excepciones legales; requiere constitución, registros y cumplimiento de deberes societarios.</p></article>
+            </div><div class="callout">La S.A.S. no es automáticamente mejor ni garantiza menos impuestos o ausencia de responsabilidad. La elección depende del número de participantes, riesgo patrimonial, clientes, financiación, costos y capacidad para mantener las obligaciones de la estructura.</div></section>
+            <section class="detail"><h3>Criterios para decidir</h3><ul><li>¿Habrá uno o varios propietarios?</li><li>¿Qué nivel de separación patrimonial se busca y qué garantías pueden exigir terceros?</li><li>¿Cómo se tomarán decisiones y entrarán nuevos inversionistas?</li><li>¿Qué piden proveedores, clínicas, hospitales o clientes institucionales?</li><li>¿Cuáles son los costos de creación y administración recurrente?</li><li>¿Qué obligaciones tributarias corresponden? No se definen solo por elegir S.A.S. o persona natural.</li></ul></section>
+            <section class="detail"><h3>Documentos y responsables</h3><p>Preparar una comparación escrita, presupuesto de costos y decisión de socios. Consultar a Cámara de Comercio, contador y asesor jurídico según el caso. <strong>Resultado:</strong> figura elegida y decisión documentada antes de preparar formularios o estatutos.</p></section>
+            <section class="detail detail--wide"><h3>Verificaciones y fuentes</h3><p>Revisen los artículos vigentes de la Ley 1258, incluidas las excepciones a la limitación de responsabilidad. No confundan personalidad jurídica con inmunidad frente a garantías personales, fraude o responsabilidades legales.</p><ul class="sources"><li><a href="https://www.funcionpublica.gov.co/eva/gestornormativo/norma.php?i=34130" target="_blank" rel="noopener noreferrer">Ley 1258 de 2008</a></li><li><a href="https://www.vue.gov.co/" target="_blank" rel="noopener noreferrer">VUE: guía empresarial</a></li></ul></section>
+          </div></div>
+        </details>
+
+        <details class="stage">
+          <summary><span class="stage-number">03</span><span><span class="stage-title">Nombre, actividades económicas y domicilio</span><span class="stage-objective">Definir correctamente la identidad, las actividades reales y el lugar de operación.</span></span><span class="summary-action"><span class="open-label">Ver información detallada</span><span class="close-label">Cerrar detalle</span></span></summary>
+          <div class="stage-content"><div class="detail-grid">
+            <section class="detail"><h3>Actividades</h3><ul><li>Consultar en RUES la homonimia del nombre societario o del establecimiento.</li><li>Distinguir razón social, nombre comercial y marca; consultar esta última por separado ante la SIC.</li><li>Comprobar el dominio y los nombres de usuario digitales, sin asumir que ello protege una marca.</li><li>Identificar códigos CIIU conforme a las operaciones reales: venta mayorista/minorista, equipos, productos médicos o comercio electrónico, si corresponden.</li><li>Definir municipio, departamento, domicilio y establecimientos; revisar uso del inmueble y trámites locales.</li></ul></section>
+            <section class="detail"><h3>Documentos y resultado</h3><p>Preparar opciones de nombre, descripción de actividades, dirección y soporte del domicilio. <strong>Resultado:</strong> nombre sujeto a disponibilidad, actividades justificadas y domicilio definidos para los registros.</p></section>
+            <section class="detail"><h3>Responsables</h3><p>Socios fundadores; Cámara de Comercio para consultas y matrícula; DIAN para referencias CIIU y obligaciones; SIC para consulta de marcas; autoridad local para requisitos territoriales aplicables.</p></section>
+            <section class="detail"><h3>Aspectos por verificar</h3><p>No asigne CIIU solo por el nombre del producto ni copie códigos sin validar la actividad efectiva en el catálogo oficial vigente. La matrícula mercantil no registra una marca. La disponibilidad de una marca requiere una búsqueda independiente.</p></section>
+            <section class="detail detail--wide"><h3>Fuentes oficiales</h3><ul class="sources"><li><a href="https://www.rues.org.co/" target="_blank" rel="noopener noreferrer">RUES</a></li><li><a href="https://www.dian.gov.co/" target="_blank" rel="noopener noreferrer">DIAN</a></li><li><a href="https://www.sic.gov.co/" target="_blank" rel="noopener noreferrer">Superintendencia de Industria y Comercio</a></li><li><a href="https://www.vue.gov.co/" target="_blank" rel="noopener noreferrer">Ventanilla Única Empresarial</a></li></ul></section>
+          </div></div>
+        </details>
+
+        <details class="stage">
+          <summary><span class="stage-number">04</span><span><span class="stage-title">Constitución y registro mercantil</span><span class="stage-objective">Formalizar la empresa y organizar sus soportes societarios y registrales.</span></span><span class="summary-action"><span class="open-label">Ver información detallada</span><span class="close-label">Cerrar detalle</span></span></summary>
+          <div class="stage-content"><div class="detail-grid">
+            <section class="detail"><h3>Si se elige S.A.S.</h3><ul><li>Preparar documento privado de constitución, salvo casos en que la ley exija otra formalidad.</li><li>Incluir accionistas, nombre, domicilio, duración, objeto, capital autorizado/suscrito/pagado, administración y facultades de representación.</li><li>Revisar coherencia de estatutos, nombramientos, firmas y aceptaciones antes de radicar.</li></ul></section>
+            <section class="detail"><h3>Registro y documentación posterior</h3><ul><li>Diligenciar RUES y presentar los documentos a la Cámara competente.</li><li>Revisar costos, derechos e impuestos aplicables y subsanar observaciones.</li><li>Matricular el establecimiento cuando corresponda y obtener certificado de existencia y representación.</li><li>Conservar estatutos, certificado, formularios y constancias; revisar cuáles libros deben llevarse o inscribirse para la estructura elegida.</li><li>Verificar obligación, plazo y procedimiento del RUB ante DIAN; no asumir que todos los escenarios son iguales.</li></ul></section>
+            <section class="detail"><h3>Documentos y responsables</h3><p>Identificaciones, documento constitutivo, estatutos, aceptaciones de cargos, formularios RUES y soportes que solicite la Cámara. Responsable: socios/representante legal; entidad de registro: Cámara de Comercio del domicilio principal.</p></section>
+            <section class="detail"><h3>Resultado y verificaciones</h3><p>Empresa registrada y expediente corporativo organizado. Verifiquen que certificado, NIT y datos de representación coincidan; confirmen libros y reportes aplicables con Cámara, DIAN y asesor.</p></section>
+            <section class="detail detail--wide"><h3>Fuentes oficiales</h3><ul class="sources"><li><a href="https://www.rues.org.co/" target="_blank" rel="noopener noreferrer">RUES</a></li><li><a href="https://www.vue.gov.co/" target="_blank" rel="noopener noreferrer">VUE</a></li><li><a href="https://www.funcionpublica.gov.co/eva/gestornormativo/norma.php?i=34130" target="_blank" rel="noopener noreferrer">Ley 1258 de 2008</a></li><li><a href="https://www.dian.gov.co/" target="_blank" rel="noopener noreferrer">DIAN: RUB y trámites</a></li></ul></section>
+          </div></div>
+        </details>
+
+        <details class="stage">
+          <summary><span class="stage-number">05</span><span><span class="stage-title">RUT, NIT y obligaciones tributarias</span><span class="stage-objective">Identificar responsabilidades tributarias y preparar facturación y contabilidad.</span></span><span class="summary-action"><span class="open-label">Ver información detallada</span><span class="close-label">Cerrar detalle</span></span></summary>
+          <div class="stage-content"><div class="detail-grid">
+            <section class="detail"><h3>Registro y análisis tributario</h3><ul><li>Obtener/actualizar el RUT y verificar NIT, actividades, representante y responsabilidades.</li><li>Evaluar régimen ordinario o SIMPLE solo si se cumplen requisitos y resulta conveniente.</li><li>Determinar IVA y tratamiento fiscal por producto; revisar retenciones, renta, información exógena cuando haya obligación e ICA según municipio.</li><li>Mantener datos y responsabilidades actualizados ante DIAN y autoridades locales.</li></ul></section>
+            <section class="detail"><h3>Facturación y contabilidad</h3><ul><li>Confirmar si existe obligación de facturar electrónicamente, escoger sistema y completar habilitación requerida.</li><li>Gestionar numeración/autorización cuando aplique, parametrizar conceptos e impuestos y probar facturas y notas crédito.</li><li>Definir marco técnico contable, catálogo de cuentas, terceros, cuentas por cobrar/pagar, inventario y conciliación bancaria.</li></ul></section>
+            <section class="detail"><h3>Documentos y responsables</h3><p>RUT, certificado mercantil si corresponde, soportes de identidad/representación, clasificación de productos, datos de facturación y política contable. Responsables: representante legal y contador; DIAN y autoridad tributaria municipal según la obligación.</p></section>
+            <section class="detail"><h3>Resultado y controles</h3><p>RUT y responsabilidades verificadas; sistema contable y de facturación preparado. No asignen una tarifa general a todos los dispositivos o insumos: validen clasificación arancelaria/tributaria y norma vigente por referencia con contador.</p></section>
+            <section class="detail detail--wide"><h3>Fuentes oficiales</h3><ul class="sources"><li><a href="https://www.dian.gov.co/" target="_blank" rel="noopener noreferrer">DIAN</a></li><li><a href="https://www.dian.gov.co/impuestos/RUT/Paginas/Inscripcion-y-actualizacion-RUT.aspx" target="_blank" rel="noopener noreferrer">DIAN: RUT</a></li><li><a href="https://www.dian.gov.co/impuestos/factura-electronica/Paginas/inicio.aspx" target="_blank" rel="noopener noreferrer">DIAN: facturación electrónica</a></li><li><a href="https://www.vue.gov.co/" target="_blank" rel="noopener noreferrer">VUE</a></li></ul></section>
+          </div></div>
+        </details>
+
+        <details class="stage">
+          <summary><span class="stage-number">06</span><span><span class="stage-title">Organización administrativa, bancaria y comercial</span><span class="stage-objective">Preparar los recursos, controles, proveedores y condiciones de atención.</span></span><span class="summary-action"><span class="open-label">Ver información detallada</span><span class="close-label">Cerrar detalle</span></span></summary>
+          <div class="stage-content"><div class="detail-grid">
+            <section class="detail"><h3>Actividades</h3><ul><li>Evaluar cuenta bancaria empresarial y definir autorizadores, topes y soportes de pagos.</li><li>Separar operaciones personales de empresariales y mantener conciliaciones.</li><li>Verificar proveedores: identidad, RUT, existencia cuando sea persona jurídica, facturas, cotizaciones, fichas, origen, autorizaciones sanitarias aplicables, garantías, entregas y devoluciones.</li><li>Definir cotización, pagos, entrega, garantías, reclamaciones, servicio y conservación de documentos.</li></ul></section>
+            <section class="detail"><h3>Datos personales y sitio web</h3><ul><li>Mapear qué datos se recogen, para qué, quién accede y cuánto tiempo se conservan.</li><li>Preparar política y aviso de privacidad; implementar autorizaciones y canales de consulta/supresión según aplique.</li><li>Publicar información comercial, precio/condiciones, contacto, garantías y reglas de compra claras.</li><li>Proteger bases de clientes/proveedores y limitar accesos; revisar las obligaciones de registro de bases cuando corresponda.</li></ul></section>
+            <section class="detail"><h3>Documentos y responsables</h3><p>Expediente de proveedor, contratos/órdenes, protocolos de compra/pago, procedimiento comercial, política de tratamiento de datos, aviso de privacidad y políticas del canal de venta. Responsables: dirección, administración y asesoría contable/jurídica.</p></section>
+            <section class="detail"><h3>Resultado y verificaciones</h3><p>Controles administrativos y comerciales documentados. Cuenta bancaria y ciertos controles dependen del banco/operación; no son todos un requisito constitutivo universal. Verifiquen con la SIC las obligaciones de comercio electrónico y datos aplicables.</p></section>
+            <section class="detail detail--wide"><h3>Fuentes oficiales</h3><ul class="sources"><li><a href="https://www.sic.gov.co/" target="_blank" rel="noopener noreferrer">SIC: protección al consumidor y datos</a></li><li><a href="https://www.dian.gov.co/" target="_blank" rel="noopener noreferrer">DIAN</a></li><li><a href="https://www.vue.gov.co/" target="_blank" rel="noopener noreferrer">VUE</a></li></ul></section>
+          </div></div>
+        </details>
+
+        <details class="stage">
+          <summary><span class="stage-number">07</span><span><span class="stage-title">Revisión sanitaria y documental de productos</span><span class="stage-objective">Verificar por referencia qué requisitos aplican al producto y al rol de NEXOR.</span></span><span class="summary-action"><span class="open-label">Ver información detallada</span><span class="close-label">Cerrar detalle</span></span></summary>
+          <div class="stage-content"><div class="detail-grid">
+            <section class="detail"><h3>Matriz por SKU / referencia</h3><p>Registrar código interno, nombre, categoría y finalidad, fabricante, país de origen, proveedor, tipo y riesgo cuando corresponda, registro/permiso y titular si aplica, vigencia, ficha técnica, etiquetado, lote/serie, vencimiento, almacenamiento, garantía y soporte de verificación.</p></section>
+            <section class="detail"><h3>Verificación sanitaria</h3><ul><li>Determinar si es dispositivo médico, IVD, medicamento, cosmético u otra categoría; el nombre comercial por sí solo no basta.</li><li>Confirmar clasificación, registro/permisos exigibles y estado vigente para ese producto.</li><li>Verificar que fabricante, titular, importador, referencia, uso y presentación correspondan a los soportes.</li><li>Revisar etiquetado, instrucciones, almacenamiento/transporte y restricciones de comercialización aplicables.</li><li>Conservar consulta, fecha, fuente y evidencia por referencia.</li></ul></section>
+            <section class="detail"><h3>Distinguir el modelo de operación</h3><ul><li><strong>Compra nacional para reventa:</strong> validar proveedor y situación sanitaria de cada producto; conservar factura, origen y soportes. No asumir que NEXOR hereda el rol del titular/importador.</li><li><strong>Importación directa:</strong> consultar requisitos de importador, autorizaciones, registros y CCAA antes de importar o almacenar; la excepción para comercialización nacional exclusiva no debe extenderse automáticamente.</li><li><strong>Almacenamiento/distribución:</strong> revisar condiciones de instalaciones, almacenamiento, transporte y vigilancia territorial que correspondan a la categoría y operación.</li></ul></section>
+            <section class="detail"><h3>Control y posventa</h3><ul><li>Controlar lotes, series y vencimientos; registrar entradas/salidas y aplicar rotación FEFO/FIFO según producto y política.</li><li>Aislar producto devuelto, deteriorado o no conforme y documentar decisiones.</li><li>Definir recepción de quejas y escalamiento de incidentes; verificar obligaciones de tecnovigilancia asociadas al rol real de NEXOR.</li></ul></section>
+            <section class="detail detail--wide"><h3>Nota específica sobre CCAA y resultado esperado</h3><p>INVIMA indica que establecimientos dedicados exclusivamente a comercializar dispositivos médicos, que no importan y solo almacenan/distribuyen, no requieren la certificación CCAA expedida por INVIMA; sí están sujetos a inspección, vigilancia y control de las autoridades territoriales de salud. La conclusión no debe extrapolarse a importadores, fabricantes, acondicionadores ni a otras categorías de productos. Verifiquen el alcance aplicable antes de operar.</p><p><strong>Resultado:</strong> matriz sanitaria por referencia, con documentos y decisiones trazables; no publicar o vender referencias cuya situación aplicable siga sin confirmar.</p></section>
+            <section class="detail detail--wide"><h3>Fuentes oficiales</h3><ul class="sources"><li><a href="https://www.invima.gov.co/productos-vigilados/dispositivos-medicos" target="_blank" rel="noopener noreferrer">INVIMA: dispositivos médicos</a></li><li><a href="https://www.invima.gov.co/productos-vigilados/dispositivos-medicos/dispositivos-medicos-equipos-biomedicos" target="_blank" rel="noopener noreferrer">INVIMA: registros, CCAA y preguntas frecuentes</a></li><li><a href="https://www.invima.gov.co/productos-vigilados/dispositivos-medicos/programa-nacional-de-tecnovigilancia" target="_blank" rel="noopener noreferrer">INVIMA: tecnovigilancia</a></li><li><a href="https://www.invima.gov.co/" target="_blank" rel="noopener noreferrer">INVIMA</a></li></ul></section>
+          </div></div>
+        </details>
+
+        <details class="stage">
+          <summary><span class="stage-number">08</span><span><span class="stage-title">Catálogo, precios y canales de venta</span><span class="stage-objective">Publicar una oferta coherente con los soportes, costos y condiciones reales.</span></span><span class="summary-action"><span class="open-label">Ver información detallada</span><span class="close-label">Cerrar detalle</span></span></summary>
+          <div class="stage-content"><div class="detail-grid">
+            <section class="detail"><h3>Actividades</h3><ul><li>Verificar nombre, referencia, fabricante, descripción, especificaciones, imágenes autorizadas, disponibilidad, presentación, garantía y entrega.</li><li>Calcular precio con compra, transporte, almacenamiento, costos atribuibles, impuestos aplicables y margen aprobado.</li><li>Distinguir margen sobre venta de recargo sobre costo; documentar la fórmula y quién aprueba cambios.</li><li>Definir canales, cotización, tiempos de respuesta, pagos, despacho, posventa y atención de reclamaciones.</li></ul></section>
+            <section class="detail"><h3>Documentos y responsables</h3><p>Catálogo aprobado, fichas técnicas y soportes de imágenes, hojas de costos, política de precios, stock, condiciones de cotización, entrega, garantías y contacto. Responsables: área comercial/financiera y responsable de catálogo.</p></section>
+            <section class="detail"><h3>Resultado esperado</h3><p>Oferta digital revisada, precios autorizados y canales de venta probados. El cliente debe recibir información clara y consistente antes de aceptar la compra.</p></section>
+            <section class="detail"><h3>Verificaciones</h3><p>Corroboren costo y precio por variante; impuestos, cantidad y presentación por SKU; disponibilidad real y derechos de uso de imágenes. No publiquen IVA uniforme ni inventario, garantía o autorización que no hayan confirmado.</p></section>
+            <section class="detail detail--wide"><h3>Fuentes oficiales</h3><ul class="sources"><li><a href="https://www.sic.gov.co/" target="_blank" rel="noopener noreferrer">SIC: información al consumidor y comercio electrónico</a></li><li><a href="https://www.dian.gov.co/" target="_blank" rel="noopener noreferrer">DIAN: obligaciones tributarias</a></li><li><a href="https://www.invima.gov.co/productos-vigilados/dispositivos-medicos" target="_blank" rel="noopener noreferrer">INVIMA: regulación por categoría</a></li></ul></section>
+          </div></div>
+        </details>
+
+        <details class="stage">
+          <summary><span class="stage-number">09</span><span><span class="stage-title">Verificación final y decisión de apertura</span><span class="stage-objective">Tomar una decisión documentada cuando las obligaciones aplicables estén comprobadas.</span></span><span class="summary-action"><span class="open-label">Ver información detallada</span><span class="close-label">Cerrar detalle</span></span></summary>
+          <div class="stage-content"><div class="detail-grid">
+            <section class="detail"><h3>Lista de control por frente</h3><ul><li><strong>Legal:</strong> figura, registros, certificados y documentos societarios; establecimiento si corresponde.</li><li><strong>Tributario:</strong> RUT/NIT, responsabilidades, facturación cuando exista obligación, ICA y calendario.</li><li><strong>Contable/financiero:</strong> sistema, inventario, compras/ventas, bancos y conciliaciones.</li><li><strong>Comercial:</strong> proveedores, precios, catálogo, condiciones y canales.</li><li><strong>Sanitario:</strong> matriz por SKU, autorizaciones aplicables, almacenamiento, trazabilidad y roles definidos.</li></ul></section>
+            <section class="detail"><h3>Pruebas y decisión</h3><ul><li>Simular una venta desde consulta y cotización hasta factura, despacho y posventa.</li><li>Verificar datos del cliente, impuestos, inventario, pago, comunicación y soportes.</li><li>Registrar pendientes, responsables, evidencia, fecha y decisión de no abrir si hay un bloqueo legal o sanitario aplicable.</li><li>Aprobar formalmente apertura controlada y plan de seguimiento.</li></ul></section>
+            <section class="detail"><h3>Documentos y responsables</h3><p>Lista GO/NO-GO, soportes citados, acta/registro de decisión, responsables y plan de acción. Participan representantes/socios y asesores contables, jurídicos o sanitarios según la verificación.</p></section>
+            <section class="detail"><h3>Resultado esperado</h3><p>Decisión documentada de apertura, condicionada al cumplimiento de los requisitos realmente aplicables a NEXOR y a cada referencia. Los requisitos no aplicables deben justificarse, no simplemente dejarse sin revisar.</p></section>
+            <section class="detail detail--wide"><h3>Fuentes de consulta</h3><ul class="sources"><li><a href="https://www.vue.gov.co/" target="_blank" rel="noopener noreferrer">VUE</a></li><li><a href="https://www.dian.gov.co/" target="_blank" rel="noopener noreferrer">DIAN</a></li><li><a href="https://www.invima.gov.co/" target="_blank" rel="noopener noreferrer">INVIMA</a></li><li><a href="https://www.sic.gov.co/" target="_blank" rel="noopener noreferrer">SIC</a></li><li><a href="https://www.rues.org.co/" target="_blank" rel="noopener noreferrer">RUES</a></li></ul></section>
+          </div></div>
+        </details>
+      </div>
+    </section>
+
+    <section class="document-center" id="centro-documental" aria-labelledby="documents-title">
+      <span class="eyebrow">Seguimiento interno</span>
+      <h2 id="documents-title">Centro documental de formalización NEXOR</h2>
+      <p>Usen este listado como índice del expediente. Seleccionen un estado por carpeta; se guarda localmente en este navegador y no se envía a ninguna entidad.</p>
+      <div class="progress-row"><span class="progress-copy" id="progress-copy" aria-live="polite">0 de 14 carpetas verificadas</span><div class="progress-track" role="progressbar" aria-label="Carpetas documentales verificadas" aria-valuemin="0" aria-valuemax="14" aria-valuenow="0"><div class="progress-value" id="progress-value"></div></div></div>
+      <p class="storage-status" id="storage-status" role="status" aria-live="polite"></p>
+      <ul class="document-list" id="document-list">
+        <li class="document-item"><label for="doc-constitucion">1. Constitución y documentos societarios</label><select id="doc-constitucion" data-document-status><option>Pendiente</option><option>En proceso</option><option>Verificado</option><option>No aplica</option></select></li>
+        <li class="document-item"><label for="doc-camara">2. Cámara de Comercio y RUES</label><select id="doc-camara" data-document-status><option>Pendiente</option><option>En proceso</option><option>Verificado</option><option>No aplica</option></select></li>
+        <li class="document-item"><label for="doc-dian">3. RUT, NIT y documentación DIAN</label><select id="doc-dian" data-document-status><option>Pendiente</option><option>En proceso</option><option>Verificado</option><option>No aplica</option></select></li>
+        <li class="document-item"><label for="doc-municipal">4. Obligaciones tributarias municipales</label><select id="doc-municipal" data-document-status><option>Pendiente</option><option>En proceso</option><option>Verificado</option><option>No aplica</option></select></li>
+        <li class="document-item"><label for="doc-bancaria">5. Documentación bancaria</label><select id="doc-bancaria" data-document-status><option>Pendiente</option><option>En proceso</option><option>Verificado</option><option>No aplica</option></select></li>
+        <li class="document-item"><label for="doc-contabilidad">6. Contabilidad y estados financieros</label><select id="doc-contabilidad" data-document-status><option>Pendiente</option><option>En proceso</option><option>Verificado</option><option>No aplica</option></select></li>
+        <li class="document-item"><label for="doc-proveedores">7. Proveedores y contratos</label><select id="doc-proveedores" data-document-status><option>Pendiente</option><option>En proceso</option><option>Verificado</option><option>No aplica</option></select></li>
+        <li class="document-item"><label for="doc-clientes">8. Clientes y acuerdos comerciales</label><select id="doc-clientes" data-document-status><option>Pendiente</option><option>En proceso</option><option>Verificado</option><option>No aplica</option></select></li>
+        <li class="document-item"><label for="doc-inventario">9. Inventario y fichas técnicas</label><select id="doc-inventario" data-document-status><option>Pendiente</option><option>En proceso</option><option>Verificado</option><option>No aplica</option></select></li>
+        <li class="document-item"><label for="doc-sanitario">10. Registros y documentación sanitaria</label><select id="doc-sanitario" data-document-status><option>Pendiente</option><option>En proceso</option><option>Verificado</option><option>No aplica</option></select></li>
+        <li class="document-item"><label for="doc-facturacion">11. Facturación electrónica</label><select id="doc-facturacion" data-document-status><option>Pendiente</option><option>En proceso</option><option>Verificado</option><option>No aplica</option></select></li>
+        <li class="document-item"><label for="doc-datos">12. Protección de datos personales</label><select id="doc-datos" data-document-status><option>Pendiente</option><option>En proceso</option><option>Verificado</option><option>No aplica</option></select></li>
+        <li class="document-item"><label for="doc-web">13. Página web y políticas comerciales</label><select id="doc-web" data-document-status><option>Pendiente</option><option>En proceso</option><option>Verificado</option><option>No aplica</option></select></li>
+        <li class="document-item"><label for="doc-posventa">14. Garantías, devoluciones y posventa</label><select id="doc-posventa" data-document-status><option>Pendiente</option><option>En proceso</option><option>Verificado</option><option>No aplica</option></select></li>
+      </ul>
+    </section>
+
+    <section class="sources-section" aria-labelledby="sources-title">
+      <span class="eyebrow">Consulta directa</span>
+      <h2 id="sources-title">Fuentes oficiales</h2>
+      <div class="sources-grid">
+        <a class="source-card" href="https://www.vue.gov.co/" target="_blank" rel="noopener noreferrer"><strong>Ventanilla Única Empresarial</strong><span>Orientación y trámites para crear y operar empresa.</span></a>
+        <a class="source-card" href="https://www.dian.gov.co/" target="_blank" rel="noopener noreferrer"><strong>DIAN</strong><span>RUT, obligaciones, facturación y consultas tributarias.</span></a>
+        <a class="source-card" href="https://www.invima.gov.co/" target="_blank" rel="noopener noreferrer"><strong>INVIMA</strong><span>Regulación y consultas por categoría de producto.</span></a>
+        <a class="source-card" href="https://www.sic.gov.co/" target="_blank" rel="noopener noreferrer"><strong>Superintendencia de Industria y Comercio</strong><span>Marcas, consumidor y protección de datos.</span></a>
+        <a class="source-card" href="https://www.rues.org.co/" target="_blank" rel="noopener noreferrer"><strong>RUES</strong><span>Consulta del Registro Único Empresarial y Social.</span></a>
+        <a class="source-card" href="https://www.secretariasenado.gov.co/senado/basedoc/ley_1258_2008.html" target="_blank" rel="noopener noreferrer"><strong>Ley 1258 de 2008</strong><span>Texto legal de la sociedad por acciones simplificada.</span></a>
+      </div>
+    </section>
+  </main>
+
+  <footer><div class="container">Guía de orientación general; no sustituye asesoría jurídica, contable o sanitaria. Confirmen la vigencia normativa, los costos, los trámites y las obligaciones aplicables antes de constituir, importar, comercializar o publicar condiciones.</div></footer>
+
+  <script>
+    const statusSelects = [...document.querySelectorAll('[data-document-status]')];
+    const storageKey = 'nexor-formalization-document-status-v1';
+    const storageStatus = document.querySelector('#storage-status');
+    let persistentStorageAvailable = true;
+
+    const updateProgress = () => {
+      const verified = statusSelects.filter(select => ['Verificado', 'No aplica'].includes(select.value)).length;
+      const progress = document.querySelector('[role="progressbar"]');
+      progress.setAttribute('aria-valuenow', String(verified));
+      document.querySelector('#progress-copy').textContent = verified + ' de ' + statusSelects.length + ' carpetas verificadas o marcadas como no aplicables';
+      document.querySelector('#progress-value').style.width = (verified / statusSelects.length * 100) + '%';
+    };
+
+    try {
+      const savedStatuses = JSON.parse(localStorage.getItem(storageKey) || '{}');
+      if (!savedStatuses || typeof savedStatuses !== 'object' || Array.isArray(savedStatuses)) {
+        throw new TypeError('El estado guardado no tiene el formato esperado.');
+      }
+      statusSelects.forEach(select => {
+        const savedValue = savedStatuses[select.id];
+        if ([...select.options].some(option => option.value === savedValue)) select.value = savedValue;
+      });
+      storageStatus.textContent = 'Los estados se guardan en este navegador. No se cargan ni envían a un servidor.';
+    } catch (error) {
+      persistentStorageAvailable = false;
+      storageStatus.textContent = 'No se pudo leer el estado guardado en este navegador. Los cambios de esta sesión seguirán funcionando, pero podrían no conservarse al cerrar la página.';
+      console.error('No se pudo recuperar el estado del centro documental.', error);
+    }
+
+    statusSelects.forEach(select => {
+      select.addEventListener('change', () => {
+        updateProgress();
+        if (!persistentStorageAvailable) return;
+        try {
+          const savedStatuses = Object.fromEntries(statusSelects.map(item => [item.id, item.value]));
+          localStorage.setItem(storageKey, JSON.stringify(savedStatuses));
+          storageStatus.textContent = 'Estado guardado en este navegador. No se envió a un servidor.';
+        } catch (error) {
+          persistentStorageAvailable = false;
+          storageStatus.textContent = 'No se pudo guardar el cambio. Los estados seguirán visibles durante esta sesión, pero podrían no conservarse al cerrar la página.';
+          console.error('No se pudo guardar el estado del centro documental.', error);
+        }
+      });
+    });
+    updateProgress();
+
+    const stages = [...document.querySelectorAll('.stage')];
+    document.querySelector('#expand-all').addEventListener('click', () => stages.forEach(stage => { stage.open = true; }));
+    document.querySelector('#collapse-all').addEventListener('click', () => stages.forEach(stage => { stage.open = false; }));
+  </script>
+</body>
+</html>

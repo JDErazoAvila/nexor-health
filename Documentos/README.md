@@ -4,7 +4,7 @@ Plataforma web de NEXOR - MEDICAL SYSTEMS, comercializadora colombiana de produc
 
 ## Características
 
-- Catálogo de 253 productos con precios publicados en COP, categorías, marcas, referencias y variantes.
+- Catálogo de 372 productos con precios publicados en COP, categorías, marcas, referencias y variantes.
 - Búsqueda por nombre, referencia, marca, categoría, tipo de producto o variante, con filtros y paginación.
 - Las fichas muestran las descripciones del catálogo, variantes y precios por variante, disponibilidad e imágenes de producto; las fichas permiten recorrer la galería disponible.
 - La lista de cotización conserva productos, variantes y cantidades en el navegador; permite editarlos y preparar un mensaje con nombre, correo, organización y observaciones.
@@ -16,7 +16,8 @@ Plataforma web de NEXOR - MEDICAL SYSTEMS, comercializadora colombiana de produc
 - El formulario prepara una solicitud con organización, producto y cantidad para continuar por WhatsApp.
 - La sección institucional explica el proceso de cotización y aclara que disponibilidad, impuestos aplicables, precio final y condiciones de entrega deben confirmarse en cada solicitud.
 - Los apartados de privacidad, términos comerciales, entrega, garantías y devoluciones son marcadores pendientes de aprobación; no son políticas publicadas.
-- La sección de redes muestra banners para Instagram, Facebook y TikTok; sus enlaces oficiales se configuran en `socialProfileUrls` dentro de `index.html`.
+- La sección de redes mantiene visibles los banners de Instagram, Facebook y TikTok; sus enlaces oficiales se configuran en `socialProfileUrls` dentro de `index.html` y solo se activan al validar cada URL.
+- Guía interactiva de formalización en nueve etapas, con resumen gráfico, fuentes oficiales y centro documental cuyos estados se guardan localmente en el navegador.
 - Diseño responsive: catálogo de cinco columnas en pantallas amplias, cuatro en escritorio, dos en móvil y una en teléfonos estrechos.
 - Diseño responsive con identidad tecnológica en azul profundo y turquesa, usando las tipografías Orbitron y Manrope.
 
@@ -41,6 +42,8 @@ python -m http.server 8000
 
 | Ruta | Contenido |
 |---|---|
+| `Ruta_formalizacion_NEXOR_interactiva.html` | Guía desplegable de formalización empresarial, tributaria, comercial y sanitaria; el estado del centro documental se guarda solo en el navegador local |
+| `Ruta_formalizacion_NEXOR.svg` | Infografía resumen enlazada con la guía interactiva |
 | `index.html` | Catálogo, lista de cotización, chat guiado, información institucional, marcadores legales, formulario de contacto y detalles de productos |
 | `nexor-premium.css` | Identidad visual, diseño responsive, tarjetas y componentes de la interfaz |
 | `productos_siempresalud_catalogo.js` | Catálogo web generado: productos, descripciones, precios, imágenes, categorías, marcas y variantes |
