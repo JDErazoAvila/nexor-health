@@ -179,7 +179,7 @@
     @media (max-width:520px) { .gmd-filters { grid-template-columns:1fr; } }
     @media (max-width:420px) { .gmd-grid { grid-template-columns:1fr; } }
   </style>
-  <link rel="stylesheet" href="Assets/Css/site.css?v=nexor-municipios-1">
+  <link rel="stylesheet" href="Assets/Css/site.css?v=nexor-carrito-2026-11">
 </head>
 <body>
   <a class="skip-link" href="#contenido">Ir al contenido principal</a>
@@ -524,39 +524,60 @@
       <button class="cart-close" id="cart-close" type="button" aria-label="Cerrar carrito"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
     </header>
     <p class="cart-status" id="cart-status" role="status" aria-live="polite"></p>
-    <p class="cart-empty" id="cart-empty">A&uacute;n no has agregado productos.</p>
+    <div class="cart-empty" id="cart-empty">
+      <i class="fa-solid fa-bag-shopping" aria-hidden="true"></i>
+      <h3>Tu carrito est&aacute; vac&iacute;o</h3>
+      <p>Explora nuestro cat&aacute;logo y encuentra lo que necesitas.</p>
+      <a class="button button--secondary" id="cart-explore" href="#productos">Explorar cat&aacute;logo</a>
+    </div>
     <ul class="cart-items" id="cart-items"></ul>
+    <section class="cart-recommendations" id="cart-recommendations" aria-labelledby="cart-recommendations-title" hidden>
+      <h3 id="cart-recommendations-title">Tambi&eacute;n podr&iacute;a interesarte</h3>
+      <div id="cart-recommendation-list"></div>
+    </section>
     <footer class="cart-footer">
       <h3 class="cart-payment-title">Resumen de compra</h3>
-      <div class="cart-subtotal"><span>Productos (impuestos incluidos cuando aplique)</span><strong id="cart-subtotal">$ 0</strong></div>
+      <div class="cart-subtotal"><span>Subtotal de productos</span><strong id="cart-subtotal">$ 0</strong></div>
       <div class="cart-shipping"><span>Env&iacute;o</span><strong>Por cotizar</strong></div>
-      <p class="cart-payment-note">El total final se confirma con el costo de env&iacute;o y la disponibilidad. El pago en l&iacute;nea a&uacute;n no est&aacute; habilitado.</p>
+      <div class="cart-shipping"><span>Total final</span><strong>Por confirmar</strong></div>
+      <p class="cart-payment-note">Precios sujetos a confirmaci&oacute;n. Los impuestos aplicables, la disponibilidad y el env&iacute;o se confirman al cotizar.</p>
       <button class="button button--secondary cart-clear" id="cart-clear" type="button" disabled>Vaciar carrito</button>
-      <button class="button button--primary cart-checkout" id="cart-checkout" type="button" aria-expanded="false" aria-controls="cart-payment-preview">Iniciar compra de demostraci&oacute;n</button>
+      <button class="button button--primary cart-checkout" id="cart-checkout" type="button" aria-expanded="false" aria-controls="cart-payment-preview">Continuar con la cotizaci&oacute;n</button>
       <section class="cart-payment-preview" id="cart-payment-preview" aria-labelledby="cart-preview-title" hidden>
-        <h3 id="cart-preview-title">Compra de demostraci&oacute;n</h3>
-        <p class="cart-demo-notice">Esta es una demostraci&oacute;n. No se crea un pedido ni se realiza ning&uacute;n cobro.</p>
+        <h3 id="cart-preview-title">Datos para tu cotizaci&oacute;n</h3>
+        <p class="cart-demo-notice">Prepararemos una solicitud para revisar en WhatsApp. No se crea un pedido ni se realiza ning&uacute;n cobro.</p>
         <form id="cart-delivery-form">
-          <h4>1. Lugar de entrega</h4>
+          <h4>Contacto y entrega</h4>
+          <label for="cart-name">Nombre completo</label>
+          <input id="cart-name" name="name" type="text" minlength="2" maxlength="80" autocomplete="name" required>
+          <label for="cart-phone">Tel&eacute;fono</label>
+          <input id="cart-phone" name="phone" type="tel" minlength="7" maxlength="25" autocomplete="tel" required>
+          <label for="cart-email">Correo electr&oacute;nico</label>
+          <input id="cart-email" name="email" type="email" maxlength="120" autocomplete="email" required>
+          <label for="cart-address">Direcci&oacute;n de entrega</label>
+          <input id="cart-address" name="address" type="text" minlength="5" maxlength="160" autocomplete="street-address" required>
           <label for="cart-department">Departamento</label>
           <select id="cart-department" name="department" required><option value="">Seleccione un departamento</option></select>
           <label for="cart-city">Ciudad o municipio</label>
           <select id="cart-city" name="city" required disabled><option value="">Seleccione primero un departamento</option></select>
           <p id="cart-location-guidance">La cobertura y el env&iacute;o se confirman al cotizar.</p>
-          <p>Usaremos estos datos solo para mostrar esta demostraci&oacute;n; no se guardan ni se env&iacute;an.</p>
-          <button class="button button--primary" type="submit">Revisar resumen</button>
+          <p>Tus datos no se guardan en el navegador; se incluir&aacute;n en el mensaje que podr&aacute;s revisar antes de enviarlo.</p>
+          <button class="button button--primary" type="submit">Revisar solicitud</button>
         </form>
         <div id="cart-order-preview" hidden>
-          <h4 tabindex="-1" id="cart-order-title">2. Resumen y pago</h4>
+          <h4 tabindex="-1" id="cart-order-title">Resumen de tu solicitud</h4>
           <p>Destino: <strong id="cart-preview-destination"></strong></p>
           <ul id="cart-preview-items"></ul>
           <div class="cart-shipping"><span>Productos</span><strong id="cart-preview-subtotal">$ 0</strong></div>
           <div class="cart-shipping"><span>Env&iacute;o</span><strong>Por cotizar</strong></div>
           <div class="cart-shipping"><span>Total a pagar</span><strong>Por confirmar</strong></div>
           <p>El costo de env&iacute;o, la disponibilidad y el total final se confirmar&aacute;n antes de pagar.</p>
-          <h4>3. Medio de pago</h4>
-          <p>Wompi es la pasarela prevista, pero a&uacute;n no est&aacute; conectada. Los medios disponibles se confirmar&aacute;n al habilitar el servicio.</p>
-          <button class="button button--secondary" type="button" id="cart-edit-destination">Cambiar destino</button>
+          <h4>Entrega y pago</h4>
+          <p>El m&eacute;todo y costo de env&iacute;o est&aacute;n por confirmar. El pago en l&iacute;nea no est&aacute; disponible; Wompi a&uacute;n no est&aacute; conectado.</p>
+          <label for="cart-quote-message">Mensaje para WhatsApp</label>
+          <textarea id="cart-quote-message" rows="8" readonly></textarea>
+          <button class="button button--secondary" type="button" id="cart-edit-destination">Editar datos</button>
+          <a class="button button--primary" id="cart-quote-whatsapp" href="https://wa.me/573053252358" target="_blank" rel="noopener noreferrer">Continuar por WhatsApp</a>
           <button class="button button--primary" type="button" disabled>Pagar (no disponible)</button>
         </div>
       </section>
@@ -666,6 +687,10 @@
     const cartOrderPreview = document.querySelector('#cart-order-preview');
     const cartPreviewDestination = document.querySelector('#cart-preview-destination');
     const cartPreviewItems = document.querySelector('#cart-preview-items');
+    const cartQuoteMessage = document.querySelector('#cart-quote-message');
+    const cartQuoteWhatsApp = document.querySelector('#cart-quote-whatsapp');
+    const cartRecommendations = document.querySelector('#cart-recommendations');
+    const cartRecommendationList = document.querySelector('#cart-recommendation-list');
     const locations = Array.isArray(window.NEXOR_LOCATIONS) ? window.NEXOR_LOCATIONS : null;
     const setupLocationSelects = (department, city, guidance, optional) => {
       if (!locations || !locations.length) {
@@ -699,13 +724,15 @@
     const resetPaymentPreview = () => {
       cartPaymentPreview.hidden = true;
       cartCheckoutButton.setAttribute('aria-expanded', 'false');
-      cartCheckoutButton.textContent = 'Iniciar compra de demostración';
+      cartCheckoutButton.textContent = 'Continuar con la cotización';
       cartDeliveryForm.reset();
       cartDepartment.dispatchEvent(new Event('change'));
       cartCity.setCustomValidity('');
       cartDepartment.setCustomValidity('');
       cartDeliveryForm.hidden = false;
       cartOrderPreview.hidden = true;
+      cartQuoteMessage.value = '';
+      cartQuoteWhatsApp.href = 'https://wa.me/573053252358';
     };
     cartCheckoutButton.addEventListener('click', () => {
       if (!cartPaymentPreview.hidden) {
@@ -714,12 +741,25 @@
       }
       cartPaymentPreview.hidden = false;
       cartCheckoutButton.setAttribute('aria-expanded', 'true');
-      cartCheckoutButton.textContent = 'Cerrar demostración';
-      cartDepartment.focus();
+      cartCheckoutButton.textContent = 'Cerrar cotización';
+      document.querySelector('#cart-name').focus();
     });
     [cartCity, cartDepartment].forEach(input => input.addEventListener('input', () => input.setCustomValidity('')));
+    cartDeliveryForm.querySelectorAll('input').forEach(input => {
+      input.addEventListener('input', () => input.setCustomValidity(''));
+    });
     cartDeliveryForm.addEventListener('submit', event => {
       event.preventDefault();
+      for (const input of cartDeliveryForm.querySelectorAll('input')) {
+        input.value = input.value.trim();
+        input.setCustomValidity(input.value.length < input.minLength
+          ? 'Complete este campo con al menos ' + input.minLength + ' caracteres.'
+          : '');
+      }
+      const phone = document.querySelector('#cart-phone');
+      if (!/^[\d+().\s-]+$/.test(phone.value) || phone.value.replace(/\D/g, '').length < 7) {
+        phone.setCustomValidity('Ingrese un teléfono válido con al menos 7 dígitos.');
+      }
       [cartCity, cartDepartment].forEach(input => {
         input.setCustomValidity(input.value.trim() ? '' : 'Complete este campo.');
       });
@@ -727,12 +767,13 @@
       cartPreviewDestination.textContent = cartCity.selectedOptions[0].textContent + ', ' + cartDepartment.selectedOptions[0].textContent;
       cartDeliveryForm.hidden = true;
       cartOrderPreview.hidden = false;
+      updateCartQuote();
       document.querySelector('#cart-order-title').focus();
     });
     document.querySelector('#cart-edit-destination').addEventListener('click', () => {
       cartOrderPreview.hidden = true;
       cartDeliveryForm.hidden = false;
-      cartDepartment.focus();
+      document.querySelector('#cart-name').focus();
     });
     const cartToast = document.querySelector('#cart-toast');
     const modalVariantSelect = document.querySelector('#modal-variant');
@@ -787,17 +828,17 @@
           hasUnavailableItems = true;
           return { ...line, available: false };
         }
-        if (!variant.available) hasUnavailableItems = true;
+        if (!variant.available || !Number.isFinite(variant.price)) hasUnavailableItems = true;
         return {
           ...line,
           productName: product.name,
           variantName: variant.name,
           sku: variant.sku,
-          unitPrice: Number.isFinite(variant.price) ? variant.price : line.unitPrice,
+          unitPrice: Number.isFinite(variant.price) ? variant.price : 0,
           taxTreatment: product.taxTreatment,
           taxRate: product.taxRate,
           image: product.image || line.image || '',
-          available: variant.available
+          available: variant.available && Number.isFinite(variant.price)
         };
       });
       if (hasUnavailableItems) {
@@ -819,6 +860,28 @@
         cartStatusNotice = 'No se pudo guardar el carrito en este navegador; se conservará mientras esta página permanezca abierta.';
         cartStatus.textContent = cartStatusNotice;
       }
+    };
+    const updateCartQuote = () => {
+      if (cartOrderPreview.hidden) return;
+      const data = new FormData(cartDeliveryForm);
+      const lines = [
+        'Hola, quiero solicitar una cotización a NEXOR - MEDICAL SYSTEMS.',
+        `Nombre: ${data.get('name')}`,
+        `Teléfono: ${data.get('phone')}`,
+        `Correo: ${data.get('email')}`,
+        `Dirección: ${data.get('address')}`,
+        `Destino: ${cartPreviewDestination.textContent}`,
+        '',
+        'Productos:',
+        ...cart.map(line => {
+          const option = getOptionValue(line.variantName);
+          return `${line.quantity} × ${line.productName}${option ? ' · ' + option : ''}${line.sku ? ' · Ref. ' + line.sku : ''} · ${gmdPriceFormatter.format(line.unitPrice)} c/u`;
+        }),
+        `Subtotal de productos: ${cartSubtotal.textContent}`,
+        'Envío, impuestos aplicables, disponibilidad y total final: por confirmar.'
+      ];
+      cartQuoteMessage.value = lines.join('\n');
+      cartQuoteWhatsApp.href = 'https://wa.me/573053252358?text=' + encodeURIComponent(cartQuoteMessage.value);
     };
     const renderCart = () => {
       cartStatus.textContent = cartStatusNotice;
@@ -850,12 +913,15 @@
           availability
         ].filter(Boolean).join(' · ');
         const price = document.createElement('span');
-        price.textContent = gmdPriceFormatter.format(line.unitPrice) + ' c/u';
+        price.textContent = line.available === false ? 'Precio y disponibilidad por confirmar' : gmdPriceFormatter.format(line.unitPrice) + ' c/u';
+        const lineTotal = document.createElement('span');
+        lineTotal.className = 'cart-line-total';
+        lineTotal.textContent = line.available === false ? '' : 'Subtotal: ' + gmdPriceFormatter.format(line.unitPrice * line.quantity);
         const taxNote = document.createElement('span');
         const product = gmdProducts.find(item => item.id === line.productId);
         taxNote.className = 'tax-note';
         taxNote.textContent = getProductTaxNote(product || line, line.unitPrice, line.quantity);
-        details.append(name, variant, price);
+        details.append(name, variant, price, lineTotal);
         if (taxNote.textContent) details.appendChild(taxNote);
         const controls = document.createElement('div');
         controls.className = 'cart-item-controls';
@@ -873,12 +939,31 @@
         remove.dataset.cartRemove = line.key;
         remove.setAttribute('aria-label', 'Quitar ' + line.productName + ' del carrito');
         remove.innerHTML = '<i class="fa-solid fa-trash-can" aria-hidden="true"></i>';
-        controls.append(quantity, remove);
+        const stepper = document.createElement('div');
+        stepper.className = 'cart-stepper';
+        const decrease = document.createElement('button');
+        decrease.type = 'button';
+        decrease.dataset.cartStep = '-1';
+        decrease.dataset.cartKey = line.key;
+        decrease.setAttribute('aria-label', 'Disminuir cantidad de ' + line.productName);
+        decrease.disabled = line.quantity <= 1;
+        decrease.textContent = '−';
+        const increase = document.createElement('button');
+        increase.type = 'button';
+        increase.dataset.cartStep = '1';
+        increase.dataset.cartKey = line.key;
+        increase.setAttribute('aria-label', 'Aumentar cantidad de ' + line.productName);
+        increase.disabled = line.quantity >= 10000;
+        increase.textContent = '+';
+        stepper.append(decrease, quantity, increase);
+        controls.append(stepper, remove);
         item.append(image, details, controls);
         cartList.appendChild(item);
       });
       const total = cart.reduce((sum, line) => sum + line.unitPrice * line.quantity, 0);
-      cartSubtotal.textContent = gmdPriceFormatter.format(total);
+      cartSubtotal.textContent = cart.some(line => line.available === false)
+        ? 'Por confirmar'
+        : gmdPriceFormatter.format(total);
       cartPreviewSubtotal.textContent = cartSubtotal.textContent;
       cartPreviewItems.replaceChildren();
       cart.forEach(line => {
@@ -892,6 +977,27 @@
       cartClearButton.disabled = cart.length === 0;
       cartCheckoutButton.disabled = !cartLocationsAvailable || cart.length === 0 || cart.some(line => line.available === false);
       if (cartCheckoutButton.disabled && !cartPaymentPreview.hidden) resetPaymentPreview();
+      updateCartQuote();
+      const cartProductIds = new Set(cart.map(line => line.productId));
+      const cartCategories = new Set(gmdProducts.filter(product => cartProductIds.has(product.id)).map(product => product.category));
+      const suggestions = cart.length ? gmdProducts.filter(product =>
+        !cartProductIds.has(product.id) && cartCategories.has(product.category) &&
+        product.variants.filter(variant => variant.available && Number.isFinite(variant.price)).length === 1
+      ).slice(0, 3) : [];
+      cartRecommendationList.replaceChildren();
+      suggestions.forEach(product => {
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.className = 'cart-recommendation';
+        button.dataset.recommendationId = product.id;
+        const label = document.createElement('span');
+        label.textContent = product.name;
+        const action = document.createElement('strong');
+        action.textContent = '+ Agregar';
+        button.append(label, action);
+        cartRecommendationList.appendChild(button);
+      });
+      cartRecommendations.hidden = suggestions.length === 0;
     };
     const announceCartChange = message => {
       cartToast.textContent = message;
@@ -945,6 +1051,7 @@
       document.querySelector('#cart-close').focus();
     };
     const closeCart = () => {
+      resetPaymentPreview();
       cartPanel.classList.remove('is-open');
       if (modalPanel.hidden) document.body.classList.remove('modal-open');
       window.setTimeout(() => {
@@ -1473,7 +1580,15 @@
     modalNext.addEventListener('click', () => showSlide(galleryIndex + 1));
     cartOpenButton.addEventListener('click', () => openCart(cartOpenButton));
     document.querySelector('#cart-close').addEventListener('click', closeCart);
+    document.querySelector('#cart-explore').addEventListener('click', closeCart);
     cartOverlay.addEventListener('click', closeCart);
+    cartRecommendationList.addEventListener('click', event => {
+      const button = event.target.closest('[data-recommendation-id]');
+      if (!button) return;
+      const product = gmdProducts.find(item => item.id === button.dataset.recommendationId);
+      const variant = product?.variants.filter(item => item.available && Number.isFinite(item.price));
+      if (variant?.length === 1) addCartLine(product, variant[0], 1);
+    });
     cartClearButton.addEventListener('click', () => {
       cart = [];
       updateCartAvailabilityNotice();
@@ -1498,6 +1613,21 @@
       renderCart();
     });
     cartList.addEventListener('click', event => {
+      const step = event.target.closest('[data-cart-step]');
+      if (step) {
+        const line = cart.find(item => item.key === step.dataset.cartKey);
+        if (!line) return;
+        const nextQuantity = line.quantity + Number(step.dataset.cartStep);
+        if (nextQuantity < 1 || nextQuantity > 10000) return;
+        line.quantity = nextQuantity;
+        saveCart();
+        renderCart();
+        const nextButton = [...cartList.querySelectorAll('[data-cart-step]')].find(button =>
+          button.dataset.cartKey === line.key && button.dataset.cartStep === step.dataset.cartStep && !button.disabled
+        );
+        if (nextButton) nextButton.focus();
+        return;
+      }
       const button = event.target.closest('[data-cart-remove]');
       if (!button) return;
       cart = cart.filter(line => line.key !== button.dataset.cartRemove);
