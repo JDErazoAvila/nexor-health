@@ -4,10 +4,26 @@ Add-Type -AssemblyName System.IO.Compression.FileSystem
 
 $repoRoot = (Resolve-Path (Join-Path $PSScriptRoot '..\..')).Path
 $saleDiscount = [decimal]0.30
-$workbookPath = Join-Path $repoRoot 'Datos\Catálogos\catalogo-siempre-salud-fuente.xlsx'
+$catalogsFolder = 'Cat' + [char]0x00E1 + 'logos'
+$catalogFolder = 'Cat' + [char]0x00E1 + 'logo'
+$workbookPath = Join-Path (Join-Path (Join-Path $repoRoot 'Datos') $catalogsFolder) 'catalogo-siempre-salud-fuente.xlsx'
 $outputPath = Join-Path $repoRoot 'Assets\Js\catalogo-productos.js'
+$editedDescriptionsPath = Join-Path (Join-Path (Join-Path $repoRoot 'Datos') $catalogsFolder) 'descripciones-editadas.json'
 if (-not (Test-Path $workbookPath)) {
   throw "No se encontró el archivo fuente: $workbookPath"
+}
+$editedDescriptions = @{}
+$descriptionGroups = Get-Content -LiteralPath $editedDescriptionsPath -Raw -Encoding UTF8 | ConvertFrom-Json
+foreach ($group in $descriptionGroups) {
+  if ([string]::IsNullOrWhiteSpace($group.description) -or -not $group.ids.Count) {
+    throw 'Grupo de descripciones editadas invalido.'
+  }
+  foreach ($id in $group.ids) {
+    if ([string]::IsNullOrWhiteSpace($id) -or $editedDescriptions.ContainsKey($id)) {
+      throw "Identificador de descripcion editada invalido o duplicado: $id"
+    }
+    $editedDescriptions[$id] = [string]$group.description
+  }
 }
 
 $workbookStream = [System.IO.File]::Open($workbookPath, [System.IO.FileMode]::Open, [System.IO.FileAccess]::Read, [System.IO.FileShare]::ReadWrite)
@@ -165,7 +181,7 @@ try {
     url = Find-Column $variantHeaders @('URL') 'URL'
   }
 
-  $taxReviewPath = Join-Path $repoRoot 'Documentos\Catálogo\reporte-iva-productos-2026-11-06.xlsx'
+  $taxReviewPath = Join-Path (Join-Path (Join-Path $repoRoot 'Documentos') $catalogFolder) 'reporte-iva-productos-2026-11-06.xlsx'
   if (-not (Test-Path $taxReviewPath)) {
     throw "No se encontró el reporte de clasificación tributaria editable: $taxReviewPath"
   }
@@ -268,6 +284,12 @@ try {
   $catalog = [System.Collections.Generic.List[object]]::new()
   foreach ($row in ($productRows | Select-Object -Skip 1)) {
     $productId = [string]$row[$productColumns.fallbackId]
+    $catalogId = if ($row[$productColumns.id]) { [string]$row[$productColumns.id] } else { $productId }
+    $description = [string]$row[$productColumns.description]
+    if ($editedDescriptions.ContainsKey($catalogId)) {
+      $description = $editedDescriptions[$catalogId]
+      $editedDescriptions.Remove($catalogId)
+    }
     $productUrl = [string]$row[$productColumns.url]
     $isLittmann = $isLittmannByProductUrl[$productUrl]
     $categoryPath = @(([string]$row[$productColumns.categories] -split '\s*\|\s*') | Where-Object { $_ })
@@ -301,14 +323,14 @@ try {
       $priceLabel = ''
     }
     $catalog.Add([ordered]@{
-      id = if ($row[$productColumns.id]) { [string]$row[$productColumns.id] } else { $productId }
+      id = $catalogId
       name = [string]$row[$productColumns.name]
       reference = $reference
       category = $category
       categories = $categoryPath
       brand = $brand
       productType = $productType
-      description = [string]$row[$productColumns.description]
+      description = $description
       price = $currentPrice
       priceLabel = $priceLabel
       taxTreatment = $tax.treatment
@@ -325,6 +347,9 @@ try {
     })
   }
 
+  if ($editedDescriptions.Count) {
+    throw "No se encontraron productos para las descripciones editadas: $($editedDescriptions.Keys -join ', ')"
+  }
   $json = ConvertTo-Json -InputObject $catalog.ToArray() -Depth 8 -Compress
   $javascript = "window.NEXOR_PRODUCTS = $json;`n"
   [System.IO.File]::WriteAllText($outputPath, $javascript, [System.Text.UTF8Encoding]::new($false))

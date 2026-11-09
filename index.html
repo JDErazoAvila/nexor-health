@@ -179,7 +179,7 @@
     @media (max-width:520px) { .gmd-filters { grid-template-columns:1fr; } }
     @media (max-width:420px) { .gmd-grid { grid-template-columns:1fr; } }
   </style>
-  <link rel="stylesheet" href="Assets/Css/site.css?v=nexor-site-polish-ux-1">
+  <link rel="stylesheet" href="Assets/Css/site.css?v=nexor-municipios-1">
 </head>
 <body>
   <a class="skip-link" href="#contenido">Ir al contenido principal</a>
@@ -387,6 +387,11 @@
               <div class="field"><label for="quantity">Cantidad solicitada</label><input id="quantity" name="quantity" type="number" placeholder="Ej.: 10" min="1" max="10000" step="1" inputmode="numeric" required><small class="field-hint" id="quantity-guidance" aria-live="polite">La presentaci&oacute;n y unidad de venta se confirman al cotizar.</small></div>
             </div>
             <div class="field"><label for="producto">Producto de inter&eacute;s</label><input id="producto" name="producto" type="text" list="producto-opciones" placeholder="Escriba o seleccione un producto" maxlength="180" required><datalist id="producto-opciones"></datalist></div>
+            <div class="form-grid">
+              <div class="field"><label for="destination-department">Departamento de entrega <span>OPCIONAL</span></label><select id="destination-department" name="destinationDepartment"><option value="">Seleccione un departamento</option></select></div>
+              <div class="field"><label for="destination-city">Municipio de entrega <span>OPCIONAL</span></label><select id="destination-city" name="destinationCity" disabled><option value="">Seleccione primero un departamento</option></select></div>
+            </div>
+            <small class="field-hint" id="destination-guidance">El env&iacute;o y la cobertura se confirman al cotizar.</small>
             <div class="field"><label for="message">Cu&eacute;ntenos un poco m&aacute;s <span>OPCIONAL</span></label><textarea id="message" name="message" placeholder="Indique el color, la talla u otra opci&oacute;n, o comparta detalles adicionales." maxlength="1000"></textarea></div>
             <button class="button button--primary form-submit" type="submit">Continuar por WhatsApp <i class="fa-brands fa-whatsapp" aria-hidden="true"></i></button>
             <p class="form-note">Sus datos se incluir&aacute;n en un mensaje de WhatsApp para que usted lo revise antes de enviarlo. No almacenamos sus datos en este sitio.</p>
@@ -522,14 +527,44 @@
     <p class="cart-empty" id="cart-empty">A&uacute;n no has agregado productos.</p>
     <ul class="cart-items" id="cart-items"></ul>
     <footer class="cart-footer">
-      <div class="cart-subtotal"><span>Total de productos (impuestos incluidos cuando aplique)</span><strong id="cart-subtotal">$ 0</strong></div>
-      <p class="cart-payment-note">El costo de env&iacute;o se confirma en la cotizaci&oacute;n. El pago en l&iacute;nea a&uacute;n no est&aacute; habilitado.</p>
+      <h3 class="cart-payment-title">Resumen de compra</h3>
+      <div class="cart-subtotal"><span>Productos (impuestos incluidos cuando aplique)</span><strong id="cart-subtotal">$ 0</strong></div>
+      <div class="cart-shipping"><span>Env&iacute;o</span><strong>Por cotizar</strong></div>
+      <p class="cart-payment-note">El total final se confirma con el costo de env&iacute;o y la disponibilidad. El pago en l&iacute;nea a&uacute;n no est&aacute; habilitado.</p>
       <button class="button button--secondary cart-clear" id="cart-clear" type="button" disabled>Vaciar carrito</button>
-      <button class="button button--primary cart-checkout" id="cart-checkout" type="button" disabled>Pago en l&iacute;nea no disponible</button>
+      <button class="button button--primary cart-checkout" id="cart-checkout" type="button" aria-expanded="false" aria-controls="cart-payment-preview">Iniciar compra de demostraci&oacute;n</button>
+      <section class="cart-payment-preview" id="cart-payment-preview" aria-labelledby="cart-preview-title" hidden>
+        <h3 id="cart-preview-title">Compra de demostraci&oacute;n</h3>
+        <p class="cart-demo-notice">Esta es una demostraci&oacute;n. No se crea un pedido ni se realiza ning&uacute;n cobro.</p>
+        <form id="cart-delivery-form">
+          <h4>1. Lugar de entrega</h4>
+          <label for="cart-department">Departamento</label>
+          <select id="cart-department" name="department" required><option value="">Seleccione un departamento</option></select>
+          <label for="cart-city">Ciudad o municipio</label>
+          <select id="cart-city" name="city" required disabled><option value="">Seleccione primero un departamento</option></select>
+          <p id="cart-location-guidance">La cobertura y el env&iacute;o se confirman al cotizar.</p>
+          <p>Usaremos estos datos solo para mostrar esta demostraci&oacute;n; no se guardan ni se env&iacute;an.</p>
+          <button class="button button--primary" type="submit">Revisar resumen</button>
+        </form>
+        <div id="cart-order-preview" hidden>
+          <h4 tabindex="-1" id="cart-order-title">2. Resumen y pago</h4>
+          <p>Destino: <strong id="cart-preview-destination"></strong></p>
+          <ul id="cart-preview-items"></ul>
+          <div class="cart-shipping"><span>Productos</span><strong id="cart-preview-subtotal">$ 0</strong></div>
+          <div class="cart-shipping"><span>Env&iacute;o</span><strong>Por cotizar</strong></div>
+          <div class="cart-shipping"><span>Total a pagar</span><strong>Por confirmar</strong></div>
+          <p>El costo de env&iacute;o, la disponibilidad y el total final se confirmar&aacute;n antes de pagar.</p>
+          <h4>3. Medio de pago</h4>
+          <p>Wompi es la pasarela prevista, pero a&uacute;n no est&aacute; conectada. Los medios disponibles se confirmar&aacute;n al habilitar el servicio.</p>
+          <button class="button button--secondary" type="button" id="cart-edit-destination">Cambiar destino</button>
+          <button class="button button--primary" type="button" disabled>Pagar (no disponible)</button>
+        </div>
+      </section>
     </footer>
   </aside>
   <p class="cart-toast" id="cart-toast" role="status" aria-live="polite"></p>
-  <script src="Assets/Js/catalogo-productos.js?v=siempresalud-2026-11-06-iva"></script>
+  <script src="Assets/Js/catalogo-productos.js?v=siempresalud-2026-11-09-descripciones"></script>
+  <script src="Assets/Js/municipios-colombia.js?v=divipola-2024"></script>
   <script>
     const gmdCatalogFailed = !Array.isArray(window.NEXOR_PRODUCTS);
     if (gmdCatalogFailed) console.error('No se pudo cargar el catálogo de productos.');
@@ -623,6 +658,82 @@
     const cartSubtotal = document.querySelector('#cart-subtotal');
     const cartClearButton = document.querySelector('#cart-clear');
     const cartCheckoutButton = document.querySelector('#cart-checkout');
+    const cartPaymentPreview = document.querySelector('#cart-payment-preview');
+    const cartPreviewSubtotal = document.querySelector('#cart-preview-subtotal');
+    const cartDeliveryForm = document.querySelector('#cart-delivery-form');
+    const cartCity = document.querySelector('#cart-city');
+    const cartDepartment = document.querySelector('#cart-department');
+    const cartOrderPreview = document.querySelector('#cart-order-preview');
+    const cartPreviewDestination = document.querySelector('#cart-preview-destination');
+    const cartPreviewItems = document.querySelector('#cart-preview-items');
+    const locations = Array.isArray(window.NEXOR_LOCATIONS) ? window.NEXOR_LOCATIONS : null;
+    const setupLocationSelects = (department, city, guidance, optional) => {
+      if (!locations || !locations.length) {
+        department.disabled = true;
+        city.disabled = true;
+        guidance.textContent = 'No se pudo cargar la lista de destinos. Comuníquese por WhatsApp para consultar el envío.';
+        guidance.setAttribute('role', 'alert');
+        console.error('No se pudo cargar la lista DIVIPOLA de destinos.');
+        return false;
+      }
+      const sorted = [...locations].sort((a, b) => a.name.localeCompare(b.name, 'es'));
+      sorted.forEach(item => department.add(new Option(item.name, item.code)));
+      const updateCities = () => {
+        const selected = locations.find(item => item.code === department.value);
+        city.replaceChildren(new Option(selected ? 'Seleccione un municipio' : 'Seleccione primero un departamento', ''));
+        city.disabled = !selected;
+        city.required = optional ? Boolean(selected) : true;
+        if (selected) {
+          [...selected.municipalities].sort((a, b) => a.name.localeCompare(b.name, 'es'))
+            .forEach(item => city.add(new Option(item.name, item.code)));
+        }
+      };
+      department.addEventListener('change', updateCities);
+      updateCities();
+      return true;
+    };
+    const cartLocationsAvailable = setupLocationSelects(cartDepartment, cartCity, document.querySelector('#cart-location-guidance'), false);
+    const contactDepartment = document.querySelector('#destination-department');
+    const contactCity = document.querySelector('#destination-city');
+    setupLocationSelects(contactDepartment, contactCity, document.querySelector('#destination-guidance'), true);
+    const resetPaymentPreview = () => {
+      cartPaymentPreview.hidden = true;
+      cartCheckoutButton.setAttribute('aria-expanded', 'false');
+      cartCheckoutButton.textContent = 'Iniciar compra de demostración';
+      cartDeliveryForm.reset();
+      cartDepartment.dispatchEvent(new Event('change'));
+      cartCity.setCustomValidity('');
+      cartDepartment.setCustomValidity('');
+      cartDeliveryForm.hidden = false;
+      cartOrderPreview.hidden = true;
+    };
+    cartCheckoutButton.addEventListener('click', () => {
+      if (!cartPaymentPreview.hidden) {
+        resetPaymentPreview();
+        return;
+      }
+      cartPaymentPreview.hidden = false;
+      cartCheckoutButton.setAttribute('aria-expanded', 'true');
+      cartCheckoutButton.textContent = 'Cerrar demostración';
+      cartDepartment.focus();
+    });
+    [cartCity, cartDepartment].forEach(input => input.addEventListener('input', () => input.setCustomValidity('')));
+    cartDeliveryForm.addEventListener('submit', event => {
+      event.preventDefault();
+      [cartCity, cartDepartment].forEach(input => {
+        input.setCustomValidity(input.value.trim() ? '' : 'Complete este campo.');
+      });
+      if (!cartDeliveryForm.reportValidity()) return;
+      cartPreviewDestination.textContent = cartCity.selectedOptions[0].textContent + ', ' + cartDepartment.selectedOptions[0].textContent;
+      cartDeliveryForm.hidden = true;
+      cartOrderPreview.hidden = false;
+      document.querySelector('#cart-order-title').focus();
+    });
+    document.querySelector('#cart-edit-destination').addEventListener('click', () => {
+      cartOrderPreview.hidden = true;
+      cartDeliveryForm.hidden = false;
+      cartDepartment.focus();
+    });
     const cartToast = document.querySelector('#cart-toast');
     const modalVariantSelect = document.querySelector('#modal-variant');
     const modalQuantityInput = document.querySelector('#modal-quantity');
@@ -768,8 +879,19 @@
       });
       const total = cart.reduce((sum, line) => sum + line.unitPrice * line.quantity, 0);
       cartSubtotal.textContent = gmdPriceFormatter.format(total);
+      cartPreviewSubtotal.textContent = cartSubtotal.textContent;
+      cartPreviewItems.replaceChildren();
+      cart.forEach(line => {
+        const item = document.createElement('li');
+        const variantName = getOptionValue(line.variantName);
+        item.textContent = line.quantity + ' × ' + line.productName +
+          (variantName ? ' · ' + variantName : '') +
+          (line.available === false ? ' · No disponible' : '');
+        cartPreviewItems.appendChild(item);
+      });
       cartClearButton.disabled = cart.length === 0;
-      cartCheckoutButton.disabled = true;
+      cartCheckoutButton.disabled = !cartLocationsAvailable || cart.length === 0 || cart.some(line => line.available === false);
+      if (cartCheckoutButton.disabled && !cartPaymentPreview.hidden) resetPaymentPreview();
     };
     const announceCartChange = message => {
       cartToast.textContent = message;
@@ -1093,6 +1215,9 @@
       const data = new FormData(form);
       const organization = data.get('organization');
       const details = data.get('message');
+      const destination = contactCity.value && contactDepartment.value
+        ? contactCity.selectedOptions[0].textContent + ', ' + contactDepartment.selectedOptions[0].textContent
+        : '';
       const requestType = data.get('requestType');
       const product = getQuoteProduct();
       const quantity = Number(data.get('quantity'));
@@ -1113,6 +1238,8 @@
         `Correo: ${data.get('email')}`,
         `Producto de interés: ${data.get('producto')}`,
         `Cantidad solicitada: ${data.get('quantity')}`,
+        destination ? `Destino de entrega: ${destination}` : '',
+        'Costo de envío: por cotizar.',
         product && Number.isFinite(product.price)
           ? `Precio publicado: ${product.priceLabel ? product.priceLabel + ' ' : ''}${gmdPriceFormatter.format(product.price)} por ${product.priceUnitLabel || 'producto'}.`
           : product && !product.available
@@ -1381,7 +1508,7 @@
     cartPanel.addEventListener('keydown', event => {
       if (event.key !== 'Tab') return;
       const focusable = [...cartPanel.querySelectorAll('button:not(:disabled), input:not(:disabled), select:not(:disabled), textarea:not(:disabled), a[href]:not([hidden])')]
-        .filter(element => !element.hidden);
+        .filter(element => !element.closest('[hidden]'));
       if (!focusable.length) return;
       const first = focusable[0];
       const last = focusable[focusable.length - 1];

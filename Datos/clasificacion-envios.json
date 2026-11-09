@@ -1,0 +1,36 @@
+{
+  "grupos": [
+    {
+      "id": "pequeno",
+      "nombre": "Pequeño",
+      "ejemplos": "Fonendoscopios, medias y accesorios",
+      "estado": "pendiente de definir límites de peso y dimensiones"
+    },
+    {
+      "id": "mediano",
+      "nombre": "Mediano",
+      "ejemplos": "Tensiómetros, nebulizadores y kits",
+      "estado": "pendiente de definir límites de peso y dimensiones"
+    },
+    {
+      "id": "grande",
+      "nombre": "Grande o pesado",
+      "ejemplos": "Caminadores y algunos equipos",
+      "estado": "cotización individual"
+    },
+    {
+      "id": "voluminoso",
+      "nombre": "Voluminoso",
+      "ejemplos": "Sillas de ruedas",
+      "estado": "cotización individual"
+    }
+  ],
+  "productos": [
+    {
+      "id": "kit-de-tensiometro-y-fonendoscopio-rappaport-gmd-colors-estuche",
+      "grupo": "mediano",
+      "estado": "provisional",
+      "observaciones": "El usuario indicó un tamaño aproximado de caja de zapatos. Peso y dimensiones empacadas pendientes de confirmar."
+    }
+  ]
+}
