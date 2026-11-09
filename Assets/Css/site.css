@@ -3267,6 +3267,66 @@ body.modal-open {
   overflow-wrap: anywhere;
 }
 
+.cart-payment-preview .cart-review-items {
+  display: grid;
+  gap: .65rem;
+  padding: 0;
+  list-style: none;
+}
+
+.cart-review-item {
+  display: grid;
+  grid-template-columns: 56px minmax(0, 1fr) auto;
+  align-items: start;
+  gap: .7rem;
+  padding: .8rem 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.cart-review-item-image {
+  width: 56px;
+  height: 56px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: #f3f7f6;
+  object-fit: contain;
+}
+
+.cart-review-item-image[hidden] {
+  display: none;
+}
+
+.cart-review-item-details {
+  display: grid;
+  grid-column: 2;
+  min-width: 0;
+  gap: .2rem;
+}
+
+.cart-review-item-details strong,
+.cart-review-item-total {
+  color: var(--navy);
+}
+
+.cart-review-item-total {
+  white-space: nowrap;
+}
+
+@media (max-width: 560px) {
+  .cart-review-item {
+    grid-template-columns: 48px minmax(0, 1fr);
+  }
+
+  .cart-review-item-image {
+    width: 48px;
+    height: 48px;
+  }
+
+  .cart-review-item-total {
+    grid-column: 2;
+  }
+}
+
 .cart-demo-notice {
   padding: .65rem;
   border-left: 3px solid var(--cyan);
