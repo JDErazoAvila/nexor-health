@@ -1,9 +1,9 @@
 'use strict';
 
-const { createHash, randomUUID } = require('node:crypto');
+const { randomUUID } = require('node:crypto');
+const { createCheckoutUrl } = require('./wompi-checkout.cjs');
 
 const TEST_AMOUNT_IN_CENTS = 100000;
-const CURRENCY = 'COP';
 
 function createSandboxCheckout(publicKey, integritySecret) {
   if (typeof publicKey !== 'string' || !/^pub_test_[A-Za-z0-9_-]+$/.test(publicKey)) {
@@ -14,16 +14,11 @@ function createSandboxCheckout(publicKey, integritySecret) {
   }
 
   const reference = 'nexor-prueba-' + randomUUID();
-  const signature = createHash('sha256')
-    .update(reference + TEST_AMOUNT_IN_CENTS + CURRENCY + integritySecret, 'utf8')
-    .digest('hex');
-  const checkout = new URL('https://checkout.wompi.co/p/');
-  checkout.searchParams.set('public-key', publicKey);
-  checkout.searchParams.set('currency', CURRENCY);
-  checkout.searchParams.set('amount-in-cents', String(TEST_AMOUNT_IN_CENTS));
-  checkout.searchParams.set('reference', reference);
-  checkout.searchParams.set('signature:integrity', signature);
-  return checkout;
+  return createCheckoutUrl({
+    publicKey, integritySecret, reference,
+    amountInCents: TEST_AMOUNT_IN_CENTS,
+    environment: 'sandbox'
+  });
 }
 
 if (require.main === module) {

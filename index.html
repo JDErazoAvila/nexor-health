@@ -179,10 +179,11 @@
     @media (max-width:520px) { .gmd-filters { grid-template-columns:1fr; } }
     @media (max-width:420px) { .gmd-grid { grid-template-columns:1fr; } }
   </style>
-  <link rel="stylesheet" href="Assets/Css/site.css?v=nexor-carrito-2026-11">
+  <link rel="stylesheet" href="Assets/Css/site.css?v=nexor-checkout-2026-11-09-4">
 </head>
 <body>
   <a class="skip-link" href="#contenido">Ir al contenido principal</a>
+  <div class="checkout-test-site-banner" id="checkout-test-site-banner" hidden>Vista de prueba: los pagos, pedidos y el envío son simulados. <a href="./">Volver a la página normal</a></div>
   <header class="site-header">
     <nav class="nav container" aria-label="Principal">
       <a class="brand" href="#inicio" aria-label="NEXOR Medical Systems, inicio">
@@ -467,6 +468,10 @@
         <button type="button" data-chat-action="quote">¿Cómo cotizo?</button>
         <button type="button" data-chat-action="availability">Precio y disponibilidad</button>
       </div>
+      <label class="chat-consent" id="chat-ai-consent-label" hidden>
+        <input id="chat-ai-consent" type="checkbox">
+        <span>Acepto enviar esta consulta al servicio de IA de NEXOR. No incluyas datos personales ni información de salud.</span>
+      </label>
       <form class="chat-form" id="chat-form">
         <label class="sr-only" for="chat-input">Escribe tu pregunta</label>
         <input id="chat-input" name="question" type="text" maxlength="180" placeholder="Escribe tu pregunta..." autocomplete="off" required>
@@ -523,7 +528,14 @@
       </div>
       <button class="cart-close" id="cart-close" type="button" aria-label="Cerrar carrito"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
     </header>
+    <p class="cart-demo-banner" id="cart-test-banner" hidden><strong>Modo de prueba</strong> · Compra y pago simulados. No se realiza ningún cobro ni se crea un pedido real.</p>
+    <ol class="cart-progress" aria-label="Etapas de compra">
+      <li class="is-current" data-cart-stage="cart" aria-current="step"><span>1</span> Carrito</li>
+      <li data-cart-stage="delivery"><span>2</span> Entrega</li>
+      <li data-cart-stage="review"><span>3</span> Resumen</li>
+    </ol>
     <p class="cart-status" id="cart-status" role="status" aria-live="polite"></p>
+    <div id="cart-stage">
     <div class="cart-empty" id="cart-empty">
       <i class="fa-solid fa-bag-shopping" aria-hidden="true"></i>
       <h3>Tu carrito est&aacute; vac&iacute;o</h3>
@@ -538,16 +550,20 @@
     <footer class="cart-footer">
       <h3 class="cart-payment-title">Resumen de compra</h3>
       <div class="cart-subtotal"><span>Subtotal de productos</span><strong id="cart-subtotal">$ 0</strong></div>
-      <div class="cart-shipping"><span>Env&iacute;o</span><strong>Por cotizar</strong></div>
-      <div class="cart-shipping"><span>Total final</span><strong>Por confirmar</strong></div>
-      <p class="cart-payment-note">Precios sujetos a confirmaci&oacute;n. Los impuestos aplicables, la disponibilidad y el env&iacute;o se confirman al cotizar.</p>
-      <button class="button button--secondary cart-clear" id="cart-clear" type="button" disabled>Vaciar carrito</button>
-      <button class="button button--primary cart-checkout" id="cart-checkout" type="button" aria-expanded="false" aria-controls="cart-payment-preview">Continuar con la cotizaci&oacute;n</button>
+      <div class="cart-shipping"><span>Referencia de env&iacute;o</span><strong id="cart-shipping-value">Selecciona un destino</strong></div>
+      <div class="cart-shipping"><span>Total orientativo</span><strong id="cart-total-value">Por confirmar</strong></div>
+      <p class="cart-payment-note" id="cart-payment-note">El pago en l&iacute;nea a&uacute;n no est&aacute; disponible. El env&iacute;o, los impuestos aplicables y el total final est&aacute;n pendientes de confirmaci&oacute;n.</p>
+      <button class="button button--primary cart-checkout" id="cart-checkout" type="button" aria-expanded="false" aria-controls="cart-payment-preview">Continuar compra</button>
+      <button class="cart-clear" id="cart-clear" type="button" disabled>Vaciar carrito</button>
+    </footer>
+    </div>
       <section class="cart-payment-preview" id="cart-payment-preview" aria-labelledby="cart-preview-title" hidden>
-        <h3 id="cart-preview-title">Datos para tu cotizaci&oacute;n</h3>
-        <p class="cart-demo-notice">Prepararemos una solicitud para revisar en WhatsApp. No se crea un pedido ni se realiza ning&uacute;n cobro.</p>
+        <button class="cart-back" id="cart-back" type="button"><i class="fa-solid fa-arrow-left" aria-hidden="true"></i> Volver al carrito</button>
+        <h3 id="cart-preview-title" tabindex="-1">Datos para tu compra</h3>
+        <p class="cart-demo-notice" id="cart-preview-notice">El pago en l&iacute;nea todav&iacute;a no est&aacute; habilitado. Revisar estos datos no crea un pedido ni realiza un cobro.</p>
         <form id="cart-delivery-form">
           <h4>Contacto y entrega</h4>
+          <p>Completa estos datos para revisar tu compra.</p>
           <label for="cart-name">Nombre completo</label>
           <input id="cart-name" name="name" type="text" minlength="2" maxlength="80" autocomplete="name" required>
           <label for="cart-phone">Tel&eacute;fono</label>
@@ -560,32 +576,77 @@
           <select id="cart-department" name="department" required><option value="">Seleccione un departamento</option></select>
           <label for="cart-city">Ciudad o municipio</label>
           <select id="cart-city" name="city" required disabled><option value="">Seleccione primero un departamento</option></select>
-          <p id="cart-location-guidance">La cobertura y el env&iacute;o se confirman al cotizar.</p>
-          <p>Tus datos no se guardan en el navegador; se incluir&aacute;n en el mensaje que podr&aacute;s revisar antes de enviarlo.</p>
-          <button class="button button--primary" type="submit">Revisar solicitud</button>
+          <p id="cart-location-guidance">La cobertura y el costo de env&iacute;o est&aacute;n pendientes de confirmaci&oacute;n.</p>
+          <div class="cart-test-options" id="cart-test-options" hidden>
+            <label for="cart-test-shipping">M&eacute;todo de entrega</label>
+            <select id="cart-test-shipping"><option value="standard">Env&iacute;o est&aacute;ndar simulado · $ 15.000</option></select>
+            <label for="cart-test-payment">M&eacute;todo de pago simulado</label>
+            <select id="cart-test-payment"><option value="card">Tarjeta (simulada)</option><option value="pse">PSE (simulado)</option><option value="transfer">Transferencia (simulada)</option></select>
+          </div>
+          <p id="cart-data-note">Tus datos solo se utilizan para mostrar este resumen; no se env&iacute;an ni se guardan en el navegador.</p>
+          <button class="button button--primary" id="cart-delivery-submit" type="submit">Revisar compra</button>
         </form>
         <div id="cart-order-preview" hidden>
-          <h4 tabindex="-1" id="cart-order-title">Resumen de tu solicitud</h4>
-          <p>Destino: <strong id="cart-preview-destination"></strong></p>
+          <h4 tabindex="-1" id="cart-order-title">Resumen de tu compra</h4>
+          <div class="cart-review-destination"><span>Entrega en</span><strong id="cart-preview-destination"></strong></div>
+          <h4>Productos</h4>
           <ul id="cart-preview-items"></ul>
           <div class="cart-shipping"><span>Productos</span><strong id="cart-preview-subtotal">$ 0</strong></div>
-          <div class="cart-shipping"><span>Env&iacute;o</span><strong>Por cotizar</strong></div>
-          <div class="cart-shipping"><span>Total a pagar</span><strong>Por confirmar</strong></div>
-          <p>El costo de env&iacute;o, la disponibilidad y el total final se confirmar&aacute;n antes de pagar.</p>
-          <h4>Entrega y pago</h4>
-          <p>El m&eacute;todo y costo de env&iacute;o est&aacute;n por confirmar. El pago en l&iacute;nea no est&aacute; disponible; Wompi a&uacute;n no est&aacute; conectado.</p>
-          <label for="cart-quote-message">Mensaje para WhatsApp</label>
-          <textarea id="cart-quote-message" rows="8" readonly></textarea>
+          <div id="cart-order-normal">
+            <div class="cart-shipping"><span>Referencia de env&iacute;o</span><strong id="cart-order-shipping">Selecciona un destino</strong></div>
+            <div class="cart-shipping"><span>Total orientativo</span><strong id="cart-order-total">Por confirmar</strong></div>
+            <p id="cart-shipping-details">Selecciona un municipio para consultar la referencia de env&iacute;o.</p>
+            <h4>Pago</h4>
+            <details class="cart-payment-demo">
+              <summary>Ver ejemplos de formas de pago</summary>
+              <p>Ejemplos visuales: las opciones y bancos no est&aacute;n conectados y no confirman disponibilidad para NEXOR.</p>
+              <p>Al activar Wompi, el cliente seleccionar&aacute; el medio de pago y, cuando corresponda, su banco en el checkout oficial. Las opciones depender&aacute;n de la cuenta y de Wompi.</p>
+              <label for="cart-payment-method">Selecciona una forma de pago de ejemplo</label>
+              <select id="cart-payment-method">
+                <option value="">Selecciona una opci&oacute;n</option>
+                <option value="pse">PSE · ejemplo</option>
+                <option value="card">Tarjeta de cr&eacute;dito o d&eacute;bito · ejemplo</option>
+                <option value="nequi">Nequi · ejemplo</option>
+                <option value="bancolombia">Transferencia Bancolombia · ejemplo</option>
+                <option value="daviplata">DaviPlata · ejemplo</option>
+                <option value="cash">Corresponsal bancario Bancolombia · ejemplo</option>
+              </select>
+              <div id="cart-payment-bank-group" class="cart-payment-bank" hidden>
+                <label for="cart-payment-bank">Selecciona un banco de ejemplo</label>
+                <select id="cart-payment-bank">
+                  <option value="">Selecciona una instituci&oacute;n</option>
+                  <option value="example-1">Bancolombia · ejemplo</option>
+                  <option value="example-2">Banco de Bogot&aacute; · ejemplo</option>
+                  <option value="example-3">Davivienda · ejemplo</option>
+                  <option value="example-4">Banco de Occidente · ejemplo</option>
+                  <option value="example-5">Banco Popular · ejemplo</option>
+                  <option value="example-6">BBVA Colombia · ejemplo</option>
+                </select>
+                <p>Lista parcial de muestra, no es la lista oficial ni garantiza bancos habilitados.</p>
+              </details>
+              <p id="cart-payment-method-guidance" aria-live="polite">No ingreses datos de tarjeta ni claves bancarias.</p>
+            </div>
+            <button class="button button--primary" type="button" disabled aria-describedby="cart-payment-unavailable">Pagar en l&iacute;nea</button>
+            <p id="cart-payment-unavailable">Pago no disponible: a&uacute;n falta conectar la pasarela y confirmar el total. La lista real de bancos y medios depender&aacute; de la integraci&oacute;n.</p>
+          </div>
+          <div id="cart-order-test" hidden>
+            <div class="cart-shipping"><span>Env&iacute;o simulado</span><strong id="cart-test-shipping-value"></strong></div>
+            <div class="cart-shipping"><span>Total de prueba</span><strong id="cart-test-total"></strong></div>
+            <p id="cart-test-payment-summary"></p>
+            <p>El total es solo ilustrativo: no calcula impuestos y no representa un precio final real.</p>
+            <button class="button button--primary" type="button" id="cart-test-pay">Simular pago</button>
+            <p class="cart-demo-banner" id="cart-test-confirmation" role="status" tabindex="-1" hidden><strong>Simulaci&oacute;n completada.</strong> No se realiz&oacute; ning&uacute;n pago ni se cre&oacute; un pedido real.</p>
+          </div>
           <button class="button button--secondary" type="button" id="cart-edit-destination">Editar datos</button>
-          <a class="button button--primary" id="cart-quote-whatsapp" href="https://wa.me/573053252358" target="_blank" rel="noopener noreferrer">Continuar por WhatsApp</a>
-          <button class="button button--primary" type="button" disabled>Pagar (no disponible)</button>
         </div>
       </section>
-    </footer>
   </aside>
   <p class="cart-toast" id="cart-toast" role="status" aria-live="polite"></p>
   <script src="Assets/Js/catalogo-productos.js?v=siempresalud-2026-11-09-descripciones"></script>
   <script src="Assets/Js/municipios-colombia.js?v=divipola-2024"></script>
+  <script src="Assets/Js/referencias-envio.js?v=20261109"></script>
+  <script src="Assets/Js/estimar-envio.js?v=1"></script>
+  <script src="Assets/Js/asistente-ia.js?v=1"></script>
   <script>
     const gmdCatalogFailed = !Array.isArray(window.NEXOR_PRODUCTS);
     if (gmdCatalogFailed) console.error('No se pudo cargar el catálogo de productos.');
@@ -668,7 +729,9 @@
       if (product?.taxTreatment === 'exempt') return 'Producto exento de IVA.';
       return '';
     };
-    const cartStorageKey = 'nexor-cart-v1';
+    const checkoutTestMode = new URLSearchParams(window.location.search).get('checkout') === 'prueba';
+    const cartStorageKey = checkoutTestMode ? 'nexor-cart-test-v1' : 'nexor-cart-v1';
+    const testShippingCost = 15000;
     const cartCount = document.querySelector('#cart-count');
     const cartOpenButton = document.querySelector('#cart-open');
     const cartPanel = document.querySelector('#cart-panel');
@@ -680,6 +743,22 @@
     const cartClearButton = document.querySelector('#cart-clear');
     const cartCheckoutButton = document.querySelector('#cart-checkout');
     const cartPaymentPreview = document.querySelector('#cart-payment-preview');
+    const cartStage = document.querySelector('#cart-stage');
+    const cartFooter = cartStage.querySelector('.cart-footer');
+    const setCartStage = stage => {
+      cartStage.hidden = stage !== 'cart';
+      cartPaymentPreview.hidden = stage === 'cart';
+      cartPanel.classList.toggle('is-checkout', stage !== 'cart');
+      document.querySelector('#cart-preview-title').textContent = stage === 'review'
+        ? (checkoutTestMode ? 'Revisa tu compra de prueba' : 'Revisa tu compra')
+        : (checkoutTestMode ? 'Datos para tu compra de prueba' : 'Datos para tu compra');
+      cartPanel.querySelectorAll('[data-cart-stage]').forEach(item => {
+        const current = item.dataset.cartStage === stage;
+        item.classList.toggle('is-current', current);
+        if (current) item.setAttribute('aria-current', 'step');
+        else item.removeAttribute('aria-current');
+      });
+    };
     const cartPreviewSubtotal = document.querySelector('#cart-preview-subtotal');
     const cartDeliveryForm = document.querySelector('#cart-delivery-form');
     const cartCity = document.querySelector('#cart-city');
@@ -687,10 +766,41 @@
     const cartOrderPreview = document.querySelector('#cart-order-preview');
     const cartPreviewDestination = document.querySelector('#cart-preview-destination');
     const cartPreviewItems = document.querySelector('#cart-preview-items');
-    const cartQuoteMessage = document.querySelector('#cart-quote-message');
-    const cartQuoteWhatsApp = document.querySelector('#cart-quote-whatsapp');
     const cartRecommendations = document.querySelector('#cart-recommendations');
     const cartRecommendationList = document.querySelector('#cart-recommendation-list');
+    const cartTestConfirmation = document.querySelector('#cart-test-confirmation');
+    const cartTestPayment = document.querySelector('#cart-test-payment');
+    const cartTestPay = document.querySelector('#cart-test-pay');
+    const shippingReferences = window.NEXOR_SHIPPING_REFERENCES;
+    if (!shippingReferences || !window.NexorShipping) console.error('No se pudieron cargar las referencias de envío.');
+    const cartPaymentMethod = document.querySelector('#cart-payment-method');
+    const cartPaymentBank = document.querySelector('#cart-payment-bank');
+    const cartPaymentBankGroup = document.querySelector('#cart-payment-bank-group');
+    const cartPaymentGuidance = document.querySelector('#cart-payment-method-guidance');
+    const updatePaymentDemo = () => {
+      const isPse = cartPaymentMethod.value === 'pse';
+      cartPaymentBankGroup.hidden = !isPse;
+      cartPaymentBank.value = '';
+      cartPaymentGuidance.textContent = isPse
+        ? 'Selecciona un banco de ejemplo para probar la vista. No ingreses claves bancarias.'
+        : 'No ingreses datos de tarjeta ni claves bancarias.';
+    };
+    cartPaymentMethod.addEventListener('change', updatePaymentDemo);
+    if (checkoutTestMode) {
+      document.querySelector('#checkout-test-site-banner').hidden = false;
+      document.querySelector('#cart-test-banner').hidden = false;
+      document.querySelector('#cart-test-options').hidden = false;
+      document.querySelector('#cart-order-normal').hidden = true;
+      document.querySelector('#cart-order-test').hidden = false;
+      document.querySelector('#cart-preview-title').textContent = 'Datos para tu compra de prueba';
+      document.querySelector('#cart-preview-notice').textContent = 'Usa datos ficticios. Esta demostración no crea pedidos ni realiza cobros.';
+      document.querySelector('#cart-location-guidance').textContent = 'El envío de esta demostración es ficticio y no confirma cobertura.';
+      document.querySelector('#cart-data-note').textContent = 'Usa datos ficticios. No se envían ni se guardan en el navegador.';
+      document.querySelector('#cart-delivery-submit').textContent = 'Revisar compra de prueba';
+      document.querySelector('#cart-order-title').textContent = 'Resumen de tu compra de prueba';
+      document.querySelector('#cart-payment-note').textContent = 'Vista de prueba: envío ficticio de $ 15.000. El total no calcula impuestos y no es una oferta ni un cobro real.';
+      cartCheckoutButton.textContent = 'Continuar compra de prueba';
+    }
     const locations = Array.isArray(window.NEXOR_LOCATIONS) ? window.NEXOR_LOCATIONS : null;
     const setupLocationSelects = (department, city, guidance, optional) => {
       if (!locations || !locations.length) {
@@ -722,27 +832,32 @@
     const contactCity = document.querySelector('#destination-city');
     setupLocationSelects(contactDepartment, contactCity, document.querySelector('#destination-guidance'), true);
     const resetPaymentPreview = () => {
-      cartPaymentPreview.hidden = true;
+      setCartStage('cart');
       cartCheckoutButton.setAttribute('aria-expanded', 'false');
-      cartCheckoutButton.textContent = 'Continuar con la cotización';
+      cartCheckoutButton.textContent = checkoutTestMode ? 'Continuar compra de prueba' : 'Continuar compra';
       cartDeliveryForm.reset();
+      cartPaymentMethod.value = '';
+      updatePaymentDemo();
       cartDepartment.dispatchEvent(new Event('change'));
+      updateShippingReference();
       cartCity.setCustomValidity('');
       cartDepartment.setCustomValidity('');
       cartDeliveryForm.hidden = false;
       cartOrderPreview.hidden = true;
-      cartQuoteMessage.value = '';
-      cartQuoteWhatsApp.href = 'https://wa.me/573053252358';
+      cartTestConfirmation.hidden = true;
+      cartTestPay.disabled = false;
     };
     cartCheckoutButton.addEventListener('click', () => {
-      if (!cartPaymentPreview.hidden) {
-        resetPaymentPreview();
-        return;
-      }
-      cartPaymentPreview.hidden = false;
+      cartDeliveryForm.hidden = false;
+      cartOrderPreview.hidden = true;
+      setCartStage('delivery');
       cartCheckoutButton.setAttribute('aria-expanded', 'true');
-      cartCheckoutButton.textContent = 'Cerrar cotización';
-      document.querySelector('#cart-name').focus();
+      document.querySelector('#cart-preview-title').focus();
+    });
+    document.querySelector('#cart-back').addEventListener('click', () => {
+      setCartStage('cart');
+      cartCheckoutButton.setAttribute('aria-expanded', 'false');
+      cartCheckoutButton.focus();
     });
     [cartCity, cartDepartment].forEach(input => input.addEventListener('input', () => input.setCustomValidity('')));
     cartDeliveryForm.querySelectorAll('input').forEach(input => {
@@ -767,13 +882,29 @@
       cartPreviewDestination.textContent = cartCity.selectedOptions[0].textContent + ', ' + cartDepartment.selectedOptions[0].textContent;
       cartDeliveryForm.hidden = true;
       cartOrderPreview.hidden = false;
-      updateCartQuote();
+      setCartStage('review');
+      updateShippingReference();
+      if (checkoutTestMode) {
+        document.querySelector('#cart-test-payment-summary').textContent =
+          'Pago simulado: ' + cartTestPayment.selectedOptions[0].textContent + '.';
+        cartTestConfirmation.hidden = true;
+        cartTestPay.disabled = false;
+      }
       document.querySelector('#cart-order-title').focus();
     });
     document.querySelector('#cart-edit-destination').addEventListener('click', () => {
+      cartTestConfirmation.hidden = true;
+      cartTestPay.disabled = false;
       cartOrderPreview.hidden = true;
       cartDeliveryForm.hidden = false;
+      setCartStage('delivery');
       document.querySelector('#cart-name').focus();
+    });
+    cartTestPay.addEventListener('click', () => {
+      if (!checkoutTestMode || cartOrderPreview.hidden || !cart.length || cart.some(line => line.available === false)) return;
+      cartTestConfirmation.hidden = false;
+      cartTestPay.disabled = true;
+      cartTestConfirmation.focus();
     });
     const cartToast = document.querySelector('#cart-toast');
     const modalVariantSelect = document.querySelector('#modal-variant');
@@ -861,34 +992,42 @@
         cartStatus.textContent = cartStatusNotice;
       }
     };
-    const updateCartQuote = () => {
-      if (cartOrderPreview.hidden) return;
-      const data = new FormData(cartDeliveryForm);
-      const lines = [
-        'Hola, quiero solicitar una cotización a NEXOR - MEDICAL SYSTEMS.',
-        `Nombre: ${data.get('name')}`,
-        `Teléfono: ${data.get('phone')}`,
-        `Correo: ${data.get('email')}`,
-        `Dirección: ${data.get('address')}`,
-        `Destino: ${cartPreviewDestination.textContent}`,
-        '',
-        'Productos:',
-        ...cart.map(line => {
-          const option = getOptionValue(line.variantName);
-          return `${line.quantity} × ${line.productName}${option ? ' · ' + option : ''}${line.sku ? ' · Ref. ' + line.sku : ''} · ${gmdPriceFormatter.format(line.unitPrice)} c/u`;
-        }),
-        `Subtotal de productos: ${cartSubtotal.textContent}`,
-        'Envío, impuestos aplicables, disponibilidad y total final: por confirmar.'
-      ];
-      cartQuoteMessage.value = lines.join('\n');
-      cartQuoteWhatsApp.href = 'https://wa.me/573053252358?text=' + encodeURIComponent(cartQuoteMessage.value);
+    const updateShippingReference = () => {
+      if (checkoutTestMode) return;
+      const result = window.NexorShipping
+        ? window.NexorShipping.estimate(shippingReferences, cartCity.value, cart)
+        : { status: 'unavailable' };
+      const messages = {
+        destination: 'Selecciona un municipio para consultar la referencia.',
+        quantity: 'Referencia no disponible para varias unidades o productos no disponibles.',
+        package: 'El paquete no tiene una estimación compatible; el envío está pendiente.',
+        route: 'No hay una referencia registrada para este destino.',
+        unavailable: 'No se pudieron cargar las referencias de envío.'
+      };
+      let shipping = 'Por confirmar';
+      let total = 'Por confirmar';
+      let details = messages[result.status];
+      if (result.status === 'destination') shipping = 'Selecciona un destino';
+      if (result.status === 'reference') {
+        shipping = gmdPriceFormatter.format(result.amount) + ' (referencia)';
+        const subtotal = cart.reduce((sum, line) => sum + line.unitPrice * line.quantity, 0);
+        total = gmdPriceFormatter.format(subtotal + result.amount) + ' (orientativo)';
+        details = 'Referencia del 9 de noviembre de 2026 desde Cali, para un paquete hipotético de 1 kg, 50 × 38 × 42 cm y valor declarado de $100.000. El peso, el empaque y el valor real pueden ser distintos. No es una tarifa garantizada; el total no calcula impuestos pendientes.';
+      }
+      document.querySelector('#cart-shipping-value').textContent = shipping;
+      document.querySelector('#cart-total-value').textContent = total;
+      document.querySelector('#cart-order-shipping').textContent = shipping;
+      document.querySelector('#cart-order-total').textContent = total;
+      document.querySelector('#cart-shipping-details').textContent = details;
     };
+    [cartDepartment, cartCity].forEach(input => input.addEventListener('change', updateShippingReference));
     const renderCart = () => {
       cartStatus.textContent = cartStatusNotice;
       const unitCount = cart.reduce((total, line) => total + line.quantity, 0);
       cartCount.textContent = String(unitCount);
       cartOpenButton.setAttribute('aria-label', 'Abrir carrito, ' + unitCount + (unitCount === 1 ? ' producto' : ' productos'));
       cartEmpty.hidden = cart.length > 0;
+      cartFooter.hidden = cart.length === 0;
       cartList.replaceChildren();
       cart.forEach(line => {
         const item = document.createElement('li');
@@ -965,6 +1104,17 @@
         ? 'Por confirmar'
         : gmdPriceFormatter.format(total);
       cartPreviewSubtotal.textContent = cartSubtotal.textContent;
+      if (checkoutTestMode) {
+        const valid = cart.length > 0 && !cart.some(line => line.available === false);
+        document.querySelector('#cart-shipping-value').textContent = valid ? gmdPriceFormatter.format(testShippingCost) + ' (prueba)' : '—';
+        document.querySelector('#cart-total-value').textContent = valid ? gmdPriceFormatter.format(total + testShippingCost) : '—';
+        document.querySelector('#cart-test-shipping-value').textContent = gmdPriceFormatter.format(testShippingCost);
+        document.querySelector('#cart-test-total').textContent = valid ? gmdPriceFormatter.format(total + testShippingCost) : '—';
+        cartTestConfirmation.hidden = true;
+        cartTestPay.disabled = false;
+      } else {
+        updateShippingReference();
+      }
       cartPreviewItems.replaceChildren();
       cart.forEach(line => {
         const item = document.createElement('li');
@@ -977,7 +1127,6 @@
       cartClearButton.disabled = cart.length === 0;
       cartCheckoutButton.disabled = !cartLocationsAvailable || cart.length === 0 || cart.some(line => line.available === false);
       if (cartCheckoutButton.disabled && !cartPaymentPreview.hidden) resetPaymentPreview();
-      updateCartQuote();
       const cartProductIds = new Set(cart.map(line => line.productId));
       const cartCategories = new Set(gmdProducts.filter(product => cartProductIds.has(product.id)).map(product => product.category));
       const suggestions = cart.length ? gmdProducts.filter(product =>
@@ -1718,6 +1867,11 @@
     const chatMessages = document.querySelector('#chat-messages');
     const chatForm = document.querySelector('#chat-form');
     const chatInput = document.querySelector('#chat-input');
+    const chatAiConsent = document.querySelector('#chat-ai-consent');
+    const chatAiConsentLabel = document.querySelector('#chat-ai-consent-label');
+    const chatSubmit = chatForm.querySelector('button[type="submit"]');
+    const chatAiEnabled = window.NexorAI.config.enabled;
+    chatAiConsentLabel.hidden = !chatAiEnabled;
     const normalizeChatText = value => value.toLocaleLowerCase('es')
       .normalize('NFD')
       .replace(/[\u0300-\u036f]/g, '')
@@ -1856,13 +2010,48 @@
         card.querySelector('.card-details-button')?.focus({ preventScroll: true });
       }
     });
-    chatForm.addEventListener('submit', event => {
+    chatForm.addEventListener('submit', async event => {
       event.preventDefault();
       const question = chatInput.value.trim();
       if (!question) return;
+      if (chatAiEnabled && !chatAiConsent.checked) {
+        addChatMessage('Para usar la IA, acepta el envío de tu consulta. También puedes usar las opciones rápidas o contactar a NEXOR por WhatsApp.');
+        chatAiConsent.focus();
+        return;
+      }
       addChatMessage(question, 'user');
       chatInput.value = '';
-      respondToChat(question);
+      if (!chatAiEnabled) {
+        respondToChat(question);
+        chatInput.focus();
+        return;
+      }
+      chatInput.disabled = true;
+      chatSubmit.disabled = true;
+      const consent = chatAiConsent.checked;
+      chatAiConsent.checked = false;
+      const status = addChatMessage('Consultando al asistente…');
+      try {
+        const result = await window.NexorAI.ask(question, {
+          enabled: chatAiEnabled,
+          consent,
+          endpoint: window.NexorAI.config.endpoint,
+          baseUrl: window.location.href,
+          fetch: window.fetch.bind(window)
+        });
+        status.remove();
+        addChatMessage(result.answer);
+        const products = result.productIds.map(id => gmdProducts.find(product => product.id === id)).filter(Boolean);
+        if (products.length) addChatProductResults(products);
+      } catch (error) {
+        console.error('Error del asistente con IA:', error);
+        status.remove();
+        addChatMessage('No fue posible obtener una respuesta de IA. Puedes intentarlo de nuevo, usar las opciones rápidas o contactar a NEXOR.');
+        chatInput.value = question;
+      } finally {
+        chatInput.disabled = false;
+        chatSubmit.disabled = false;
+      }
       chatInput.focus();
     });
     document.addEventListener('keydown', event => {
