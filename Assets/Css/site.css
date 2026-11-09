@@ -3227,14 +3227,32 @@ body.modal-open {
 
 .cart-review-destination {
   display: grid;
-  gap: .2rem;
-  padding: .8rem;
+  gap: .75rem;
+  padding: 1rem;
   border-radius: 7px;
   background: #eff8f8;
 }
 
-.cart-review-destination span {
+.cart-review-destination dl {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
+  gap: .75rem 1rem;
+  margin: 0;
+}
+
+.cart-review-destination dt {
   color: #647d86;
+}
+
+.cart-review-destination dd {
+  margin: .15rem 0 0;
+  color: var(--ink);
+  font-weight: 700;
+  overflow-wrap: anywhere;
+}
+
+.cart-review-destination button {
+  justify-self: start;
 }
 
 .cart-payment-preview input,

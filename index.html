@@ -179,7 +179,7 @@
     @media (max-width:520px) { .gmd-filters { grid-template-columns:1fr; } }
     @media (max-width:420px) { .gmd-grid { grid-template-columns:1fr; } }
   </style>
-  <link rel="stylesheet" href="Assets/Css/site.css?v=nexor-checkout-2026-11-09-4">
+  <link rel="stylesheet" href="Assets/Css/site.css?v=nexor-checkout-2026-11-09-5">
 </head>
 <body>
   <a class="skip-link" href="#contenido">Ir al contenido principal</a>
@@ -588,7 +588,17 @@
         </form>
         <div id="cart-order-preview" hidden>
           <h4 tabindex="-1" id="cart-order-title">Resumen de tu compra</h4>
-          <div class="cart-review-destination"><span>Entrega en</span><strong id="cart-preview-destination"></strong></div>
+          <section class="cart-review-destination" aria-labelledby="cart-delivery-summary-title">
+            <h4 id="cart-delivery-summary-title">Datos de entrega</h4>
+            <dl>
+              <div><dt>Recibe</dt><dd id="cart-preview-name"></dd></div>
+              <div><dt>Direcci&oacute;n</dt><dd id="cart-preview-address"></dd></div>
+              <div><dt>Ciudad y departamento</dt><dd id="cart-preview-destination"></dd></div>
+              <div><dt>Tel&eacute;fono</dt><dd id="cart-preview-phone"></dd></div>
+              <div><dt>Correo electr&oacute;nico</dt><dd id="cart-preview-email"></dd></div>
+            </dl>
+            <button class="button button--secondary" type="button" id="cart-edit-destination">Editar datos de entrega</button>
+          </section>
           <h4>Productos</h4>
           <ul id="cart-preview-items"></ul>
           <div class="cart-shipping"><span>Productos</span><strong id="cart-preview-subtotal">$ 0</strong></div>
@@ -637,7 +647,6 @@
             <button class="button button--primary" type="button" id="cart-test-pay">Simular pago</button>
             <p class="cart-demo-banner" id="cart-test-confirmation" role="status" tabindex="-1" hidden><strong>Simulaci&oacute;n completada.</strong> No se realiz&oacute; ning&uacute;n pago ni se cre&oacute; un pedido real.</p>
           </div>
-          <button class="button button--secondary" type="button" id="cart-edit-destination">Editar datos</button>
         </div>
       </section>
   </aside>
@@ -764,7 +773,11 @@
     const cartCity = document.querySelector('#cart-city');
     const cartDepartment = document.querySelector('#cart-department');
     const cartOrderPreview = document.querySelector('#cart-order-preview');
+    const cartPreviewName = document.querySelector('#cart-preview-name');
+    const cartPreviewAddress = document.querySelector('#cart-preview-address');
     const cartPreviewDestination = document.querySelector('#cart-preview-destination');
+    const cartPreviewPhone = document.querySelector('#cart-preview-phone');
+    const cartPreviewEmail = document.querySelector('#cart-preview-email');
     const cartPreviewItems = document.querySelector('#cart-preview-items');
     const cartRecommendations = document.querySelector('#cart-recommendations');
     const cartRecommendationList = document.querySelector('#cart-recommendation-list');
@@ -836,6 +849,8 @@
       cartCheckoutButton.setAttribute('aria-expanded', 'false');
       cartCheckoutButton.textContent = checkoutTestMode ? 'Continuar compra de prueba' : 'Continuar compra';
       cartDeliveryForm.reset();
+      [cartPreviewName, cartPreviewAddress, cartPreviewDestination, cartPreviewPhone, cartPreviewEmail]
+        .forEach(element => { element.textContent = ''; });
       cartPaymentMethod.value = '';
       updatePaymentDemo();
       cartDepartment.dispatchEvent(new Event('change'));
@@ -879,7 +894,11 @@
         input.setCustomValidity(input.value.trim() ? '' : 'Complete este campo.');
       });
       if (!cartDeliveryForm.reportValidity()) return;
+      cartPreviewName.textContent = document.querySelector('#cart-name').value;
+      cartPreviewAddress.textContent = document.querySelector('#cart-address').value;
       cartPreviewDestination.textContent = cartCity.selectedOptions[0].textContent + ', ' + cartDepartment.selectedOptions[0].textContent;
+      cartPreviewPhone.textContent = phone.value;
+      cartPreviewEmail.textContent = document.querySelector('#cart-email').value;
       cartDeliveryForm.hidden = true;
       cartOrderPreview.hidden = false;
       setCartStage('review');
